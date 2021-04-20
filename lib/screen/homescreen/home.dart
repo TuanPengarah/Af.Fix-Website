@@ -15,7 +15,7 @@ class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
     scrollController = ScrollController();
-    scrollController.addListener(_scrollListener);
+    // scrollController.addListener(_scrollListener);
     super.initState();
   }
 

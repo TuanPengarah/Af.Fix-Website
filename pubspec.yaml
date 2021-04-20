@@ -30,6 +30,7 @@ dependencies:
   velocity_x: ^2.6.1
   blur: ^2.0.0
   blurrycontainer: ^0.0.1
+  flutter_vector_icons: ^1.0.0
 
 
 dev_dependencies:

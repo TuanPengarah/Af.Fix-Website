@@ -9,11 +9,37 @@ class RepairForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 550,
+      width: 500,
       height: 800,
       decoration: BoxDecoration(
-        color: kColorWhite,
+        color: kColorGrey,
         borderRadius: BorderRadius.circular(18),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: Column(
+          children: [
+            Text(
+              'Mari mulakan. Kami akan hubungi anda secepat mungkin',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: 100,
+              child: Divider(
+                thickness: 1,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

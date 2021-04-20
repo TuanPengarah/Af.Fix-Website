@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Af.Fix Smartphone Repair',
+      title: 'Af.Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),

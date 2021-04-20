@@ -67,102 +67,116 @@ class DekstopNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlurryContainer(
-      blur: scrollPosition < 20 ? 1 : 15,
-      borderRadius: BorderRadius.vertical(),
-      bgColor: scrollPosition < 20 ? Colors.transparent : kColorGrey,
+    return Container(
       height: 100,
+      decoration: BoxDecoration(
+        color: Colors.white70,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(15),
+          bottomRight: Radius.circular(15),
+        ),
+      ),
       child: Stack(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/images/web_logo.png',
-                height: 60,
-              ),
-              Row(
-                children: [
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: Image.asset(
+              //     'assets/images/logo_web_dark.jpg',
+              //     height: 70,
+              //   ),
+              // ),
+              Center(
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        scrollController.animateTo(1200,
+                            duration: Duration(milliseconds: 800),
+                            curve: Curves.decelerate);
+                      },
+                      child: Text(
+                        'Kelebihan',
+                        style: TextStyle(
+                          color: scrollPosition > 900 ? kColorRed : kColorGrey,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 1.1,
                         ),
                       ),
                     ),
-                    onPressed: () {
-                      scrollController.animateTo(60,
-                          duration: Duration(milliseconds: 800),
-                          curve: Curves.decelerate);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    TextButton(
+                      onPressed: () {},
                       child: Text(
-                        'Jom Repair',
-                        style: kTextSubtitle,
+                        'Servis Kami',
+                        style: kTextSubtitleDark,
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      scrollController.animateTo(1200,
-                          duration: Duration(milliseconds: 800),
-                          curve: Curves.decelerate);
-                    },
-                    child: Text(
-                      'Kelebihan',
-                      style: TextStyle(
-                        color: scrollPosition > 900 ? kColorRed : Colors.white,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 1.1,
+                    SizedBox(
+                      width: 20,
+                    ),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        scrollController.animateTo(60,
+                            duration: Duration(milliseconds: 800),
+                            curve: Curves.decelerate);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          'Jom Baiki',
+                          style: kTextSubtitle,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Servis Kami',
-                      style: kTextSubtitle,
+                    // SizedBox(
+                    //   width: 20,
+                    // ),
+                    // TextButton(
+                    //   onPressed: () {},
+                    //   child: Text(
+                    //     'Aplikasi',
+                    //     style: kTextSubtitle,
+                    //   ),
+                    // ),
+                    SizedBox(
+                      width: 20,
                     ),
-                  ),
-                  // SizedBox(
-                  //   width: 20,
-                  // ),
-                  // TextButton(
-                  //   onPressed: () {},
-                  //   child: Text(
-                  //     'Aplikasi',
-                  //     style: kTextSubtitle,
-                  //   ),
-                  // ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'E-Waranti',
-                      style: kTextSubtitle,
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'E-Waranti',
+                        style: kTextSubtitleDark,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'MyRepair ID',
-                      style: kTextSubtitle,
+                    SizedBox(
+                      width: 20,
                     ),
-                  ),
-                ],
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'MyRepair ID',
+                        style: kTextSubtitleDark,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
