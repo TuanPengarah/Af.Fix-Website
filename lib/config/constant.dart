@@ -8,9 +8,11 @@ final TextStyle kTextSubtitleDark = TextStyle(
   color: kColorGrey,
   fontWeight: FontWeight.w700,
   letterSpacing: 1.1,
+  fontSize: 20,
 );
 final TextStyle kTextSubtitle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.w700,
   letterSpacing: 1.1,
+  fontSize: 20,
 );

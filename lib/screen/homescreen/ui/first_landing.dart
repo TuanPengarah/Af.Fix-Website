@@ -1,5 +1,7 @@
+import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/screen/homescreen/ui/repair_form.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
@@ -59,7 +61,7 @@ class DekstopFirstPageView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Peranti anda mengalami kerosakkan?',
+                AppLocalizations.of(context).translate('broken'),
                 style: TextStyle(
                   color: kColorGrey,
                   fontSize: 20,
@@ -78,35 +80,32 @@ class DekstopFirstPageView extends StatelessWidget {
               ),
               Container(
                 width: MediaQuery.of(context).size.width / 2.4,
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Servis peranti anda dengan ',
+                child: AutoSizeText.rich(
+                  TextSpan(
+                    text:
+                        '${AppLocalizations.of(context).translate('service')} ',
                     style: TextStyle(
                       color: kColorGrey,
-                      fontSize: 70,
+                      fontSize: 40,
                     ),
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'mudah',
+                        text:
+                            '${AppLocalizations.of(context).translate('easy')}',
                         style: TextStyle(fontWeight: FontWeight.w900),
                       ),
-                      TextSpan(text: ' dan semestinya '),
                       TextSpan(
-                        text: 'dipercayai',
+                          text:
+                              ' ${AppLocalizations.of(context).translate('and')} '),
+                      TextSpan(
+                        text:
+                            '${AppLocalizations.of(context).translate('trust')}',
                         style: TextStyle(fontWeight: FontWeight.w900),
                       ),
                     ],
                   ),
+                  minFontSize: 25,
                 ),
-                // child: Text(
-                //   'Servis peranti anda dengan mudah dan semestinya dipercayai',
-                //   textAlign: TextAlign.left,
-                //   style: TextStyle(
-                //     color: kColorGrey,
-                //     fontSize: 70,
-                //     fontWeight: FontWeight.w800,
-                //   ),
-                // ),
               ),
               SizedBox(
                 height: 30,
@@ -127,7 +126,7 @@ class DekstopFirstPageView extends StatelessWidget {
                     label: Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Text(
-                        'Whatsapp kami',
+                        '${AppLocalizations.of(context).translate('whatsapp')}',
                         style: kTextSubtitle,
                       ),
                     ),
@@ -143,7 +142,7 @@ class DekstopFirstPageView extends StatelessWidget {
                       color: kColorGrey,
                     ),
                     label: Text(
-                      'Muat turun aplikasi (Akan Datang)',
+                      '${AppLocalizations.of(context).translate('download')}',
                       style: kTextSubtitleDark,
                     ),
                   )
@@ -152,7 +151,7 @@ class DekstopFirstPageView extends StatelessWidget {
             ],
           ),
           SizedBox(
-            width: 100,
+            width: 40,
           ),
           RepairForm()
         ],
