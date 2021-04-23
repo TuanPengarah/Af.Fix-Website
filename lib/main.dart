@@ -1,5 +1,6 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/routes.dart';
+import 'package:affix_web/config/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:affix_web/screen/myrepairid.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:url_strategy/url_strategy.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'config/change_lang.dart';
 
+//  flutter run -d web-server --web-port 8080 --web-hostname 192.168.1.17
 void main() async {
   setPathUrlStrategy();
   AppLanguage appLanguage = AppLanguage();
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<AppLanguage>(create: (context) => appLanguage)
+        ChangeNotifierProvider<AppLanguage>(create: (context) => appLanguage),
+        ChangeNotifierProvider<UpdateUI>(create: (context) => UpdateUI())
       ],
       child: Consumer<AppLanguage>(
         builder: (context, model, child) {

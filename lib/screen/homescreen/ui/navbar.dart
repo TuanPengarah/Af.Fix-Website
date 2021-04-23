@@ -1,10 +1,12 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/config/routes.dart';
+import 'package:affix_web/config/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:flutter/material.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:affix_web/screen/homescreen/ui/buttom_change_language.dart';
+import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
@@ -32,64 +34,74 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
 class MobileNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlurryContainer(
-      blur: 15,
-      borderRadius: BorderRadius.vertical(),
-      bgColor: kColorGrey,
-      height: 80,
-      child: Stack(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Stack(
+      alignment: AlignmentDirectional.topCenter,
+      children: [
+        BlurryContainer(
+          blur: atasSekali == true ? 0.1 : 9,
+          borderRadius: BorderRadius.vertical(),
+          bgColor: kColorWhite,
+          height: 80,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Image.asset(
-                'assets/images/web_logo.png',
-                height: 80,
-              ),
               Row(
                 children: [
                   IconButton(
                       icon: Icon(
                         Icons.menu,
-                        color: kColorWhite,
+                        color: kColorGrey,
                       ),
                       onPressed: () {})
                 ],
               ),
             ],
           ),
-        ],
-      ),
+        ),
+        AnimatedContainer(
+          duration: Duration(milliseconds: 500),
+          height: Provider.of<UpdateUI>(context).heightAnimMob,
+          width: Provider.of<UpdateUI>(context).widthAnimMob,
+          curve: Curves.decelerate,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Image.asset(
+              'assets/images/logo_only_black.png',
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
 
-class DekstopNav extends StatelessWidget {
+class DekstopNav extends StatefulWidget {
   const DekstopNav({
     Key key,
   }) : super(key: key);
 
   @override
+  _DekstopNavState createState() => _DekstopNavState();
+}
+
+class _DekstopNavState extends State<DekstopNav> {
+  @override
   Widget build(BuildContext context) {
-    return BlurryContainer(
-      height: 100,
-      bgColor: Colors.white,
-      borderRadius: BorderRadius.only(
-        bottomLeft: Radius.circular(15),
-        bottomRight: Radius.circular(15),
-      ),
-      child: Stack(
-        children: [
-          Row(
+    return Stack(
+      children: [
+        BlurryContainer(
+          blur: atasSekali == true ? 0.1 : 15,
+          height: 100,
+          bgColor: kColorWhite,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(15),
+            bottomRight: Radius.circular(15),
+          ),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                  'assets/images/logo_web_dark.jpg',
-                  height: 70,
-                ),
-              ),
+              Container(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -102,6 +114,14 @@ class DekstopNav extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
+                            atasSekali = false;
+                            Provider.of<UpdateUI>(context, listen: false)
+                                .animationStartSmall(
+                                    wAnimDesk: 140,
+                                    hAnimDesk: 90,
+                                    wAnimMob: 120,
+                                    hAnimMob: 80);
+
                             scrollController.animateTo(1200,
                                 duration: Duration(milliseconds: 800),
                                 curve: Curves.decelerate);
@@ -135,6 +155,13 @@ class DekstopNav extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
+                            Provider.of<UpdateUI>(context, listen: false)
+                                .animationStartSmall(
+                                    wAnimDesk: 140,
+                                    hAnimDesk: 90,
+                                    wAnimMob: 120,
+                                    hAnimMob: 80);
+
                             scrollController.animateTo(60,
                                 duration: Duration(milliseconds: 800),
                                 curve: Curves.decelerate);
@@ -195,8 +222,21 @@ class DekstopNav extends StatelessWidget {
                   ))
             ],
           ),
-        ],
-      ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 500),
+            height: Provider.of<UpdateUI>(context).heightAnimDeks,
+            width: Provider.of<UpdateUI>(context).widthAnimDeks,
+            curve: Curves.decelerate,
+            child: Image.asset(
+              'assets/images/logo_only_black.png',
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

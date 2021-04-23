@@ -30,7 +30,7 @@ class MobileFirstPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
+      height: MediaQuery.of(context).size.height + 900,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(),
       child: Column(
@@ -38,8 +38,90 @@ class MobileFirstPageView extends StatelessWidget {
           SizedBox(
             height: 120,
           ),
-          Text('Smartphone anda mengalami kerosakkan?',
-              style: kTextSubtitleDark)
+          Text(AppLocalizations.of(context).translate('broken'),
+              textAlign: TextAlign.center, style: kTextSubtitleDark),
+          Container(
+            width: 200,
+            child: Divider(
+              thickness: 1,
+              color: kColorGrey,
+            ),
+          ),
+          Center(
+            child: Container(
+              child: AutoSizeText.rich(
+                TextSpan(
+                  text: '${AppLocalizations.of(context).translate('service')} ',
+                  style: TextStyle(
+                    color: kColorGrey,
+                    letterSpacing: 1.1,
+                    fontSize: 40,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '${AppLocalizations.of(context).translate('easy')}',
+                      style: TextStyle(fontWeight: FontWeight.w900),
+                    ),
+                    TextSpan(
+                        text:
+                            ' ${AppLocalizations.of(context).translate('and')} '),
+                    TextSpan(
+                      text:
+                          '${AppLocalizations.of(context).translate('trust')}',
+                      style: TextStyle(fontWeight: FontWeight.w900),
+                    ),
+                  ],
+                ),
+                textAlign: TextAlign.center,
+                minFontSize: 10,
+                maxFontSize: 30,
+                // overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton.icon(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(kColorGrey),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+            ),
+            icon: Icon(MaterialCommunityIcons.whatsapp),
+            label: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Text(
+                '${AppLocalizations.of(context).translate('whatsapp')}',
+                style: kTextSubtitle,
+              ),
+            ),
+            onPressed: () {},
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          TextButton.icon(
+            onPressed: () {},
+            icon: Icon(
+              Icons.file_download,
+              color: kColorGrey,
+            ),
+            label: Expanded(
+              child: Text(
+                '${AppLocalizations.of(context).translate('download')}',
+                style: kTextSubtitleDark,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          RepairForm(),
         ],
       ),
     );
@@ -145,7 +227,7 @@ class DekstopFirstPageView extends StatelessWidget {
                       '${AppLocalizations.of(context).translate('download')}',
                       style: kTextSubtitleDark,
                     ),
-                  )
+                  ),
                 ],
               ),
             ],

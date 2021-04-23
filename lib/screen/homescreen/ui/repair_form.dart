@@ -29,14 +29,14 @@ class _RepairFormState extends State<RepairForm> {
     return Form(
       key: _formKey,
       child: Container(
-        width: 500,
-        height: 820,
+        width: 380,
+        height: 850,
         decoration: BoxDecoration(
           color: kColorGrey,
           borderRadius: BorderRadius.circular(18),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.all(25.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,9 +190,9 @@ class _RepairFormState extends State<RepairForm> {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: TextFormField(
-                  maxLines: 3,
+                  // maxLines: 3,
                   controller: _kerosakkan,
-                  onEditingComplete: () => context.nextEditableTextFocus(),
+                  onEditingComplete: () => FocusScope.of(context).unfocus(),
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -221,14 +221,18 @@ class _RepairFormState extends State<RepairForm> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: ElevatedButton.icon(
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
+                          _email.clear();
+                          _kerosakkan.clear();
+                          _model.clear();
+                          _name.clear();
+                          _phoneNmber.clear();
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('Processing Data')));
                         }
