@@ -12,12 +12,13 @@
     "and" : "dan semestinya",
     "trust" : "dipercayai",
     "whatsapp" : "Whatsapp kami",
-    "download" : "Muat turun aplikasi (Akan Datang)",
+    "download" : "Muat turun aplikasi\n(Akan Datang)",
     "start" : "Mari mulakan, kami akan menghubungi anda secepat mungkin",
     "name" : "Nama",
     "phonenumber" : "Nombor telefon yang boleh dihubungi",
     "damage" : "Kerosakkan",
     "send" : "Buat temujanji",
     "eg" : "cth: Masuk air, Screen pecah...",
-    "urgent" : "Urgent?"
+    "urgent" : "Urgent?",
+    "emptyfield" : "Sila isi ruangan ini"
 }

@@ -12,13 +12,15 @@
     "and" : "and",
     "trust" : "reliable",
     "whatsapp" : "Whatsapp Us",
-    "download" : "Download our Apps (Coming Soon)",
+    "download" : "Download our Apps\n(Coming Soon)",
     "start" : "Let's get started, We will contact you as soon as possible",
     "name" : "Name",
     "phonenumber" : "Phone Number",
     "damage" : "Problem Statement",
     "send" : "Make an appointment",
     "eg" : "eg: Water damage, Screen crack...",
-    "urgent" : "Urgent?"
+    "urgent" : "Urgent?",
+    "emptyfield" : "This field cannot be empty"
+
 
 }

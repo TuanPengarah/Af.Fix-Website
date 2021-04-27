@@ -1,37 +1,28 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-extension Utility on BuildContext {
-  void nextEditableTextFocus() {
-    do {
-      FocusScope.of(this).nextFocus();
-    } while (FocusScope.of(this).focusedChild.context.widget is! EditableText);
-  }
-}
-
-class RepairForm extends StatefulWidget {
+class RepairFormMobile extends StatefulWidget {
   @override
-  _RepairFormState createState() => _RepairFormState();
+  _RepairFormMobileState createState() => _RepairFormMobileState();
 }
 
-class _RepairFormState extends State<RepairForm> {
+class _RepairFormMobileState extends State<RepairFormMobile> {
   final _formKey = GlobalKey<FormState>();
 
-  final _name = TextEditingController();
-  final _phoneNmber = TextEditingController();
-  final _email = TextEditingController();
-  final _model = TextEditingController();
-  final _kerosakkan = TextEditingController();
+  TextEditingController _name = TextEditingController();
+  TextEditingController _phoneNmber = TextEditingController();
+  TextEditingController _email = TextEditingController();
+  TextEditingController _model = TextEditingController();
+  TextEditingController _kerosakkan = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: Container(
-        width: 500,
+        width: MediaQuery.of(context).size.width - 30,
         height: 850,
         decoration: BoxDecoration(
           color: kColorGrey,
@@ -43,13 +34,15 @@ class _RepairFormState extends State<RepairForm> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SelectableText(
-                '${AppLocalizations.of(context).translate('start')}',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w700,
+              Center(
+                child: SelectableText(
+                  '${AppLocalizations.of(context).translate('start')}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
               SizedBox(
@@ -82,7 +75,7 @@ class _RepairFormState extends State<RepairForm> {
                     }
                     return null;
                   },
-                  onEditingComplete: () => context.nextEditableTextFocus(),
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
@@ -103,7 +96,7 @@ class _RepairFormState extends State<RepairForm> {
                 padding: const EdgeInsets.all(15.0),
                 child: TextFormField(
                   controller: _phoneNmber,
-                  onEditingComplete: () => context.nextEditableTextFocus(),
+                  textInputAction: TextInputAction.next,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -134,7 +127,7 @@ class _RepairFormState extends State<RepairForm> {
                 padding: const EdgeInsets.all(15.0),
                 child: TextFormField(
                   controller: _email,
-                  onEditingComplete: () => context.nextEditableTextFocus(),
+                  textInputAction: TextInputAction.next,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -164,7 +157,7 @@ class _RepairFormState extends State<RepairForm> {
                 padding: const EdgeInsets.all(15.0),
                 child: TextFormField(
                   controller: _model,
-                  onEditingComplete: () => context.nextEditableTextFocus(),
+                  textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.name,
                   style: TextStyle(
                     color: Colors.white,
@@ -197,7 +190,7 @@ class _RepairFormState extends State<RepairForm> {
                   // maxLines: 3,
                   controller: _kerosakkan,
                   keyboardType: TextInputType.name,
-                  textInputAction: TextInputAction.send,
+                  textInputAction: TextInputAction.done,
                   style: TextStyle(
                     color: Colors.white,
                   ),

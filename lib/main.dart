@@ -10,7 +10,7 @@ import 'package:url_strategy/url_strategy.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'config/change_lang.dart';
 
-//  flutter run -d web-server --web-port 8080 --web-hostname 192.168.1.17
+//
 void main() async {
   setPathUrlStrategy();
   AppLanguage appLanguage = AppLanguage();

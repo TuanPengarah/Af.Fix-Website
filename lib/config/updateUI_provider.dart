@@ -1,10 +1,14 @@
+import 'package:affix_web/config/constant.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class UpdateUI extends ChangeNotifier {
   double widthAnimDeks = 240;
   double heightAnimDeks = 150;
   double widthAnimMob = 150;
   double heightAnimMob = 100;
+  bool isMobile = true;
+  Color colorWhiteDark = kColorGrey;
 
   animationStartSmall(
       {double wAnimDesk, double hAnimDesk, double wAnimMob, double hAnimMob}) {
@@ -12,7 +16,7 @@ class UpdateUI extends ChangeNotifier {
     heightAnimDeks = hAnimDesk;
     widthAnimMob = wAnimMob;
     heightAnimMob = hAnimMob;
-    ChangeNotifier();
+    notifyListeners();
   }
 
   animationStartBig(
@@ -21,20 +25,16 @@ class UpdateUI extends ChangeNotifier {
     heightAnimDeks = hAnimDesk;
     widthAnimMob = wAnimMob;
     heightAnimMob = hAnimMob;
-    ChangeNotifier();
+    notifyListeners();
   }
-// animationStartSmall() {
-//   widthAnimDeks = 140;
-//   heightAnimDeks = 90;
-//   widthAnimMob = 120;
-//   heightAnimMob = 80;
-// }
 
-// animationStartBig() {
-//   widthAnimDeks = 240;
-//   heightAnimDeks = 150;
-//   widthAnimMob = 150;
-//   heightAnimMob = 100;
-// }
+  isThisMobile(bool mobile) {
+    isMobile = mobile;
+    // notifyListeners();
+  }
 
+  colorTweenDarkWhite(Color animation) {
+    colorWhiteDark = animation;
+    notifyListeners();
+  }
 }

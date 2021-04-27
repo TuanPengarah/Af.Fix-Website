@@ -3,9 +3,9 @@ import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/config/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
+import 'package:affix_web/screen/homescreen/ui/icon_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
-import 'package:affix_web/screen/homescreen/ui/buttom_change_language.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -22,59 +22,68 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
         if (constraints.maxWidth > 1200) {
           return DekstopNav();
         } else if (constraints.maxWidth > 820 && constraints.maxWidth < 1200) {
-          return MobileNav();
+          return EmptyLayout();
         } else {
-          return MobileNav();
+          return EmptyLayout();
         }
       },
     );
   }
 }
 
-class MobileNav extends StatelessWidget {
+class EmptyLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional.topCenter,
-      children: [
-        BlurryContainer(
-          blur: atasSekali == true ? 0.1 : 9,
-          borderRadius: BorderRadius.vertical(),
-          bgColor: kColorWhite,
-          height: 80,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Row(
-                children: [
-                  IconButton(
-                      icon: Icon(
-                        Icons.menu,
-                        color: kColorGrey,
-                      ),
-                      onPressed: () {})
-                ],
-              ),
-            ],
-          ),
-        ),
-        AnimatedContainer(
-          duration: Duration(milliseconds: 500),
-          height: Provider.of<UpdateUI>(context).heightAnimMob,
-          width: Provider.of<UpdateUI>(context).widthAnimMob,
-          curve: Curves.decelerate,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Image.asset(
-              'assets/images/logo_only_black.png',
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
-      ],
-    );
+    return Container();
   }
 }
+
+// class MobileNav extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Stack(
+//       alignment: AlignmentDirectional.topCenter,
+//       children: [
+//         BlurryContainer(
+//           blur: atasSekali == true ? 0.1 : 9,
+//           borderRadius: BorderRadius.vertical(),
+//           bgColor: kColorWhite,
+//           height: 80,
+//           child: Row(
+//             mainAxisAlignment: MainAxisAlignment.end,
+//             children: [
+//               Row(
+//                 children: [
+//                   IconButton(
+//                       icon: Icon(
+//                         Icons.menu,
+//                         color: kColorGrey,
+//                       ),
+//                       onPressed: () {
+//                         Drawer();
+//                       })
+//                 ],
+//               ),
+//             ],
+//           ),
+//         ),
+//         AnimatedContainer(
+//           duration: Duration(milliseconds: 500),
+//           height: Provider.of<UpdateUI>(context).heightAnimMob,
+//           width: Provider.of<UpdateUI>(context).widthAnimMob,
+//           curve: Curves.decelerate,
+//           child: Padding(
+//             padding: const EdgeInsets.only(top: 8.0),
+//             child: Image.asset(
+//               'assets/images/logo_only_black.png',
+//               fit: BoxFit.fill,
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 class DekstopNav extends StatefulWidget {
   const DekstopNav({
@@ -175,16 +184,6 @@ class _DekstopNavState extends State<DekstopNav> {
                             ),
                           ),
                         ),
-                        // SizedBox(
-                        //   width: 20,
-                        // ),
-                        // TextButton(
-                        //   onPressed: () {},
-                        //   child: Text(
-                        //     'Aplikasi',
-                        //     style: kTextSubtitle,
-                        //   ),
-                        // ),
                         SizedBox(
                           width: 20,
                         ),
@@ -212,14 +211,7 @@ class _DekstopNavState extends State<DekstopNav> {
                   ),
                 ],
               ),
-              TextButton(
-                  onPressed: () {
-                    showLanguageUI(context);
-                  },
-                  child: Text(
-                    '${AppLocalizations.of(context).translate('locale')}',
-                    style: kTextSubtitleDark,
-                  ))
+              IconCircle(),
             ],
           ),
         ),
