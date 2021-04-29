@@ -22,7 +22,7 @@ class _RepairFormMobileState extends State<RepairFormMobile> {
     return Form(
       key: _formKey,
       child: Container(
-        width: MediaQuery.of(context).size.width - 30,
+        width: MediaQuery.of(context).size.width - 10,
         height: 850,
         decoration: BoxDecoration(
           color: kColorGrey,

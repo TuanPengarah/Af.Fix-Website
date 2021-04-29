@@ -34,105 +34,117 @@ class MobileFirstPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     Provider.of<UpdateUI>(context, listen: false).isThisMobile(true);
     return FittedBox(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Text(AppLocalizations.of(context).translate('broken'),
-                textAlign: TextAlign.center, style: kTextSubtitleDark),
-            Container(
-              width: 200,
-              child: Divider(
-                thickness: 1,
-                color: kColorGrey,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: [
+              Image.asset(
+                'assets/images/logo_only_black.png',
+                height: 170,
               ),
-            ),
-            Center(
-              child: Container(
-                child: AutoSizeText.rich(
-                  TextSpan(
-                    text:
-                        '${AppLocalizations.of(context).translate('service')} ',
-                    style: TextStyle(
-                      color: kColorGrey,
-                      letterSpacing: 1.1,
-                      fontSize: 40,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text:
-                            '${AppLocalizations.of(context).translate('easy')}',
-                        style: TextStyle(fontWeight: FontWeight.w900),
-                      ),
-                      TextSpan(
-                          text:
-                              ' ${AppLocalizations.of(context).translate('and')} '),
-                      TextSpan(
-                        text:
-                            '${AppLocalizations.of(context).translate('trust')}',
-                        style: TextStyle(fontWeight: FontWeight.w900),
-                      ),
-                    ],
-                  ),
-                  textAlign: TextAlign.center,
-                  minFontSize: 10,
-                  maxFontSize: 30,
-                  // overflow: TextOverflow.ellipsis,
-                ),
+              SizedBox(
+                height: 20,
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ElevatedButton.icon(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(kColorGrey),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
+              SelectableText(
+                AppLocalizations.of(context).translate('broken'),
+                textAlign: TextAlign.center,
+                style: kTextSubtitleDark,
               ),
-              icon: Icon(MaterialCommunityIcons.whatsapp),
-              label: Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Text(
-                  '${AppLocalizations.of(context).translate('whatsapp')}',
-                  style: kTextSubtitle,
-                ),
-              ),
-              onPressed: () {},
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: TextButton.icon(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.file_download,
+              Container(
+                width: 200,
+                child: Divider(
+                  thickness: 1,
                   color: kColorGrey,
                 ),
-                label: Center(
-                  child: Text(
-                    '${AppLocalizations.of(context).translate('download')}',
-                    style: kTextSubtitleDark,
-                    textAlign: TextAlign.center,
+              ),
+              Center(
+                child: Container(
+                  child: Center(
+                    child: AutoSizeText.rich(
+                      TextSpan(
+                        text:
+                            '${AppLocalizations.of(context).translate('service')} ',
+                        style: TextStyle(
+                          color: kColorGrey,
+                          letterSpacing: 1.1,
+                          fontSize: 35,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text:
+                                '${AppLocalizations.of(context).translate('easy')}',
+                            style: TextStyle(fontWeight: FontWeight.w900),
+                          ),
+                          TextSpan(
+                              text:
+                                  ' ${AppLocalizations.of(context).translate('and')} '),
+                          TextSpan(
+                            text:
+                                '${AppLocalizations.of(context).translate('trust')}',
+                            style: TextStyle(fontWeight: FontWeight.w900),
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.center,
+                      minFontSize: 10,
+                      maxFontSize: 30,
+                      // overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            RepairFormMobile(),
-            SizedBox(
-              height: 50,
-            ),
-          ],
+              SizedBox(
+                height: 20,
+              ),
+              ElevatedButton.icon(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(kColorGrey),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                ),
+                icon: Icon(MaterialCommunityIcons.whatsapp),
+                label: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Text(
+                    '${AppLocalizations.of(context).translate('whatsapp')}',
+                    style: kTextSubtitle,
+                  ),
+                ),
+                onPressed: () {},
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: TextButton.icon(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.file_download,
+                    color: kColorGrey,
+                  ),
+                  label: Center(
+                    child: Text(
+                      '${AppLocalizations.of(context).translate('download')}',
+                      style: kTextSubtitleDark,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              RepairFormMobile(),
+              SizedBox(
+                height: 50,
+              ),
+            ],
+          ),
         ),
       ),
     );

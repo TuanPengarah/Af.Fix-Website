@@ -1,7 +1,9 @@
+import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/config/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/ui/first_landing.dart';
 import 'package:affix_web/screen/homescreen/ui/navbar.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
@@ -16,37 +18,37 @@ double scrollPosition = 0;
 bool atasSekali = true;
 bool dahRunning = false;
 
-class _LandingPageState extends State<LandingPage>
-    with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<Color> _animColor;
-
+class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(duration: Duration(milliseconds: 400), vsync: this);
     scrollController = ScrollController();
     scrollController.addListener(_scrollListener);
-    _animColor = ColorTween(begin: kColorGrey, end: kColorWhite)
-        .animate(_animationController)
-          ..addListener(() {
-            Provider.of<UpdateUI>(context, listen: false)
-                .colorTweenDarkWhite(_animColor.value);
-          });
   }
 
   _scrollListener() {
     scrollPosition = scrollController.position.pixels;
     // print(scrollPosition);
+    if (dahRunning == true) {
+      if (scrollPosition < 60) {
+        Provider.of<UpdateUI>(context, listen: false)
+            .changeColorDarkWhite(kColorGrey);
+        dahRunning = false;
+        Provider.of<UpdateUI>(context, listen: false)
+            .changeLogoColorRedWhite(kColorRed);
+      }
+    }
     if (dahRunning == false) {
-      if (scrollPosition > 60 && scrollPosition <= 190) {
+      if (scrollPosition > 60 && scrollPosition < 190) {
         Provider.of<UpdateUI>(context, listen: false).animationStartSmall(
             wAnimDesk: 140, hAnimDesk: 90, wAnimMob: 120, hAnimMob: 80);
         atasSekali = false;
-        Future.delayed(Duration(milliseconds: 200), () {
-          _animationController.forward();
-        });
+
+        Provider.of<UpdateUI>(context, listen: false)
+            .changeColorDarkWhite(kColorWhite);
+        Provider.of<UpdateUI>(context, listen: false)
+            .changeLogoColorRedWhite(kColorWhite);
+
         dahRunning = true;
       }
     }
@@ -63,7 +65,8 @@ class _LandingPageState extends State<LandingPage>
 //do logic untuk atas sekali
       Provider.of<UpdateUI>(context, listen: false).animationStartBig(
           wAnimDesk: 240, hAnimDesk: 150, wAnimMob: 150, hAnimMob: 100);
-      _animationController.reverse();
+      // Provider.of<UpdateUI>(context, listen: false)
+      //     .changeColorDarkWhite(kColorGrey);
       atasSekali = true;
       dahRunning = false;
     }
@@ -89,12 +92,103 @@ class MobileHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: kColorWhiteDark,
+                      radius: 28,
+                      child: Icon(
+                        Ionicons.person,
+                        color: kColorWhite,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    AutoSizeText(
+                      'User not signed in',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Divider(
+              indent: 20,
+              endIndent: 20,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              width: 250,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  scrollController.animateTo(0,
+                      duration: Duration(milliseconds: 800),
+                      curve: Curves.decelerate);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    AppLocalizations.of(context).translate('letsrepair'),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context).translate('about')),
+              onTap: () {
+                Navigator.of(context).pop();
+                scrollController.animateTo(1577,
+                    duration: Duration(milliseconds: 800),
+                    curve: Curves.decelerate);
+              },
+            ),
+            ListTile(
+              title: Text(
+                AppLocalizations.of(context).translate('ourservice'),
+              ),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text(
+                AppLocalizations.of(context).translate('ewarranti'),
+              ),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text(
+                AppLocalizations.of(context).translate('myrid'),
+              ),
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
       body: Scrollbar(
         child: CustomScrollView(
           controller: scrollController,
           slivers: [
             SliverAppBar(
+              elevation: 0,
               shape: ContinuousRectangleBorder(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(15),
@@ -110,7 +204,7 @@ class MobileHomeView extends StatelessWidget {
                   tooltip: 'Menu',
                   icon: Icon(
                     Icons.menu,
-                    color: Provider.of<UpdateUI>(context).colorWhiteDark,
+                    color: Provider.of<UpdateUI>(context).changeColor,
                   ),
                   onPressed: () {
                     Scaffold.of(context).openDrawer();
@@ -119,19 +213,32 @@ class MobileHomeView extends StatelessWidget {
               ),
               actions: [
                 IconButton(
-                  tooltip: 'Our Social Media',
+                  tooltip:
+                      '${AppLocalizations.of(context).translate('tooltipsocial')}',
                   icon: Icon(
                     MaterialCommunityIcons.contacts,
-                    color: Provider.of<UpdateUI>(context).colorWhiteDark,
+                    color: Provider.of<UpdateUI>(context).changeColor,
                   ),
                   onPressed: () {},
                 ),
               ],
               flexibleSpace: FlexibleSpaceBar(
-                title: Text(
-                  'AF.FIX',
-                  style: TextStyle(
-                    color: Provider.of<UpdateUI>(context).colorWhiteDark,
+                title: Text.rich(
+                  TextSpan(
+                    text: 'AF',
+                    style: TextStyle(
+                      fontFamily: 'MotionControl',
+                      fontSize: 60,
+                      color: Provider.of<UpdateUI>(context).changeLogoColor,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: '.FIX',
+                        style: TextStyle(
+                          color: Provider.of<UpdateUI>(context).changeColor,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 centerTitle: true,

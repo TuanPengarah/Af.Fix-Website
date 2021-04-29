@@ -20,7 +20,8 @@
     "send" : "Make an appointment",
     "eg" : "eg: Water damage, Screen crack...",
     "urgent" : "Urgent?",
-    "emptyfield" : "This field cannot be empty"
+    "emptyfield" : "This field cannot be empty",
+    "tooltipsocial" : "Our Social Media"
 
 
 }

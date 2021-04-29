@@ -8,7 +8,8 @@ class UpdateUI extends ChangeNotifier {
   double widthAnimMob = 150;
   double heightAnimMob = 100;
   bool isMobile = true;
-  Color colorWhiteDark = kColorGrey;
+  Color changeColor = kColorGrey;
+  Color changeLogoColor = kColorRed;
 
   animationStartSmall(
       {double wAnimDesk, double hAnimDesk, double wAnimMob, double hAnimMob}) {
@@ -33,8 +34,13 @@ class UpdateUI extends ChangeNotifier {
     // notifyListeners();
   }
 
-  colorTweenDarkWhite(Color animation) {
-    colorWhiteDark = animation;
+  changeColorDarkWhite(Color newColor) {
+    changeColor = newColor;
+    notifyListeners();
+  }
+
+  changeLogoColorRedWhite(Color newColor) {
+    changeLogoColor = newColor;
     notifyListeners();
   }
 }
