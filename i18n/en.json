@@ -21,7 +21,9 @@
     "eg" : "eg: Water damage, Screen crack...",
     "urgent" : "Urgent?",
     "emptyfield" : "This field cannot be empty",
-    "tooltipsocial" : "Our Social Media"
-
+    "tooltipsocial" : "Our Social Media",
+    "usernotsign" : "User not sign in",
+    "login" : "Click here to login",
+    "darktheme" : "Dark Theme"
 
 }

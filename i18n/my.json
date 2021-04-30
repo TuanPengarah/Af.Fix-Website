@@ -21,5 +21,8 @@
     "eg" : "cth: Masuk air, Screen pecah...",
     "urgent" : "Urgent?",
     "emptyfield" : "Sila isi ruangan ini",
-    "tooltipsocial" : "Sosial Media Kami"
+    "tooltipsocial" : "Sosial Media Kami",
+    "usernotsign" : "Pengguna tidak log masuk",
+    "login" : "Tekan sini untuk log masuk",
+    "darktheme" : "Tema Gelap"
 }

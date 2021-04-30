@@ -36,6 +36,7 @@ dependencies:
   auto_size_text: ^2.1.0
   shared_preferences: ^2.0.5
   provider: ^5.0.0
+  switcher_button: ^0.0.3
 
 
 dev_dependencies:

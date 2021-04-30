@@ -5,7 +5,7 @@ import 'package:affix_web/screen/homescreen/ui/first_landing.dart';
 import 'package:affix_web/screen/homescreen/ui/navbar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:switcher_button/switcher_button.dart';
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {
@@ -17,6 +17,7 @@ ScrollController scrollController = ScrollController();
 double scrollPosition = 0;
 bool atasSekali = true;
 bool dahRunning = false;
+bool _switch = false;
 
 class _LandingPageState extends State<LandingPage> {
   @override
@@ -93,71 +94,47 @@ class MobileHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
-        child: Column(
+        child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Container(
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: kColorWhiteDark,
-                      radius: 28,
-                      child: Icon(
-                        Ionicons.person,
-                        color: kColorWhite,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    AutoSizeText(
-                      'User not signed in',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
+            DrawerHeader(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  AutoSizeText(
+                    '${AppLocalizations.of(context).translate('usernotsign')}',
+                    style: TextStyle(color: Colors.white),
+                    overflow: TextOverflow.ellipsis,
+                    maxFontSize: 20,
+                    minFontSize: 13,
+                  ),
+                ],
               ),
-            ),
-            Divider(
-              indent: 20,
-              endIndent: 20,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              width: 250,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  scrollController.animateTo(0,
-                      duration: Duration(milliseconds: 800),
-                      curve: Curves.decelerate);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    AppLocalizations.of(context).translate('letsrepair'),
-                  ),
-                ),
+              decoration: BoxDecoration(
+                color: kColorRed,
               ),
             ),
             SizedBox(
               height: 10,
             ),
             ListTile(
-              title: Text(AppLocalizations.of(context).translate('about')),
+              title: Text(AppLocalizations.of(context).translate('letsrepair')),
               onTap: () {
                 Navigator.of(context).pop();
-                scrollController.animateTo(1577,
+                scrollController.animateTo(0,
+                    duration: Duration(milliseconds: 800),
+                    curve: Curves.decelerate);
+              },
+            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context).translate('about')),
+              onTap: () {
+                Provider.of<UpdateUI>(context, listen: false)
+                    .changeColorDarkWhite(kColorWhite);
+                Provider.of<UpdateUI>(context, listen: false)
+                    .changeLogoColorRedWhite(kColorWhite);
+                Navigator.of(context).pop();
+                scrollController.animateTo(1677,
                     duration: Duration(milliseconds: 800),
                     curve: Curves.decelerate);
               },
@@ -179,6 +156,29 @@ class MobileHomeView extends StatelessWidget {
                 AppLocalizations.of(context).translate('myrid'),
               ),
               onTap: () {},
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Divider(),
+            ListTile(
+              title: Text(
+                '${AppLocalizations.of(context).translate('language')}',
+              ),
+              trailing:
+                  Text('${AppLocalizations.of(context).translate('locale')}'),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text(
+                  '${AppLocalizations.of(context).translate('darktheme')}'),
+              trailing: SwitcherButton(
+                value: _switch,
+                onChange: (newValue) {
+                  _switch = !newValue;
+                },
+                onColor: kColorRed,
+              ),
             ),
           ],
         ),
@@ -211,17 +211,6 @@ class MobileHomeView extends StatelessWidget {
                   },
                 ),
               ),
-              actions: [
-                IconButton(
-                  tooltip:
-                      '${AppLocalizations.of(context).translate('tooltipsocial')}',
-                  icon: Icon(
-                    MaterialCommunityIcons.contacts,
-                    color: Provider.of<UpdateUI>(context).changeColor,
-                  ),
-                  onPressed: () {},
-                ),
-              ],
               flexibleSpace: FlexibleSpaceBar(
                 title: Text.rich(
                   TextSpan(
