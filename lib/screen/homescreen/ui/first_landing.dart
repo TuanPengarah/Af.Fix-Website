@@ -40,10 +40,10 @@ class MobileFirstPageView extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
-              Image.asset(
-                'assets/images/logo_only_black.png',
-                height: 170,
-              ),
+              // Image.asset(
+              //   'assets/images/logo_only_black.png',
+              //   height: 170,
+              // ),
               SizedBox(
                 height: 20,
               ),

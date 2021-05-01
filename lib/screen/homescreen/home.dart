@@ -31,7 +31,7 @@ class _LandingPageState extends State<LandingPage> {
     scrollPosition = scrollController.position.pixels;
     // print(scrollPosition);
     if (dahRunning == true) {
-      if (scrollPosition < 60) {
+      if (scrollPosition < 200) {
         Provider.of<UpdateUI>(context, listen: false)
             .changeColorDarkWhite(kColorGrey);
         dahRunning = false;
@@ -40,7 +40,7 @@ class _LandingPageState extends State<LandingPage> {
       }
     }
     if (dahRunning == false) {
-      if (scrollPosition > 60 && scrollPosition < 190) {
+      if (scrollPosition > 200 && scrollPosition < 250) {
         Provider.of<UpdateUI>(context, listen: false).animationStartSmall(
             wAnimDesk: 140, hAnimDesk: 90, wAnimMob: 120, hAnimMob: 80);
         atasSekali = false;
@@ -93,7 +93,7 @@ class MobileHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
+      endDrawer: Drawer(
         child: ListView(
           children: [
             DrawerHeader(
@@ -198,19 +198,7 @@ class MobileHomeView extends StatelessWidget {
               pinned: true,
               floating: false,
               snap: false,
-              expandedHeight: 160.0,
-              leading: Builder(
-                builder: (BuildContext context) => IconButton(
-                  tooltip: 'Menu',
-                  icon: Icon(
-                    Icons.menu,
-                    color: Provider.of<UpdateUI>(context).changeColor,
-                  ),
-                  onPressed: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                ),
-              ),
+              expandedHeight: 280.0,
               flexibleSpace: FlexibleSpaceBar(
                 title: Text.rich(
                   TextSpan(
@@ -231,8 +219,43 @@ class MobileHomeView extends StatelessWidget {
                   ),
                 ),
                 centerTitle: true,
-                background: Container(color: kColorWhite),
+                background: Container(
+                  alignment: Alignment.topCenter,
+                  decoration: BoxDecoration(
+                    color: kColorWhite,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        height: 250,
+                        alignment: Alignment.topCenter,
+                        width: 250,
+                        child: Image.asset(
+                          'assets/images/logo_only_black.png',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
+              actions: [
+                Builder(
+                  builder: (BuildContext context) => IconButton(
+                    tooltip: 'Menu',
+                    icon: Icon(
+                      Icons.menu,
+                      color: Provider.of<UpdateUI>(context).changeColor,
+                    ),
+                    onPressed: () {
+                      Scaffold.of(context).openEndDrawer();
+                    },
+                  ),
+                ),
+              ],
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
