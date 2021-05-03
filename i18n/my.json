@@ -24,5 +24,13 @@
     "tooltipsocial" : "Sosial Media Kami",
     "usernotsign" : "Pengguna tidak log masuk",
     "login" : "Tekan sini untuk log masuk",
-    "darktheme" : "Tema Gelap"
+    "darktheme" : "Tema Gelap",
+    "tooltipletrepair" : "Jom repair dengan kami",
+    "tooltipabout" : "Kelebihan servis dengan kami",
+    "tooltipourservice" : "Lihat kesemua servis yang kami lakukan",
+    "tooltipewaranti" : "Informasi tentang status peranti smartphone anda",
+    "tooltipmyrid" : "Jejaki status membaiki smartphone anda",
+    "tooltipchangelang" : "Tukar bahasa lain",
+    "tooltipdarktheme" : "Tukar tema kepada gelap"
+    
 }

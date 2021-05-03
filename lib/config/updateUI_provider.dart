@@ -10,6 +10,7 @@ class UpdateUI extends ChangeNotifier {
   bool isMobile = true;
   Color changeColor = kColorGrey;
   Color changeLogoColor = kColorRed;
+  bool switchDarkMode = false;
 
   animationStartSmall(
       {double wAnimDesk, double hAnimDesk, double wAnimMob, double hAnimMob}) {
@@ -41,6 +42,11 @@ class UpdateUI extends ChangeNotifier {
 
   changeLogoColorRedWhite(Color newColor) {
     changeLogoColor = newColor;
+    notifyListeners();
+  }
+
+  changeDarkMode(bool newMode) {
+    switchDarkMode = !newMode;
     notifyListeners();
   }
 }

@@ -25,18 +25,24 @@ dependencies:
     sdk: flutter
   flutter_localizations: 
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  firebase_core: ^1.0.3
-  cloud_firestore: "^1.0.5"
-  url_strategy: ^0.2.0
-  velocity_x: ^2.6.1
-  blur: ^2.0.0
+
+   # UI/UX
   blurrycontainer: ^0.0.1
+  cupertino_icons: ^1.0.2
   flutter_vector_icons: ^1.0.0
   auto_size_text: ^2.1.0
-  shared_preferences: ^2.0.5
+
+  # Firebase Services
+  firebase_core: ^1.0.3
+  cloud_firestore: "^1.0.5"
+
+  # State Management
+  url_strategy: ^0.2.0
   provider: ^5.0.0
-  switcher_button: ^0.0.3
+  velocity_x: ^2.6.1
+
+  # Model
+  shared_preferences: ^2.0.5
 
 
 dev_dependencies:

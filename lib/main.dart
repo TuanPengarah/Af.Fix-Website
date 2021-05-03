@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'config/change_lang.dart';
+import 'config/themeUI_provider.dart';
 
 //flutter run -d web-server --web-port 8080 --web-hostname 192.168.1.17
 
@@ -30,17 +31,19 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<AppLanguage>(create: (context) => appLanguage),
-        ChangeNotifierProvider<UpdateUI>(create: (context) => UpdateUI())
+        ChangeNotifierProvider<UpdateUI>(create: (context) => UpdateUI()),
+        ChangeNotifierProvider<ThemeProvider>(
+            create: (context) => ThemeProvider())
       ],
       child: Consumer<AppLanguage>(
         builder: (context, model, child) {
           return MaterialApp.router(
+            themeMode: Provider.of<ThemeProvider>(context).themeMode,
             debugShowCheckedModeBanner: false,
             title:
                 'Af.Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
-            theme: ThemeData(
-              primarySwatch: Colors.red,
-            ),
+            theme: MyThemes.lightTheme,
+            darkTheme: MyThemes.darkTheme,
             routeInformationParser: VxInformationParser(),
             routerDelegate: VxNavigator(
               routes: {
