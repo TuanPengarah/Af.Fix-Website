@@ -1,6 +1,7 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/config/routes.dart';
+import 'package:affix_web/config/themeUI_provider.dart';
 import 'package:affix_web/config/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:affix_web/screen/homescreen/ui/icon_circle.dart';
@@ -38,53 +39,6 @@ class EmptyLayout extends StatelessWidget {
   }
 }
 
-// class MobileNav extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Stack(
-//       alignment: AlignmentDirectional.topCenter,
-//       children: [
-//         BlurryContainer(
-//           blur: atasSekali == true ? 0.1 : 9,
-//           borderRadius: BorderRadius.vertical(),
-//           bgColor: kColorWhite,
-//           height: 80,
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.end,
-//             children: [
-//               Row(
-//                 children: [
-//                   IconButton(
-//                       icon: Icon(
-//                         Icons.menu,
-//                         color: kColorGrey,
-//                       ),
-//                       onPressed: () {
-//                         Drawer();
-//                       })
-//                 ],
-//               ),
-//             ],
-//           ),
-//         ),
-//         AnimatedContainer(
-//           duration: Duration(milliseconds: 500),
-//           height: Provider.of<UpdateUI>(context).heightAnimMob,
-//           width: Provider.of<UpdateUI>(context).widthAnimMob,
-//           curve: Curves.decelerate,
-//           child: Padding(
-//             padding: const EdgeInsets.only(top: 8.0),
-//             child: Image.asset(
-//               'assets/images/logo_only_black.png',
-//               fit: BoxFit.fill,
-//             ),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
-
 class DekstopNav extends StatefulWidget {
   const DekstopNav({
     Key key,
@@ -97,12 +51,15 @@ class DekstopNav extends StatefulWidget {
 class _DekstopNavState extends State<DekstopNav> {
   @override
   Widget build(BuildContext context) {
+    bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
     return Stack(
       children: [
         BlurryContainer(
           blur: atasSekali == true ? 0.1 : 15,
           height: 100,
-          bgColor: kColorWhite,
+          bgColor: _isDarkMode
+              ? Theme.of(context).scaffoldBackgroundColor
+              : kColorWhite,
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(15),
             bottomRight: Radius.circular(15),
@@ -156,6 +113,8 @@ class _DekstopNavState extends State<DekstopNav> {
                         ),
                         ElevatedButton(
                           style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Theme.of(context).primaryColor),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
@@ -223,7 +182,9 @@ class _DekstopNavState extends State<DekstopNav> {
             width: Provider.of<UpdateUI>(context).widthAnimDeks,
             curve: Curves.decelerate,
             child: Image.asset(
-              'assets/images/logo_only_black.png',
+              _isDarkMode
+                  ? 'assets/images/logo_only_white.png'
+                  : 'assets/images/logo_only_black.png',
               fit: BoxFit.fill,
             ),
           ),

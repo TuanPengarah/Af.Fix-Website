@@ -1,7 +1,9 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
+import 'package:affix_web/config/themeUI_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class RepairFormMobile extends StatefulWidget {
   @override
@@ -19,13 +21,14 @@ class _RepairFormMobileState extends State<RepairFormMobile> {
 
   @override
   Widget build(BuildContext context) {
+    bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
     return Form(
       key: _formKey,
       child: Container(
         width: MediaQuery.of(context).size.width - 10,
         height: 850,
         decoration: BoxDecoration(
-          color: kColorGrey,
+          color: _isDarkMode ? Colors.grey.shade900 : kColorGrey,
           borderRadius: BorderRadius.circular(18),
         ),
         child: Padding(
@@ -236,6 +239,8 @@ class _RepairFormMobileState extends State<RepairFormMobile> {
                         }
                       },
                       style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Theme.of(context).primaryColor),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(

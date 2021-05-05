@@ -1,5 +1,6 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
+import 'package:affix_web/config/themeUI_provider.dart';
 import 'package:affix_web/config/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/ui/repair_form.dart';
 import 'package:affix_web/screen/homescreen/ui/repair_form_mobile.dart';
@@ -32,6 +33,7 @@ class FirstLanding extends StatelessWidget {
 class MobileFirstPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
     Provider.of<UpdateUI>(context, listen: false).isThisMobile(true);
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
@@ -42,10 +44,6 @@ class MobileFirstPageView extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Column(
               children: [
-                // Image.asset(
-                //   'assets/images/logo_only_black.png',
-                //   height: 170,
-                // ),
                 SizedBox(
                   height: 20,
                 ),
@@ -58,6 +56,7 @@ class MobileFirstPageView extends StatelessWidget {
                   width: 200,
                   child: Divider(
                     thickness: 1,
+                    color: _isDarkMode ? kColorWhite : kColorGrey,
                   ),
                 ),
                 Center(
@@ -100,15 +99,15 @@ class MobileFirstPageView extends StatelessWidget {
                 ),
                 ElevatedButton.icon(
                   style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(kColorGrey),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
                     ),
                   ),
-                  icon: Icon(MaterialCommunityIcons.whatsapp),
+                  icon: Icon(
+                    MaterialCommunityIcons.whatsapp,
+                  ),
                   label: Padding(
                     padding: const EdgeInsets.all(18.0),
                     child: Text(
@@ -126,12 +125,10 @@ class MobileFirstPageView extends StatelessWidget {
                     onPressed: () {},
                     icon: Icon(
                       Icons.file_download,
-                      color: kColorGrey,
                     ),
                     label: Center(
                       child: Text(
                         '${AppLocalizations.of(context).translate('download')}',
-                        style: kTextSubtitleDark,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -156,12 +153,14 @@ class MobileFirstPageView extends StatelessWidget {
 class DekstopFirstPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
     Provider.of<UpdateUI>(context, listen: false).isThisMobile(false);
     return FittedBox(
       child: Container(
         height: MediaQuery.of(context).size.height + 250,
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(),
+        decoration:
+            BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -172,7 +171,6 @@ class DekstopFirstPageView extends StatelessWidget {
                 SelectableText(
                   AppLocalizations.of(context).translate('broken'),
                   style: TextStyle(
-                    color: kColorGrey,
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
                   ),
@@ -184,7 +182,7 @@ class DekstopFirstPageView extends StatelessWidget {
                   width: 200,
                   child: Divider(
                     thickness: 3,
-                    color: kColorGrey,
+                    color: _isDarkMode ? kColorWhite : kColorGrey,
                   ),
                 ),
                 Container(
@@ -194,7 +192,6 @@ class DekstopFirstPageView extends StatelessWidget {
                       text:
                           '${AppLocalizations.of(context).translate('service')} ',
                       style: TextStyle(
-                        color: kColorGrey,
                         fontSize: 60,
                       ),
                       children: <TextSpan>[
@@ -222,8 +219,10 @@ class DekstopFirstPageView extends StatelessWidget {
                   children: [
                     ElevatedButton.icon(
                       style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(kColorGrey),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            _isDarkMode
+                                ? Theme.of(context).primaryColor
+                                : kColorGrey),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
@@ -248,7 +247,6 @@ class DekstopFirstPageView extends StatelessWidget {
                       onPressed: () {},
                       icon: Icon(
                         Icons.file_download,
-                        color: kColorGrey,
                       ),
                       label: Text(
                         '${AppLocalizations.of(context).translate('download')}',

@@ -98,7 +98,7 @@ class DekstopHomeView extends StatelessWidget {
       body: PrimaryScrollController(
         controller: scrollController,
         child: Container(
-          decoration: BoxDecoration(color: kColorWhite),
+          // decoration: BoxDecoration(color: kColorWhite),
           child: Stack(
             children: [
               Scrollbar(
@@ -126,12 +126,3 @@ class DekstopHomeView extends StatelessWidget {
     );
   }
 }
-
-// appBar: AppBar(
-//   title: Text('Home'),
-// ),
-// floatingActionButton: FloatingActionButton(
-//   onPressed: () {
-//     context.vxNav.push(Uri.parse(MyRoutes.myRepairID));
-//   },
-// ),

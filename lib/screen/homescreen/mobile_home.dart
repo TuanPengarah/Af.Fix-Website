@@ -1,5 +1,6 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
+import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/config/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:affix_web/screen/homescreen/ui/menu_change_language.dart';
@@ -8,12 +9,14 @@ import 'package:affix_web/screen/homescreen/ui/navbar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:affix_web/config/themeUI_provider.dart';
 import 'ui/menu_change_theme.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class MobileHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       endDrawer: Drawer(
@@ -99,7 +102,9 @@ class MobileHomeView extends StatelessWidget {
                 title: Text(
                   AppLocalizations.of(context).translate('myrid'),
                 ),
-                onTap: () {},
+                onTap: () {
+                  context.vxNav.push(Uri.parse(MyRoutes.myRepairID));
+                },
               ),
             ),
             SizedBox(
@@ -129,9 +134,9 @@ class MobileHomeView extends StatelessWidget {
                 title: Text(
                     '${AppLocalizations.of(context).translate('darktheme')}'),
                 trailing: Text(
-                  MediaQuery.of(context).platformBrightness == Brightness.dark
-                      ? 'On'
-                      : 'Off',
+                  _isDarkMode
+                      ? '${AppLocalizations.of(context).translate('on')}'
+                      : '${AppLocalizations.of(context).translate('off')}',
                 ),
                 onTap: () {
                   showDarkTheme(context);
@@ -170,7 +175,9 @@ class MobileHomeView extends StatelessWidget {
                       TextSpan(
                         text: '.FIX',
                         style: TextStyle(
-                          color: Provider.of<UpdateUI>(context).changeColor,
+                          color: _isDarkMode
+                              ? kColorWhite
+                              : Provider.of<UpdateUI>(context).changeColor,
                         ),
                       ),
                     ],
@@ -180,7 +187,7 @@ class MobileHomeView extends StatelessWidget {
                 background: Container(
                   alignment: Alignment.topCenter,
                   decoration: BoxDecoration(
-                    color: kColorWhite,
+                    color: Theme.of(context).scaffoldBackgroundColor,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,7 +200,9 @@ class MobileHomeView extends StatelessWidget {
                         alignment: Alignment.topCenter,
                         width: 250,
                         child: Image.asset(
-                          'assets/images/logo_only_black.png',
+                          _isDarkMode
+                              ? 'assets/images/logo_only_white.png'
+                              : 'assets/images/logo_only_black.png',
                         ),
                       ),
                     ],
@@ -206,7 +215,9 @@ class MobileHomeView extends StatelessWidget {
                     tooltip: 'Menu',
                     icon: Icon(
                       Icons.menu,
-                      color: Provider.of<UpdateUI>(context).changeColor,
+                      color: _isDarkMode
+                          ? Colors.white
+                          : Provider.of<UpdateUI>(context).changeColor,
                     ),
                     onPressed: () {
                       Scaffold.of(context).openEndDrawer();

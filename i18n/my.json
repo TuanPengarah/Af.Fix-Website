@@ -31,6 +31,8 @@
     "tooltipewaranti" : "Informasi tentang status peranti smartphone anda",
     "tooltipmyrid" : "Jejaki status membaiki smartphone anda",
     "tooltipchangelang" : "Tukar bahasa lain",
-    "tooltipdarktheme" : "Tukar tema kepada gelap"
+    "tooltipdarktheme" : "Tukar tema kepada gelap",
+    "on" : "Buka",
+    "off" : "Tutup"
     
 }

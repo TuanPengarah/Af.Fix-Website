@@ -1,8 +1,9 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
-
+import 'package:affix_web/config/themeUI_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 extension Utility on BuildContext {
   void nextEditableTextFocus() {
@@ -28,13 +29,14 @@ class _RepairFormState extends State<RepairForm> {
 
   @override
   Widget build(BuildContext context) {
+    bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
     return Form(
       key: _formKey,
       child: Container(
         width: 500,
         height: 850,
         decoration: BoxDecoration(
-          color: kColorGrey,
+          color: _isDarkMode ? Colors.grey.shade900 : kColorGrey,
           borderRadius: BorderRadius.circular(18),
         ),
         child: Padding(
@@ -243,6 +245,8 @@ class _RepairFormState extends State<RepairForm> {
                         }
                       },
                       style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Theme.of(context).primaryColor),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(

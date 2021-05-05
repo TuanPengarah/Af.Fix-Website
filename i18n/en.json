@@ -31,6 +31,8 @@
     "tooltipewaranti" : "Information about all your services warranty",
     "tooltipchangelang" : "Change language",
     "tooltipmyrid" : "Tracking smarphone repair status",
-    "tooltipdarktheme" : "Change to dark theme"
+    "tooltipdarktheme" : "Change to dark theme",
+    "on" : "On",
+    "off" : "Off"
 
 }
