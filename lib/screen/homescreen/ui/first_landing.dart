@@ -120,16 +120,19 @@ class MobileFirstPageView extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Center(
-                  child: TextButton.icon(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.file_download,
-                    ),
-                    label: Center(
-                      child: Text(
-                        '${AppLocalizations.of(context).translate('download')}',
-                        textAlign: TextAlign.center,
+                Container(
+                  width: 400,
+                  child: Center(
+                    child: TextButton.icon(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.file_download,
+                      ),
+                      label: Center(
+                        child: Text(
+                          '${AppLocalizations.of(context).translate('download')}',
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   ),

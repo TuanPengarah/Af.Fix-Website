@@ -34,7 +34,12 @@ class MyThemes {
     ),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-        overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+        overlayColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> state) {
+          if (state.contains(MaterialState.pressed))
+            return Colors.grey.withOpacity(0.2);
+          return Colors.grey.withOpacity(0.1);
+        }),
         foregroundColor: MaterialStateProperty.all<Color>(kColorWhite),
         textStyle: MaterialStateProperty.all<TextStyle>(
           TextStyle(
@@ -69,7 +74,12 @@ class MyThemes {
     ),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-        overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+        overlayColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> state) {
+          if (state.contains(MaterialState.pressed))
+            return Colors.grey.withOpacity(0.2);
+          return Colors.grey.withOpacity(0.1);
+        }),
         foregroundColor: MaterialStateProperty.all<Color>(kColorGrey),
         textStyle: MaterialStateProperty.all<TextStyle>(
           TextStyle(
