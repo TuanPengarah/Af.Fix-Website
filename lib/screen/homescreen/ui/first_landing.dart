@@ -121,7 +121,7 @@ class MobileFirstPageView extends StatelessWidget {
                   height: 20,
                 ),
                 Container(
-                  width: 400,
+                  width: 280,
                   child: Center(
                     child: TextButton.icon(
                       onPressed: () {},
