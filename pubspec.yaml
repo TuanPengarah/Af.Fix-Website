@@ -26,12 +26,6 @@ dependencies:
   flutter_localizations: 
     sdk: flutter
 
-   # UI/UX
-  blurrycontainer: ^0.0.1
-  cupertino_icons: ^1.0.2
-  flutter_vector_icons: ^1.0.0
-  auto_size_text: ^2.1.0
-
   # Firebase Services
   firebase_core: ^1.0.3
   cloud_firestore: "^1.0.5"
@@ -41,13 +35,30 @@ dependencies:
   provider: ^5.0.0
   velocity_x: ^2.6.1
 
-  # Model
+  # Model Data
   shared_preferences: ^2.0.5
+
+
+   # UI/UX
+  blurrycontainer: ^0.0.1
+  cupertino_icons: ^1.0.2
+  flutter_vector_icons: ^1.0.0
+  auto_size_text: ^2.1.0
+  flutter_native_splash: ^1.1.8+4
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/splash_dark.png
+  color_dark: "#303030"
+  image_dark: assets/images/splash_light.png
+  web: true
+  web_image_mode: center
+
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
