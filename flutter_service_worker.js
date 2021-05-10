@@ -47,7 +47,7 @@ const RESOURCES = {
 "icons/apple-icon-76x76.png": "64e25353232a34165023958f1a538f6d",
 "icons/apple-icon-72x72.png": "be28995a4d0f339c9cf9dde2e3ab3baa",
 "icons/browserconfig.xml": "653d077300a12f09a69caeea7a8947f8",
-"icons/manifest.json": "b58fcfa7628c9205cb11a1b2c3e8f99a",
+"icons/manifest.json": "a69cb23b49c992be60b7bdc2f1ec6813",
 "icons/android-icon-144x144.png": "f93c75b93d0275bfe2ac2c4809c437a3",
 "icons/android-icon-96x96.png": "b6c9f53a97d937615dd87a95e9dd1ecd",
 "icons/favicon-16x16.png": "58af0e0bcc7c0cf3b56c6316b6c84569",
@@ -68,10 +68,11 @@ const RESOURCES = {
 "splash/style.css": "85b9bc5808a6c2e98251c14244b99ae7",
 "favicon.png": "58af0e0bcc7c0cf3b56c6316b6c84569",
 "version.json": "42dbcea7fb445741e49bc6c0904a3948",
-"manifest.json": "0564355c335d0a7445c88f0baf58e2d5",
-"main.dart.js": "b74d0a8fc0b4933d21a0fe98843ad1e5",
-"index.html": "da00dd10a4836f36d34401720cc102c5",
-"/": "da00dd10a4836f36d34401720cc102c5"
+"manifest.json": "c1c05b36b4b98d3ee00298846bcdb93f",
+"main.dart.js": "e398b42cb803b1cb639193e75d653c02",
+"favicon.ico": "562c0adcb9842c2f3925a6c0b36911a3",
+"index.html": "b9b9b9a12ef7284c35407c88323b3dca",
+"/": "b9b9b9a12ef7284c35407c88323b3dca"
 };
 
 // The application shell files that are downloaded before a service worker can
