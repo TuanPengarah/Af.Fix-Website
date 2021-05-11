@@ -1,4 +1,5 @@
 import 'package:affix_web/config/constant.dart';
+import 'package:affix_web/menu/menu_settings_dekstop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
@@ -30,7 +31,9 @@ class IconCircle extends StatelessWidget {
         Tooltip(
           message: 'Settings',
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              showSettingMenu(context);
+            },
             child: CircleAvatar(
               backgroundColor: Theme.of(context).primaryColor,
               child: Icon(

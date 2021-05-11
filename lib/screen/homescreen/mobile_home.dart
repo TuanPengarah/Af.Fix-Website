@@ -3,14 +3,14 @@ import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/config/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
-import 'package:affix_web/screen/homescreen/ui/menu_change_language.dart';
+import 'package:affix_web/menu/menu_change_language.dart';
 import 'package:affix_web/screen/homescreen/ui/first_landing.dart';
 import 'package:affix_web/screen/homescreen/ui/navbar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:affix_web/config/themeUI_provider.dart';
-import 'ui/menu_change_theme.dart';
+import '../../menu/menu_change_theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class MobileHomeView extends StatelessWidget {
