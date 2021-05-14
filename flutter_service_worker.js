@@ -31,7 +31,7 @@ const RESOURCES = {
 "assets/AssetManifest.json": "be0436bc542887fc9d3f3a78a691d911",
 "assets/i18n/en.json": "f14774c38a621d962d8a232038c121b3",
 "assets/i18n/my.json": "f6b6f56402a3fa29f97ed4c84b3dd7dd",
-"assets/NOTICES": "d3e1838e9a87098fd4573c73110e13cc",
+"assets/NOTICES": "762a9029ca69a788569dcb9c5b271bba",
 "icons/android-icon-72x72.png": "be28995a4d0f339c9cf9dde2e3ab3baa",
 "icons/favicon-96x96.png": "b6c9f53a97d937615dd87a95e9dd1ecd",
 "icons/apple-icon-152x152.png": "bf5f0c61c9272d58631a63d745a5a366",
@@ -69,10 +69,10 @@ const RESOURCES = {
 "favicon.png": "58af0e0bcc7c0cf3b56c6316b6c84569",
 "version.json": "42dbcea7fb445741e49bc6c0904a3948",
 "manifest.json": "c1c05b36b4b98d3ee00298846bcdb93f",
-"main.dart.js": "42637a3229c6e43b962c68882d2c95f3",
+"main.dart.js": "ec33eaecfc7041ea38f4e3ed461d0acf",
 "favicon.ico": "562c0adcb9842c2f3925a6c0b36911a3",
-"index.html": "57dcbd3d995efbfa3325ca02e5ff1349",
-"/": "57dcbd3d995efbfa3325ca02e5ff1349"
+"index.html": "43a74c63337101397ddd02a570d7075b",
+"/": "43a74c63337101397ddd02a570d7075b"
 };
 
 // The application shell files that are downloaded before a service worker can
