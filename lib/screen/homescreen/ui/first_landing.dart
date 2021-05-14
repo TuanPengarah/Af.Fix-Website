@@ -8,6 +8,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:universal_html/html.dart' as html;
 
 class FirstLanding extends StatelessWidget {
   const FirstLanding({
@@ -115,7 +116,9 @@ class MobileFirstPageView extends StatelessWidget {
                       style: kTextSubtitle,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    html.window.open(kWhatsAppLink, 'WhatsApp');
+                  },
                 ),
                 SizedBox(
                   height: 20,

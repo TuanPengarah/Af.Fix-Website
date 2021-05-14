@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/config/themeUI_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class RepairFormMobile extends StatefulWidget {
   @override
@@ -13,11 +16,36 @@ class RepairFormMobile extends StatefulWidget {
 class _RepairFormMobileState extends State<RepairFormMobile> {
   final _formKey = GlobalKey<FormState>();
 
+  final RoundedLoadingButtonController _buttonController =
+      RoundedLoadingButtonController();
   TextEditingController _name = TextEditingController();
   TextEditingController _phoneNmber = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _model = TextEditingController();
   TextEditingController _kerosakkan = TextEditingController();
+
+  void _submitted() async {
+    Timer(Duration(seconds: 2), () {
+      if (_formKey.currentState.validate()) {
+        _email.clear();
+        _kerosakkan.clear();
+        _model.clear();
+        _name.clear();
+        _phoneNmber.clear();
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Processing Data')));
+        _buttonController.success();
+        Timer(Duration(seconds: 2), () {
+          _buttonController.reset();
+        });
+      } else {
+        _buttonController.error();
+        Timer(Duration(seconds: 2), () {
+          _buttonController.reset();
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -224,40 +252,57 @@ class _RepairFormMobileState extends State<RepairFormMobile> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          _email.clear();
-                          _kerosakkan.clear();
-                          _model.clear();
-                          _name.clear();
-                          _phoneNmber.clear();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Processing Data')));
-                        }
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Theme.of(context).primaryColor),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                  RoundedLoadingButton(
+                    errorColor: Colors.red,
+                    controller: _buttonController,
+                    onPressed: () => _submitted(),
+                    color: Theme.of(context).primaryColor,
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.email,
+                          color: Colors.white,
                         ),
-                      ),
-                      icon: Icon(Icons.email),
-                      label: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15.0, horizontal: 30),
-                        child: Text(
-                          '${AppLocalizations.of(context).translate('send')}',
-                        ),
-                      ),
+                        SizedBox(width: 15),
+                        Text(
+                            '${AppLocalizations.of(context).translate('send')}'),
+                      ],
                     ),
                   ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(15.0),
+                  //   child: ElevatedButton.icon(
+                  //     onPressed: () {
+                  //       if (_formKey.currentState.validate()) {
+                  //         _email.clear();
+                  //         _kerosakkan.clear();
+                  //         _model.clear();
+                  //         _name.clear();
+                  //         _phoneNmber.clear();
+                  //         ScaffoldMessenger.of(context).showSnackBar(
+                  //             SnackBar(content: Text('Processing Data')));
+                  //       }
+                  //     },
+                  //     style: ButtonStyle(
+                  //       backgroundColor: MaterialStateProperty.all<Color>(
+                  //           Theme.of(context).primaryColor),
+                  //       shape:
+                  //           MaterialStateProperty.all<RoundedRectangleBorder>(
+                  //         RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(15),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     icon: Icon(Icons.email),
+                  //     label: Padding(
+                  //       padding: const EdgeInsets.symmetric(
+                  //           vertical: 15.0, horizontal: 30),
+                  //       child: Text(
+                  //         '${AppLocalizations.of(context).translate('send')}',
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               )
             ],

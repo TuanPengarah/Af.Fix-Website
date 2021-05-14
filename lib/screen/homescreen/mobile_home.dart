@@ -107,6 +107,18 @@ class MobileHomeView extends StatelessWidget {
                 },
               ),
             ),
+                        Tooltip(
+              message:
+                  '${AppLocalizations.of(context).translate('tooltipsocial')}',
+              child: ListTile(
+                title: Text(
+                  AppLocalizations.of(context).translate('tooltipsocial'),
+                ),
+                onTap: () {
+                  context.vxNav.push(Uri.parse(MyRoutes.myRepairID));
+                },
+              ),
+            ),
             SizedBox(
               height: 10,
             ),
