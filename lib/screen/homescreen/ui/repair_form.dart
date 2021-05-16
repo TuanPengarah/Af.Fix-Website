@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
-import 'package:affix_web/config/themeUI_provider.dart';
+import 'package:affix_web/model/firestore_add.dart';
+import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -27,22 +28,34 @@ class _RepairFormState extends State<RepairForm> {
       RoundedLoadingButtonController();
 
   final _name = TextEditingController();
-  final _phoneNmber = TextEditingController();
+  final _phoneNumber = TextEditingController();
   final _email = TextEditingController();
   final _model = TextEditingController();
   final _kerosakkan = TextEditingController();
 
   void _submitted() async {
-    Timer(Duration(seconds: 2), () {
+    Timer(Duration(seconds: 2), () async {
       if (_formKey.currentState.validate()) {
+        try {
+          await AddAppointment(
+            context: context,
+            email: _email.text,
+            model: _model.text,
+            name: _name.text,
+            noPhone: _phoneNumber.text,
+            problem: _kerosakkan.text,
+          ).addToFirestore();
+        } catch (e) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(e.toString())));
+        }
         _email.clear();
         _kerosakkan.clear();
         _model.clear();
         _name.clear();
-        _phoneNmber.clear();
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Processing Data')));
+        _phoneNumber.clear();
         _buttonController.success();
+
         Timer(Duration(seconds: 2), () {
           _buttonController.reset();
         });
@@ -132,7 +145,7 @@ class _RepairFormState extends State<RepairForm> {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: TextFormField(
-                  controller: _phoneNmber,
+                  controller: _phoneNumber,
                   onEditingComplete: () => context.nextEditableTextFocus(),
                   style: TextStyle(
                     color: Colors.white,
@@ -254,6 +267,7 @@ class _RepairFormState extends State<RepairForm> {
                   ),
                 ),
               ),
+              SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

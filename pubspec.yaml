@@ -29,6 +29,8 @@ dependencies:
   # Firebase Services
   firebase_core: ^1.0.3
   cloud_firestore: "^1.0.5"
+  firebase_auth: ^1.1.4
+  firebase_auth_web: ^1.1.2
 
   # State Management
   url_strategy: ^0.2.0

@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
-import 'package:affix_web/config/themeUI_provider.dart';
+import 'package:affix_web/model/firestore_add.dart';
+import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -19,19 +20,32 @@ class _RepairFormMobileState extends State<RepairFormMobile> {
   final RoundedLoadingButtonController _buttonController =
       RoundedLoadingButtonController();
   TextEditingController _name = TextEditingController();
-  TextEditingController _phoneNmber = TextEditingController();
+  TextEditingController _phoneNumber = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _model = TextEditingController();
   TextEditingController _kerosakkan = TextEditingController();
 
   void _submitted() async {
-    Timer(Duration(seconds: 2), () {
+    Timer(Duration(seconds: 2), () async {
       if (_formKey.currentState.validate()) {
+        try {
+          await AddAppointment(
+            context: context,
+            email: _email.text,
+            model: _model.text,
+            name: _name.text,
+            noPhone: _phoneNumber.text,
+            problem: _kerosakkan.text,
+          ).addToFirestore();
+        } catch (e) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(e.toString())));
+        }
         _email.clear();
         _kerosakkan.clear();
         _model.clear();
         _name.clear();
-        _phoneNmber.clear();
+        _phoneNumber.clear();
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text('Processing Data')));
         _buttonController.success();
@@ -126,7 +140,7 @@ class _RepairFormMobileState extends State<RepairFormMobile> {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: TextFormField(
-                  controller: _phoneNmber,
+                  controller: _phoneNumber,
                   textInputAction: TextInputAction.next,
                   style: TextStyle(
                     color: Colors.white,
@@ -248,6 +262,7 @@ class _RepairFormMobileState extends State<RepairFormMobile> {
                   ),
                 ),
               ),
+              SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -269,40 +284,6 @@ class _RepairFormMobileState extends State<RepairFormMobile> {
                       ],
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(15.0),
-                  //   child: ElevatedButton.icon(
-                  //     onPressed: () {
-                  //       if (_formKey.currentState.validate()) {
-                  //         _email.clear();
-                  //         _kerosakkan.clear();
-                  //         _model.clear();
-                  //         _name.clear();
-                  //         _phoneNmber.clear();
-                  //         ScaffoldMessenger.of(context).showSnackBar(
-                  //             SnackBar(content: Text('Processing Data')));
-                  //       }
-                  //     },
-                  //     style: ButtonStyle(
-                  //       backgroundColor: MaterialStateProperty.all<Color>(
-                  //           Theme.of(context).primaryColor),
-                  //       shape:
-                  //           MaterialStateProperty.all<RoundedRectangleBorder>(
-                  //         RoundedRectangleBorder(
-                  //           borderRadius: BorderRadius.circular(15),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     icon: Icon(Icons.email),
-                  //     label: Padding(
-                  //       padding: const EdgeInsets.symmetric(
-                  //           vertical: 15.0, horizontal: 30),
-                  //       child: Text(
-                  //         '${AppLocalizations.of(context).translate('send')}',
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               )
             ],

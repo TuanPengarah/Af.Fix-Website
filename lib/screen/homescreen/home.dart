@@ -1,12 +1,16 @@
 import 'package:affix_web/config/constant.dart';
-import 'package:affix_web/config/updateUI_provider.dart';
+import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/mobile_home.dart';
 import 'package:affix_web/screen/homescreen/ui/first_landing.dart';
 import 'package:affix_web/screen/homescreen/ui/navbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {
+  final bool isLogin;
+
+  LandingPage({this.isLogin});
   @override
   _LandingPageState createState() => _LandingPageState();
 }
@@ -16,11 +20,17 @@ double scrollPosition = 0;
 bool atasSekali = true;
 bool dahRunningDekstop = false;
 bool dahRunningMobile = false;
+FirebaseAuth _auth = FirebaseAuth.instance;
 
 class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
     super.initState();
+    print('login is ${widget.isLogin}');
+    if (widget.isLogin == false) {
+      _auth.signInAnonymously();
+      print(_auth.currentUser.uid);
+    }
     scrollController = ScrollController();
     scrollController.addListener(_scrollListener);
   }
@@ -98,7 +108,6 @@ class DekstopHomeView extends StatelessWidget {
       body: PrimaryScrollController(
         controller: scrollController,
         child: Container(
-          // decoration: BoxDecoration(color: kColorWhite),
           child: Stack(
             children: [
               Scrollbar(

@@ -1,7 +1,7 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
-import 'package:affix_web/config/themeUI_provider.dart';
-import 'package:affix_web/config/updateUI_provider.dart';
+import 'package:affix_web/provider/themeUI_provider.dart';
+import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/ui/repair_form.dart';
 import 'package:affix_web/screen/homescreen/ui/repair_form_mobile.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -244,7 +244,9 @@ class DekstopFirstPageView extends StatelessWidget {
                           style: kTextSubtitle,
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        html.window.open(kWhatsAppLink, 'WhatsApp');
+                      },
                     ),
                     SizedBox(
                       width: 20,

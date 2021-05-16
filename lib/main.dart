@@ -1,20 +1,24 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/routes.dart';
-import 'package:affix_web/config/updateUI_provider.dart';
-import 'package:affix_web/screen/homescreen/home.dart';
+import 'package:affix_web/model/auth_services.dart';
+import 'package:affix_web/model/auth_wrapper.dart';
+import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/myrepairid.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'config/change_lang.dart';
-import 'config/themeUI_provider.dart';
+import 'provider/themeUI_provider.dart';
 
 //flutter run -d web-server --web-port 8080 --web-hostname 192.168.1.17
 
-void main() async {
+Future<void> main() async {
   setPathUrlStrategy();
+  await Firebase.initializeApp();
   AppLanguage appLanguage = AppLanguage();
   await appLanguage.fetchLocale();
   runApp(MyApp(
@@ -30,6 +34,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        Provider<AuthenticationServices>(
+          create: (context) => AuthenticationServices(FirebaseAuth.instance),
+        ),
+        StreamProvider(
+          create: (context) =>
+              context.read<AuthenticationServices>().authStateChanges,
+          initialData: null,
+        ),
         ChangeNotifierProvider<AppLanguage>(create: (context) => appLanguage),
         ChangeNotifierProvider<UpdateUI>(create: (context) => UpdateUI()),
         ChangeNotifierProvider<ThemeProvider>(
@@ -47,7 +59,7 @@ class MyApp extends StatelessWidget {
             routeInformationParser: VxInformationParser(),
             routerDelegate: VxNavigator(
               routes: {
-                '/': (_, __) => MaterialPage(child: LandingPage()),
+                '/': (_, __) => MaterialPage(child: AuthenticationWrapper()),
                 MyRoutes.myRepairID: (_, __) =>
                     MaterialPage(child: MyRepairIDDisplay()),
               },
