@@ -29,9 +29,9 @@ const RESOURCES = {
 "assets/packages/flutter_vector_icons/fonts/EvilIcons.ttf": "140c53a7643ea949007aa9a282153849",
 "assets/packages/flutter_vector_icons/fonts/AntDesign.ttf": "3a2ba31570920eeb9b1d217cabe58315",
 "assets/AssetManifest.json": "be0436bc542887fc9d3f3a78a691d911",
-"assets/i18n/en.json": "f14774c38a621d962d8a232038c121b3",
-"assets/i18n/my.json": "f6b6f56402a3fa29f97ed4c84b3dd7dd",
-"assets/NOTICES": "a84c14cc951eefe5566b6525c0e9193b",
+"assets/i18n/en.json": "d70a7abb92219d7548c73b970d3de30c",
+"assets/i18n/my.json": "a35b3b6918ae8e9322e33e2286877e5c",
+"assets/NOTICES": "b7617d77ebcbbe726cc33a339bc78854",
 "icons/android-icon-72x72.png": "be28995a4d0f339c9cf9dde2e3ab3baa",
 "icons/favicon-96x96.png": "b6c9f53a97d937615dd87a95e9dd1ecd",
 "icons/apple-icon-152x152.png": "bf5f0c61c9272d58631a63d745a5a366",
@@ -69,10 +69,10 @@ const RESOURCES = {
 "favicon.png": "58af0e0bcc7c0cf3b56c6316b6c84569",
 "version.json": "42dbcea7fb445741e49bc6c0904a3948",
 "manifest.json": "c1c05b36b4b98d3ee00298846bcdb93f",
-"main.dart.js": "cb62edae165d87d89cb6df2261e698df",
+"main.dart.js": "627255e15daba6daf807b4ad94be2db3",
 "favicon.ico": "562c0adcb9842c2f3925a6c0b36911a3",
-"index.html": "b5d4d9be4643d58e1cb0d8f0c74d1b23",
-"/": "b5d4d9be4643d58e1cb0d8f0c74d1b23"
+"index.html": "bc01c33e9ebf98b234ea95c2bed57c18",
+"/": "bc01c33e9ebf98b234ea95c2bed57c18"
 };
 
 // The application shell files that are downloaded before a service worker can
