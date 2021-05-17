@@ -51,6 +51,10 @@ class MyThemes {
         ),
       ),
     ),
+    inputDecorationTheme: InputDecorationTheme(
+      focusColor: Colors.teal,
+      hoverColor: Colors.grey.withOpacity(0.1),
+    ),
   );
 
   static final lightTheme = ThemeData(
@@ -90,6 +94,10 @@ class MyThemes {
           ),
         ),
       ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      focusColor: Colors.red,
+      hoverColor: Colors.grey.withOpacity(0.1),
     ),
   );
 }

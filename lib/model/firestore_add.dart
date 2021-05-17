@@ -1,3 +1,4 @@
+import 'package:affix_web/config/app_localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +31,8 @@ class AddAppointment {
     await _addAppointment.doc().set(appointment).then(
           (value) => ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Berjaya'),
+              content: Text(
+                  '${AppLocalizations.of(context).translate('appoinmentsuccess')}'),
             ),
           ),
         );

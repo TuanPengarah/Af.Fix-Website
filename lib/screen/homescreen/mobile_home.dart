@@ -4,8 +4,9 @@ import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:affix_web/menu/menu_change_language.dart';
-import 'package:affix_web/screen/homescreen/ui/first_landing.dart';
-import 'package:affix_web/screen/homescreen/ui/navbar.dart';
+import 'package:affix_web/screen/homescreen/page/about.dart';
+import 'package:affix_web/screen/homescreen/page/call_us.dart';
+import 'package:affix_web/screen/homescreen/page/first_landing.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -164,12 +165,12 @@ class MobileHomeView extends StatelessWidget {
           slivers: [
             SliverAppBar(
               elevation: 0,
-              shape: ContinuousRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(25),
-                  bottomRight: Radius.circular(25),
-                ),
-              ),
+              // shape: ContinuousRectangleBorder(
+              //   borderRadius: BorderRadius.only(
+              //     bottomLeft: Radius.circular(25),
+              //     bottomRight: Radius.circular(25),
+              //   ),
+              // ),
               pinned: true,
               floating: false,
               snap: false,
@@ -248,16 +249,11 @@ class MobileHomeView extends StatelessWidget {
                         Column(
                           children: [
                             FirstLanding(),
-                            Container(
-                              height: MediaQuery.of(context).size.height,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                color: kColorRed,
-                              ),
-                            ),
+                            About(),
+                            CallUs(),
                           ],
                         ),
-                        Navbar(),
+                        // Navbar(),
                       ],
                     ),
                   );

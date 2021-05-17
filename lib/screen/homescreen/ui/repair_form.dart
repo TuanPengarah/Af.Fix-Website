@@ -45,20 +45,23 @@ class _RepairFormState extends State<RepairForm> {
             noPhone: _phoneNumber.text,
             problem: _kerosakkan.text,
           ).addToFirestore();
+          _email.clear();
+          _kerosakkan.clear();
+          _model.clear();
+          _name.clear();
+          _phoneNumber.clear();
+          _buttonController.success();
+          Timer(Duration(seconds: 2), () {
+            _buttonController.reset();
+          });
         } catch (e) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(e.toString())));
+          _buttonController.error();
+          Timer(Duration(seconds: 2), () {
+            _buttonController.reset();
+          });
         }
-        _email.clear();
-        _kerosakkan.clear();
-        _model.clear();
-        _name.clear();
-        _phoneNumber.clear();
-        _buttonController.success();
-
-        Timer(Duration(seconds: 2), () {
-          _buttonController.reset();
-        });
       } else {
         _buttonController.error();
         Timer(Duration(seconds: 2), () {
@@ -127,6 +130,7 @@ class _RepairFormState extends State<RepairForm> {
                   },
                   onEditingComplete: () => context.nextEditableTextFocus(),
                   decoration: InputDecoration(
+                    focusColor: Colors.red,
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),

@@ -37,21 +37,23 @@ class _RepairFormMobileState extends State<RepairFormMobile> {
             noPhone: _phoneNumber.text,
             problem: _kerosakkan.text,
           ).addToFirestore();
+          _email.clear();
+          _kerosakkan.clear();
+          _model.clear();
+          _name.clear();
+          _phoneNumber.clear();
+          _buttonController.success();
+          Timer(Duration(seconds: 2), () {
+            _buttonController.reset();
+          });
         } catch (e) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(e.toString())));
+          _buttonController.error();
+          Timer(Duration(seconds: 2), () {
+            _buttonController.reset();
+          });
         }
-        _email.clear();
-        _kerosakkan.clear();
-        _model.clear();
-        _name.clear();
-        _phoneNumber.clear();
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Processing Data')));
-        _buttonController.success();
-        Timer(Duration(seconds: 2), () {
-          _buttonController.reset();
-        });
       } else {
         _buttonController.error();
         Timer(Duration(seconds: 2), () {
