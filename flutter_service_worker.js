@@ -30,7 +30,7 @@ const RESOURCES = {
 "assets/packages/flutter_vector_icons/fonts/AntDesign.ttf": "3a2ba31570920eeb9b1d217cabe58315",
 "assets/AssetManifest.json": "be0436bc542887fc9d3f3a78a691d911",
 "assets/i18n/en.json": "d70a7abb92219d7548c73b970d3de30c",
-"assets/i18n/my.json": "a35b3b6918ae8e9322e33e2286877e5c",
+"assets/i18n/my.json": "8d4f4bf24ac3110d199ee9146cc5c43d",
 "assets/NOTICES": "b7617d77ebcbbe726cc33a339bc78854",
 "icons/android-icon-72x72.png": "be28995a4d0f339c9cf9dde2e3ab3baa",
 "icons/favicon-96x96.png": "b6c9f53a97d937615dd87a95e9dd1ecd",
@@ -69,10 +69,10 @@ const RESOURCES = {
 "favicon.png": "58af0e0bcc7c0cf3b56c6316b6c84569",
 "version.json": "42dbcea7fb445741e49bc6c0904a3948",
 "manifest.json": "c1c05b36b4b98d3ee00298846bcdb93f",
-"main.dart.js": "627255e15daba6daf807b4ad94be2db3",
+"main.dart.js": "8336d84e669d0217101d411532b34744",
 "favicon.ico": "562c0adcb9842c2f3925a6c0b36911a3",
-"index.html": "bc01c33e9ebf98b234ea95c2bed57c18",
-"/": "bc01c33e9ebf98b234ea95c2bed57c18"
+"index.html": "807bb63c0f1260832f72e80ca21da929",
+"/": "807bb63c0f1260832f72e80ca21da929"
 };
 
 // The application shell files that are downloaded before a service worker can
