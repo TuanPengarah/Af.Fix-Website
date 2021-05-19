@@ -12,22 +12,13 @@ const kNoKedai = '01111426421';
 
 //link
 const kWhatsAppLink = 'https://wa.link/ah5ifs';
-
-//lottie
-const kLottieMoney =
-    'https://assets4.lottiefiles.com/packages/lf20_wmnfnun7.json';
-const kLottieMalaysia =
-    'https://assets8.lottiefiles.com/packages/lf20_MJmUNc.json';
-const kLottieCourier =
-    'https://assets5.lottiefiles.com/packages/lf20_ugqbfoov.json';
-const kLottieService =
-    'https://assets6.lottiefiles.com/packages/lf20_osgnqbad.json';
-const kLottiePhone =
-    'https://assets9.lottiefiles.com/packages/lf20_gq7j3ueb.json';
-const kLottieChecking =
-    'https://assets9.lottiefiles.com/packages/lf20_EVx240.json';
-const kLottieSystem =
-    'https://assets4.lottiefiles.com/packages/lf20_EsrHok.json';
+const kImageLCD = 'https://i.imgur.com/wOOMHf0.png';
+const kImageMoney = 'https://i.imgur.com/sLRgc52.png';
+const kImageMalaysia = 'https://i.imgur.com/WIsHyOO.png';
+const kImageCourier = 'https://i.imgur.com/55ia9ax.png';
+const kImageService = 'https://i.imgur.com/haag4UB.png';
+const kImageChecking = 'https://i.imgur.com/zMejloH.png';
+const kImageSystem = 'https://i.imgur.com/Uf6QPuP.png';
 //style
 final TextStyle kTextSubtitleDark = TextStyle(
   fontWeight: FontWeight.w700,

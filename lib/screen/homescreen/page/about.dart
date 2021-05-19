@@ -1,66 +1,8 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
-class About extends StatefulWidget {
-  const About({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  _AboutState createState() => _AboutState();
-}
-
-class _AboutState extends State<About> with TickerProviderStateMixin {
-  AnimationController _lottieFirstController;
-  AnimationController _lottieSecondController;
-  AnimationController _lottieThirdController;
-  AnimationController _lottieForthController;
-  AnimationController _lottieFithController;
-  AnimationController _lottieSixController;
-
-  @override
-  void initState() {
-    super.initState();
-    _lottieFirstController = AnimationController(vsync: this)
-      ..value = 0.5
-      ..addListener(() {
-        setState(() {});
-      });
-    _lottieSecondController = AnimationController(vsync: this)
-      ..value = 0.7
-      ..addListener(() {
-        setState(() {});
-      });
-    _lottieThirdController = AnimationController(vsync: this)
-      ..value = 0.5
-      ..addListener(() {
-        setState(() {});
-      });
-    _lottieForthController = AnimationController(vsync: this)
-      ..value = 0.5
-      ..addListener(() {
-        setState(() {});
-      });
-    _lottieFithController = AnimationController(vsync: this)
-      ..value = 0.5
-      ..addListener(() {
-        setState(() {});
-      });
-    _lottieSixController = AnimationController(vsync: this)
-      ..value = 0.5
-      ..addListener(() {
-        setState(() {});
-      });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _lottieFirstController.dispose();
-  }
-
+class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -96,45 +38,27 @@ class _AboutState extends State<About> with TickerProviderStateMixin {
                 children: [
                   aboutContaint(
                     '${AppLocalizations.of(context).translate('cheap')}',
-                    _lottieFirstController,
-                    kLottieMoney,
-                    200,
-                    0.5,
+                    kImageMoney,
                   ),
                   aboutContaint(
                     '${AppLocalizations.of(context).translate('bmf')}',
-                    _lottieSecondController,
-                    kLottieMalaysia,
-                    150,
-                    0.65,
+                    kImageMalaysia,
                   ),
                   aboutContaint(
                     '${AppLocalizations.of(context).translate('mailin')}',
-                    _lottieThirdController,
-                    kLottieCourier,
-                    200,
-                    0.5,
+                    kImageCourier,
                   ),
                   aboutContaint(
                     '${AppLocalizations.of(context).translate('services')}',
-                    _lottieForthController,
-                    kLottieService,
-                    200,
-                    0.5,
+                    kImageService,
                   ),
                   aboutContaint(
                     '${AppLocalizations.of(context).translate('diagnostic')}',
-                    _lottieFithController,
-                    kLottieChecking,
-                    200,
-                    0.5,
+                    kImageChecking,
                   ),
                   aboutContaint(
                     '${AppLocalizations.of(context).translate('system')}',
-                    _lottieSixController,
-                    kLottieSystem,
-                    200,
-                    0.5,
+                    kImageSystem,
                   ),
                 ],
               ),
@@ -146,8 +70,7 @@ class _AboutState extends State<About> with TickerProviderStateMixin {
     );
   }
 
-  Container aboutContaint(String title, AnimationController controller,
-      String url, double height, double value) {
+  Container aboutContaint(String title, String url) {
     return Container(
       height: 450,
       width: 300,
@@ -158,23 +81,8 @@ class _AboutState extends State<About> with TickerProviderStateMixin {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MouseRegion(
-              onExit: (_exit) {
-                controller.value = value;
-              },
-              onEnter: (_enter) {
-                controller.forward(
-                    from: controller.value == 1 ? 0 : controller.value);
-              },
-              child: Center(
-                child: Lottie.network(url,
-                    controller: controller,
-                    height: height, onLoaded: (composition) {
-                  setState(() {
-                    controller.duration = composition.duration;
-                  });
-                }),
-              ),
+            Center(
+              child: Image.network(url),
             ),
             SizedBox(height: 15),
             SelectableText(
