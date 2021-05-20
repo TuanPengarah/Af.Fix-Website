@@ -171,7 +171,7 @@ class MobileHomeView extends StatelessWidget {
               //     bottomRight: Radius.circular(25),
               //   ),
               // ),
-              pinned: true,
+              pinned: false,
               floating: false,
               snap: false,
               expandedHeight: 280.0,

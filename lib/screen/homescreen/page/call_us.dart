@@ -26,7 +26,7 @@ class CallUs extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       color: Theme.of(context).scaffoldBackgroundColor,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 100),
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
         child: Container(
           // height: 400,
           // width: double.infinity,
