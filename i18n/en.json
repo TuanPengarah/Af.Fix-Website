@@ -43,5 +43,13 @@
     "diagnostic" : "Free diagnostics*. No payment required if your phone cannot be repaired. “No Fix No Fee”",
     "system"  : "Repair your phone with trusted✅. You can check the repair status of your phone and the warranty period on our portal site",
     "call" : "You can also directly call us",
-    "callnow" : "Urgent? need a spare parts price right away? Directly call our number now"
+    "callnow" : "Urgent? need a spare parts price right away? Directly call our number now",
+    "ourservicestitle" : "Our services",
+    "ourservicessubtitle" : "We offer repair services for iPhone and Android smartphones that have the following problems:",
+    "LCD" : "Screen crack, no display, cannot touch, green line in display, ghost touch",
+    "battery" : "Battery runs out quickly, Automatic shutdown, decrease battery health, battery temperature too high",
+    "software" : "Stuck logo, FRP or Google Lock, Software stuck, Update Software",
+    "subboard" : "Looses charging port, Temperature High, Microphone problem",
+    "button" : "Power or volume buttons cannot be pressed, Home button not working",
+    "waterdamaged" : "Cannot on or other problems that cause by exposure to water"
 }

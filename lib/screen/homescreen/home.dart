@@ -1,9 +1,9 @@
-import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/mobile_home.dart';
 import 'package:affix_web/screen/homescreen/page/about.dart';
 import 'package:affix_web/screen/homescreen/page/call_us.dart';
 import 'package:affix_web/screen/homescreen/page/first_landing.dart';
+import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:affix_web/screen/homescreen/ui/navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,6 @@ ScrollController scrollController = ScrollController();
 double scrollPosition = 0;
 bool atasSekali = true;
 bool dahRunningDekstop = false;
-bool dahRunningMobile = false;
 FirebaseAuth _auth = FirebaseAuth.instance;
 
 class _LandingPageState extends State<LandingPage> {
@@ -39,15 +38,15 @@ class _LandingPageState extends State<LandingPage> {
   _scrollListener() {
     scrollPosition = scrollController.position.pixels;
     // print(scrollPosition);
-    if (dahRunningMobile == true) {
-      if (scrollPosition < 200) {
-        Provider.of<UpdateUI>(context, listen: false)
-            .changeColorDarkWhite(kColorGrey);
-        dahRunningMobile = false;
-        Provider.of<UpdateUI>(context, listen: false)
-            .changeLogoColorRedWhite(kColorRed);
-      }
-    }
+    // if (dahRunningMobile == true) {
+    //   if (scrollPosition < 200) {
+    //     Provider.of<UpdateUI>(context, listen: false)
+    //         .changeColorDarkWhite(kColorGrey);
+    //     dahRunningMobile = false;
+    //     Provider.of<UpdateUI>(context, listen: false)
+    //         .changeLogoColorRedWhite(kColorRed);
+    //   }
+    // }
     if (dahRunningDekstop == false) {
       if (scrollPosition > 60 && scrollPosition < 190) {
         Provider.of<UpdateUI>(context, listen: false).animationStartSmall(
@@ -56,16 +55,16 @@ class _LandingPageState extends State<LandingPage> {
         dahRunningDekstop = true;
       }
     }
-    if (dahRunningMobile == false) {
-      if (scrollPosition > 200) {
-        Provider.of<UpdateUI>(context, listen: false)
-            .changeColorDarkWhite(kColorWhite);
-        Provider.of<UpdateUI>(context, listen: false)
-            .changeLogoColorRedWhite(kColorWhite);
+    // if (dahRunningMobile == false) {
+    //   if (scrollPosition > 200) {
+    //     Provider.of<UpdateUI>(context, listen: false)
+    //         .changeColorDarkWhite(kColorWhite);
+    //     Provider.of<UpdateUI>(context, listen: false)
+    //         .changeLogoColorRedWhite(kColorWhite);
 
-        dahRunningMobile = true;
-      }
-    }
+    //     dahRunningMobile = true;
+    //   }
+    // }
     if (scrollController.offset >= scrollController.position.maxScrollExtent &&
         !scrollController.position.outOfRange) {
       setState(() {
@@ -119,11 +118,7 @@ class DekstopHomeView extends StatelessWidget {
                       FirstLanding(),
                       About(),
                       CallUs(),
-                      Container(
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height,
-                      )
+                      OurServices()
                     ],
                   ),
                 ),

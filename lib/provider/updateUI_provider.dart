@@ -35,16 +35,6 @@ class UpdateUI extends ChangeNotifier {
     // notifyListeners();
   }
 
-  changeColorDarkWhite(Color newColor) {
-    changeColor = newColor;
-    notifyListeners();
-  }
-
-  changeLogoColorRedWhite(Color newColor) {
-    changeLogoColor = newColor;
-    notifyListeners();
-  }
-
   changeDarkMode(bool newMode) {
     switchDarkMode = !newMode;
     notifyListeners();

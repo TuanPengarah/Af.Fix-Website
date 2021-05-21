@@ -7,6 +7,7 @@ import 'package:affix_web/menu/menu_change_language.dart';
 import 'package:affix_web/screen/homescreen/page/about.dart';
 import 'package:affix_web/screen/homescreen/page/call_us.dart';
 import 'package:affix_web/screen/homescreen/page/first_landing.dart';
+import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -64,11 +65,6 @@ class MobileHomeView extends StatelessWidget {
               child: ListTile(
                 title: Text(AppLocalizations.of(context).translate('about')),
                 onTap: () {
-                  Provider.of<UpdateUI>(context, listen: false)
-                      .changeColorDarkWhite(kColorWhite);
-                  Provider.of<UpdateUI>(context, listen: false)
-                      .changeLogoColorRedWhite(kColorWhite);
-                  Navigator.of(context).pop();
                   if (scrollController.hasClients)
                     scrollController.animateTo(1677,
                         duration: Duration(milliseconds: 800),
@@ -159,110 +155,104 @@ class MobileHomeView extends StatelessWidget {
           ],
         ),
       ),
-      body: Scrollbar(
-        child: CustomScrollView(
-          controller: scrollController,
-          slivers: [
-            SliverAppBar(
-              elevation: 0,
-              // shape: ContinuousRectangleBorder(
-              //   borderRadius: BorderRadius.only(
-              //     bottomLeft: Radius.circular(25),
-              //     bottomRight: Radius.circular(25),
-              //   ),
-              // ),
-              pinned: false,
-              floating: false,
-              snap: false,
-              expandedHeight: 280.0,
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text.rich(
-                  TextSpan(
-                    text: 'AF',
-                    style: TextStyle(
-                      fontFamily: 'MotionControl',
-                      fontSize: 60,
-                      color: Provider.of<UpdateUI>(context).changeLogoColor,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '.FIX',
-                        style: TextStyle(
-                          color: _isDarkMode
-                              ? kColorWhite
-                              : Provider.of<UpdateUI>(context).changeColor,
-                        ),
+      body: CustomScrollView(
+        controller: scrollController,
+        slivers: [
+          SliverAppBar(
+            backgroundColor: _isDarkMode
+                ? Theme.of(context).appBarTheme.backgroundColor
+                : kColorWhite,
+            elevation: 0,
+            pinned: false,
+            floating: false,
+            snap: false,
+            expandedHeight: 280.0,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text.rich(
+                TextSpan(
+                  text: 'AF',
+                  style: TextStyle(
+                    fontFamily: 'MotionControl',
+                    fontSize: 60,
+                    color: kColorRed,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '.FIX',
+                      style: TextStyle(
+                        color: _isDarkMode ? kColorWhite : kColorGrey,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                centerTitle: true,
-                background: Container(
-                  alignment: Alignment.topCenter,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
+              ),
+              centerTitle: true,
+              background: Container(
+                alignment: Alignment.topCenter,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      height: 250,
+                      alignment: Alignment.topCenter,
+                      width: 250,
+                      child: Image.asset(
+                        _isDarkMode
+                            ? 'assets/images/logo_only_white.png'
+                            : 'assets/images/logo_only_black.png',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            actions: [
+              Builder(
+                builder: (BuildContext context) => IconButton(
+                  tooltip: 'Menu',
+                  icon: Icon(
+                    Icons.menu,
+                    color: _isDarkMode
+                        ? Colors.white
+                        : Provider.of<UpdateUI>(context).changeColor,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  onPressed: () {
+                    Scaffold.of(context).openEndDrawer();
+                  },
+                ),
+              ),
+            ],
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return Container(
+                  decoration: BoxDecoration(color: kColorWhite),
+                  child: Stack(
                     children: [
-                      SizedBox(
-                        height: 20,
+                      Column(
+                        children: [
+                          FirstLanding(),
+                          About(),
+                          CallUs(),
+                          OurServices(),
+                        ],
                       ),
-                      Container(
-                        height: 250,
-                        alignment: Alignment.topCenter,
-                        width: 250,
-                        child: Image.asset(
-                          _isDarkMode
-                              ? 'assets/images/logo_only_white.png'
-                              : 'assets/images/logo_only_black.png',
-                        ),
-                      ),
+                      // Navbar(),
                     ],
                   ),
-                ),
-              ),
-              actions: [
-                Builder(
-                  builder: (BuildContext context) => IconButton(
-                    tooltip: 'Menu',
-                    icon: Icon(
-                      Icons.menu,
-                      color: _isDarkMode
-                          ? Colors.white
-                          : Provider.of<UpdateUI>(context).changeColor,
-                    ),
-                    onPressed: () {
-                      Scaffold.of(context).openEndDrawer();
-                    },
-                  ),
-                ),
-              ],
+                );
+              },
+              childCount: 1,
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return Container(
-                    decoration: BoxDecoration(color: kColorWhite),
-                    child: Stack(
-                      children: [
-                        Column(
-                          children: [
-                            FirstLanding(),
-                            About(),
-                            CallUs(),
-                          ],
-                        ),
-                        // Navbar(),
-                      ],
-                    ),
-                  );
-                },
-                childCount: 1,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
