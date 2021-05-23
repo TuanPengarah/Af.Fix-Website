@@ -24,7 +24,12 @@ const kImageSubBoard = 'https://i.imgur.com/TTD4qLb.png';
 const kImageBattery = 'https://i.imgur.com/vISY51T.png';
 const kImageSoftware = 'https://i.imgur.com/e57Exue.png';
 const kImageWaterDamaged = 'https://i.imgur.com/NUoH6u0.png';
-
+const kImageAppsDemo = 'https://i.imgur.com/x4bBC8L.png';
+const kImageCustomerIjoy = 'https://i.imgur.com/K0BIiyi.jpg';
+const kImageCustomerYen = 'https://i.imgur.com/YTri6oK.jpg';
+const kImageCustomerLangkojai = 'https://i.imgur.com/2Wi26lz.jpg';
+const kImageCustomerFaridzul = 'https://i.imgur.com/rLNuhH7.png';
+const kImageCustomerJon = 'https://i.imgur.com/SDAa6Gy.jpg';
 //style
 final TextStyle kTextSubtitleDark = TextStyle(
   fontWeight: FontWeight.w700,

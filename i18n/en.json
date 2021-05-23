@@ -1,7 +1,7 @@
 {
     "locale" : "EN",
     "language" : "Change Language",
-    "about" : "About",
+    "about" : "Why us?",
     "ourservice" : "Our Services" ,
     "letsrepair" : "Let's Repair",
     "ewarranti" : "E-Warranty",
@@ -51,5 +51,10 @@
     "software" : "Stuck logo, FRP or Google Lock, Software stuck, Update Software",
     "subboard" : "Looses charging port, Temperature High, Microphone problem",
     "button" : "Power or volume buttons cannot be pressed, Home button not working",
-    "waterdamaged" : "Cannot on or other problems that cause by exposure to water"
+    "waterdamaged" : "Cannot on or other problems that cause by exposure to water",
+    "newapps" : "New apps just for you (Coming Soon)!",
+    "newappsdesc" : "Worried if your warranty receipt is lost? Not anymore, you can track repair status of your smartphone, make an appointment with us and many more fun for you to explore !",
+    "followsocmed" : "Follow us on our social media platforms",
+    "buttonsocmed" : "Click here to follow",
+    "testimonial" : "Customers Testimonial"
 }

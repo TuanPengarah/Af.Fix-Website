@@ -16,7 +16,7 @@ class OurServices extends StatelessWidget {
         child: Column(
           children: [
             SelectableText(
-              'Servis kami',
+              '${AppLocalizations.of(context).translate('ourservicestitle')}',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w800,
@@ -25,11 +25,13 @@ class OurServices extends StatelessWidget {
             ),
             Container(
               width: 150,
-              child: Divider(),
+              child: Divider(
+                thickness: 1,
+              ),
             ),
             SizedBox(height: 10),
             SelectableText(
-              'Kami menawarkan servis membaiki smartphone iPhone dan Android yang mempunyai masalah seperti berikut: ',
+              '${AppLocalizations.of(context).translate('ourservicessubtitle')}',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,

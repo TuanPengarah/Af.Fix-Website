@@ -101,7 +101,19 @@ class _DekstopNavState extends State<DekstopNav> {
                           width: 20,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            atasSekali = false;
+                            Provider.of<UpdateUI>(context, listen: false)
+                                .animationStartSmall(
+                                    wAnimDesk: 140,
+                                    hAnimDesk: 90,
+                                    wAnimMob: 120,
+                                    hAnimMob: 80);
+
+                            scrollController.animateTo(2700,
+                                duration: Duration(milliseconds: 800),
+                                curve: Curves.decelerate);
+                          },
                           child: Text(
                             AppLocalizations.of(context)
                                 .translate('ourservice'),

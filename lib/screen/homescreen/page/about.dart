@@ -25,10 +25,11 @@ class About extends StatelessWidget {
                   ),
                 ),
               ),
-              Divider(
-                indent: 80,
-                endIndent: 80,
-                color: Colors.white,
+              Container(
+                width: 200,
+                child: Divider(
+                  color: Colors.white,
+                ),
               ),
               SizedBox(height: 80),
               Wrap(

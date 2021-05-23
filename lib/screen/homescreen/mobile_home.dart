@@ -5,8 +5,11 @@ import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:affix_web/menu/menu_change_language.dart';
 import 'package:affix_web/screen/homescreen/page/about.dart';
+import 'package:affix_web/screen/homescreen/page/apps.dart';
 import 'package:affix_web/screen/homescreen/page/call_us.dart';
+import 'package:affix_web/screen/homescreen/page/customer_testimonial.dart';
 import 'package:affix_web/screen/homescreen/page/first_landing.dart';
+import 'package:affix_web/screen/homescreen/page/follow_socmed.dart';
 import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +82,12 @@ class MobileHomeView extends StatelessWidget {
                 title: Text(
                   AppLocalizations.of(context).translate('ourservice'),
                 ),
-                onTap: () {},
+                onTap: () {
+                  if (scrollController.hasClients)
+                    scrollController.animateTo(5000,
+                        duration: Duration(milliseconds: 800),
+                        curve: Curves.decelerate);
+                },
               ),
             ),
             Tooltip(
@@ -242,6 +250,9 @@ class MobileHomeView extends StatelessWidget {
                           About(),
                           CallUs(),
                           OurServices(),
+                          Apps(),
+                          FollowSocialMedia(),
+                          CustomerTestimonial(),
                         ],
                       ),
                       // Navbar(),

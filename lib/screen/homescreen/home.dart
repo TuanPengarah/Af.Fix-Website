@@ -1,8 +1,11 @@
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/mobile_home.dart';
 import 'package:affix_web/screen/homescreen/page/about.dart';
+import 'package:affix_web/screen/homescreen/page/apps.dart';
 import 'package:affix_web/screen/homescreen/page/call_us.dart';
+import 'package:affix_web/screen/homescreen/page/customer_testimonial.dart';
 import 'package:affix_web/screen/homescreen/page/first_landing.dart';
+import 'package:affix_web/screen/homescreen/page/follow_socmed.dart';
 import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:affix_web/screen/homescreen/ui/navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -118,7 +121,10 @@ class DekstopHomeView extends StatelessWidget {
                       FirstLanding(),
                       About(),
                       CallUs(),
-                      OurServices()
+                      OurServices(),
+                      Apps(),
+                      FollowSocialMedia(),
+                      CustomerTestimonial()
                     ],
                   ),
                 ),
