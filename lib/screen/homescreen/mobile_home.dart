@@ -9,8 +9,8 @@ import 'package:affix_web/screen/homescreen/page/apps.dart';
 import 'package:affix_web/screen/homescreen/page/call_us.dart';
 import 'package:affix_web/screen/homescreen/page/customer_testimonial.dart';
 import 'package:affix_web/screen/homescreen/page/first_landing.dart';
-import 'package:affix_web/screen/homescreen/page/follow_socmed.dart';
 import 'package:affix_web/screen/homescreen/page/our_services.dart';
+import 'package:affix_web/screen/homescreen/page/pwa.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -68,6 +68,7 @@ class MobileHomeView extends StatelessWidget {
               child: ListTile(
                 title: Text(AppLocalizations.of(context).translate('about')),
                 onTap: () {
+                  Navigator.of(context).pop();
                   if (scrollController.hasClients)
                     scrollController.animateTo(1677,
                         duration: Duration(milliseconds: 800),
@@ -83,6 +84,7 @@ class MobileHomeView extends StatelessWidget {
                   AppLocalizations.of(context).translate('ourservice'),
                 ),
                 onTap: () {
+                  Navigator.of(context).pop();
                   if (scrollController.hasClients)
                     scrollController.animateTo(5000,
                         duration: Duration(milliseconds: 800),
@@ -97,7 +99,9 @@ class MobileHomeView extends StatelessWidget {
                 title: Text(
                   AppLocalizations.of(context).translate('ewarranti'),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
               ),
             ),
             Tooltip(
@@ -108,6 +112,7 @@ class MobileHomeView extends StatelessWidget {
                   AppLocalizations.of(context).translate('myrid'),
                 ),
                 onTap: () {
+                  Navigator.of(context).pop();
                   context.vxNav.push(Uri.parse(MyRoutes.myRepairID));
                 },
               ),
@@ -120,7 +125,7 @@ class MobileHomeView extends StatelessWidget {
                   AppLocalizations.of(context).translate('tooltipsocial'),
                 ),
                 onTap: () {
-                  context.vxNav.push(Uri.parse(MyRoutes.myRepairID));
+                  Navigator.of(context).pop();
                 },
               ),
             ),
@@ -251,8 +256,8 @@ class MobileHomeView extends StatelessWidget {
                           CallUs(),
                           OurServices(),
                           Apps(),
-                          FollowSocialMedia(),
                           CustomerTestimonial(),
+                          PWA(),
                         ],
                       ),
                       // Navbar(),

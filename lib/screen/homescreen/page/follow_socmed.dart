@@ -16,7 +16,7 @@ class FollowSocialMedia extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: Wrap(
-          alignment: WrapAlignment.spaceAround,
+          alignment: WrapAlignment.spaceEvenly,
           runAlignment: WrapAlignment.spaceAround,
           crossAxisAlignment: WrapCrossAlignment.center,
           spacing: 80,

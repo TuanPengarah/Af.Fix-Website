@@ -35,8 +35,8 @@ class CustomerTestimonial extends StatelessWidget {
             ),
             SizedBox(height: 50),
             Wrap(
-              spacing: 100,
-              runSpacing: 30,
+              spacing: 80,
+              runSpacing: 50,
               alignment: WrapAlignment.center,
               children: [
                 _customerCard(
@@ -70,7 +70,8 @@ class CustomerTestimonial extends StatelessWidget {
                   context,
                 ),
               ],
-            )
+            ),
+            SizedBox(height: 60),
           ],
         ),
       ),
