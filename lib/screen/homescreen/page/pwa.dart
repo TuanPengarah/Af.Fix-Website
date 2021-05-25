@@ -1,3 +1,4 @@
+import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +13,11 @@ class PWA extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       color: Theme.of(context).scaffoldBackgroundColor,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: const EdgeInsets.only(top: 120, bottom: 20, left: 5, right: 5),
         child: Column(
           children: [
             SelectableText(
-              'Alat berguna untuk anda terokai',
+              '${AppLocalizations.of(context).translate('usefultool')}',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w800,
@@ -39,12 +40,12 @@ class PWA extends StatelessWidget {
               children: [
                 pwaContainer(
                     'MyRepair ID',
-                    'Setiap phone yang di pick up untuk dibaiki atau telah dibaiki akan diberikan nombor tracking. Jom tracking smartphone anda di sini',
-                    'Track smartphone saya'),
+                    '${AppLocalizations.of(context).translate('myridsubtitle')}',
+                    '${AppLocalizations.of(context).translate('myridgobutton')}'),
                 pwaContainer(
-                    'E-Waranti',
-                    'Setiap phone yang di pick up untuk dibaiki atau telah dibaiki akan diberikan nombor tracking. Jom tracking smartphone anda di sini',
-                    'Lihat semua waranti saya'),
+                    '${AppLocalizations.of(context).translate('ewarranti')}',
+                    '${AppLocalizations.of(context).translate('ewaranttysubtitle')}',
+                    '${AppLocalizations.of(context).translate('ewarrantygobutton')}'),
               ],
             ),
           ],
@@ -70,7 +71,7 @@ class PWA extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.w800,
                 color: kColorWhite,
-                fontSize: 40,
+                fontSize: 30,
               ),
             ),
             SizedBox(height: 20),
@@ -89,7 +90,7 @@ class PWA extends StatelessWidget {
                 backgroundColor: MaterialStateProperty.all<Color>(kColorWhite),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Text(
                   button,
                   style: TextStyle(
@@ -100,6 +101,7 @@ class PWA extends StatelessWidget {
               ),
               onPressed: () {},
             ),
+            SizedBox(height: 10),
           ],
         ),
       ),

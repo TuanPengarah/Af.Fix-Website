@@ -71,7 +71,7 @@ class CustomerTestimonial extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 60),
+            SizedBox(height: 20),
           ],
         ),
       ),

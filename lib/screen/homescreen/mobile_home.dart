@@ -8,6 +8,7 @@ import 'package:affix_web/screen/homescreen/page/about.dart';
 import 'package:affix_web/screen/homescreen/page/apps.dart';
 import 'package:affix_web/screen/homescreen/page/call_us.dart';
 import 'package:affix_web/screen/homescreen/page/customer_testimonial.dart';
+import 'package:affix_web/screen/homescreen/page/faq.dart';
 import 'package:affix_web/screen/homescreen/page/first_landing.dart';
 import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:affix_web/screen/homescreen/page/pwa.dart';
@@ -258,6 +259,7 @@ class MobileHomeView extends StatelessWidget {
                           Apps(),
                           CustomerTestimonial(),
                           PWA(),
+                          FAQ(),
                         ],
                       ),
                       // Navbar(),
