@@ -1,5 +1,8 @@
+import 'package:affix_web/config/app_localizations.dart';
+import 'package:affix_web/config/change_lang.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:slimy_card/slimy_card.dart';
 
 class FAQ extends StatelessWidget {
@@ -9,6 +12,7 @@ class FAQ extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool _isMalay = Provider.of<AppLanguage>(context).isMalay;
     return Container(
       width: MediaQuery.of(context).size.width,
       color: Theme.of(context).scaffoldBackgroundColor,
@@ -50,19 +54,49 @@ class FAQ extends StatelessWidget {
                   borderRadius: 0,
                   color: kColorGrey,
                   topCardWidget: topWidget(
-                      'Model smartphone apakah yang boleh di repair?'),
-                  bottomCardWidget: bottomWidget(
-                      'iPhone dan Android, selagi ada sparepart selagi itu kami boleh repair'),
+                      '${AppLocalizations.of(context).translate('qmodel')}'),
+                  bottomCardWidget: bottomWidget(_isMalay == true
+                      ? 'iPhone dan Android, selagi ada sparepart selagi itu kami boleh repair'
+                      : 'iPhone and Android, as long as there are spare parts as long as we can repair'),
                 ),
-                SizedBox(height: 80),
+                SizedBox(height: 40),
                 SlimyCard(
                   width: 350,
                   topCardHeight: 180,
                   borderRadius: 0,
                   bottomCardHeight: 100,
                   color: kColorGrey,
-                  topCardWidget: topWidget('Tempoh waranti?'),
-                  bottomCardWidget: bottomWidget('30 hari sehingga 90 hari'),
+                  topCardWidget: topWidget(
+                      '${AppLocalizations.of(context).translate('qwarranty')}'),
+                  bottomCardWidget: bottomWidget(_isMalay == true
+                      ? '30 hari sehingga 90 hari'
+                      : '30 to 90 days'),
+                ),
+                SizedBox(height: 40),
+                SlimyCard(
+                  width: 350,
+                  topCardHeight: 180,
+                  borderRadius: 0,
+                  bottomCardHeight: 160,
+                  color: kColorGrey,
+                  topCardWidget: topWidget(
+                      '${AppLocalizations.of(context).translate('qmotherboard')}'),
+                  bottomCardWidget: bottomWidget(_isMalay == true
+                      ? 'Ye boleh repair motherboard smartphone. Terutamanya model iPhone dan Android(Jika ada alat ganti)'
+                      : 'Yes we can repair smartphone motherboards. Especially iPhone and Android models (If there are spare parts for android)'),
+                ),
+                SizedBox(height: 40),
+                SlimyCard(
+                  width: 350,
+                  topCardHeight: 180,
+                  borderRadius: 0,
+                  bottomCardHeight: 250,
+                  color: kColorGrey,
+                  topCardWidget: topWidget(
+                      '${AppLocalizations.of(context).translate('qhowlong')}'),
+                  bottomCardWidget: bottomWidget(_isMalay == true
+                      ? 'Bergantung kepada jenis kerosakkan, jika kerosakkan jenis minor mengambil masa dalam 30 minit hingga 1 hari, Jika kerosakkan melibatkan motherboard ia kemungkinan mengambil masa 3 - 14 hari'
+                      : 'Depending on the type of damage, if the minor damage takes 30 minutes to 1 day, If the damage involves the motherboard it may take 3 - 14 days'),
                 ),
               ],
             ),

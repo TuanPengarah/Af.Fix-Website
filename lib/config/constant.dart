@@ -9,9 +9,12 @@ const kColorDarkScaffold = Color(0xff303030);
 
 //information
 const kNoKedai = '01111426421';
+const kEmailKedai = 'services.af.fix@gmail.com';
 
 //link
 const kWhatsAppLink = 'https://wa.link/ah5ifs';
+const kFacebookLink = 'https://www.facebook.com/assaff.fix';
+const kInstagramLink = 'https://www.instagram.com/assaff.fix/';
 const kImageMoney = 'https://i.imgur.com/sLRgc52.png';
 const kImageMalaysia = 'https://i.imgur.com/WIsHyOO.png';
 const kImageCourier = 'https://i.imgur.com/55ia9ax.png';

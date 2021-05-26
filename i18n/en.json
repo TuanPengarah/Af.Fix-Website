@@ -54,12 +54,24 @@
     "waterdamaged" : "Cannot on or other problems that cause by exposure to water",
     "newapps" : "New apps just for you (Coming Soon)!",
     "newappsdesc" : "Worried if your warranty receipt is lost? Not anymore, you can track repair status of your smartphone, make an appointment with us and many more fun for you to explore !",
-    "followsocmed" : "Follow us on our social media platforms",
-    "buttonsocmed" : "Click here to follow",
+    "followsocmed" : "Follow us on our social media platforms for more updates",
+    "buttonsocmed" : "Click here for more",
     "testimonial" : "Customers Testimonial",
     "usefultool" : "Useful tools for you to explore",
     "myridsubtitle" : "Each phone taken for repair will be given a tracking number. Let's track your smartphone here",
     "myridgobutton" : "Track my smartphone",
     "ewaranttysubtitle" : "Have you repaired your phone with us? Let's see your spare part's warranty in here",
-    "ewarrantygobutton" : "My warranty"
+    "ewarrantygobutton" : "My warranty",
+    "qmodel" : "Which smartphone model can be repair?",
+    "amodel" : "iPhone and Android, as long as there are spare parts as long as we can repair",
+    "qwarranty" : "Warranty period?",
+    "awarranty" : "30 to 90 days",
+    "qmotherboard" : "Can repair motherboard smartphone?",
+    "amotherboard" : "Yes we can repair smartphone motherboards. Especially iPhone and Android models (If there are spare parts for android)",
+    "qhowlong" : "How long does it take to repair?",
+    "ahowlong" : "Depending on the type of damage, if the minor damage takes 30 minutes to 1 day, If the damage involves the motherboard it may take 3 - 14 days",
+    "fmission" : "Offers Android and iPhone device repair services. Our mission is to provide quality and services in all aspect in the smartphone repair industry",
+    "copyright" : "Copyright © 2021 Assaff Enterprise | All right reserved"
+
+
 }

@@ -7,6 +7,7 @@ import 'package:affix_web/screen/homescreen/page/customer_testimonial.dart';
 import 'package:affix_web/screen/homescreen/page/faq.dart';
 import 'package:affix_web/screen/homescreen/page/first_landing.dart';
 import 'package:affix_web/screen/homescreen/page/follow_socmed.dart';
+import 'package:affix_web/screen/homescreen/page/footer.dart';
 import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:affix_web/screen/homescreen/page/pwa.dart';
 import 'package:affix_web/screen/homescreen/ui/navbar.dart';
@@ -129,6 +130,7 @@ class DekstopHomeView extends StatelessWidget {
                       FollowSocialMedia(),
                       PWA(),
                       FAQ(),
+                      Footer(),
                     ],
                   ),
                 ),

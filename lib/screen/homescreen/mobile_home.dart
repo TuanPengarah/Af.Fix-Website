@@ -10,6 +10,8 @@ import 'package:affix_web/screen/homescreen/page/call_us.dart';
 import 'package:affix_web/screen/homescreen/page/customer_testimonial.dart';
 import 'package:affix_web/screen/homescreen/page/faq.dart';
 import 'package:affix_web/screen/homescreen/page/first_landing.dart';
+import 'package:affix_web/screen/homescreen/page/follow_socmed.dart';
+import 'package:affix_web/screen/homescreen/page/footer.dart';
 import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:affix_web/screen/homescreen/page/pwa.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -258,8 +260,10 @@ class MobileHomeView extends StatelessWidget {
                           OurServices(),
                           Apps(),
                           CustomerTestimonial(),
+                          FollowSocialMedia(),
                           PWA(),
                           FAQ(),
+                          Footer(),
                         ],
                       ),
                       // Navbar(),
