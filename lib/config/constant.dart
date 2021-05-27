@@ -33,6 +33,7 @@ const kImageCustomerYen = 'https://i.imgur.com/YTri6oK.jpg';
 const kImageCustomerLangkojai = 'https://i.imgur.com/2Wi26lz.jpg';
 const kImageCustomerFaridzul = 'https://i.imgur.com/rLNuhH7.png';
 const kImageCustomerJon = 'https://i.imgur.com/SDAa6Gy.jpg';
+const kImageTicket = 'https://i.imgur.com/57BRTVO.png';
 //style
 final TextStyle kTextSubtitleDark = TextStyle(
   fontWeight: FontWeight.w700,

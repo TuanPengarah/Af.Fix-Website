@@ -17,8 +17,8 @@ class MyThemes {
     scaffoldBackgroundColor: kColorDarkScaffold,
     primaryColor: Colors.teal,
     textSelectionTheme: TextSelectionThemeData(
-      selectionColor: Colors.teal,
-      cursorColor: Colors.teal,
+      selectionColor: kColorRed,
+      cursorColor: kColorRed,
       selectionHandleColor: Colors.teal,
     ),
     colorScheme: ColorScheme.dark(),
@@ -62,8 +62,8 @@ class MyThemes {
     primaryColor: Colors.red,
     colorScheme: ColorScheme.light(),
     textSelectionTheme: TextSelectionThemeData(
-      selectionColor: kColorRed,
-      cursorColor: kColorRed,
+      selectionColor: Colors.teal,
+      cursorColor: Colors.teal,
       selectionHandleColor: kColorRed,
     ),
     textTheme: TextTheme(

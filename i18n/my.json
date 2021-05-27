@@ -71,5 +71,8 @@
     "qhowlong" : "Berapa lama mengambil masa untuk repair?",
     "ahowlong" : "Bergantung kepada jenis kerosakkan, jika kerosakkan jenis minor mengambil masa dalam 30 minit hingga 1 hari, Jika kerosakkan melibatkan motherboard ia kemungkinan mengambil masa 3 - 14 hari",
     "fmission" : "Menawarkan perkhidmatan membaikpulih peranti Android dan iPhone. Misi kami adalah untuk memberikan kemudahan dan perkhidmatan pada semua aspek yang berkualiti dalam industri membaikpulih smartphone",
-    "copyright" : "Hak Cipta © 2021 Assaff Enterprise | Hak Cipta Terpelihara"
+    "copyright" : "Hak Cipta © 2021 Assaff Enterprise | Hak Cipta Terpelihara",
+    "trackyourrepair"  : "Jejaki status peranti anda",
+    "tyrsubtitle" : "Sila masukkan nombor MyRepair ID anda",
+    "tyrhint" : "Masukkan nombor MyRepair ID"
 }

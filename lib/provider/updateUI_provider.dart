@@ -11,6 +11,7 @@ class UpdateUI extends ChangeNotifier {
   Color changeColor = kColorGrey;
   Color changeLogoColor = kColorRed;
   bool switchDarkMode = false;
+  String uid;
 
   animationStartSmall(
       {double wAnimDesk, double hAnimDesk, double wAnimMob, double hAnimMob}) {
@@ -37,6 +38,11 @@ class UpdateUI extends ChangeNotifier {
 
   changeDarkMode(bool newMode) {
     switchDarkMode = !newMode;
+    notifyListeners();
+  }
+
+  setUID(String newUID) {
+    uid = newUID;
     notifyListeners();
   }
 }

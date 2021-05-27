@@ -59,7 +59,7 @@ class _DekstopNavState extends State<DekstopNav> {
           height: 100,
           bgColor: _isDarkMode
               ? Theme.of(context).scaffoldBackgroundColor
-              : kColorWhite,
+              : Colors.white.withOpacity(0.4),
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(15),
             bottomRight: Radius.circular(15),
@@ -171,6 +171,12 @@ class _DekstopNavState extends State<DekstopNav> {
                         TextButton(
                           onPressed: () {
                             context.vxNav.push(Uri.parse(MyRoutes.myRepairID));
+                            Provider.of<UpdateUI>(context, listen: false)
+                                .animationStartSmall(
+                                    wAnimDesk: 140,
+                                    hAnimDesk: 90,
+                                    wAnimMob: 120,
+                                    hAnimMob: 80);
                           },
                           child: Text(
                             AppLocalizations.of(context).translate('myrid'),

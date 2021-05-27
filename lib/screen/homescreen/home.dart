@@ -4,21 +4,17 @@ import 'package:affix_web/screen/homescreen/page/about.dart';
 import 'package:affix_web/screen/homescreen/page/apps.dart';
 import 'package:affix_web/screen/homescreen/page/call_us.dart';
 import 'package:affix_web/screen/homescreen/page/customer_testimonial.dart';
-import 'package:affix_web/screen/homescreen/page/faq.dart';
 import 'package:affix_web/screen/homescreen/page/first_landing.dart';
 import 'package:affix_web/screen/homescreen/page/follow_socmed.dart';
 import 'package:affix_web/screen/homescreen/page/footer.dart';
 import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:affix_web/screen/homescreen/page/pwa.dart';
-import 'package:affix_web/screen/homescreen/ui/navbar.dart';
+import 'package:affix_web/screen/navbar/navbar_landingPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {
-  final bool isLogin;
-
-  LandingPage({this.isLogin});
   @override
   _LandingPageState createState() => _LandingPageState();
 }
@@ -33,10 +29,6 @@ class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
     super.initState();
-    print('login is ${widget.isLogin}');
-    if (widget.isLogin == false) {
-      _auth.signInAnonymously();
-    }
     scrollController = ScrollController();
     scrollController.addListener(_scrollListener);
   }
@@ -93,6 +85,23 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
+    final _firebaseUser = context.watch<User>();
+    if (_firebaseUser == null) {
+      _auth.signInAnonymously();
+      print('initialize anonymous');
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        final User user = _auth.currentUser;
+        final uid = user.uid;
+        Provider.of<UpdateUI>(context, listen: false).setUID(uid);
+      });
+    } else {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        final User user = _auth.currentUser;
+        final uid = user.uid;
+        Provider.of<UpdateUI>(context, listen: false).setUID(uid);
+        print('already login');
+      });
+    }
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         if (constraints.maxWidth > 1200) {
@@ -129,7 +138,7 @@ class DekstopHomeView extends StatelessWidget {
                       CustomerTestimonial(),
                       FollowSocialMedia(),
                       PWA(),
-                      FAQ(),
+                      // FAQ(),
                       Footer(),
                     ],
                   ),

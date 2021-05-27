@@ -8,7 +8,6 @@ import 'package:affix_web/screen/homescreen/page/about.dart';
 import 'package:affix_web/screen/homescreen/page/apps.dart';
 import 'package:affix_web/screen/homescreen/page/call_us.dart';
 import 'package:affix_web/screen/homescreen/page/customer_testimonial.dart';
-import 'package:affix_web/screen/homescreen/page/faq.dart';
 import 'package:affix_web/screen/homescreen/page/first_landing.dart';
 import 'package:affix_web/screen/homescreen/page/follow_socmed.dart';
 import 'package:affix_web/screen/homescreen/page/footer.dart';
@@ -41,6 +40,14 @@ class MobileHomeView extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     maxFontSize: 20,
                     minFontSize: 13,
+                  ),
+                  SizedBox(height: 5),
+                  SelectableText(
+                    'uid: ${Provider.of<UpdateUI>(context).uid}',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w200),
                   ),
                 ],
               ),
@@ -116,6 +123,12 @@ class MobileHomeView extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
+                  Provider.of<UpdateUI>(context, listen: false)
+                      .animationStartSmall(
+                          wAnimDesk: 140,
+                          hAnimDesk: 90,
+                          wAnimMob: 120,
+                          hAnimMob: 80);
                   context.vxNav.push(Uri.parse(MyRoutes.myRepairID));
                 },
               ),
@@ -262,7 +275,7 @@ class MobileHomeView extends StatelessWidget {
                           CustomerTestimonial(),
                           FollowSocialMedia(),
                           PWA(),
-                          FAQ(),
+                          // FAQ(),
                           Footer(),
                         ],
                       ),

@@ -48,6 +48,7 @@ class PWA extends StatelessWidget {
                     '${AppLocalizations.of(context).translate('ewarrantygobutton')}'),
               ],
             ),
+            SizedBox(height: 70),
           ],
         ),
       ),

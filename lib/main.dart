@@ -1,9 +1,9 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/model/auth_services.dart';
-import 'package:affix_web/model/auth_wrapper.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
-import 'package:affix_web/screen/myrepairid.dart';
+import 'package:affix_web/screen/MyRepairID/myrepairID_wrapper.dart';
+import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -59,9 +59,9 @@ class MyApp extends StatelessWidget {
             routeInformationParser: VxInformationParser(),
             routerDelegate: VxNavigator(
               routes: {
-                '/': (_, __) => MaterialPage(child: AuthenticationWrapper()),
+                '/': (_, __) => MaterialPage(child: LandingPage()),
                 MyRoutes.myRepairID: (_, __) =>
-                    MaterialPage(child: MyRepairIDDisplay()),
+                    MaterialPage(child: MyrepairIDWrapper()),
               },
             ),
             locale: model.appLocal,
