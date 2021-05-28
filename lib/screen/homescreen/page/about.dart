@@ -6,7 +6,7 @@ class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: kColorRed,
+      color: Theme.of(context).primaryColor,
       child: ConstrainedBox(
         constraints: BoxConstraints(minWidth: double.infinity),
         child: Padding(

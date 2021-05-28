@@ -7,7 +7,7 @@
       "**/node_modules/**"
     ],
   "rewrites": [ {
-    "source": "/myrid",
+    "source": "/mysid",
     "destination": "/index.html"
   } ]
   }

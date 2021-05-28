@@ -5,7 +5,7 @@
     "ourservice" : "Our Services" ,
     "letsrepair" : "Let's Repair",
     "ewarranti" : "E-Warranty",
-    "myrid" : "MyRepair ID",
+    "myrid" : "MyStatus ID",
     "broken" : "Your smartphone got problem?",
     "service" : "Services your smartphone with",
     "easy" : "easy",
@@ -72,9 +72,13 @@
     "ahowlong" : "Depending on the type of damage, if the minor damage takes 30 minutes to 1 day, If the damage involves the motherboard it may take 3 - 14 days",
     "fmission" : "Offers Android and iPhone device repair services. Our mission is to provide quality and services in all aspect in the smartphone repair industry",
     "copyright" : "Copyright © 2021 Assaff Enterprise | All right reserved",
-    "trackyourrepair"  : "Track your repair status",
-    "tyrsubtitle" : "Please enter your MyRepair ID number",
-    "tyrhint" : "Enter MyRepair ID number"
-
-
+    "trackyourrepair"  : "Check Repair Status",
+    "tyrsubtitle" : "Please enter your MyStatus ID (MySID) number to find out your device's repair status",
+    "tyrhint" : "Enter MySID number",
+    "trackbutton" : "Check",
+    "emptyfieldmysid" : "Please enter your MySID number",
+    "recordfound" : "Record found!",
+    "recordnotfound" : "Record not found. Please enter correct MySID number",
+    "titlecheck" : "Repair Status",
+    "egmysid" : "eg: 248444"
 }

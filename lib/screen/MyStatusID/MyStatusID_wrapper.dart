@@ -3,7 +3,7 @@ import 'package:affix_web/menu/menu_change_language.dart';
 import 'package:affix_web/menu/menu_change_theme.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
-import 'package:affix_web/screen/MyRepairID/myrepairID_page.dart';
+import 'package:affix_web/screen/MyStatusID/MyStatusID_page.dart';
 import 'package:affix_web/screen/navbar/navbar_landingPage.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -204,13 +204,32 @@ class _MobileMyRepairIDState extends State<MobileMyRepairID> {
         alignment: AlignmentDirectional.topEnd,
         children: [
           MyRepairIDContainer(),
-          Builder(
-            builder: (BuildContext context) => IconButton(
-              tooltip: 'Menu',
-              icon: Icon(Icons.menu, color: Colors.white),
-              onPressed: () {
-                Scaffold.of(context).openEndDrawer();
-              },
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Builder(
+              builder: (BuildContext context) => IconButton(
+                tooltip: 'Menu',
+                icon: Icon(Icons.menu, color: Colors.white),
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+              ),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Builder(
+                builder: (BuildContext context) => IconButton(
+                  tooltip: 'Back',
+                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
             ),
           ),
         ],

@@ -69,21 +69,33 @@ class MobileFirstPageView extends StatelessWidget {
                               '${AppLocalizations.of(context).translate('service')} ',
                           style: TextStyle(
                             letterSpacing: 1.1,
-                            fontSize: 35,
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
                           ),
                           children: <TextSpan>[
                             TextSpan(
                               text:
                                   '${AppLocalizations.of(context).translate('easy')}',
-                              style: TextStyle(fontWeight: FontWeight.w900),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 45),
                             ),
                             TextSpan(
-                                text:
-                                    ' ${AppLocalizations.of(context).translate('and')} '),
+                              text:
+                                  ' ${AppLocalizations.of(context).translate('and')} ',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 45),
+                            ),
                             TextSpan(
                               text:
                                   '${AppLocalizations.of(context).translate('trust')}',
-                              style: TextStyle(fontWeight: FontWeight.w900),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 45),
                             ),
                           ],
                         ),
@@ -100,6 +112,8 @@ class MobileFirstPageView extends StatelessWidget {
                 ),
                 ElevatedButton.icon(
                   style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Theme.of(context).primaryColor),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -204,7 +218,9 @@ class DekstopFirstPageView extends StatelessWidget {
                         TextSpan(
                           text:
                               '${AppLocalizations.of(context).translate('easy')}',
-                          style: TextStyle(fontWeight: FontWeight.w900),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              color: Theme.of(context).primaryColor),
                         ),
                         TextSpan(
                             text:
@@ -212,7 +228,9 @@ class DekstopFirstPageView extends StatelessWidget {
                         TextSpan(
                           text:
                               '${AppLocalizations.of(context).translate('trust')}',
-                          style: TextStyle(fontWeight: FontWeight.w900),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              color: Theme.of(context).primaryColor),
                         ),
                       ],
                     ),
@@ -226,9 +244,7 @@ class DekstopFirstPageView extends StatelessWidget {
                     ElevatedButton.icon(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
-                            _isDarkMode
-                                ? Theme.of(context).primaryColor
-                                : kColorGrey),
+                            Theme.of(context).primaryColor),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(

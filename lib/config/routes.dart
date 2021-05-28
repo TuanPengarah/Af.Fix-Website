@@ -1,3 +1,3 @@
 class MyRoutes {
-  static String myRepairID = '/myrid';
+  static String myRepairID = '/mysid';
 }

@@ -12,7 +12,7 @@ class Apps extends StatelessWidget {
     return Container(
       // height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      color: kColorRed,
+      color: Theme.of(context).primaryColor,
       child: Padding(
         padding: const EdgeInsets.only(top: 45, left: 20, right: 20),
         child: Column(

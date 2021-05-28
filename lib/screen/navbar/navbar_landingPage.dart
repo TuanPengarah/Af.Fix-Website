@@ -57,9 +57,7 @@ class _DekstopNavState extends State<DekstopNav> {
         BlurryContainer(
           blur: atasSekali == true ? 0.1 : 15,
           height: 100,
-          bgColor: _isDarkMode
-              ? Theme.of(context).scaffoldBackgroundColor
-              : Colors.white.withOpacity(0.4),
+          bgColor: Theme.of(context).scaffoldBackgroundColor,
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(15),
             bottomRight: Radius.circular(15),

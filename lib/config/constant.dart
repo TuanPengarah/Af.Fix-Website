@@ -20,20 +20,20 @@ const kImageMalaysia = 'https://i.imgur.com/WIsHyOO.png';
 const kImageCourier = 'https://i.imgur.com/55ia9ax.png';
 const kImageService = 'https://i.imgur.com/haag4UB.png';
 const kImageChecking = 'https://i.imgur.com/zMejloH.png';
-const kImageSystem = 'https://i.imgur.com/Uf6QPuP.png';
+const kImageSystem = 'https://i.imgur.com/MQDDEkm.png';
 const kImageLCD = 'https://i.imgur.com/wOOMHf0.png';
 const kImageButton = 'https://i.imgur.com/5x5SDC3.png';
 const kImageSubBoard = 'https://i.imgur.com/TTD4qLb.png';
 const kImageBattery = 'https://i.imgur.com/vISY51T.png';
 const kImageSoftware = 'https://i.imgur.com/e57Exue.png';
 const kImageWaterDamaged = 'https://i.imgur.com/NUoH6u0.png';
-const kImageAppsDemo = 'https://i.imgur.com/x4bBC8L.png';
+const kImageAppsDemo = 'https://i.imgur.com/xGlFNa6.png';
 const kImageCustomerIjoy = 'https://i.imgur.com/K0BIiyi.jpg';
 const kImageCustomerYen = 'https://i.imgur.com/YTri6oK.jpg';
 const kImageCustomerLangkojai = 'https://i.imgur.com/2Wi26lz.jpg';
 const kImageCustomerFaridzul = 'https://i.imgur.com/rLNuhH7.png';
 const kImageCustomerJon = 'https://i.imgur.com/SDAa6Gy.jpg';
-const kImageTicket = 'https://i.imgur.com/57BRTVO.png';
+const kImageTicket = 'https://i.imgur.com/VJp8RxU.png';
 //style
 final TextStyle kTextSubtitleDark = TextStyle(
   fontWeight: FontWeight.w700,

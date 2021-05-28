@@ -39,13 +39,15 @@ class PWA extends StatelessWidget {
               runSpacing: 50,
               children: [
                 pwaContainer(
-                    'MyRepair ID',
+                    'MyStatus ID',
                     '${AppLocalizations.of(context).translate('myridsubtitle')}',
-                    '${AppLocalizations.of(context).translate('myridgobutton')}'),
+                    '${AppLocalizations.of(context).translate('myridgobutton')}',
+                    context),
                 pwaContainer(
                     '${AppLocalizations.of(context).translate('ewarranti')}',
                     '${AppLocalizations.of(context).translate('ewaranttysubtitle')}',
-                    '${AppLocalizations.of(context).translate('ewarrantygobutton')}'),
+                    '${AppLocalizations.of(context).translate('ewarrantygobutton')}',
+                    context),
               ],
             ),
             SizedBox(height: 70),
@@ -55,11 +57,12 @@ class PWA extends StatelessWidget {
     );
   }
 
-  Container pwaContainer(String title, String subtitle, String button) {
+  Container pwaContainer(
+      String title, String subtitle, String button, BuildContext context) {
     return Container(
       width: 600,
       decoration: BoxDecoration(
-        color: kColorRed,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(30),
       ),
       child: Padding(
@@ -95,7 +98,7 @@ class PWA extends StatelessWidget {
                 child: Text(
                   button,
                   style: TextStyle(
-                    color: kColorRed,
+                    color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
