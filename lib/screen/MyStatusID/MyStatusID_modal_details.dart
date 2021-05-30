@@ -27,12 +27,9 @@ showDetails(BuildContext context, String docid) {
               ),
             ),
             SizedBox(height: 10),
-            SelectableText(
-              '${AppLocalizations.of(context).translate('titlecheck')}',
-              style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 1.1),
+            CircleAvatar(
+              backgroundColor: Colors.grey,
+              radius: 35,
             ),
             SizedBox(height: 10),
             StreamBuilder(
@@ -49,10 +46,8 @@ showDetails(BuildContext context, String docid) {
                 var userDocument = snapshot.data;
                 return Container(
                   width: MediaQuery.of(context).size.width - 80,
-                  child: Card(
-                    child: Column(
-                      children: [SelectableText('${userDocument['Model']}')],
-                    ),
+                  child: Column(
+                    children: [SelectableText('${userDocument['Model']}')],
                   ),
                 );
               },

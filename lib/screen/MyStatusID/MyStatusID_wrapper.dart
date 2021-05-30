@@ -4,68 +4,23 @@ import 'package:affix_web/menu/menu_change_theme.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/MyStatusID/MyStatusID_page.dart';
-import 'package:affix_web/screen/navbar/navbar_landingPage.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MyrepairIDWrapper extends StatefulWidget {
+class MyStatusIDScaffold extends StatefulWidget {
   @override
-  _MyrepairIDWrapperState createState() => _MyrepairIDWrapperState();
+  _MyStatusIDScaffoldState createState() => _MyStatusIDScaffoldState();
 }
 
-class _MyrepairIDWrapperState extends State<MyrepairIDWrapper> {
-  @override
-  Widget build(BuildContext context) {
-    bool _dahrunning = false;
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth > 1200) {
-          if (_dahrunning == false) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              // Add Your Code here.
-              Provider.of<UpdateUI>(context, listen: false).animationStartSmall(
-                  wAnimDesk: 140, hAnimDesk: 90, wAnimMob: 120, hAnimMob: 80);
-              _dahrunning = true;
-            });
-          }
-
-          return DekstopMyRepairID();
-        }
-        return MobileMyRepairID();
-      },
-    );
-  }
-}
-
-class DekstopMyRepairID extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Container(
-        child: Stack(
-          children: [
-            MyRepairIDContainer(),
-            Navbar(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class MobileMyRepairID extends StatefulWidget {
-  @override
-  _MobileMyRepairIDState createState() => _MobileMyRepairIDState();
-}
-
-class _MobileMyRepairIDState extends State<MobileMyRepairID> {
+class _MyStatusIDScaffoldState extends State<MyStatusIDScaffold> {
   @override
   Widget build(BuildContext context) {
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
+    String _uidText = Provider.of<UpdateUI>(context).uid;
+
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Theme.of(context).primaryColor,
       endDrawer: Drawer(
         child: ListView(
           children: [
@@ -83,7 +38,7 @@ class _MobileMyRepairIDState extends State<MobileMyRepairID> {
                   ),
                   SizedBox(height: 5),
                   SelectableText(
-                    'uid: ${Provider.of<UpdateUI>(context).uid}',
+                    'uid: $_uidText',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 10,

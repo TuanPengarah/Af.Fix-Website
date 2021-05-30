@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
               routes: {
                 '/': (_, __) => MaterialPage(child: LandingPage()),
                 MyRoutes.myRepairID: (_, __) =>
-                    MaterialPage(child: MyrepairIDWrapper()),
+                    MaterialPage(child: MyStatusIDScaffold()),
               },
             ),
             locale: model.appLocal,

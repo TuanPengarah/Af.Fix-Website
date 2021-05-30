@@ -81,7 +81,7 @@ class _LandingPageState extends State<LandingPage> {
     }
   }
 
-  Future<void> _authServices(User _firebaseUser) async {
+  _authServices(User _firebaseUser) async {
     String elseUID = '';
     if (_firebaseUser == null) {
       await _auth.signInAnonymously();
@@ -89,9 +89,7 @@ class _LandingPageState extends State<LandingPage> {
       final uid = user.uid;
       elseUID = uid;
       print('initialize anonymous');
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
-        Provider.of<UpdateUI>(context, listen: false).setUID(uid);
-      });
+      Provider.of<UpdateUI>(context, listen: false).setUID(uid);
     } else {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         Provider.of<UpdateUI>(context, listen: false).setUID(elseUID);
@@ -104,7 +102,9 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     //SET AUTH
     final _firebaseUser = context.watch<User>();
-    _authServices(_firebaseUser);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _authServices(_firebaseUser);
+    });
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
