@@ -22,7 +22,7 @@ class LandingPage extends StatefulWidget {
 ScrollController scrollController = ScrollController();
 double scrollPosition = 0;
 bool atasSekali = true;
-bool dahRunningDekstop = false;
+bool dahRunningDesktop = false;
 FirebaseAuth _auth = FirebaseAuth.instance;
 
 class _LandingPageState extends State<LandingPage> {
@@ -45,12 +45,12 @@ class _LandingPageState extends State<LandingPage> {
     //         .changeLogoColorRedWhite(kColorRed);
     //   }
     // }
-    if (dahRunningDekstop == false) {
+    if (dahRunningDesktop == false) {
       if (scrollPosition > 60 && scrollPosition < 190) {
         Provider.of<UpdateUI>(context, listen: false).animationStartSmall(
             wAnimDesk: 140, hAnimDesk: 90, wAnimMob: 120, hAnimMob: 80);
         atasSekali = false;
-        dahRunningDekstop = true;
+        dahRunningDesktop = true;
       }
     }
     // if (dahRunningMobile == false) {
@@ -65,11 +65,9 @@ class _LandingPageState extends State<LandingPage> {
     // }
     if (scrollController.offset >= scrollController.position.maxScrollExtent &&
         !scrollController.position.outOfRange) {
-      setState(() {
 //do logic untuk bawah sekali
-        atasSekali = false;
-        dahRunningDekstop = false;
-      });
+      atasSekali = false;
+      dahRunningDesktop = false;
     }
     if (scrollController.offset <= scrollController.position.minScrollExtent &&
         !scrollController.position.outOfRange) {
@@ -79,29 +77,33 @@ class _LandingPageState extends State<LandingPage> {
       // Provider.of<UpdateUI>(context, listen: false)
       //     .changeColorDarkWhite(kColorGrey);
       atasSekali = true;
-      dahRunningDekstop = false;
+      dahRunningDesktop = false;
     }
   }
-
-  @override
-  Widget build(BuildContext context) {
-    final _firebaseUser = context.watch<User>();
+  _authServices(User _firebaseUser) async{
     if (_firebaseUser == null) {
       _auth.signInAnonymously();
       print('initialize anonymous');
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        final User user = _auth.currentUser;
-        final uid = user.uid;
+        final User user = await _auth.currentUser;
+        final uid = await user.uid;
         Provider.of<UpdateUI>(context, listen: false).setUID(uid);
       });
     } else {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        final User user = _auth.currentUser;
-        final uid = user.uid;
+        final User user = await _auth.currentUser;
+        final uid = await user.uid;
         Provider.of<UpdateUI>(context, listen: false).setUID(uid);
         print('already login');
       });
     }
+  }
+  @override
+  Widget build(BuildContext context) {
+    //SET AUTH
+    final _firebaseUser = context.watch<User>();
+    _authServices(_firebaseUser);
+
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         if (constraints.maxWidth > 1200) {

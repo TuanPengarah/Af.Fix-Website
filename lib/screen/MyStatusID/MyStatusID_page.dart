@@ -17,11 +17,16 @@ extension Utility on BuildContext {
   }
 }
 
-class MyRepairIDContainer extends StatelessWidget {
-  final RoundedLoadingButtonController _buttonController =
-      RoundedLoadingButtonController();
-  final _inputSearch = TextEditingController();
+class MyRepairIDContainer extends StatefulWidget {
+  @override
+  _MyRepairIDContainerState createState() => _MyRepairIDContainerState();
+}
 
+final RoundedLoadingButtonController _buttonController =
+    RoundedLoadingButtonController();
+
+class _MyRepairIDContainerState extends State<MyRepairIDContainer> {
+  final _inputSearch = TextEditingController();
   _checkDatabase(BuildContext context) async {
     final _inputText = _inputSearch.text;
     if (_inputText.isEmpty) {
@@ -62,7 +67,7 @@ class MyRepairIDContainer extends StatelessWidget {
 
           _buttonController.success();
           Timer(Duration(seconds: 2), () {
-            showDetails(context);
+            showDetails(context, _inputText);
             _buttonController.reset();
           });
         }
@@ -80,6 +85,12 @@ class MyRepairIDContainer extends StatelessWidget {
         });
       }
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _inputSearch.dispose();
   }
 
   @override
@@ -154,8 +165,6 @@ class MyRepairIDContainer extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 13,
                       ),
-                      // enabledBorder: InputBorder.none,
-                      // focusedBorder: InputBorder.none,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(
@@ -193,7 +202,7 @@ class MyRepairIDContainer extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Icon(
-                          MaterialCommunityIcons.chart_bubble,
+                          MaterialCommunityIcons.notebook,
                           color: Theme.of(context).primaryColor,
                         ),
                         SizedBox(width: 15),

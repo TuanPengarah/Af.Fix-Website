@@ -69,7 +69,7 @@ class MobileFirstPageView extends StatelessWidget {
                               '${AppLocalizations.of(context).translate('service')} ',
                           style: TextStyle(
                             letterSpacing: 1.1,
-                            fontSize: 40,
+                            fontSize: 35,
                             fontWeight: FontWeight.bold,
                           ),
                           children: <TextSpan>[
@@ -77,25 +77,17 @@ class MobileFirstPageView extends StatelessWidget {
                               text:
                                   '${AppLocalizations.of(context).translate('easy')}',
                               style: TextStyle(
-                                  fontWeight: FontWeight.w900,
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 45),
+                                  fontWeight: FontWeight.w900, fontSize: 40),
                             ),
                             TextSpan(
                               text:
                                   ' ${AppLocalizations.of(context).translate('and')} ',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w900,
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 45),
                             ),
                             TextSpan(
                               text:
                                   '${AppLocalizations.of(context).translate('trust')}',
                               style: TextStyle(
-                                  fontWeight: FontWeight.w900,
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 45),
+                                  fontWeight: FontWeight.w900, fontSize: 40),
                             ),
                           ],
                         ),
