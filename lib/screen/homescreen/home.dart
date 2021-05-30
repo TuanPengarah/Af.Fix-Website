@@ -80,24 +80,26 @@ class _LandingPageState extends State<LandingPage> {
       dahRunningDesktop = false;
     }
   }
-  _authServices(User _firebaseUser) async{
+
+  Future<void> _authServices(User _firebaseUser) async {
+    String elseUID = '';
     if (_firebaseUser == null) {
-      _auth.signInAnonymously();
+      await _auth.signInAnonymously();
+      final User user = _auth.currentUser;
+      final uid = user.uid;
+      elseUID = uid;
       print('initialize anonymous');
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        final User user = await _auth.currentUser;
-        final uid = await user.uid;
         Provider.of<UpdateUI>(context, listen: false).setUID(uid);
       });
     } else {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        final User user = await _auth.currentUser;
-        final uid = await user.uid;
-        Provider.of<UpdateUI>(context, listen: false).setUID(uid);
+        Provider.of<UpdateUI>(context, listen: false).setUID(elseUID);
         print('already login');
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     //SET AUTH
