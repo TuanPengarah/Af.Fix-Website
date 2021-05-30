@@ -57,7 +57,7 @@
     "followsocmed" : "Ikuti kami di platform media sosial untuk dapatkan maklumat terkini",
     "buttonsocmed" : "Klik sini banyak pilihan",
     "testimonial" : "Testimoni Pelanggan",
-    "usefultool" : "Bantuan Anda",
+    "usefultool" : "Perlukan bantuan?",
     "myridsubtitle" : "Setiap phone yang di pick up untuk dibaiki akan diberikan nombor tracking. Jom tracking smartphone anda di sini",
     "myridgobutton" : "Track smartphone saya",
     "ewaranttysubtitle" : "Resit waranti hilang? bukan sekarang! Jom lihat waranti anda di sini",
@@ -78,7 +78,7 @@
     "trackbutton" : "Semak",
     "emptyfieldmysid" : "Sila masukkan nombor MySID!",
     "recordfound" : "Rekod ditemui!",
-    "recordnotfound" : "Rekod tidak ditemui. Sila masukkan nombor MySID yang betul",
+    "recordnotfound" : "Tiada rekod ditemui!",
     "titlecheck" : "Status Pembaikan",
     "egmysid" : "cth: 248444"
 }
