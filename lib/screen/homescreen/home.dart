@@ -82,19 +82,17 @@ class _LandingPageState extends State<LandingPage> {
   }
 
   _authServices(User _firebaseUser) async {
-    String elseUID = '';
     if (_firebaseUser == null) {
       await _auth.signInAnonymously();
       final User user = _auth.currentUser;
       final uid = user.uid;
-      elseUID = uid;
       print('initialize anonymous');
       Provider.of<UpdateUI>(context, listen: false).setUID(uid);
     } else {
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
-        Provider.of<UpdateUI>(context, listen: false).setUID(elseUID);
-        print('already login');
-      });
+      print('already login');
+      User user = _auth.currentUser;
+      final uid = user.uid;
+      Provider.of<UpdateUI>(context, listen: false).setUID(uid);
     }
   }
 
