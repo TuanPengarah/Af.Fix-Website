@@ -1,4 +1,4 @@
-import 'package:affix_web/config/app_localizations.dart';
+import 'package:affix_web/config/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -13,46 +13,61 @@ showDetails(BuildContext context, String docid) {
       elevation: 5,
       context: context,
       builder: (BuildContext context) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 10),
-            Container(
-              width: 50,
-              height: 5,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(30),
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image(
+                image: NetworkImage(kImageiPhoneOldWhite),
+                height: 150,
               ),
-            ),
-            SizedBox(height: 10),
-            CircleAvatar(
-              backgroundColor: Colors.grey,
-              radius: 35,
-            ),
-            SizedBox(height: 10),
-            StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection('MyrepairID')
-                  .doc(docid)
-                  .snapshots(),
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                if (!snapshot.hasData) {
-                  return Text("loading");
-                } else if (!snapshot.data.exists) {
-                  return Text('No data found');
-                }
-                var userDocument = snapshot.data;
-                return Container(
-                  width: MediaQuery.of(context).size.width - 80,
-                  child: Column(
-                    children: [SelectableText('${userDocument['Model']}')],
-                  ),
-                );
-              },
-            )
-          ],
+              SizedBox(height: 10),
+              StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('MyrepairID')
+                    .doc(docid)
+                    .snapshots(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Text("loading");
+                  } else if (!snapshot.data.exists) {
+                    return Text('No data found');
+                  }
+                  var userDocument = snapshot.data;
+                  return Column(
+                    children: [
+                      SelectableText(
+                        '${userDocument['Model']}',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      SelectableText(
+                        '${userDocument['Kerosakkan']}',
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 25),
+                      SelectableText(
+                        'Tarikh Diterima: ${userDocument['Tarikh']}',
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 5),
+                      SelectableText(
+                        'Peranti ini diuruskan oleh juruteknik bernama ${userDocument['Technician']}',
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                  );
+                },
+              )
+            ],
+          ),
         );
       });
 }
