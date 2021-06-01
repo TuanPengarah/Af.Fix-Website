@@ -7,7 +7,6 @@ import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.da
 
 showDetails(BuildContext context, String docid) {
   showModalBottomSheet(
-      isScrollControlled: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10),
@@ -15,139 +14,197 @@ showDetails(BuildContext context, String docid) {
         ),
       ),
       elevation: 5,
+      isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection('MyrepairID')
-                    .doc(docid)
-                    .snapshots(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                  if (!snapshot.hasData) {
-                    return Text("loading");
-                  } else if (!snapshot.data.exists) {
-                    return Text('No data found');
-                  }
-                  var userDocument = snapshot.data;
-                  String _model = '${userDocument['Model']}';
-                  bool _isOldiPhone = true;
-                  bool _isNewiPhone = false;
-                  bool _isAndroid = false;
-                  int _progress = userDocument['Percent'] * 100;
-                  if (matches(_model, 'IPHONE 5') ||
-                      matches(_model, 'IPHONE 6') ||
-                      matches(_model, 'IPHONE 7') ||
-                      matches(_model, 'IPHONE 8') ||
-                      matches(_model, 'IPHONE SE')) {
-                    _isOldiPhone = true;
-                    _isNewiPhone = false;
-                    _isAndroid = false;
-                  } else if (matches(_model, 'IPHONE X') ||
-                      matches(_model, 'IPHONE XS') ||
-                      matches(_model, 'IPHONE XR') ||
-                      matches(_model, 'IPHONE 11') ||
-                      matches(_model, 'IPHONE 12')) {
-                    _isNewiPhone = true;
-                    _isOldiPhone = false;
-                    _isAndroid = false;
-                  } else {
-                    _isNewiPhone = false;
-                    _isOldiPhone = false;
-                    _isAndroid = true;
-                  }
-                  print('old iphone: $_isOldiPhone');
-                  print('new iphone: $_isNewiPhone');
-                  print('android: $_isAndroid');
-                  return Column(
-                    children: [
-                      Image(
-                        image: NetworkImage((_isOldiPhone == true)
-                            ? kImageiPhoneOldWhite
-                            : (_isNewiPhone == true)
-                                ? kImageiPhoneNew
-                                : kImageAndroid),
-                        height: 150,
-                      ),
-                      SizedBox(height: 10),
-                      SelectableText(
-                        '${userDocument['Model']}',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      SelectableText(
-                        '${userDocument['Kerosakkan']}',
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 25),
-                      SelectableText.rich(
-                        TextSpan(
-                            text:
-                                '${AppLocalizations.of(context).translate('receiveddate')}',
-                            children: <TextSpan>[
+        return Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  iconSize: 30,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  tooltip: 'Tutup',
+                  icon: Icon(
+                    Icons.close,
+                    color: Color(0xFFFA7268),
+                  ),
+                ),
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('MyrepairID')
+                        .doc(docid)
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<dynamic> snapshot) {
+                      if (!snapshot.hasData) {
+                        return Text('Loading...');
+                      } else if (!snapshot.data.exists) {
+                        return Text('No data found');
+                      }
+                      var userDocument = snapshot.data;
+                      String _model = '${userDocument['Model']}';
+                      bool _isOldiPhone = true;
+                      bool _isNewiPhone = false;
+                      bool _isAndroid = false;
+                      int _progress = userDocument['Percent'] * 100;
+                      if (matches(_model, 'IPHONE 5') ||
+                          matches(_model, 'IPHONE 6') ||
+                          matches(_model, 'IPHONE 7') ||
+                          matches(_model, 'IPHONE 8') ||
+                          matches(_model, 'IPHONE SE')) {
+                        _isOldiPhone = true;
+                        _isNewiPhone = false;
+                        _isAndroid = false;
+                      } else if (matches(_model, 'IPHONE X') ||
+                          matches(_model, 'IPHONE XS') ||
+                          matches(_model, 'IPHONE XR') ||
+                          matches(_model, 'IPHONE 11') ||
+                          matches(_model, 'IPHONE 12')) {
+                        _isNewiPhone = true;
+                        _isOldiPhone = false;
+                        _isAndroid = false;
+                      } else {
+                        _isNewiPhone = false;
+                        _isOldiPhone = false;
+                        _isAndroid = true;
+                      }
+                      print('old iphone: $_isOldiPhone');
+                      print('new iphone: $_isNewiPhone');
+                      print('android: $_isAndroid');
+
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image(
+                              image: NetworkImage((_isOldiPhone == true)
+                                  ? kImageiPhoneOldWhite
+                                  : (_isNewiPhone == true)
+                                      ? kImageiPhoneNew
+                                      : kImageAndroid),
+                              height: 180,
+                            ),
+                            SizedBox(height: 15),
+                            SelectableText(
+                              '${userDocument['Model']}',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            SelectableText(
+                              '${userDocument['Kerosakkan']}',
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: 30),
+                            SelectableText.rich(
                               TextSpan(
-                                text: '${userDocument['Tarikh']}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                  text:
+                                      '${AppLocalizations.of(context).translate('receiveddate')}',
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: '${userDocument['Tarikh']}',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ]),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: 10),
+                            SelectableText.rich(
+                              TextSpan(
+                                  text:
+                                      '${AppLocalizations.of(context).translate('technician')}',
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: '${userDocument['Technician']}',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ]),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: 35),
+                            SelectableText(
+                              '${AppLocalizations.of(context).translate('progress')}',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Container(
+                              width: 500,
+                              child: FAProgressBar(
+                                currentValue: _progress.toInt(),
+                                displayText: '%',
+                                border: Border.all(
+                                  color: Colors.grey.shade300,
                                 ),
                               ),
-                            ]),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 5),
-                      SelectableText.rich(
-                        TextSpan(
-                            text:
-                                '${AppLocalizations.of(context).translate('technician')}',
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: '${userDocument['Technician']}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                            ),
+                            SizedBox(height: 20),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                ),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Color(0xFFFA7268),
                                 ),
                               ),
-                            ]),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 28),
-                      SelectableText(
-                        '${AppLocalizations.of(context).translate('progress')}',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text('Laporan Repair'),
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Tutup',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: Color(0xFFFA7268),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 30),
+                          ],
                         ),
-                      ),
-                      SizedBox(height: 5),
-                      Container(
-                        width: 500,
-                        child: FAProgressBar(
-                          currentValue: _progress.toInt(),
-                          displayText: '%',
-                          animatedDuration: Duration(milliseconds: 400),
-                          displayTextStyle: TextStyle(
-                              color:
-                                  _progress < 5 ? Colors.black : Colors.white),
-                          border: Border.all(color: Color(0xFFFA7268)),
-                        ),
-                      ),
-                      SizedBox(height: 30),
-                    ],
-                  );
-                },
-              )
-            ],
-          ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
         );
       });
 }

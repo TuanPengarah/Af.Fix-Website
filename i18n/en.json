@@ -83,5 +83,7 @@
     "egmysid" : "eg: 248444",
     "receiveddate" : "Received Date: ",
     "technician" : "Technician:  ",
-    "progress" : "Repairing Progress: "
+    "progress" : "Repairing Progress: ",
+    "buttonrepairlog" : "Repair Report",
+    "buttonclose" : "Close"
 }
