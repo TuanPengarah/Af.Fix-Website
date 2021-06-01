@@ -14,7 +14,7 @@ import 'package:velocity_x/velocity_x.dart';
 import 'config/change_lang.dart';
 import 'provider/themeUI_provider.dart';
 
-//flutter run -d web-server --web-port 8080 --web-hostname 192.168.1.17
+// flutter run -d web-server --web-port 8080 --web-hostname 192.168.1.17
 
 Future<void> main() async {
   setPathUrlStrategy();

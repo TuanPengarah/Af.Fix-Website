@@ -80,5 +80,8 @@
     "recordfound" : "Record found!",
     "recordnotfound" : "Record not found. Please enter correct MySID number",
     "titlecheck" : "Repair Status",
-    "egmysid" : "eg: 248444"
+    "egmysid" : "eg: 248444",
+    "receiveddate" : "Received Date: ",
+    "technician" : "Technician:  ",
+    "progress" : "Repairing Progress: "
 }
