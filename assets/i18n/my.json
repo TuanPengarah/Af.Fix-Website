@@ -83,5 +83,7 @@
     "egmysid" : "cth: 248444",
     "receiveddate" : "Tarikh Diterima: ",
     "technician" : "Juruteknik: ",
-    "progress" : "Progres membaikpulih: "
+    "progress" : "Peratus membaikpulih: ",
+    "buttonrepairlog" : "Laporan Repair",
+    "buttonclose" : "Tutup"
 }
