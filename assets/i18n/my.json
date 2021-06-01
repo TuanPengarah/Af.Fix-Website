@@ -80,5 +80,8 @@
     "recordfound" : "Rekod ditemui!",
     "recordnotfound" : "Tiada rekod ditemui!",
     "titlecheck" : "Status Pembaikan",
-    "egmysid" : "cth: 248444"
+    "egmysid" : "cth: 248444",
+    "receiveddate" : "Tarikh Diterima: ",
+    "technician" : "Juruteknik: ",
+    "progress" : "Progres membaikpulih: "
 }
