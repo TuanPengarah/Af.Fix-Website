@@ -84,6 +84,6 @@
     "receiveddate" : "Received Date: ",
     "technician" : "Technician:  ",
     "progress" : "Repairing Progress: ",
-    "buttonrepairlog" : "Repair Report",
+    "buttonrepairlog" : "Repair Timeline",
     "buttonclose" : "Close"
 }
