@@ -9,6 +9,12 @@
   "rewrites": [ {
     "source": "/mysid",
     "destination": "/index.html"
-  } ]
+  }, 
+  {
+    "source": "/mysid/details",
+    "destination": "/index.html"
+  }
+]
+  
   }
 }

@@ -50,7 +50,7 @@ class FollowSocialMedia extends StatelessWidget {
                       backgroundColor: Colors.grey.withOpacity(0.2),
                       child: Icon(
                         MaterialCommunityIcons.whatsapp,
-                        color: _isDarkMode ? Colors.white : kColorGrey,
+                        color: _isDarkMode == false ? Colors.white : kColorGrey,
                       ),
                     ),
                   ),
@@ -67,7 +67,7 @@ class FollowSocialMedia extends StatelessWidget {
                       backgroundColor: Colors.grey.withOpacity(0.2),
                       child: Icon(
                         MaterialCommunityIcons.facebook,
-                        color: _isDarkMode ? Colors.white : kColorGrey,
+                        color: _isDarkMode == false ? Colors.white : kColorGrey,
                       ),
                     ),
                   ),
@@ -84,7 +84,7 @@ class FollowSocialMedia extends StatelessWidget {
                       backgroundColor: Colors.grey.withOpacity(0.2),
                       child: Icon(
                         MaterialCommunityIcons.instagram,
-                        color: _isDarkMode ? Colors.white : kColorGrey,
+                        color: _isDarkMode == false ? Colors.white : kColorGrey,
                       ),
                     ),
                   ),
@@ -100,7 +100,7 @@ class FollowSocialMedia extends StatelessWidget {
                       backgroundColor: Colors.grey.withOpacity(0.2),
                       child: Icon(
                         MaterialCommunityIcons.dots_horizontal,
-                        color: _isDarkMode ? Colors.white : kColorGrey,
+                        color: _isDarkMode == false ? Colors.white : kColorGrey,
                       ),
                     ),
                   ),

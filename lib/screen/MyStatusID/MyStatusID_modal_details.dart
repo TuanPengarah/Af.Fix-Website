@@ -1,18 +1,20 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
+import 'package:affix_web/config/routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 showDetails(BuildContext context, String docid) {
   showModalBottomSheet(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        ),
-      ),
+      // shape: RoundedRectangleBorder(
+      //   borderRadius: BorderRadius.only(
+      //     topLeft: Radius.circular(10),
+      //     topRight: Radius.circular(10),
+      //   ),
+      // ),
       elevation: 5,
       isScrollControlled: true,
       context: context,
@@ -166,6 +168,12 @@ showDetails(BuildContext context, String docid) {
                             ElevatedButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
+                                context.vxNav.push(
+                                    Uri(
+                                      path: MyRoutes.mySIDDetails,
+                                      queryParameters: {"id": docid},
+                                    ),
+                                    params: docid);
                               },
                               style: ButtonStyle(
                                 shape: MaterialStateProperty.all<
@@ -181,14 +189,17 @@ showDetails(BuildContext context, String docid) {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(10.0),
-                                child: Text('Laporan Repair'),
+                                child: Text(
+                                    '${AppLocalizations.of(context).translate('buttonrepairlog')}'),
                               ),
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: 5),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
                               child: Text(
-                                'Tutup',
+                                '${AppLocalizations.of(context).translate('buttonclose')}',
                                 style: TextStyle(
                                   fontSize: 13,
                                   color: Color(0xFFFA7268),

@@ -10,6 +10,9 @@ import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class MyRepairIDContainer extends StatefulWidget {
+  final String mySIDText;
+
+  MyRepairIDContainer({this.mySIDText});
   @override
   _MyRepairIDContainerState createState() => _MyRepairIDContainerState();
 }
@@ -76,6 +79,19 @@ class _MyRepairIDContainerState extends State<MyRepairIDContainer> {
           _buttonController.reset();
         });
       }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.mySIDText == null) {
+      _inputSearch.text = '';
+    } else {
+      _inputSearch.text = widget.mySIDText.toString();
+      Timer(Duration(milliseconds: 1500), () {
+        _buttonController.start();
+      });
     }
   }
 
@@ -162,7 +178,7 @@ class _MyRepairIDContainerState extends State<MyRepairIDContainer> {
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(
-                              color: _isDarkMode
+                              color: _isDarkMode == false
                                   ? Colors.teal.shade700
                                   : Colors.red.shade800,
                               width: 2),

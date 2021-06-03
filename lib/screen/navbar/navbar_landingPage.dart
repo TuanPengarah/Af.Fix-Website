@@ -168,7 +168,7 @@ class _DekstopNavState extends State<DekstopNav> {
                         ),
                         TextButton(
                           onPressed: () {
-                            context.vxNav.push(Uri.parse(MyRoutes.myRepairID));
+                            context.vxNav.push(Uri.parse(MyRoutes.myStatusID));
                             Provider.of<UpdateUI>(context, listen: false)
                                 .animationStartSmall(
                                     wAnimDesk: 140,
@@ -198,7 +198,7 @@ class _DekstopNavState extends State<DekstopNav> {
             width: Provider.of<UpdateUI>(context).widthAnimDeks,
             curve: Curves.decelerate,
             child: Image.asset(
-              _isDarkMode
+              _isDarkMode == false
                   ? 'assets/images/logo_only_white.png'
                   : 'assets/images/logo_only_black.png',
               fit: BoxFit.fill,

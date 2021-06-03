@@ -85,12 +85,14 @@ class CustomerTestimonial extends StatelessWidget {
       height: 200,
       width: 450,
       decoration: BoxDecoration(
-        color: _isDarkMode ? Colors.grey.withOpacity(0.2) : kColorWhite,
+        color:
+            _isDarkMode == false ? Colors.grey.withOpacity(0.2) : kColorWhite,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color:
-                _isDarkMode ? Colors.transparent : Colors.grey.withOpacity(0.5),
+            color: _isDarkMode == false
+                ? Colors.transparent
+                : Colors.grey.withOpacity(0.5),
             spreadRadius: 6,
             blurRadius: 10,
             offset: Offset(0, 6),

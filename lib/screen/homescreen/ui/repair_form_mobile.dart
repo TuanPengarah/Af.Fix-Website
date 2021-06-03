@@ -72,7 +72,7 @@ class _RepairFormMobileState extends State<RepairFormMobile> {
         width: MediaQuery.of(context).size.width - 10,
         height: 850,
         decoration: BoxDecoration(
-          color: _isDarkMode ? Colors.grey.shade900 : kColorGrey,
+          color: _isDarkMode == false ? Colors.grey.shade900 : kColorGrey,
           borderRadius: BorderRadius.circular(18),
         ),
         child: Padding(

@@ -80,7 +80,7 @@ class _RepairFormState extends State<RepairForm> {
         width: 500,
         height: 850,
         decoration: BoxDecoration(
-          color: _isDarkMode ? Colors.grey.shade900 : kColorGrey,
+          color: _isDarkMode == false ? Colors.grey.shade900 : kColorGrey,
           borderRadius: BorderRadius.circular(18),
         ),
         child: Padding(

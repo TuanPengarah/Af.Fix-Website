@@ -3,21 +3,20 @@ import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/MyStatusID/MyStatusID_wrapper.dart';
+import 'package:affix_web/screen/MyStatusID/repair_report.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:url_strategy/url_strategy.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'config/change_lang.dart';
 import 'provider/themeUI_provider.dart';
-
 // flutter run -d web-server --web-port 8080 --web-hostname 192.168.1.17
 
 Future<void> main() async {
-  setPathUrlStrategy();
+  Vx.setPathUrlStrategy();
   await Firebase.initializeApp();
   AppLanguage appLanguage = AppLanguage();
   await appLanguage.fetchLocale();
@@ -60,8 +59,22 @@ class MyApp extends StatelessWidget {
             routerDelegate: VxNavigator(
               routes: {
                 '/': (_, __) => MaterialPage(child: LandingPage()),
-                MyRoutes.myRepairID: (_, __) =>
-                    MaterialPage(child: MyStatusIDScaffold()),
+                MyRoutes.myStatusID: (uri, __) {
+                  final myID = uri.queryParameters["id"];
+                  return MaterialPage(
+                    child: MyStatusIDScaffold(
+                      mysidData: myID,
+                    ),
+                  );
+                },
+                MyRoutes.mySIDDetails: (uri, __) {
+                  final catalog = uri.queryParameters["id"];
+                  return MaterialPage(
+                    child: RepairReport(
+                      mysid: catalog,
+                    ),
+                  );
+                }
               },
             ),
             locale: model.appLocal,

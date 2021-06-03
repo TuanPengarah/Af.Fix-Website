@@ -57,7 +57,7 @@ class MobileFirstPageView extends StatelessWidget {
                   width: 200,
                   child: Divider(
                     thickness: 1,
-                    color: _isDarkMode ? kColorWhite : kColorGrey,
+                    color: _isDarkMode == false ? kColorWhite : kColorGrey,
                   ),
                 ),
                 Center(
@@ -194,7 +194,7 @@ class DekstopFirstPageView extends StatelessWidget {
                   width: 200,
                   child: Divider(
                     thickness: 3,
-                    color: _isDarkMode ? kColorWhite : kColorGrey,
+                    color: _isDarkMode == false ? kColorWhite : kColorGrey,
                   ),
                 ),
                 Container(

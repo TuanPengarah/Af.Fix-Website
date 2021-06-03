@@ -12,6 +12,7 @@ import 'package:affix_web/screen/homescreen/page/pwa.dart';
 import 'package:affix_web/screen/navbar/navbar_landingPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {
@@ -98,6 +99,12 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setApplicationSwitcherDescription(
+        ApplicationSwitcherDescription(
+      label: 'Af.Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
+      primaryColor: Theme.of(context).primaryColor.value,
+    ));
+
     //SET AUTH
     final _firebaseUser = context.watch<User>();
     WidgetsBinding.instance.addPostFrameCallback((_) {

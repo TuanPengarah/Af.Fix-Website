@@ -31,7 +31,7 @@ class CallUs extends StatelessWidget {
           // height: 400,
           // width: double.infinity,
           decoration: BoxDecoration(
-            color: _isDarkMode ? Colors.grey.shade900 : kColorGrey,
+            color: _isDarkMode == false ? Colors.grey.shade900 : kColorGrey,
             borderRadius: BorderRadius.circular(18),
           ),
           child: Padding(
@@ -85,7 +85,9 @@ class CallUs extends StatelessWidget {
                     ),
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all<Color>(
-                        _isDarkMode ? Colors.grey.shade900 : kColorGrey,
+                        _isDarkMode == false
+                            ? Colors.grey.shade900
+                            : kColorGrey,
                       ),
                       backgroundColor:
                           MaterialStateProperty.all<Color>(kColorWhite),

@@ -129,7 +129,7 @@ class MobileHomeView extends StatelessWidget {
                           hAnimDesk: 90,
                           wAnimMob: 120,
                           hAnimMob: 80);
-                  context.vxNav.push(Uri.parse(MyRoutes.myRepairID));
+                  context.vxNav.push(Uri.parse(MyRoutes.myStatusID));
                 },
               ),
             ),
@@ -172,7 +172,7 @@ class MobileHomeView extends StatelessWidget {
                 title: Text(
                     '${AppLocalizations.of(context).translate('darktheme')}'),
                 trailing: Text(
-                  _isDarkMode
+                  _isDarkMode == false
                       ? '${AppLocalizations.of(context).translate('on')}'
                       : '${AppLocalizations.of(context).translate('off')}',
                 ),
@@ -188,7 +188,7 @@ class MobileHomeView extends StatelessWidget {
         controller: scrollController,
         slivers: [
           SliverAppBar(
-            backgroundColor: _isDarkMode
+            backgroundColor: _isDarkMode == false
                 ? Theme.of(context).appBarTheme.backgroundColor
                 : kColorWhite,
             elevation: 0,
@@ -209,7 +209,7 @@ class MobileHomeView extends StatelessWidget {
                     TextSpan(
                       text: '.FIX',
                       style: TextStyle(
-                        color: _isDarkMode ? kColorWhite : kColorGrey,
+                        color: _isDarkMode == false ? kColorWhite : kColorGrey,
                       ),
                     ),
                   ],
@@ -232,7 +232,7 @@ class MobileHomeView extends StatelessWidget {
                       alignment: Alignment.topCenter,
                       width: 250,
                       child: Image.asset(
-                        _isDarkMode
+                        _isDarkMode == false
                             ? 'assets/images/logo_only_white.png'
                             : 'assets/images/logo_only_black.png',
                       ),
@@ -247,7 +247,7 @@ class MobileHomeView extends StatelessWidget {
                   tooltip: 'Menu',
                   icon: Icon(
                     Icons.menu,
-                    color: _isDarkMode
+                    color: _isDarkMode == false
                         ? Colors.white
                         : Provider.of<UpdateUI>(context).changeColor,
                   ),
