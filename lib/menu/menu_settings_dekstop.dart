@@ -119,11 +119,11 @@ Future<void> showDarkModeDekstop(BuildContext context) async {
   if (selected == 0) {
     showSettingMenu(context);
   } else if (selected == 1) {
-    _isDarkMode
+    _isDarkMode == false
         ? print('dark theme dah on le')
         : Provider.of<ThemeProvider>(context, listen: false).toggleTheme(true);
   } else if (selected == 2) {
-    _isDarkMode
+    _isDarkMode == false
         ? Provider.of<ThemeProvider>(context, listen: false).toggleTheme(false)
         : print('dark theme dah off le');
   }

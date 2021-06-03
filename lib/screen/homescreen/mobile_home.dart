@@ -123,12 +123,6 @@ class MobileHomeView extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Provider.of<UpdateUI>(context, listen: false)
-                      .animationStartSmall(
-                          wAnimDesk: 140,
-                          hAnimDesk: 90,
-                          wAnimMob: 120,
-                          hAnimMob: 80);
                   context.vxNav.push(Uri.parse(MyRoutes.myStatusID));
                 },
               ),

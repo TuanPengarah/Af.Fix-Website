@@ -1,6 +1,8 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
+import 'package:affix_web/config/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class PWA extends StatelessWidget {
   const PWA({
@@ -42,12 +44,16 @@ class PWA extends StatelessWidget {
                     'MyStatus ID',
                     '${AppLocalizations.of(context).translate('myridsubtitle')}',
                     '${AppLocalizations.of(context).translate('myridgobutton')}',
-                    context),
+                    context, () {
+                  context.vxNav.push(Uri.parse(MyRoutes.myStatusID));
+                }),
                 pwaContainer(
                     '${AppLocalizations.of(context).translate('ewarranti')}',
                     '${AppLocalizations.of(context).translate('ewaranttysubtitle')}',
                     '${AppLocalizations.of(context).translate('ewarrantygobutton')}',
-                    context),
+                    context, () {
+                  context.vxNav.push(Uri.parse(MyRoutes.myStatusID));
+                }),
               ],
             ),
             SizedBox(height: 70),
@@ -57,8 +63,8 @@ class PWA extends StatelessWidget {
     );
   }
 
-  Container pwaContainer(
-      String title, String subtitle, String button, BuildContext context) {
+  Container pwaContainer(String title, String subtitle, String button,
+      BuildContext context, Function onTap) {
     return Container(
       width: 600,
       decoration: BoxDecoration(
@@ -103,7 +109,7 @@ class PWA extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () {},
+              onPressed: onTap,
             ),
             SizedBox(height: 10),
           ],

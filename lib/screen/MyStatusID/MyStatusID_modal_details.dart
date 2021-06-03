@@ -53,9 +53,27 @@ showDetails(BuildContext context, String docid) {
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
                       if (!snapshot.hasData) {
-                        return Text('Loading...');
+                        return Center(
+                          child: Column(
+                            children: [
+                              CircularProgressIndicator(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                              SizedBox(height: 15),
+                              Text('Loading...'),
+                            ],
+                          ),
+                        );
                       } else if (!snapshot.data.exists) {
-                        return Text('No data found');
+                        return Center(
+                          child: Column(
+                            children: [
+                              Icon(Icons.error_outline),
+                              SizedBox(height: 15),
+                              Text('No data found'),
+                            ],
+                          ),
+                        );
                       }
                       var userDocument = snapshot.data;
                       String _model = '${userDocument['Model']}';
@@ -165,32 +183,33 @@ showDetails(BuildContext context, String docid) {
                               ),
                             ),
                             SizedBox(height: 20),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                context.vxNav.push(
-                                    Uri(
-                                      path: MyRoutes.mySIDDetails,
-                                      queryParameters: {"id": docid},
+                            Container(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  context.vxNav.push(
+                                      Uri(
+                                        path: MyRoutes.mySIDDetails,
+                                        queryParameters: {"id": docid},
+                                      ),
+                                      params: docid);
+                                },
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
                                     ),
-                                    params: docid);
-                              },
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    Color(0xFFFA7268),
                                   ),
                                 ),
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                  Color(0xFFFA7268),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                      '${AppLocalizations.of(context).translate('buttonrepairlog')}'),
                                 ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Text(
-                                    '${AppLocalizations.of(context).translate('buttonrepairlog')}'),
                               ),
                             ),
                             SizedBox(height: 5),
