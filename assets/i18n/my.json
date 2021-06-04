@@ -70,7 +70,7 @@
     "amotherboard" : "Ye boleh repair motherboard smartphone. Terutamanya model iPhone dan Android(Jika ada alat ganti)",
     "qhowlong" : "Berapa lama mengambil masa untuk repair?",
     "ahowlong" : "Bergantung kepada jenis kerosakkan, jika kerosakkan jenis minor mengambil masa dalam 30 minit hingga 1 hari, Jika kerosakkan melibatkan motherboard ia kemungkinan mengambil masa 3 - 14 hari",
-    "fmission" : "Menawarkan perkhidmatan membaikpulih peranti Android dan iPhone. Misi kami adalah untuk memberikan kemudahan dan perkhidmatan pada semua aspek yang berkualiti dalam industri membaikpulih smartphone",
+    "fmission" : "Menawarkan perkhidmatan membaikpulih peranti Android dan iPhone. Misi kami adalah untuk memberikan perkhidmatan dan kemudahan yang terbaik dalam industri membaikpulih smartphone",
     "copyright" : "Hak Cipta © 2021 Assaff Enterprise | Hak Cipta Terpelihara",
     "trackyourrepair"  : "Semak Status Repair",
     "tyrsubtitle" : "Sila masukkan nombor MyStatus ID (MySID) untuk mengetahui status repair peranti anda",
@@ -84,6 +84,6 @@
     "receiveddate" : "Tarikh Diterima: ",
     "technician" : "Juruteknik: ",
     "progress" : "Peratus membaikpulih: ",
-    "buttonrepairlog" : "Garis Masa Repair",
+    "buttonrepairlog" : "Repair Timeline",
     "buttonclose" : "Tutup"
 }
