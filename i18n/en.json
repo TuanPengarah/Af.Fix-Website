@@ -78,7 +78,7 @@
     "trackbutton" : "Check",
     "emptyfieldmysid" : "Please enter your MySID number",
     "recordfound" : "Record found!",
-    "recordnotfound" : "Record not found. Please enter correct MySID number",
+    "recordnotfound" : "Record not found!",
     "titlecheck" : "Repair Status",
     "egmysid" : "eg: 248444",
     "receiveddate" : "Received Date: ",

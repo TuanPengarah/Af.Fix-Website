@@ -58,6 +58,13 @@ class MyThemes {
   );
 
   static final lightTheme = ThemeData(
+    appBarTheme: AppBarTheme(
+      // color: kColorWhite,
+      elevation: 5,
+      brightness: Brightness.dark,
+      backgroundColor: kColorWhite,
+      foregroundColor: kColorGrey,
+    ),
     scaffoldBackgroundColor: kColorWhite,
     primaryColor: Colors.red,
     colorScheme: ColorScheme.light(),

@@ -33,9 +33,7 @@ dependencies:
   firebase_auth_web: ^1.1.2
 
   # State Management
-  url_strategy: ^0.2.0
   provider: ^5.0.0
-  # velocity_x: ^2.6.1
   velocity_x: ^3.2.0
 
   # Model Data
@@ -53,7 +51,8 @@ dependencies:
   slimy_card: ^1.0.4
   flutter_animation_progress_bar: ^2.0.0
   timeline_list: ^0.0.5
-  
+  lottie: ^1.0.1
+
   #Splash Screen
   flutter_native_splash: ^1.1.8+4
 flutter_native_splash:

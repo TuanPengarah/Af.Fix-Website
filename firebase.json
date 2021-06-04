@@ -6,7 +6,12 @@
       "**/.*",
       "**/node_modules/**"
     ],
-  "rewrites": [ {
+  "rewrites": [ 
+    {
+      "source": "/home",
+      "destination": "/index.html"
+    }, 
+    {
     "source": "/mysid",
     "destination": "/index.html"
   }, 

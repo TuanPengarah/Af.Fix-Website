@@ -1,8 +1,12 @@
 import 'package:affix_web/config/app_localizations.dart';
+import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/menu/menu_change_language.dart';
 import 'package:affix_web/menu/menu_change_theme.dart';
+import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class EndDrawer extends StatelessWidget {
   const EndDrawer({
@@ -47,6 +51,21 @@ class EndDrawer extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
           ),
+          Tooltip(
+            message: 'Log masuk ke akaun anda',
+            child: ListTile(
+              trailing: Icon(Icons.login),
+              title: Text('Log Masuk'),
+              onTap: () {},
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            child: Divider(
+              height: 1,
+              thickness: 1.5,
+            ),
+          ),
           SizedBox(
             height: 10,
           ),
@@ -55,7 +74,20 @@ class EndDrawer extends StatelessWidget {
                 '${AppLocalizations.of(context).translate('tooltipletrepair')}',
             child: ListTile(
               title: Text(AppLocalizations.of(context).translate('letsrepair')),
-              onTap: () {},
+              onTap: () {
+                SystemChrome.setApplicationSwitcherDescription(
+                    ApplicationSwitcherDescription(
+                  label:
+                      'Af.Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
+                  primaryColor: Theme.of(context).primaryColor.value,
+                ));
+                Navigator.of(context).pop();
+                context.vxNav.popToRoot();
+                scrollController.animateTo(0,
+                    duration: Duration(milliseconds: 800),
+                    curve: Curves.decelerate);
+                // context.vxNav.push(Uri.parse('/'));
+              },
             ),
           ),
           Tooltip(
@@ -63,7 +95,19 @@ class EndDrawer extends StatelessWidget {
                 '${AppLocalizations.of(context).translate('tooltipabout')}',
             child: ListTile(
               title: Text(AppLocalizations.of(context).translate('about')),
-              onTap: () {},
+              onTap: () {
+                SystemChrome.setApplicationSwitcherDescription(
+                    ApplicationSwitcherDescription(
+                  label:
+                      'Af.Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
+                  primaryColor: Theme.of(context).primaryColor.value,
+                ));
+                Navigator.of(context).pop();
+                context.vxNav.popToRoot();
+                scrollController.animateTo(1677,
+                    duration: Duration(milliseconds: 800),
+                    curve: Curves.decelerate);
+              },
             ),
           ),
           Tooltip(
@@ -73,7 +117,19 @@ class EndDrawer extends StatelessWidget {
               title: Text(
                 AppLocalizations.of(context).translate('ourservice'),
               ),
-              onTap: () {},
+              onTap: () {
+                SystemChrome.setApplicationSwitcherDescription(
+                    ApplicationSwitcherDescription(
+                  label:
+                      'Af.Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
+                  primaryColor: Theme.of(context).primaryColor.value,
+                ));
+                Navigator.of(context).pop();
+                context.vxNav.popToRoot();
+                scrollController.animateTo(5500,
+                    duration: Duration(milliseconds: 800),
+                    curve: Curves.decelerate);
+              },
             ),
           ),
           Tooltip(
@@ -96,7 +152,13 @@ class EndDrawer extends StatelessWidget {
                 AppLocalizations.of(context).translate('myrid'),
               ),
               onTap: () {
+                SystemChrome.setApplicationSwitcherDescription(
+                    ApplicationSwitcherDescription(
+                  label: 'MyStatus ID - Af.Fix Smartphone Repair',
+                  primaryColor: Theme.of(context).primaryColor.value,
+                ));
                 Navigator.of(context).pop();
+                context.vxNav.push(Uri.parse(MyRoutes.myStatusID));
               },
             ),
           ),
@@ -115,8 +177,12 @@ class EndDrawer extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Divider(
-            height: 1,
+          Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            child: Divider(
+              height: 1,
+              thickness: 1.5,
+            ),
           ),
           Tooltip(
             message:

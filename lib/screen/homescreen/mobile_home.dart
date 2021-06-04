@@ -96,7 +96,7 @@ class MobileHomeView extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).pop();
                   if (scrollController.hasClients)
-                    scrollController.animateTo(5000,
+                    scrollController.animateTo(5500,
                         duration: Duration(milliseconds: 800),
                         curve: Curves.decelerate);
                 },
@@ -142,8 +142,12 @@ class MobileHomeView extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Divider(
-              height: 1,
+            Container(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Divider(
+                height: 1,
+                thickness: 1.5,
+              ),
             ),
             Tooltip(
               message:

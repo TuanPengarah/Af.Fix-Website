@@ -28,6 +28,12 @@ FirebaseAuth _auth = FirebaseAuth.instance;
 
 class _LandingPageState extends State<LandingPage> {
   @override
+  void dispose() {
+    super.dispose();
+    scrollController.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     scrollController = ScrollController();

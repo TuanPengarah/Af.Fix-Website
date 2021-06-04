@@ -1,6 +1,7 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/model/auth_services.dart';
+import 'package:affix_web/not_found_page.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/MyStatusID/MyStatusID_wrapper.dart';
 import 'package:affix_web/screen/MyStatusID/repair_report.dart';
@@ -57,11 +58,17 @@ class MyApp extends StatelessWidget {
             darkTheme: MyThemes.darkTheme,
             routeInformationParser: VxInformationParser(),
             routerDelegate: VxNavigator(
+              notFoundPage: (uri, params) => MaterialPage(
+                child: NotFoundPage(
+                  path: uri.toString(),
+                ),
+              ),
               routes: {
                 '/': (_, __) => MaterialPage(child: LandingPage()),
                 MyRoutes.myStatusID: (uri, __) {
                   final myID = uri.queryParameters["id"];
                   return MaterialPage(
+                    fullscreenDialog: false,
                     child: MyStatusIDScaffold(
                       mysidData: myID,
                     ),
@@ -70,6 +77,7 @@ class MyApp extends StatelessWidget {
                 MyRoutes.mySIDDetails: (uri, __) {
                   final catalog = uri.queryParameters["id"];
                   return MaterialPage(
+                    fullscreenDialog: false,
                     child: RepairReport(
                       mysid: catalog,
                     ),

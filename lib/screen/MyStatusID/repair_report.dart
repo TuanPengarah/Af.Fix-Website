@@ -1,4 +1,5 @@
 import 'package:affix_web/config/app_localizations.dart';
+import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/drawer/drawer.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
@@ -25,8 +26,13 @@ class RepairReport extends StatelessWidget {
     ));
     return Scaffold(
       appBar: AppBar(
+        elevation: 10,
         title: Text(
-            '${AppLocalizations.of(context).translate('buttonrepairlog')}'),
+          '${AppLocalizations.of(context).translate('buttonrepairlog')}',
+          style: TextStyle(
+            color: _isDarkMode == false ? kColorWhite : kColorGrey,
+          ),
+        ),
         centerTitle: true,
         leading: IconButton(
           tooltip: '${AppLocalizations.of(context).translate('buttonclose')}',
@@ -38,13 +44,19 @@ class RepairReport extends StatelessWidget {
             ));
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.close),
+          icon: Icon(
+            Icons.close,
+            color: _isDarkMode == false ? kColorWhite : kColorGrey,
+          ),
         ),
         actions: [
           Builder(
             builder: (BuildContext context) => IconButton(
               tooltip: 'Menu',
-              icon: Icon(Icons.menu, color: Colors.white),
+              icon: Icon(
+                Icons.menu,
+                color: _isDarkMode == false ? kColorWhite : kColorGrey,
+              ),
               onPressed: () {
                 Scaffold.of(context).openEndDrawer();
               },
@@ -96,6 +108,7 @@ class RepairReport extends StatelessWidget {
             physics: BouncingScrollPhysics(),
             itemBuilder: (BuildContext context, int i) {
               var document = snapshot.data.docs[i];
+              bool _isError = document['isError'];
               return TimelineModel(
                   Padding(
                     padding: const EdgeInsets.all(16.0),
@@ -131,12 +144,48 @@ class RepairReport extends StatelessWidget {
                       : TimelineItemPosition.left,
                   isFirst: i == 0,
                   isLast: i == snapshot.data.docs.length,
-                  iconBackground: Theme.of(context).primaryColor);
+                  icon: _iconLookup(_isError, document['Repair Log']),
+                  iconBackground: _isError == true ? Colors.red : Colors.teal);
             },
             itemCount: snapshot.data.docs.length,
           );
         },
       ),
     );
+  }
+
+  Icon _iconLookup(bool isError, String checkIcon) {
+    if (isError == true) {
+      return Icon(Icons.warning);
+    } else if (checkIcon == 'Pesanan diterima') {
+      return Icon(Icons.note_alt_outlined);
+    } else if (checkIcon == 'Menunggu giliran') {
+      return Icon(Icons.alarm);
+    } else if (checkIcon == 'Memulakan proses diagnosis') {
+      return Icon(Icons.search);
+    } else if (checkIcon == 'Proses diagnosis selesai') {
+      return Icon(Icons.download_done);
+    } else if (checkIcon == 'Memulakan proses membaiki') {
+      return Icon(Icons.home_repair_service_outlined);
+    } else if (checkIcon ==
+        'Menyelaraskan sparepart baru kepada peranti anda') {
+      return Icon(Icons.sync);
+    } else if (checkIcon == 'Semua alat sparepart baru berfungsi dengan baik') {
+      return Icon(Icons.download_done);
+    } else if (checkIcon == 'Memasang semula peranti anda') {
+      return Icon(Icons.add_to_home_screen);
+    } else if (checkIcon == 'Melakukan proses diagnosis buat kali terakhir') {
+      return Icon(Icons.saved_search);
+    } else if (checkIcon == 'Proses membaiki selesai') {
+      return Icon(Icons.done);
+    } else if (checkIcon == 'Pihak kami cuba untuk menghubungi anda') {
+      return Icon(Icons.call_rounded);
+    } else if (checkIcon == 'Maklumat telah diberitahu kepada anda') {
+      return Icon(Icons.notifications_active_outlined);
+    } else if (checkIcon == 'Selesai') {
+      return Icon(Icons.done_all);
+    } else {
+      return Icon(Icons.notes);
+    }
   }
 }
