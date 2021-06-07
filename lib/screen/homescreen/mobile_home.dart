@@ -1,6 +1,7 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/config/routes.dart';
+import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:affix_web/menu/menu_change_language.dart';
@@ -14,6 +15,7 @@ import 'package:affix_web/screen/homescreen/page/footer.dart';
 import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:affix_web/screen/homescreen/page/pwa.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
@@ -23,7 +25,9 @@ import 'package:velocity_x/velocity_x.dart';
 class MobileHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String _userName = Provider.of<UpdateUI>(context).userName;
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
+    bool _isAnony = Provider.of<UpdateUI>(context).checkAnonymous;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       endDrawer: Drawer(
@@ -35,7 +39,9 @@ class MobileHomeView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   AutoSizeText(
-                    '${AppLocalizations.of(context).translate('usernotsign')}',
+                    _isAnony == true
+                        ? '${AppLocalizations.of(context).translate('usernotsign')}'
+                        : _userName.toString(),
                     style: TextStyle(color: Colors.white),
                     overflow: TextOverflow.ellipsis,
                     maxFontSize: 20,
@@ -53,6 +59,25 @@ class MobileHomeView extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
+              ),
+            ),
+            Tooltip(
+              message:
+                  '${AppLocalizations.of(context).translate('tooltipsignin')}',
+              child: ListTile(
+                trailing: Icon(Icons.login),
+                title:
+                    Text('${AppLocalizations.of(context).translate('signin')}'),
+                onTap: () {
+                  VxNavigator.of(context).push(Uri.parse(MyRoutes.login));
+                },
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Divider(
+                height: 1,
+                thickness: 1.5,
               ),
             ),
             SizedBox(
@@ -249,7 +274,18 @@ class MobileHomeView extends StatelessWidget {
                         ? Colors.white
                         : Provider.of<UpdateUI>(context).changeColor,
                   ),
-                  onPressed: () {
+                  onPressed: () async {
+                    final retrieve = await context
+                        .read<AuthenticationServices>()
+                        .getUserName();
+                    Provider.of<UpdateUI>(context, listen: false)
+                        .setUserName(retrieve);
+
+                    final getuid =
+                        await context.read<AuthenticationServices>().getUID();
+
+                    Provider.of<UpdateUI>(context, listen: false)
+                        .setUID(getuid);
                     Scaffold.of(context).openEndDrawer();
                   },
                 ),

@@ -22,6 +22,7 @@ final RoundedLoadingButtonController _buttonController =
 
 class _MyRepairIDContainerState extends State<MyRepairIDContainer> {
   final _inputSearch = TextEditingController();
+
   _checkDatabase(BuildContext context) async {
     final _inputText = _inputSearch.text;
     if (_inputText.isEmpty) {

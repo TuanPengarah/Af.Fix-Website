@@ -2,10 +2,13 @@ import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/menu/menu_change_language.dart';
 import 'package:affix_web/menu/menu_change_theme.dart';
+import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class EndDrawer extends StatelessWidget {
@@ -22,6 +25,8 @@ class EndDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _firebaseUser = FirebaseAuth.instance.currentUser;
+    final _isAnony = Provider.of<UpdateUI>(context).checkAnonymous;
     return Drawer(
       child: ListView(
         children: [
@@ -31,7 +36,11 @@ class EndDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 AutoSizeText(
-                  '${AppLocalizations.of(context).translate('usernotsign')}',
+                  _isAnony == true
+                      ? '${AppLocalizations.of(context).translate('usernotsign')}'
+                      : _firebaseUser.displayName == null
+                          ? _firebaseUser.email
+                          : _firebaseUser.displayName,
                   style: TextStyle(color: Colors.white),
                   overflow: TextOverflow.ellipsis,
                   maxFontSize: 20,
@@ -52,10 +61,12 @@ class EndDrawer extends StatelessWidget {
             ),
           ),
           Tooltip(
-            message: 'Log masuk ke akaun anda',
+            message:
+                '${AppLocalizations.of(context).translate('tooltipsignin')}',
             child: ListTile(
               trailing: Icon(Icons.login),
-              title: Text('Log Masuk'),
+              title:
+                  Text('${AppLocalizations.of(context).translate('signin')}'),
               onTap: () {},
             ),
           ),

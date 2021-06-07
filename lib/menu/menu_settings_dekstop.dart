@@ -1,16 +1,19 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
+import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:affix_web/config/change_lang.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 Future<void> showSettingMenu(BuildContext context) async {
   int selected = await showMenu(
     context: context,
     position: RelativeRect.fromLTRB(430, 80, 10, 100),
     items: [
-      PopupMenuItem(
+      PopupMenuItem<int>(
+        value: 2,
         child: Row(
           children: [
             CircleAvatar(
@@ -41,6 +44,8 @@ Future<void> showSettingMenu(BuildContext context) async {
     showLanguageDekstop(context);
   } else if (selected == 1) {
     showDarkModeDekstop(context);
+  } else if (selected == 2) {
+    VxNavigator.of(context).push(Uri.parse(MyRoutes.login));
   }
 }
 

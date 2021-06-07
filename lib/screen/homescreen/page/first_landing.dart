@@ -1,5 +1,6 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
+import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/ui/repair_form.dart';
@@ -133,7 +134,9 @@ class MobileFirstPageView extends StatelessWidget {
                   width: 280,
                   child: Center(
                     child: TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.read<AuthenticationServices>().signOut();
+                      },
                       icon: Icon(
                         Icons.file_download,
                       ),

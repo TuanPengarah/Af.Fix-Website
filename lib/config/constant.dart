@@ -37,7 +37,7 @@ const kImageTicket = 'https://i.imgur.com/VJp8RxU.png';
 const kImageiPhoneOldWhite = 'https://i.imgur.com/2Q1XZBe.png';
 const kImageiPhoneNew = 'https://i.imgur.com/tviI849.png';
 const kImageAndroid = 'https://i.imgur.com/5wR5MPJ.png';
-const kImageSignIn = 'https://i.imgur.com/EJBFVkb.png';
+const kImageAuth = 'https://i.imgur.com/EJBFVkb.png';
 
 //style
 final TextStyle kTextSubtitleDark = TextStyle(

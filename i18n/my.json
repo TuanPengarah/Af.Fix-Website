@@ -85,5 +85,18 @@
     "technician" : "Juruteknik: ",
     "progress" : "Peratus membaikpulih: ",
     "buttonrepairlog" : "Repair Timeline",
-    "buttonclose" : "Tutup"
+    "buttonclose" : "Tutup",
+    "signin" : "Log Masuk",
+    "signout" : "Log Keluar",
+    "tooltipsignin" : "Log masuk ke akaun anda",
+    "tooltipsignout" : "Log keluar ke akaun anda",
+    "signintitle" : "Jom log masuk ke Af-Fix!",
+    "signinsubtitle" : "Jangan risau, anda hanya memerlukan alamat email dan kata laluan untuk teruskan!",
+    "signincompleted" : "Log masuk berjaya!",
+    "usernotfound" : "Pengguna tidak dijumpai. sila masuk alamat email yang betul",
+    "wrongpassword" : "Kata laluan salah. Sila masuk kata laluan yang betul",
+    "noemail" : "Sila masukkan email yang betul",
+    "nopassword" : "Sila masukkan password yang betul",
+    "password" : "Kata Laluan"
+    
 }

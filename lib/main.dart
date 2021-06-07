@@ -1,7 +1,8 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/model/auth_services.dart';
-import 'package:affix_web/not_found_page.dart';
+import 'package:affix_web/screen/authscreen/login.dart';
+import 'package:affix_web/screen/not_found_page.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/MyStatusID/MyStatusID_wrapper.dart';
 import 'package:affix_web/screen/MyStatusID/repair_report.dart';
@@ -20,6 +21,7 @@ Future<void> main() async {
   Vx.setPathUrlStrategy();
   await Firebase.initializeApp();
   AppLanguage appLanguage = AppLanguage();
+  Provider.debugCheckInvalidValueType = null;
   await appLanguage.fetchLocale();
   runApp(MyApp(
     appLanguage: appLanguage,
@@ -37,11 +39,11 @@ class MyApp extends StatelessWidget {
         Provider<AuthenticationServices>(
           create: (context) => AuthenticationServices(FirebaseAuth.instance),
         ),
-        StreamProvider(
-          create: (context) =>
-              context.read<AuthenticationServices>().authStateChanges,
-          initialData: null,
-        ),
+        // StreamProvider(
+        //   create: (context) =>
+        //       context.read<AuthenticationServices>().authStateChanges,
+        //   initialData: null,
+        // ),
         ChangeNotifierProvider<AppLanguage>(create: (context) => appLanguage),
         ChangeNotifierProvider<UpdateUI>(create: (context) => UpdateUI()),
         ChangeNotifierProvider<ThemeProvider>(
@@ -82,7 +84,11 @@ class MyApp extends StatelessWidget {
                       mysid: catalog,
                     ),
                   );
-                }
+                },
+                MyRoutes.login: (_, __) => MaterialPage(
+                      child: LoginPage(),
+                      fullscreenDialog: true,
+                    ),
               },
             ),
             locale: model.appLocal,

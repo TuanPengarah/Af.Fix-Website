@@ -1,19 +1,74 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 
-class AuthenticationServices {
+class AuthenticationServices extends ChangeNotifier {
   final FirebaseAuth _firebaseAuthWeb;
-
+  String status = 'Sign in completed!';
+  bool isError = false;
   AuthenticationServices(this._firebaseAuthWeb);
 
-  Stream<User> get authStateChanges => _firebaseAuthWeb.authStateChanges();
+  // Stream<User> get authStateChanges {
+
+  //   return _firebaseAuthWeb.authStateChanges();
+  // }
+
+  getError(String e) {
+    status = e;
+    notifyListeners();
+  }
+
+  Future<void> signOut() async {
+    print('signing out...');
+    await _firebaseAuthWeb.signOut();
+  }
+
+  Future<String> getUID() async {
+    final user = _firebaseAuthWeb.currentUser;
+    final uid = user.uid;
+    return uid;
+  }
+
+  Future<String> getUserName() async {
+    final user = _firebaseAuthWeb.currentUser;
+    final userName = user.displayName;
+    return userName;
+  }
+
+  Future<String> getEmail() async {
+    final user = _firebaseAuthWeb.currentUser;
+    final email = user.email;
+    return email;
+  }
+
+  Future<String> anonymousSignIn() async {
+    try {
+      await _firebaseAuthWeb.signInAnonymously();
+      return 'Sign in Anonymously!';
+    } on FirebaseAuthException catch (e) {
+      return e.message;
+    }
+  }
 
   Future<String> signIn({String email, String password}) async {
     try {
       await _firebaseAuthWeb.signInWithEmailAndPassword(
           email: email, password: password);
+      isError = false;
+      getError('Sign in completed!');
       return 'Signed in';
-    } on FirebaseException catch (e) {
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        getError('No user found');
+        isError = true;
+        return 'no user';
+      } else if (e.code == 'wrong-password') {
+        getError('Wrong password');
+        isError = true;
+        return 'wrong password';
+      }
+      isError = true;
+      getError(e.message);
       return e.message;
     }
   }

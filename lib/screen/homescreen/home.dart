@@ -1,3 +1,4 @@
+import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/mobile_home.dart';
 import 'package:affix_web/screen/homescreen/page/about.dart';
@@ -9,7 +10,7 @@ import 'package:affix_web/screen/homescreen/page/follow_socmed.dart';
 import 'package:affix_web/screen/homescreen/page/footer.dart';
 import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:affix_web/screen/homescreen/page/pwa.dart';
-import 'package:affix_web/screen/navbar/navbar_landingPage.dart';
+import 'package:affix_web/navbar/navbar_landingPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,19 +28,6 @@ bool dahRunningDesktop = false;
 FirebaseAuth _auth = FirebaseAuth.instance;
 
 class _LandingPageState extends State<LandingPage> {
-  @override
-  void dispose() {
-    super.dispose();
-    scrollController.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    scrollController = ScrollController();
-    scrollController.addListener(_scrollListener);
-  }
-
   _scrollListener() {
     scrollPosition = scrollController.position.pixels;
     // print(scrollPosition);
@@ -88,19 +76,39 @@ class _LandingPageState extends State<LandingPage> {
     }
   }
 
-  _authServices(User _firebaseUser) async {
-    if (_firebaseUser == null) {
-      await _auth.signInAnonymously();
-      final User user = _auth.currentUser;
-      final uid = user.uid;
-      print('initialize anonymous');
-      Provider.of<UpdateUI>(context, listen: false).setUID(uid);
-    } else {
-      print('already login');
-      User user = _auth.currentUser;
-      final uid = user.uid;
-      Provider.of<UpdateUI>(context, listen: false).setUID(uid);
-    }
+  _authServices(BuildContext context) async {
+    print('already login');
+    String uid = await context.read<AuthenticationServices>().getUID();
+    String retrieve =
+        await context.read<AuthenticationServices>().getUserName();
+    String retrieveEmail =
+        await context.read<AuthenticationServices>().getEmail();
+    Provider.of<UpdateUI>(context, listen: false)
+        .setUserName(retrieve != null ? retrieve : retrieveEmail);
+    Provider.of<UpdateUI>(context, listen: false).setAnonymous(false);
+    Provider.of<UpdateUI>(context, listen: false).setUID(uid);
+  }
+
+  _registerAnonymous(BuildContext context) async {
+    print('initialize anonymouse');
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<UpdateUI>(context, listen: false).setAnonymous(true);
+      Provider.of<UpdateUI>(context, listen: false).setUID('N/A');
+    });
+    // await context.read<AuthenticationServices>().anonymousSignIn();
+    // String uid = await context.read<AuthenticationServices>().getUID();
+    // Provider.of<UpdateUI>(context, listen: false).setUserName('Anonymous');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   _authServices(context);
+    // });
+
+    scrollController = ScrollController();
+    scrollController.addListener(_scrollListener);
   }
 
   @override
@@ -111,23 +119,29 @@ class _LandingPageState extends State<LandingPage> {
       primaryColor: Theme.of(context).primaryColor.value,
     ));
 
-    //SET AUTH
-    final _firebaseUser = context.watch<User>();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _authServices(_firebaseUser);
-    });
+    // SET AUTH
 
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth > 1200) {
-          return DekstopHomeView();
-        } else if (constraints.maxWidth > 800 && constraints.maxWidth < 1200) {
-          return MobileHomeView();
-        } else {
-          return MobileHomeView();
-        }
-      },
-    );
+    return StreamBuilder<User>(
+        stream: _auth.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            _authServices(context);
+          } else {
+            _registerAnonymous(context);
+          }
+          return LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              if (constraints.maxWidth > 1200) {
+                return DekstopHomeView();
+              } else if (constraints.maxWidth > 800 &&
+                  constraints.maxWidth < 1200) {
+                return MobileHomeView();
+              } else {
+                return MobileHomeView();
+              }
+            },
+          );
+        });
   }
 }
 
