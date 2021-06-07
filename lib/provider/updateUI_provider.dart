@@ -12,6 +12,18 @@ class UpdateUI extends ChangeNotifier {
   Color changeLogoColor = kColorRed;
   bool switchDarkMode = false;
   String uid;
+  bool checkAnonymous = false;
+  String userName = 'Af-Fix Smartphone Repair';
+
+  setUserName(String newName) {
+    userName = newName;
+    notifyListeners();
+  }
+
+  setAnonymous(bool newAnony) {
+    checkAnonymous = newAnony;
+    notifyListeners();
+  }
 
   animationStartSmall(
       {double wAnimDesk, double hAnimDesk, double wAnimMob, double hAnimMob}) {
