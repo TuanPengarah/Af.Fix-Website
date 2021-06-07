@@ -85,5 +85,17 @@
     "technician" : "Technician:  ",
     "progress" : "Repairing Progress: ",
     "buttonrepairlog" : "Repair Timeline",
-    "buttonclose" : "Close"
+    "buttonclose" : "Close",
+    "signin" : "Sign In",
+    "signout" : "Sign Out",
+    "tooltipsignin" : "Sign in to your account",
+    "tooltipsignout" : "Sign out to your account",
+    "signintitle" : "Let's sign you in first!",
+    "signinsubtitle" : "Don't worry, just enter your email address and password to continue!",
+    "signincompleted" : "Sign in completed!",
+    "usernotfound" : "User not found for that email. Please enter correct email address!",
+    "wrongpassword" : "Wrong password. Enter your correct password!",
+    "noemail" : "Please enter your valid email address",
+    "nopassword" : "Please enter your password",
+    "password" : "Password"
 }
