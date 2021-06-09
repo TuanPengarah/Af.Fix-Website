@@ -16,7 +16,7 @@
     "destination": "/index.html"
   }, 
   {
-    "source": "/mysid/details",
+    "source": "/mysid/timeline",
     "destination": "/index.html"
   }
 ]

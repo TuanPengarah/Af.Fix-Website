@@ -246,8 +246,8 @@ class _LoginPageState extends State<LoginPage> {
   _buttonCompleted() {
     _buttonController.success();
     Timer(Duration(seconds: 2), () {
-      _buttonController.reset();
-      // VxNavigator.of(context).popToRoot();
+      // _buttonController.reset();
+      VxNavigator.of(context).popToRoot();
     });
   }
 

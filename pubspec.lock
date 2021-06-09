@@ -50,6 +50,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  bottom_sheet:
+    dependency: "direct main"
+    description:
+      name: bottom_sheet
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   characters:
     dependency: transitive
     description:
@@ -64,6 +71,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  clay_containers:
+    dependency: "direct main"
+    description:
+      name: clay_containers
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.2"
   clock:
     dependency: transitive
     description:
@@ -120,6 +134,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  dismissible_page:
+    dependency: "direct main"
+    description:
+      name: dismissible_page
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.5"
   fake_async:
     dependency: transitive
     description:
@@ -287,20 +308,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
-  logging:
-    dependency: transitive
-    description:
-      name: logging
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.1"
-  lottie:
+  liquid_pull_to_refresh:
     dependency: "direct main"
     description:
-      name: lottie
+      name: liquid_pull_to_refresh
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "3.0.0"
   matcher:
     dependency: transitive
     description:
@@ -315,6 +329,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
+  ndialog:
+    dependency: "direct main"
+    description:
+      name: ndialog
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.1.0"
   nested:
     dependency: transitive
     description:
@@ -502,13 +523,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
-  sweetsheet:
-    dependency: "direct main"
-    description:
-      name: sweetsheet
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.1"
   term_glyph:
     dependency: transitive
     description:

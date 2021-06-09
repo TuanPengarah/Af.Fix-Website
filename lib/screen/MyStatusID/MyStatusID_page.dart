@@ -198,35 +198,38 @@ class _MyRepairIDContainerState extends State<MyRepairIDContainer> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 180,
-                    height: 120,
-                    child: RoundedLoadingButton(
-                      successColor: Colors.white,
-                      valueColor: Theme.of(context).primaryColor,
-                      errorColor: Colors.white,
-                      controller: _buttonController,
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        _checkDatabase(context);
-                      },
-                      color: kColorWhite,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            MaterialCommunityIcons.notebook,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                          SizedBox(width: 15),
-                          Text(
-                            '${AppLocalizations.of(context).translate('trackbutton')}',
-                            style: TextStyle(
+                  Hero(
+                    tag: _inputSearch.text,
+                    child: SizedBox(
+                      width: 180,
+                      height: 120,
+                      child: RoundedLoadingButton(
+                        successColor: Colors.white,
+                        valueColor: Theme.of(context).primaryColor,
+                        errorColor: Colors.white,
+                        controller: _buttonController,
+                        onPressed: () {
+                          FocusScope.of(context).unfocus();
+                          _checkDatabase(context);
+                        },
+                        color: kColorWhite,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              MaterialCommunityIcons.notebook,
                               color: Theme.of(context).primaryColor,
                             ),
-                          ),
-                        ],
+                            SizedBox(width: 15),
+                            Text(
+                              '${AppLocalizations.of(context).translate('trackbutton')}',
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

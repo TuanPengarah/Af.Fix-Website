@@ -14,6 +14,12 @@ class UpdateUI extends ChangeNotifier {
   String uid;
   bool checkAnonymous = false;
   String userName = 'Af-Fix Smartphone Repair';
+  bool isRepair = true;
+
+  setRepair(bool repairType) {
+    isRepair = repairType;
+    notifyListeners();
+  }
 
   setUserName(String newName) {
     userName = newName;
@@ -45,7 +51,8 @@ class UpdateUI extends ChangeNotifier {
 
   isThisMobile(bool mobile) {
     isMobile = mobile;
-    // notifyListeners();
+    print('mobile: $isMobile');
+    notifyListeners();
   }
 
   changeDarkMode(bool newMode) {

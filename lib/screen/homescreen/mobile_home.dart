@@ -1,7 +1,7 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/config/routes.dart';
-import 'package:affix_web/model/auth_services.dart';
+import 'package:affix_web/model/sweetLogoutDialog.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:affix_web/menu/menu_change_language.dart';
@@ -15,7 +15,6 @@ import 'package:affix_web/screen/homescreen/page/footer.dart';
 import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:affix_web/screen/homescreen/page/pwa.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
@@ -61,18 +60,33 @@ class MobileHomeView extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
             ),
-            Tooltip(
-              message:
-                  '${AppLocalizations.of(context).translate('tooltipsignin')}',
-              child: ListTile(
-                trailing: Icon(Icons.login),
-                title:
-                    Text('${AppLocalizations.of(context).translate('signin')}'),
-                onTap: () {
-                  VxNavigator.of(context).push(Uri.parse(MyRoutes.login));
-                },
-              ),
-            ),
+            _isAnony == true
+                ? Tooltip(
+                    message:
+                        '${AppLocalizations.of(context).translate('tooltipsignin')}',
+                    child: ListTile(
+                      trailing: Icon(Icons.login),
+                      title: Text(
+                          '${AppLocalizations.of(context).translate('signin')}'),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        VxNavigator.of(context).push(Uri.parse(MyRoutes.login));
+                      },
+                    ),
+                  )
+                : Tooltip(
+                    message:
+                        '${AppLocalizations.of(context).translate('tooltipsignout')}',
+                    child: ListTile(
+                      trailing: Icon(Icons.logout),
+                      title: Text(
+                          '${AppLocalizations.of(context).translate('signout')}'),
+                      onTap: () {
+                        showLogoutDialog(context)
+                            .then((value) => Navigator.of(context).pop());
+                      },
+                    ),
+                  ),
             Container(
               padding: EdgeInsets.only(left: 10, right: 10),
               child: Divider(
@@ -147,8 +161,11 @@ class MobileHomeView extends StatelessWidget {
                   AppLocalizations.of(context).translate('myrid'),
                 ),
                 onTap: () {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    context.vxNav.push(Uri.parse(MyRoutes.myStatusID));
+                  });
+
                   Navigator.of(context).pop();
-                  context.vxNav.push(Uri.parse(MyRoutes.myStatusID));
                 },
               ),
             ),
@@ -275,17 +292,6 @@ class MobileHomeView extends StatelessWidget {
                         : Provider.of<UpdateUI>(context).changeColor,
                   ),
                   onPressed: () async {
-                    final retrieve = await context
-                        .read<AuthenticationServices>()
-                        .getUserName();
-                    Provider.of<UpdateUI>(context, listen: false)
-                        .setUserName(retrieve);
-
-                    final getuid =
-                        await context.read<AuthenticationServices>().getUID();
-
-                    Provider.of<UpdateUI>(context, listen: false)
-                        .setUID(getuid);
                     Scaffold.of(context).openEndDrawer();
                   },
                 ),
@@ -313,7 +319,6 @@ class MobileHomeView extends StatelessWidget {
                           Footer(),
                         ],
                       ),
-                      // Navbar(),
                     ],
                   ),
                 );

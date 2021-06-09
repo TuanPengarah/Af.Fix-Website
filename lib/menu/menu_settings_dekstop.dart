@@ -1,32 +1,41 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/config/routes.dart';
+import 'package:affix_web/model/sweetLogoutDialog.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
+import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:affix_web/config/change_lang.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 Future<void> showSettingMenu(BuildContext context) async {
+  String _userName = Provider.of<UpdateUI>(context, listen: false).userName;
+  bool _isAnony = Provider.of<UpdateUI>(context, listen: false).checkAnonymous;
   int selected = await showMenu(
     context: context,
     position: RelativeRect.fromLTRB(430, 80, 10, 100),
     items: [
       PopupMenuItem<int>(
         value: 2,
-        child: Row(
-          children: [
-            CircleAvatar(
-              backgroundColor: kColorWhiteDark,
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              '${AppLocalizations.of(context).translate('usernotsign')}',
-              style: TextStyle(fontSize: 15),
-            ),
-          ],
+        child: Tooltip(
+          message: 'uid: ${Provider.of<UpdateUI>(context, listen: false).uid}',
+          child: Row(
+            children: [
+              CircleAvatar(
+                backgroundColor: kColorWhiteDark,
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                _isAnony == true
+                    ? '${AppLocalizations.of(context).translate('usernotsign')}'
+                    : _userName.toString(),
+                style: TextStyle(fontSize: 15),
+              ),
+            ],
+          ),
         ),
       ),
       PopupMenuDivider(),
@@ -45,7 +54,9 @@ Future<void> showSettingMenu(BuildContext context) async {
   } else if (selected == 1) {
     showDarkModeDekstop(context);
   } else if (selected == 2) {
-    VxNavigator.of(context).push(Uri.parse(MyRoutes.login));
+    _isAnony == true
+        ? VxNavigator.of(context).push(Uri.parse(MyRoutes.login))
+        : showLogoutDialog(context);
   }
 }
 
@@ -63,7 +74,7 @@ Future<void> showLanguageDekstop(BuildContext context) async {
             Icon(
               Icons.arrow_back_ios_rounded,
               size: 15,
-              color: _isDarkMode ? kColorWhite : Colors.black,
+              color: _isDarkMode == false ? kColorWhite : Colors.black,
             ),
             SizedBox(width: 15),
             Text('${AppLocalizations.of(context).translate('language')}'),
@@ -103,7 +114,7 @@ Future<void> showDarkModeDekstop(BuildContext context) async {
             Icon(
               Icons.arrow_back_ios_rounded,
               size: 15,
-              color: _isDarkMode ? kColorWhite : Colors.black,
+              color: _isDarkMode == false ? kColorWhite : Colors.black,
             ),
             SizedBox(width: 15),
             Text('${AppLocalizations.of(context).translate('darktheme')}'),

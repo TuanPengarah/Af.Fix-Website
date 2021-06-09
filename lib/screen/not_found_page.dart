@@ -3,7 +3,6 @@ import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:lottie/lottie.dart';
 
 class NotFoundPage extends StatelessWidget {
   final String path;
@@ -22,9 +21,6 @@ class NotFoundPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Lottie.network(
-                  'https://assets4.lottiefiles.com/packages/lf20_ukmmbtae.json'),
-              SizedBox(height: 50),
               SelectableText(
                 'DEAD END..',
                 style: TextStyle(fontSize: 40, fontWeight: FontWeight.w700),

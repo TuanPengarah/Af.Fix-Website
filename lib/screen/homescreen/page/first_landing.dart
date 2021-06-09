@@ -1,6 +1,5 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
-import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/ui/repair_form.dart';
@@ -32,11 +31,25 @@ class FirstLanding extends StatelessWidget {
   }
 }
 
-class MobileFirstPageView extends StatelessWidget {
+class MobileFirstPageView extends StatefulWidget {
+  @override
+  _MobileFirstPageViewState createState() => _MobileFirstPageViewState();
+}
+
+class _MobileFirstPageViewState extends State<MobileFirstPageView> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<UpdateUI>(context, listen: false).isThisMobile(true);
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
-    Provider.of<UpdateUI>(context, listen: false).isThisMobile(true);
+
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
       child: FittedBox(
@@ -135,7 +148,8 @@ class MobileFirstPageView extends StatelessWidget {
                   child: Center(
                     child: TextButton.icon(
                       onPressed: () {
-                        context.read<AuthenticationServices>().signOut();
+                        print(Provider.of<UpdateUI>(context, listen: false)
+                            .checkAnonymous);
                       },
                       icon: Icon(
                         Icons.file_download,
@@ -165,11 +179,24 @@ class MobileFirstPageView extends StatelessWidget {
   }
 }
 
-class DekstopFirstPageView extends StatelessWidget {
+class DekstopFirstPageView extends StatefulWidget {
+  @override
+  _DekstopFirstPageViewState createState() => _DekstopFirstPageViewState();
+}
+
+class _DekstopFirstPageViewState extends State<DekstopFirstPageView> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<UpdateUI>(context, listen: false).isThisMobile(false);
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
-    Provider.of<UpdateUI>(context, listen: false).isThisMobile(false);
     return FittedBox(
       child: Container(
         height: MediaQuery.of(context).size.height + 250,

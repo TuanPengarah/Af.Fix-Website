@@ -1,3 +1,4 @@
+import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/mobile_home.dart';
@@ -85,15 +86,25 @@ class _LandingPageState extends State<LandingPage> {
         await context.read<AuthenticationServices>().getEmail();
     Provider.of<UpdateUI>(context, listen: false)
         .setUserName(retrieve != null ? retrieve : retrieveEmail);
-    Provider.of<UpdateUI>(context, listen: false).setAnonymous(false);
+    if (retrieve == null && retrieveEmail == null) {
+      Provider.of<UpdateUI>(context, listen: false).setAnonymous(true);
+      Provider.of<UpdateUI>(context, listen: false).setUserName(
+          '${AppLocalizations.of(context).translate('usernotsign')}');
+    } else {
+      Provider.of<UpdateUI>(context, listen: false).setAnonymous(false);
+    }
+
     Provider.of<UpdateUI>(context, listen: false).setUID(uid);
   }
 
   _registerAnonymous(BuildContext context) async {
     print('initialize anonymouse');
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       Provider.of<UpdateUI>(context, listen: false).setAnonymous(true);
       Provider.of<UpdateUI>(context, listen: false).setUID('N/A');
+      if (_auth.currentUser != null) {
+        _authServices(context);
+      }
     });
     // await context.read<AuthenticationServices>().anonymousSignIn();
     // String uid = await context.read<AuthenticationServices>().getUID();
@@ -122,7 +133,7 @@ class _LandingPageState extends State<LandingPage> {
     // SET AUTH
 
     return StreamBuilder<User>(
-        stream: _auth.authStateChanges(),
+        stream: _auth.userChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             _authServices(context);

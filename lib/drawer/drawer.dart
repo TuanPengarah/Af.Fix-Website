@@ -2,6 +2,7 @@ import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/menu/menu_change_language.dart';
 import 'package:affix_web/menu/menu_change_theme.dart';
+import 'package:affix_web/model/sweetLogoutDialog.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -12,7 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class EndDrawer extends StatelessWidget {
-  const EndDrawer({
+  EndDrawer({
     Key key,
     @required String uidText,
     @required bool isDarkMode,
@@ -22,11 +23,11 @@ class EndDrawer extends StatelessWidget {
 
   final String _uidText;
   final bool _isDarkMode;
-
   @override
   Widget build(BuildContext context) {
-    final _firebaseUser = FirebaseAuth.instance.currentUser;
-    final _isAnony = Provider.of<UpdateUI>(context).checkAnonymous;
+    String _userName = Provider.of<UpdateUI>(context).userName;
+    bool _isAnony = Provider.of<UpdateUI>(context).checkAnonymous;
+    bool _isMobile = Provider.of<UpdateUI>(context).isMobile;
     return Drawer(
       child: ListView(
         children: [
@@ -38,9 +39,7 @@ class EndDrawer extends StatelessWidget {
                 AutoSizeText(
                   _isAnony == true
                       ? '${AppLocalizations.of(context).translate('usernotsign')}'
-                      : _firebaseUser.displayName == null
-                          ? _firebaseUser.email
-                          : _firebaseUser.displayName,
+                      : _userName.toString(),
                   style: TextStyle(color: Colors.white),
                   overflow: TextOverflow.ellipsis,
                   maxFontSize: 20,
@@ -60,16 +59,33 @@ class EndDrawer extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
           ),
-          Tooltip(
-            message:
-                '${AppLocalizations.of(context).translate('tooltipsignin')}',
-            child: ListTile(
-              trailing: Icon(Icons.login),
-              title:
-                  Text('${AppLocalizations.of(context).translate('signin')}'),
-              onTap: () {},
-            ),
-          ),
+          _isAnony == true
+              ? Tooltip(
+                  message:
+                      '${AppLocalizations.of(context).translate('tooltipsignin')}',
+                  child: ListTile(
+                    trailing: Icon(Icons.login),
+                    title: Text(
+                        '${AppLocalizations.of(context).translate('signin')}'),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      VxNavigator.of(context).push(Uri.parse(MyRoutes.login));
+                    },
+                  ),
+                )
+              : Tooltip(
+                  message:
+                      '${AppLocalizations.of(context).translate('tooltipsignout')}',
+                  child: ListTile(
+                    trailing: Icon(Icons.logout),
+                    title: Text(
+                        '${AppLocalizations.of(context).translate('signout')}'),
+                    onTap: () {
+                      showLogoutDialog(context)
+                          .then((value) => Navigator.of(context).pop());
+                    },
+                  ),
+                ),
           Container(
             padding: EdgeInsets.only(left: 10, right: 10),
             child: Divider(
@@ -97,7 +113,6 @@ class EndDrawer extends StatelessWidget {
                 scrollController.animateTo(0,
                     duration: Duration(milliseconds: 800),
                     curve: Curves.decelerate);
-                // context.vxNav.push(Uri.parse('/'));
               },
             ),
           ),
@@ -115,7 +130,7 @@ class EndDrawer extends StatelessWidget {
                 ));
                 Navigator.of(context).pop();
                 context.vxNav.popToRoot();
-                scrollController.animateTo(1677,
+                scrollController.animateTo(_isMobile == true ? 1677 : 1200,
                     duration: Duration(milliseconds: 800),
                     curve: Curves.decelerate);
               },
@@ -137,7 +152,7 @@ class EndDrawer extends StatelessWidget {
                 ));
                 Navigator.of(context).pop();
                 context.vxNav.popToRoot();
-                scrollController.animateTo(5500,
+                scrollController.animateTo(_isMobile == true ? 5500 : 2700,
                     duration: Duration(milliseconds: 800),
                     curve: Curves.decelerate);
               },

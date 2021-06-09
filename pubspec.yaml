@@ -52,8 +52,12 @@ dependencies:
   slimy_card: ^1.0.4
   flutter_animation_progress_bar: ^2.0.0
   timeline_list: ^0.0.5
-  lottie: ^1.0.1
-  sweetsheet: ^0.3.1
+  clay_containers: ^0.3.2
+  dismissible_page: ^0.5.5
+  bottom_sheet: ^1.0.1
+  ndialog: ^4.1.0
+  liquid_pull_to_refresh: ^3.0.0
+
   
   #Splash Screen
   flutter_native_splash: ^1.1.8+4
