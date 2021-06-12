@@ -157,7 +157,9 @@ class _DekstopNavState extends State<DekstopNav> {
                           width: 20,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.vxNav.push(Uri(path: MyRoutes.ewarranty));
+                          },
                           child: Text(
                             AppLocalizations.of(context).translate('ewarranti'),
                             style: kTextSubtitleDark,

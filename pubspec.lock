@@ -36,6 +36,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
+  avatar_letter:
+    dependency: "direct main"
+    description:
+      name: avatar_letter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   blurrycontainer:
     dependency: "direct main"
     description:
@@ -184,7 +191,7 @@ packages:
     source: hosted
     version: "4.2.2"
   firebase_auth_web:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: firebase_auth_web
       url: "https://pub.dartlang.org"
@@ -295,7 +302,7 @@ packages:
     source: hosted
     version: "3.0.2"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -466,6 +473,13 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
+  shimmer:
+    dependency: "direct main"
+    description:
+      name: shimmer
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"

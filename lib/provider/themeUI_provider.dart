@@ -1,12 +1,24 @@
 import 'package:affix_web/config/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  ThemeMode themeMode = ThemeMode.light;
+  ThemeMode themeMode;
+
+  ThemeProvider({bool isDarkMode}) {
+    themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
+  }
 
   bool get isDark => themeMode == ThemeMode.light;
-  void toggleTheme(bool isOn) {
-    themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
+  void toggleTheme(bool isOn) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    if (isOn) {
+      themeMode = ThemeMode.dark;
+      _prefs.setBool('isDarkMode', true);
+    } else {
+      themeMode = ThemeMode.light;
+      _prefs.setBool('isDarkMode', false);
+    }
     notifyListeners();
   }
 }
@@ -69,8 +81,8 @@ class MyThemes {
     primaryColor: Colors.red,
     colorScheme: ColorScheme.light(),
     textSelectionTheme: TextSelectionThemeData(
-      selectionColor: Colors.teal,
-      cursorColor: Colors.teal,
+      selectionColor: Colors.red[900],
+      cursorColor: Colors.red[900],
       selectionHandleColor: kColorRed,
     ),
     textTheme: TextTheme(
@@ -80,7 +92,7 @@ class MyThemes {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.all<Color>(kColorWhite),
-        backgroundColor: MaterialStateProperty.all<Color>(kColorGrey),
+        backgroundColor: MaterialStateProperty.all<Color>(kColorRed),
       ),
     ),
     textButtonTheme: TextButtonThemeData(

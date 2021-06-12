@@ -6,7 +6,6 @@ import 'package:affix_web/model/sweetLogoutDialog.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -167,6 +166,7 @@ class EndDrawer extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.of(context).pop();
+                context.vxNav.push(Uri.parse(MyRoutes.ewarranty));
               },
             ),
           ),

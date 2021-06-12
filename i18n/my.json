@@ -94,8 +94,8 @@
     "signin" : "Log Masuk",
     "signout" : "Log Keluar",
     "tooltipsignin" : "Log masuk ke akaun anda",
-    "tooltipsignout" : "Log keluar ke akaun anda",
-    "signintitle" : "Jom log masuk ke Af-Fix!",
+    "tooltipsignout" : "Log keluar dari akaun anda",
+    "signintitle" : "Jom log masuk ke Af.Fix!",
     "signinsubtitle" : "Jangan risau, anda hanya memerlukan alamat email dan kata laluan untuk teruskan!",
     "signincompleted" : "Log masuk berjaya!",
     "usernotfound" : "Pengguna tidak dijumpai. sila masuk alamat email yang betul",
@@ -105,5 +105,8 @@
     "password" : "Kata Laluan",
     "signoutconfirmtitle" : "Adakah anda pasti untuk log keluar?",
     "signoutconfirmsubtitle" : "Selepas log keluar, anda boleh log masuk semula untuk menguruskan peranti anda yang dibaiki dan menguruskan status e-waranti anda.",
-    "cancel" : "Batal"
+    "cancel" : "Batal",
+    "signinfirst" : "Whoops! Anda mesti log masuk terlebih dahulu!",
+    "signinfirstsub" : "Log masuk ke akaun Af.Fix untuk memeriksa status E-warranty anda dan juga memeriksa kesemuaan peranti anda yang telah dibaiki!",
+    "visithelpcenter" : "Lawati pusat bantuan kami"
 }

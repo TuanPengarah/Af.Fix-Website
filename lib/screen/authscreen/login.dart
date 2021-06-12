@@ -15,6 +15,14 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:string_validator/string_validator.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+extension Utility on BuildContext {
+  void nextEditableTextFocus() {
+    do {
+      FocusScope.of(this).nextFocus();
+    } while (FocusScope.of(this).focusedChild.context.widget is! EditableText);
+  }
+}
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -31,6 +39,8 @@ class _LoginPageState extends State<LoginPage> {
 
   DocumentSnapshot snapshot;
 
+  bool _visibilityPassword;
+
   Future<dynamic> setUserName(String uid) async {
     try {
       final setUser = await FirebaseFirestore.instance
@@ -42,6 +52,12 @@ class _LoginPageState extends State<LoginPage> {
     } catch (e) {
       print('cannot set username');
     }
+  }
+
+  @override
+  void initState() {
+    _visibilityPassword = false;
+    super.initState();
   }
 
   final RoundedLoadingButtonController _buttonController =
@@ -88,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              _title(context),
+                              _title(context, 45),
                               SizedBox(height: 5),
                               _subtitle(context),
                               SizedBox(height: 30),
@@ -96,6 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                                 context: context,
                                 isDarkMode: _isDarkMode,
                                 controller: _emailInput,
+                                type: TextInputType.emailAddress,
                                 title: 'Email',
                                 subtitle: 'abdullah@email.com',
                                 icon: Icon(Icons.email),
@@ -108,6 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                                 context: context,
                                 isDarkMode: _isDarkMode,
                                 controller: _passwordInput,
+                                type: TextInputType.visiblePassword,
                                 title: 'Password',
                                 subtitle: '12345678',
                                 isPassword: true,
@@ -115,6 +133,18 @@ class _LoginPageState extends State<LoginPage> {
                                 err: _passwordMiss
                                     ? '${AppLocalizations.of(context).translate('nopassword')}'
                                     : null,
+                                iconButton: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _visibilityPassword =
+                                          !_visibilityPassword;
+                                    });
+                                  },
+                                  icon: Icon(_visibilityPassword == false
+                                      ? Icons.visibility_off
+                                      : Icons.visibility),
+                                ),
+                                isTextFieldPassword: true,
                               ),
                               _buttonAuth(
                                   context: context,
@@ -132,6 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                 return Align(
                   alignment: Alignment.bottomCenter,
                   child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 25, vertical: 15),
@@ -152,7 +183,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           SizedBox(height: 19),
-                          _title(context),
+                          _title(context, 35),
                           SizedBox(height: 5),
                           _subtitle(context),
                           SizedBox(height: 30),
@@ -160,6 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                             context: context,
                             isDarkMode: _isDarkMode,
                             controller: _emailInput,
+                            type: TextInputType.emailAddress,
                             title: 'Email',
                             subtitle: 'abdullah@email.com',
                             icon: Icon(Icons.email),
@@ -172,13 +204,25 @@ class _LoginPageState extends State<LoginPage> {
                             context: context,
                             isDarkMode: _isDarkMode,
                             controller: _passwordInput,
+                            type: TextInputType.visiblePassword,
                             title: 'Password',
                             subtitle: '123456',
-                            isPassword: true,
+                            isPassword: !_visibilityPassword,
                             icon: Icon(Icons.password),
                             err: _passwordMiss
                                 ? '${AppLocalizations.of(context).translate('nopassword')}'
                                 : null,
+                            iconButton: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _visibilityPassword = !_visibilityPassword;
+                                });
+                              },
+                              icon: Icon(_visibilityPassword == false
+                                  ? Icons.visibility_off
+                                  : Icons.visibility),
+                            ),
+                            isTextFieldPassword: true,
                           ),
                           _buttonAuth(
                               context: context,
@@ -247,7 +291,7 @@ class _LoginPageState extends State<LoginPage> {
     _buttonController.success();
     Timer(Duration(seconds: 2), () {
       // _buttonController.reset();
-      VxNavigator.of(context).popToRoot();
+      VxNavigator.of(context).pop();
     });
   }
 
@@ -376,6 +420,9 @@ class _LoginPageState extends State<LoginPage> {
     bool isPassword = false,
     Icon icon,
     String err,
+    TextInputType type,
+    IconButton iconButton,
+    bool isTextFieldPassword = false,
   }) {
     return SizedBox(
       width: 400,
@@ -383,6 +430,7 @@ class _LoginPageState extends State<LoginPage> {
         obscureText: isPassword,
         controller: controller,
         textAlign: TextAlign.center,
+        keyboardType: type ?? TextInputType.emailAddress,
         style: TextStyle(fontWeight: FontWeight.bold),
         onEditingComplete: () {
           _inputComplete() {
@@ -391,14 +439,18 @@ class _LoginPageState extends State<LoginPage> {
           }
 
           isPassword == false
-              ? FocusScope.of(context).nextFocus()
+              ? context.nextEditableTextFocus()
               : _inputComplete();
         },
         decoration: InputDecoration(
           prefixIcon: Padding(
-            padding: EdgeInsetsDirectional.only(start: 12, end: 18),
-            child: icon,
-          ),
+              padding: EdgeInsetsDirectional.only(start: 12, end: 18),
+              child: isPassword == false && isTextFieldPassword == false
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: icon,
+                    )
+                  : iconButton),
           hintText: subtitle,
           errorText: err,
           errorStyle: TextStyle(color: Colors.amber.shade800),
@@ -448,13 +500,13 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  SelectableText _title(BuildContext context) {
+  SelectableText _title(BuildContext context, double titleSize) {
     return SelectableText(
       '${AppLocalizations.of(context).translate('signintitle')}',
       textAlign: TextAlign.center,
       style: TextStyle(
         letterSpacing: 1.1,
-        fontSize: 35,
+        fontSize: titleSize,
         fontWeight: FontWeight.w800,
       ),
     );
