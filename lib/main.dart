@@ -2,6 +2,7 @@ import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/screen/authscreen/login.dart';
+import 'package:affix_web/screen/e-warranty/e-warranty_wrapper.dart';
 import 'package:affix_web/screen/not_found_page.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/MyStatusID/MyStatusID_wrapper.dart';
@@ -12,6 +13,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'config/change_lang.dart';
 import 'provider/themeUI_provider.dart';
@@ -19,19 +21,22 @@ import 'provider/themeUI_provider.dart';
 
 Future<void> main() async {
   Vx.setPathUrlStrategy();
-  await Firebase.initializeApp();
   AppLanguage appLanguage = AppLanguage();
   Provider.debugCheckInvalidValueType = null;
   await appLanguage.fetchLocale();
+  SharedPreferences _prefs = await SharedPreferences.getInstance();
+  await Firebase.initializeApp();
   runApp(MyApp(
     appLanguage: appLanguage,
+    getTheme: _prefs.getBool('isDarkMode') ?? false,
   ));
 }
 
 class MyApp extends StatelessWidget {
   final AppLanguage appLanguage;
+  final bool getTheme;
 
-  MyApp({this.appLanguage});
+  MyApp({this.appLanguage, this.getTheme});
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -39,15 +44,10 @@ class MyApp extends StatelessWidget {
         Provider<AuthenticationServices>(
           create: (context) => AuthenticationServices(FirebaseAuth.instance),
         ),
-        // StreamProvider(
-        //   create: (context) =>
-        //       context.read<AuthenticationServices>().authStateChanges,
-        //   initialData: null,
-        // ),
         ChangeNotifierProvider<AppLanguage>(create: (context) => appLanguage),
         ChangeNotifierProvider<UpdateUI>(create: (context) => UpdateUI()),
         ChangeNotifierProvider<ThemeProvider>(
-            create: (context) => ThemeProvider())
+            create: (context) => ThemeProvider(isDarkMode: getTheme))
       ],
       child: Consumer<AppLanguage>(
         builder: (context, model, child) {
@@ -89,6 +89,10 @@ class MyApp extends StatelessWidget {
                       child: LoginPage(),
                       fullscreenDialog: true,
                     ),
+                MyRoutes.ewarranty: (_, __) => MaterialPage(
+                      child: EwarrantyWrapper(),
+                      fullscreenDialog: true,
+                    )
               },
             ),
             locale: model.appLocal,

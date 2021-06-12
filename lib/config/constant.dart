@@ -38,6 +38,7 @@ const kImageiPhoneOldWhite = 'https://i.imgur.com/2Q1XZBe.png';
 const kImageiPhoneNew = 'https://i.imgur.com/tviI849.png';
 const kImageAndroid = 'https://i.imgur.com/5wR5MPJ.png';
 const kImageAuth = 'https://i.imgur.com/EJBFVkb.png';
+const kImageSignFirst = 'https://i.imgur.com/F6RvAMX.png';
 
 //style
 final TextStyle kTextSubtitleDark = TextStyle(

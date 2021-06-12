@@ -29,7 +29,7 @@ class _RepairReportState extends State<RepairReport> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
   bool _isMobile = false;
-  bool _isDone = false;
+  bool _isDone = true;
   Future<void> _onRefresh() {
     final Completer<void> completer = Completer<void>();
     Timer(Duration(seconds: 1), () {
@@ -43,6 +43,15 @@ class _RepairReportState extends State<RepairReport> {
                 '${AppLocalizations.of(context).translate('refreshcomplete')}')));
       });
     });
+  }
+
+  @override
+  void initState() {
+    Future.delayed(Duration(seconds: 3), () {
+      setState(() {});
+    });
+
+    super.initState();
   }
 
   @override
@@ -95,16 +104,59 @@ class _RepairReportState extends State<RepairReport> {
                   ),
                 );
               } else if (snapshot.data.docs.isEmpty) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(Icons.error_outline),
-                      SizedBox(height: 15),
-                      Text('No data found'),
-                    ],
-                  ),
+                return Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    Center(
+                      child: Column(
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(Icons.error_outline),
+                              SizedBox(height: 15),
+                              Text('No data found'),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Builder(
+                        builder: (BuildContext context) => IconButton(
+                          tooltip: 'Menu',
+                          icon: Icon(
+                            Icons.menu,
+                            color:
+                                _isDarkMode == false ? kColorWhite : kColorGrey,
+                          ),
+                          onPressed: () {
+                            Scaffold.of(context).openEndDrawer();
+                          },
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          tooltip: 'Tutup',
+                          icon: Icon(
+                            Icons.close,
+                            color:
+                                _isDarkMode == false ? kColorWhite : kColorGrey,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               }
 

@@ -150,6 +150,7 @@ class MobileHomeView extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
+                  context.vxNav.push(Uri.parse(MyRoutes.ewarranty));
                 },
               ),
             ),
@@ -224,106 +225,111 @@ class MobileHomeView extends StatelessWidget {
           ],
         ),
       ),
-      body: CustomScrollView(
-        controller: scrollController,
-        slivers: [
-          SliverAppBar(
-            backgroundColor: _isDarkMode == false
-                ? Theme.of(context).appBarTheme.backgroundColor
-                : kColorWhite,
-            elevation: 0,
-            pinned: false,
-            floating: false,
-            snap: false,
-            expandedHeight: 280.0,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text.rich(
-                TextSpan(
-                  text: 'AF',
-                  style: TextStyle(
-                    fontFamily: 'MotionControl',
-                    fontSize: 60,
-                    color: kColorRed,
-                  ),
-                  children: <TextSpan>[
+      body: Stack(
+        alignment: Alignment.topRight,
+        children: [
+          CustomScrollView(
+            controller: scrollController,
+            slivers: [
+              SliverAppBar(
+                actions: [Container()],
+                backgroundColor: _isDarkMode == false
+                    ? Theme.of(context).appBarTheme.backgroundColor
+                    : kColorWhite,
+                elevation: 0,
+                pinned: false,
+                floating: false,
+                snap: false,
+                expandedHeight: 280.0,
+                flexibleSpace: FlexibleSpaceBar(
+                  title: Text.rich(
                     TextSpan(
-                      text: '.FIX',
+                      text: 'AF',
                       style: TextStyle(
-                        color: _isDarkMode == false ? kColorWhite : kColorGrey,
+                        fontFamily: 'MotionControl',
+                        fontSize: 60,
+                        color: kColorRed,
                       ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '.FIX',
+                          style: TextStyle(
+                            color:
+                                _isDarkMode == false ? kColorWhite : kColorGrey,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-              centerTitle: true,
-              background: Container(
-                alignment: Alignment.topCenter,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      height: 250,
-                      alignment: Alignment.topCenter,
-                      width: 250,
-                      child: Image.asset(
-                        _isDarkMode == false
-                            ? 'assets/images/logo_only_white.png'
-                            : 'assets/images/logo_only_black.png',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            actions: [
-              Builder(
-                builder: (BuildContext context) => IconButton(
-                  tooltip: 'Menu',
-                  icon: Icon(
-                    Icons.menu,
-                    color: _isDarkMode == false
-                        ? Colors.white
-                        : Provider.of<UpdateUI>(context).changeColor,
                   ),
-                  onPressed: () async {
-                    Scaffold.of(context).openEndDrawer();
+                  centerTitle: true,
+                  background: Container(
+                    alignment: Alignment.topCenter,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          height: 250,
+                          alignment: Alignment.topCenter,
+                          width: 250,
+                          child: Image.asset(
+                            _isDarkMode == false
+                                ? 'assets/images/logo_only_white.png'
+                                : 'assets/images/logo_only_black.png',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return Container(
+                      decoration: BoxDecoration(color: kColorWhite),
+                      child: Stack(
+                        children: [
+                          Column(
+                            children: [
+                              FirstLanding(),
+                              About(),
+                              CallUs(),
+                              OurServices(),
+                              Apps(),
+                              CustomerTestimonial(),
+                              FollowSocialMedia(),
+                              PWA(),
+                              // FAQ(),
+                              Footer(),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
                   },
+                  childCount: 1,
                 ),
               ),
             ],
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Container(
-                  decoration: BoxDecoration(color: kColorWhite),
-                  child: Stack(
-                    children: [
-                      Column(
-                        children: [
-                          FirstLanding(),
-                          About(),
-                          CallUs(),
-                          OurServices(),
-                          Apps(),
-                          CustomerTestimonial(),
-                          FollowSocialMedia(),
-                          PWA(),
-                          // FAQ(),
-                          Footer(),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
+          Builder(
+            builder: (BuildContext context) => IconButton(
+              tooltip: 'Menu',
+              icon: Icon(
+                Icons.menu,
+                color: _isDarkMode == false
+                    ? Colors.white
+                    : Provider.of<UpdateUI>(context).changeColor,
+              ),
+              onPressed: () async {
+                Scaffold.of(context).openEndDrawer();
               },
-              childCount: 1,
             ),
           ),
         ],

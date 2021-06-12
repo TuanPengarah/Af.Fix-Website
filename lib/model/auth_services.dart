@@ -59,11 +59,11 @@ class AuthenticationServices extends ChangeNotifier {
       return 'Signed in';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        getError('No user found');
+        getError('User not found! Please check your email address');
         isError = true;
         return 'no user';
       } else if (e.code == 'wrong-password') {
-        getError('Wrong password');
+        getError('Wrong Password!');
         isError = true;
         return 'wrong password';
       }

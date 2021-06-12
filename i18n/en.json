@@ -105,5 +105,8 @@
     "password" : "Password",
     "signoutconfirmtitle" : "Are you sure want to sign out?",
     "signoutconfirmsubtitle" : "Once signed out, you can sign in back at any point to manage your repaired devices and your e-warranty status.",
-    "cancel" : "Cancel"
+    "cancel" : "Cancel",
+    "signinfirst" : "Oh No! You must sign in first!",
+    "signinfirstsub" : "Sign in to your Af.Fix Account to check your E-Warranty status and all your repaired devices!",
+    "visithelpcenter" : "Visit our help center"
 }

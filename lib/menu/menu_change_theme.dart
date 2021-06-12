@@ -8,7 +8,7 @@ Future<void> showDarkTheme(BuildContext context) async {
   bool _isDarkMode = Provider.of<ThemeProvider>(context, listen: false).isDark;
   int selected = await showMenu(
     context: context,
-    position: RelativeRect.fromLTRB(400, 490, 9, 100),
+    position: RelativeRect.fromLTRB(400, 650, 9, 100),
     items: [
       PopupMenuItem<int>(
         value: 0,

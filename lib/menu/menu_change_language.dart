@@ -6,16 +6,13 @@ Future<void> showLanguage(BuildContext context) async {
   var appLanguage = Provider.of<AppLanguage>(context, listen: false);
   int selected = await showMenu(
     context: context,
-    position: RelativeRect.fromLTRB(400, 440, 10, 100),
+    position: RelativeRect.fromLTRB(400, 600, 10, 80),
     items: [
       PopupMenuItem<int>(
         value: 0,
         child: Text('Bahasa Melayu'),
       ),
-      PopupMenuItem<int>(
-        value: 1,
-        child: Text('English'),
-      ),
+      PopupMenuItem<int>(value: 1, child: Text('English')),
     ],
   );
   if (selected == 0) {
