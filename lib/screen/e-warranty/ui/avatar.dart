@@ -1,25 +1,28 @@
+import 'package:affix_web/config/app_localizations.dart';
+import 'package:affix_web/config/constant.dart';
 import 'package:avatar_letter/avatar_letter.dart';
 import 'package:flutter/material.dart';
 
-Row userProfile(String name, BuildContext context) {
+Row userProfile(String name, BuildContext context, bool hpke, bool isDark) {
   String _greeting() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
-      return 'Selamat Pagi';
+      return '${AppLocalizations.of(context).translate('goodmorning')}';
     }
     if (hour < 13) {
-      return 'Selamat Tengah Hari';
+      return '${AppLocalizations.of(context).translate('goodafternoon')}';
     }
-    return 'Selamat Petang';
+    return '${AppLocalizations.of(context).translate('goodevening')}';
   }
 
   return Row(
     children: [
       AvatarLetter(
         text: '$name',
-        textColor: Colors.white,
+        textColor: hpke == true ? Colors.white : Theme.of(context).primaryColor,
         textColorHex: null,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor:
+            hpke == true ? Theme.of(context).primaryColor : Colors.white,
         backgroundColorHex: null,
         letterType: LetterType.Circular,
       ),
@@ -32,6 +35,11 @@ Row userProfile(String name, BuildContext context) {
             '${_greeting()},',
             style: TextStyle(
               fontSize: 16,
+              color: hpke == false
+                  ? Colors.white
+                  : isDark == false
+                      ? Colors.white
+                      : kColorGrey,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -41,6 +49,11 @@ Row userProfile(String name, BuildContext context) {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w600,
+              color: hpke == false
+                  ? Colors.white
+                  : isDark == false
+                      ? Colors.white
+                      : kColorGrey,
             ),
           ),
         ],

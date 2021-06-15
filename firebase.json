@@ -18,6 +18,10 @@
   {
     "source": "/mysid/timeline",
     "destination": "/index.html"
+  },
+  {
+    "source": "/e-warranti",
+    "destination": "/index.html"
   }
 ]
   

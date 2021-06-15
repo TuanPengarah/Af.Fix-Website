@@ -1,3 +1,4 @@
+import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/drawer/drawer.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
@@ -10,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
+
+import 'dekstopView/ui/tab_button_dekstop.dart';
 
 extension CapExtension on String {
   String get inCaps =>
@@ -30,6 +33,9 @@ class EwarrantyHome extends StatefulWidget {
 class _EwarrantyHomeState extends State<EwarrantyHome> {
   int _selectablePage = 1;
   PageController _pageController;
+  PageController _pageControllerDekstop;
+  bool _onHover = true;
+  bool _isMobile = false;
 
   void _clickPage(int pageNum) {
     setState(() {
@@ -40,16 +46,31 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
     });
   }
 
+  void _clickPageDekstop(int pageNum) {
+    setState(() {
+      _selectablePage = pageNum;
+      _pageControllerDekstop.jumpToPage(pageNum);
+    });
+  }
+
   @override
   void initState() {
-    _pageController = PageController(initialPage: 1);
-
+    if (_isMobile == false) {
+      Future.delayed(Duration(milliseconds: 1500), () {
+        setState(() {
+          _onHover = false;
+        });
+      });
+    }
     super.initState();
   }
 
   @override
   void dispose() {
-    _pageController.dispose();
+    if (_isMobile == true) {
+      _pageController.dispose();
+    }
+
     super.dispose();
   }
 
@@ -65,59 +86,158 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
         alignment: Alignment.topRight,
         children: [
           LayoutBuilder(builder: (context, constraints) {
-            if (constraints.maxHeight > 1200) {}
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 20),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
-                  child: userProfile(_name, context),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TabButton(
-                        tabName: 'E-Warranti',
-                        pageNumber: 0,
-                        icon: MaterialCommunityIcons.book_open_outline,
-                        selectablePage: _selectablePage,
-                        onPressed: () {
-                          _clickPage(0);
-                        },
-                      ),
-                      TabButton(
-                        tabName: 'Sejarah baiki',
-                        pageNumber: 1,
-                        selectablePage: _selectablePage,
-                        onPressed: () {
-                          _clickPage(1);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: PageView(
-                    physics: BouncingScrollPhysics(),
-                    onPageChanged: (int change) {
+            if (constraints.maxWidth > 900) {
+              _isMobile = false;
+              _pageControllerDekstop =
+                  PageController(initialPage: _selectablePage);
+              return Row(
+                children: [
+                  MouseRegion(
+                    onHover: (hover) {
                       setState(() {
-                        _selectablePage = change;
+                        _onHover = true;
                       });
                     },
-                    controller: _pageController,
-                    children: [
-                      eWarrantyPage(_uidText, _name),
-                      historyRepairPage(_uidText, _name, _isDarkMode)
-                    ],
+                    onExit: (ex) {
+                      setState(() {
+                        _onHover = false;
+                      });
+                    },
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: 1000),
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      height: constraints.maxHeight,
+                      width: _onHover == true ? 250 : 80,
+                      color: Theme.of(context).primaryColor,
+                      child: SingleChildScrollView(
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Column(
+                                children: [
+                                  SizedBox(height: 60),
+                                  userProfile(
+                                      _name, context, _isMobile, _isDarkMode),
+                                ],
+                              ),
+                              SizedBox(height: 50),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TabButtonDekstop(
+                                    icon: MaterialCommunityIcons
+                                        .book_open_outline,
+                                    label:
+                                        '${AppLocalizations.of(context).translate('ewarranti')}',
+                                    selectablePage: _selectablePage,
+                                    pageNumber: 0,
+                                    onTap: () {
+                                      _clickPageDekstop(0);
+                                    },
+                                  ),
+                                  TabButtonDekstop(
+                                    icon: Icons.history,
+                                    label:
+                                        '${AppLocalizations.of(context).translate('repairhistory')}',
+                                    selectablePage: _selectablePage,
+                                    pageNumber: 1,
+                                    onTap: () {
+                                      _clickPageDekstop(1);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            );
+                  Expanded(
+                    child: PageView(
+                      physics: NeverScrollableScrollPhysics(),
+                      onPageChanged: (int change) {
+                        setState(() {
+                          _selectablePage = change;
+                        });
+                      },
+                      scrollDirection: Axis.vertical,
+                      controller: _pageControllerDekstop,
+                      children: [
+                        eWarrantyPage(_uidText, _name, _isMobile),
+                        historyRepairPage(
+                            _uidText, _name, _isDarkMode, _isMobile)
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              _isMobile = true;
+              _pageController = PageController(initialPage: _selectablePage);
+
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 30),
+                    child: userProfile(_name, context, _isMobile, _isDarkMode),
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TabButton(
+                          tabName:
+                              '${AppLocalizations.of(context).translate('ewarranti')}',
+                          pageNumber: 0,
+                          icon: MaterialCommunityIcons.book_open_outline,
+                          selectablePage: _selectablePage,
+                          onPressed: () {
+                            _clickPage(0);
+                          },
+                        ),
+                        TabButton(
+                          tabName:
+                              '${AppLocalizations.of(context).translate('repairhistory')}',
+                          pageNumber: 1,
+                          selectablePage: _selectablePage,
+                          onPressed: () {
+                            _clickPage(1);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 1),
+                  Expanded(
+                    child: PageView(
+                      physics: BouncingScrollPhysics(),
+                      onPageChanged: (int change) {
+                        setState(() {
+                          _selectablePage = change;
+                        });
+                      },
+                      controller: _pageController,
+                      children: [
+                        eWarrantyPage(_uidText, _name, _isMobile),
+                        historyRepairPage(
+                            _uidText, _name, _isDarkMode, _isMobile)
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            }
           }),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -143,10 +263,15 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                tooltip: 'Tutup',
+                tooltip:
+                    '${AppLocalizations.of(context).translate('buttonclose')}',
                 icon: Icon(
                   Icons.close,
-                  color: _isDarkMode == false ? kColorWhite : kColorGrey,
+                  color: _isMobile == false
+                      ? kColorWhite
+                      : _isDarkMode == false
+                          ? kColorWhite
+                          : kColorGrey,
                 ),
               ),
             ),

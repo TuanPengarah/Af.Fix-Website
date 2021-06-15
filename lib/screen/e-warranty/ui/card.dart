@@ -1,4 +1,6 @@
+import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
+import 'package:affix_web/screen/MyStatusID/MyStatusID_modal_details.dart';
 import 'package:avatar_letter/avatar_letter.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -25,6 +27,7 @@ Widget warrantyCard({
             : Theme.of(context).cardColor,
         child: tengahRepair == true
             ? Shimmer.fromColors(
+                period: Duration(seconds: 3),
                 highlightColor: Theme.of(context).primaryColor,
                 baseColor: warrantiKe == true
                     ? Colors.white
@@ -43,7 +46,7 @@ Widget warrantyCard({
   );
 }
 
-Padding _normalCard(
+Material _normalCard(
     String uid,
     bool warrantiKe,
     bool isDark,
@@ -54,148 +57,156 @@ Padding _normalCard(
     int harga,
     bool tengahRepair,
     String warrantyAkhir) {
-  return Padding(
-    padding: const EdgeInsets.all(12.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Tooltip(
-              message: 'MySID',
-              child: SelectableText(
-                '$uid',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: warrantiKe == true
-                      ? Colors.white60
-                      : isDark == true
-                          ? Colors.black54
-                          : Colors.white60,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Column(
+  return Material(
+    color: Colors.transparent,
+    child: InkWell(
+      onTap: () {
+        showDetails(context, uid);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                AvatarLetter(
-                  text: phoneModel,
-                  textColor: warrantiKe == true
-                      ? Theme.of(context).primaryColor
-                      : kColorWhite,
-                  textColorHex: null,
-                  backgroundColor:
-                      warrantiKe == true ? kColorWhite : Colors.grey,
-                  backgroundColorHex: null,
-                  letterType: LetterType.Rectangle,
+                Tooltip(
+                  message: 'MySID',
+                  child: SelectableText(
+                    '$uid',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: warrantiKe == true
+                          ? Colors.white60
+                          : isDark == true
+                              ? Colors.black54
+                              : Colors.white60,
+                    ),
+                  ),
                 ),
-                SizedBox(width: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    SelectableText(
-                      '$phoneModel',
-                      style: TextStyle(
-                        letterSpacing: 1.5,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                        color: warrantiKe == true
-                            ? Colors.white
-                            : isDark == true
-                                ? kColorGrey
-                                : Colors.white,
-                      ),
+                    AvatarLetter(
+                      text: phoneModel,
+                      textColor: warrantiKe == true
+                          ? Theme.of(context).primaryColor
+                          : kColorWhite,
+                      textColorHex: null,
+                      backgroundColor:
+                          warrantiKe == true ? kColorWhite : Colors.grey,
+                      backgroundColorHex: null,
+                      letterType: LetterType.Rectangle,
                     ),
-                    SizedBox(height: 5),
-                    SelectableText(
-                      '$rosak',
-                      style: TextStyle(
-                        letterSpacing: 2,
-                        fontSize: 15,
-                        color: warrantiKe == true
-                            ? Colors.white
-                            : isDark == true
-                                ? kColorGrey
-                                : Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    SelectableText(
-                      '$warrantyStart',
-                      style: TextStyle(
-                        letterSpacing: 2,
-                        fontSize: 15,
-                        color: warrantiKe == true
-                            ? Colors.white
-                            : isDark == true
-                                ? kColorGrey
-                                : Colors.white,
-                      ),
+                    SizedBox(width: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SelectableText(
+                          '$phoneModel',
+                          style: TextStyle(
+                            letterSpacing: 1.5,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: warrantiKe == true
+                                ? Colors.white
+                                : isDark == true
+                                    ? kColorGrey
+                                    : Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        SelectableText(
+                          '$rosak',
+                          style: TextStyle(
+                            letterSpacing: 2,
+                            fontSize: 15,
+                            color: warrantiKe == true
+                                ? Colors.white
+                                : isDark == true
+                                    ? kColorGrey
+                                    : Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        SelectableText(
+                          '$warrantyStart',
+                          style: TextStyle(
+                            letterSpacing: 2,
+                            fontSize: 15,
+                            color: warrantiKe == true
+                                ? Colors.white
+                                : isDark == true
+                                    ? kColorGrey
+                                    : Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ],
             ),
-          ],
-        ),
-        SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            SelectableText(
-              'RM${harga.toString()}',
-              style: TextStyle(
-                fontSize: 23,
-                color: warrantiKe == true
-                    ? Colors.white
-                    : isDark == true
-                        ? kColorGrey
-                        : Colors.white,
-              ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SelectableText(
+                  'RM${harga.toString()}',
+                  style: TextStyle(
+                    fontSize: 23,
+                    color: warrantiKe == true
+                        ? Colors.white
+                        : isDark == true
+                            ? kColorGrey
+                            : Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  warrantiKe == true
+                      ? Icons.done
+                      : tengahRepair == true
+                          ? Icons.medical_services_rounded
+                          : Icons.cancel_presentation_rounded,
+                  size: 13,
+                  color: warrantiKe == true
+                      ? Colors.white
+                      : isDark == true
+                          ? kColorGrey
+                          : Colors.white,
+                ),
+                SizedBox(width: 9),
+                SelectableText(
+                  warrantiKe == true
+                      ? '${AppLocalizations.of(context).translate('validuntil')} $warrantyAkhir'
+                      : tengahRepair == true
+                          ? '${AppLocalizations.of(context).translate('beingrepair')}'
+                          : '${AppLocalizations.of(context).translate('expired')} $warrantyAkhir',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: warrantiKe == true
+                        ? Colors.white60
+                        : isDark == true
+                            ? Colors.black54
+                            : Colors.white60,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
-        SizedBox(height: 10),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(
-              warrantiKe == true
-                  ? Icons.done
-                  : tengahRepair == true
-                      ? Icons.medical_services_rounded
-                      : Icons.cancel_presentation_rounded,
-              size: 13,
-              color: warrantiKe == true
-                  ? Colors.white
-                  : isDark == true
-                      ? kColorGrey
-                      : Colors.white,
-            ),
-            SizedBox(width: 9),
-            SelectableText(
-              warrantiKe == true
-                  ? 'Waranti anda sah sehingga $warrantyAkhir'
-                  : tengahRepair == true
-                      ? 'Peranti anda sedang dibaiki'
-                      : 'Waranti anda sudah tamat pada $warrantyAkhir',
-              style: TextStyle(
-                fontSize: 13,
-                color: warrantiKe == true
-                    ? Colors.white60
-                    : isDark == true
-                        ? Colors.black54
-                        : Colors.white60,
-              ),
-            ),
-          ],
-        ),
-      ],
+      ),
     ),
   );
 }

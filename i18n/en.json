@@ -108,5 +108,17 @@
     "cancel" : "Cancel",
     "signinfirst" : "Oh No! You must sign in first!",
     "signinfirstsub" : "Sign in to your Af.Fix Account to check your E-Warranty status and all your repaired devices!",
-    "visithelpcenter" : "Visit our help center"
+    "visithelpcenter" : "Visit our help center",
+    "repairhistory" : "Repair History",
+    "sorry" : "Sorry",
+    "nowaranty" : "it looks like your warranty has been expired or you do not have any warranty from us",
+    "activewarranty" : "Your valid E-Warranty status",
+    "nodevice" : "Looks like it's empty! It's mean you don't have repair any device or make appointment with us yet🙂",
+    "devicehistory" : "All your repaired devices",
+    "goodmorning" : "Good Morning",
+    "goodafternoon" : "Good Afteroon",
+    "goodevening" : "Good Evening",
+    "validuntil" : "Your E-Warranty valid until",
+    "beingrepair" : "Your device is being repair",
+    "expired" : "Your warranty has been expired at"
 }

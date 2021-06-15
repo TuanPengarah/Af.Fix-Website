@@ -1,10 +1,12 @@
+import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/screen/e-warranty/ui/card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:intl/intl.dart';
 
-StreamBuilder<QuerySnapshot> eWarrantyPage(String _uidText, String _name) {
+StreamBuilder<QuerySnapshot> eWarrantyPage(
+    String _uidText, String _name, bool isMobile) {
   return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('customer')
@@ -43,7 +45,7 @@ StreamBuilder<QuerySnapshot> eWarrantyPage(String _uidText, String _name) {
                     ),
                     SizedBox(height: 15),
                     SelectableText(
-                      'Maaf $_name nampak gayanya waranti anda sudah tamat atau anda tidak mempunyai sebarang waranti daripada kami',
+                      '${AppLocalizations.of(context).translate('sorry')} $_name ${AppLocalizations.of(context).translate('nowaranty')}',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.grey),
                     ),
@@ -54,12 +56,13 @@ StreamBuilder<QuerySnapshot> eWarrantyPage(String _uidText, String _name) {
         return SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            padding: EdgeInsets.symmetric(
+                horizontal: isMobile == true ? 20 : 80, vertical: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SelectableText(
-                  'E-Waranti anda yang masih aktif',
+                  '${AppLocalizations.of(context).translate('activewarranty')}',
                   style: TextStyle(
                     letterSpacing: 1.1,
                     fontWeight: FontWeight.w800,
