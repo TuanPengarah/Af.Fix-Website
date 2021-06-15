@@ -108,5 +108,17 @@
     "cancel" : "Batal",
     "signinfirst" : "Whoops! Anda mesti log masuk terlebih dahulu!",
     "signinfirstsub" : "Log masuk ke akaun Af.Fix untuk memeriksa status E-warranty anda dan juga memeriksa kesemuaan peranti anda yang telah dibaiki!",
-    "visithelpcenter" : "Lawati pusat bantuan kami"
+    "visithelpcenter" : "Lawati pusat bantuan kami",
+    "repairhistory" : "Sejarah Baiki",
+    "sorry" : "Maaf",
+    "nowaranty" : "nampak gayanya waranti anda sudah tamat atau anda tidak mempunyai sebarang waranti daripada kami",
+    "activewarranty" : "E-Waranti anda yang masih aktif",
+    "nodevice" : "Tiada rekod ditemui! Ini bermakna anda tidak pernah baiki atau buat temujanji dengan kami🙂",
+    "devicehistory" : "Rekod peranti yang dibaiki",
+    "goodmorning" : "Selamat Pagi",
+    "goodafternoon" : "Selemat Tengah Hari",
+    "goodevening" : "Selamat Petang",
+    "validuntil" : "E-Waranti anda sah sehingga",
+    "beingrepair" : "Peranti anda sedang dibaiki",
+    "expired" : "Waranti anda sudah tamat pada"
 }
