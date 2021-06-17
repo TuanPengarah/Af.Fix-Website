@@ -51,11 +51,13 @@
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers --> 
+       
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
   <script src="/__/firebase/8.4.1/firebase-analytics.js"></script>
   <script src="/__/firebase/init.js"></script>
+  <meta name="google-signin-client_id" content="432957311030-1q5qt1dk84vbgou3525kikcfagbpku18.apps.googleusercontent.com">
 
   <script>
   // Your web app's Firebase configuration
@@ -72,13 +74,13 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+  // firebase.analytics();
 </script>
 
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('flutter-first-frame', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js?v=2032402438');
+        navigator.serviceWorker.register('flutter_service_worker.js?v=369989747');
       });
     }
   </script>
