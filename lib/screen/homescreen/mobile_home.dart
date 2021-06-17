@@ -27,6 +27,7 @@ class MobileHomeView extends StatelessWidget {
     String _userName = Provider.of<UpdateUI>(context).userName;
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
     bool _isAnony = Provider.of<UpdateUI>(context).checkAnonymous;
+    String _userPhoto = Provider.of<UpdateUI>(context).userPhoto;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       endDrawer: Drawer(
@@ -37,6 +38,22 @@ class MobileHomeView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  CircleAvatar(
+                    minRadius: 30,
+                    backgroundColor: _isDarkMode == true
+                        ? Colors.red[900]
+                        : Colors.teal[900],
+                    child: _userPhoto != null
+                        ? ClipOval(
+                            child: Image.network(
+                              _userPhoto,
+                              height: 63,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        : Container(),
+                  ),
+                  SizedBox(height: 15),
                   AutoSizeText(
                     _isAnony == true
                         ? '${AppLocalizations.of(context).translate('usernotsign')}'

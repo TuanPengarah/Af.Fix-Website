@@ -1,5 +1,6 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/model/auth_services.dart';
+import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,9 @@ Future<void> showLogoutDialog(BuildContext context) async {
         TextButton(
           onPressed: () {
             WidgetsBinding.instance.addPostFrameCallback((_) async {
-              await context.read<AuthenticationServices>().signOut();
+              await context.read<AuthenticationServices>().signOut().then(
+                  (value) => Provider.of<UpdateUI>(context, listen: false)
+                      .setUserPhoto(null));
               Navigator.of(context).pop();
             });
           },

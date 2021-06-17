@@ -12,6 +12,7 @@ import 'package:velocity_x/velocity_x.dart';
 Future<void> showSettingMenu(BuildContext context) async {
   String _userName = Provider.of<UpdateUI>(context, listen: false).userName;
   bool _isAnony = Provider.of<UpdateUI>(context, listen: false).checkAnonymous;
+  String _photo = Provider.of<UpdateUI>(context, listen: false).userPhoto;
   int selected = await showMenu(
     context: context,
     position: RelativeRect.fromLTRB(430, 80, 10, 100),
@@ -24,6 +25,7 @@ Future<void> showSettingMenu(BuildContext context) async {
             children: [
               CircleAvatar(
                 backgroundColor: kColorWhiteDark,
+                backgroundImage: _photo != null ? NetworkImage(_photo) : null,
               ),
               SizedBox(
                 width: 10,

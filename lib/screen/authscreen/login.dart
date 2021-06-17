@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:affix_web/screen/authscreen/ui/google_button.dart';
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/drawer/drawer.dart';
@@ -10,6 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:string_validator/string_validator.dart';
@@ -114,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                                 controller: _emailInput,
                                 type: TextInputType.emailAddress,
                                 title: 'Email',
-                                subtitle: 'abdullah@email.com',
+                                subtitle: 'contoh@email.com',
                                 icon: Icon(Icons.email),
                                 err: _emailMiss
                                     ? '${AppLocalizations.of(context).translate('noemail')}'
@@ -126,9 +127,10 @@ class _LoginPageState extends State<LoginPage> {
                                 isDarkMode: _isDarkMode,
                                 controller: _passwordInput,
                                 type: TextInputType.visiblePassword,
-                                title: 'Password',
-                                subtitle: '12345678',
-                                isPassword: true,
+                                title:
+                                    '${AppLocalizations.of(context).translate('password')}',
+                                subtitle: '123456',
+                                isPassword: !_visibilityPassword,
                                 icon: Icon(Icons.password),
                                 err: _passwordMiss
                                     ? '${AppLocalizations.of(context).translate('nopassword')}'
@@ -151,6 +153,25 @@ class _LoginPageState extends State<LoginPage> {
                                   onTap: () {
                                     _loginAction(context);
                                   }),
+                              orDivivder(),
+                              SizedBox(height: 30),
+                              Row(
+                                children: [
+                                  OtherButtonSign(
+                                    title:
+                                        '${AppLocalizations.of(context).translate('googlesignbutton')}',
+                                    icon: MaterialCommunityIcons.google,
+                                    buttonItem: 0,
+                                  ),
+                                  SizedBox(width: 20),
+                                  OtherButtonSign(
+                                    title:
+                                        '${AppLocalizations.of(context).translate('emailsignbutton')}',
+                                    icon: MaterialCommunityIcons.email,
+                                    buttonItem: 1,
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ],
@@ -168,19 +189,11 @@ class _LoginPageState extends State<LoginPage> {
                           horizontal: 25, vertical: 15),
                       width: MediaQuery.of(context).size.width,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          InkWell(
-                            onTap: () {
-                              final checkUID =
-                                  FirebaseAuth.instance.currentUser;
-                              print(checkUID.email);
-                            },
-                            child: Image(
-                              image: NetworkImage(kImageAuth),
-                              height: 300,
-                              fit: BoxFit.cover,
-                            ),
+                          Image(
+                            image: NetworkImage(kImageAuth),
+                            height: 300,
+                            fit: BoxFit.cover,
                           ),
                           SizedBox(height: 19),
                           _title(context, 35),
@@ -193,7 +206,7 @@ class _LoginPageState extends State<LoginPage> {
                             controller: _emailInput,
                             type: TextInputType.emailAddress,
                             title: 'Email',
-                            subtitle: 'abdullah@email.com',
+                            subtitle: 'contoh@email.com',
                             icon: Icon(Icons.email),
                             err: _emailMiss
                                 ? '${AppLocalizations.of(context).translate('noemail')}'
@@ -205,7 +218,8 @@ class _LoginPageState extends State<LoginPage> {
                             isDarkMode: _isDarkMode,
                             controller: _passwordInput,
                             type: TextInputType.visiblePassword,
-                            title: 'Password',
+                            title:
+                                '${AppLocalizations.of(context).translate('password')}',
                             subtitle: '123456',
                             isPassword: !_visibilityPassword,
                             icon: Icon(Icons.password),
@@ -229,6 +243,21 @@ class _LoginPageState extends State<LoginPage> {
                               onTap: () {
                                 _loginAction(context);
                               }),
+                          orDivivder(),
+                          SizedBox(height: 30),
+                          OtherButtonSign(
+                            title:
+                                '${AppLocalizations.of(context).translate('googlesignbutton')}',
+                            icon: MaterialCommunityIcons.google,
+                            buttonItem: 0,
+                          ),
+                          SizedBox(height: 10),
+                          OtherButtonSign(
+                            title:
+                                '${AppLocalizations.of(context).translate('emailsignbutton')}',
+                            icon: MaterialCommunityIcons.email,
+                            buttonItem: 1,
+                          ),
                         ],
                       ),
                     ),
@@ -275,6 +304,36 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Row orDivivder() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          width: 100,
+          child: Divider(
+            thickness: 2,
+          ),
+        ),
+        SizedBox(width: 10),
+        Text(
+          '${AppLocalizations.of(context).translate('or')}',
+          style: TextStyle(
+            fontSize: 13,
+            color: Colors.grey,
+          ),
+        ),
+        SizedBox(width: 10),
+        Container(
+          width: 100,
+          child: Divider(
+            thickness: 2,
+          ),
+        ),
+      ],
     );
   }
 
@@ -348,6 +407,7 @@ class _LoginPageState extends State<LoginPage> {
           //show status
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
+              backgroundColor: Colors.amber[900],
               content: Text(
                   '${Provider.of<AuthenticationServices>(context, listen: false).status}'),
             ),

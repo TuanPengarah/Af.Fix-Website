@@ -1,4 +1,5 @@
 import 'package:affix_web/config/app_localizations.dart';
+import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/menu/menu_change_language.dart';
 import 'package:affix_web/menu/menu_change_theme.dart';
@@ -27,6 +28,7 @@ class EndDrawer extends StatelessWidget {
     String _userName = Provider.of<UpdateUI>(context).userName;
     bool _isAnony = Provider.of<UpdateUI>(context).checkAnonymous;
     bool _isMobile = Provider.of<UpdateUI>(context).isMobile;
+    String _userPhoto = Provider.of<UpdateUI>(context).userPhoto;
     return Drawer(
       child: ListView(
         children: [
@@ -35,6 +37,23 @@ class EndDrawer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                CircleAvatar(
+                  minRadius: 30,
+                  backgroundColor:
+                      _isDarkMode == true ? Colors.red[900] : Colors.teal[900],
+                  child: _userPhoto != null && _isAnony == false
+                      ? ClipOval(
+                          child: Image.network(
+                            _userPhoto != null && _isAnony == false
+                                ? _userPhoto
+                                : kImageCustomerFaridzul,
+                            height: 63,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : Container(),
+                ),
+                SizedBox(height: 15),
                 AutoSizeText(
                   _isAnony == true
                       ? '${AppLocalizations.of(context).translate('usernotsign')}'
@@ -55,6 +74,10 @@ class EndDrawer extends StatelessWidget {
               ],
             ),
             decoration: BoxDecoration(
+              // image: _userPhoto != ''
+              //     ? DecorationImage(
+              //         image: NetworkImage(_userPhoto), fit: BoxFit.cover)
+              //     : null,
               color: Theme.of(context).primaryColor,
             ),
           ),

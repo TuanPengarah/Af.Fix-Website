@@ -1,16 +1,19 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/drawer/drawer.dart';
+import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/e-warranty/mobileView/ewarranty_page.dart';
 import 'package:affix_web/screen/e-warranty/mobileView/history_page.dart';
 import 'package:affix_web/screen/e-warranty/ui/avatar.dart';
 import 'package:affix_web/screen/e-warranty/ui/tab_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import 'dekstopView/ui/tab_button_dekstop.dart';
 
@@ -36,7 +39,7 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
   PageController _pageControllerDekstop;
   bool _onHover = true;
   bool _isMobile = false;
-
+  User _user = FirebaseAuth.instance.currentUser;
   void _clickPage(int pageNum) {
     setState(() {
       _selectablePage = pageNum;
@@ -103,56 +106,72 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
                         _onHover = false;
                       });
                     },
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 1000),
-                      curve: Curves.fastLinearToSlowEaseIn,
-                      height: constraints.maxHeight,
-                      width: _onHover == true ? 250 : 80,
-                      color: Theme.of(context).primaryColor,
-                      child: SingleChildScrollView(
-                        physics: NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Column(
-                                children: [
-                                  SizedBox(height: 60),
-                                  userProfile(
-                                      _name, context, _isMobile, _isDarkMode),
-                                ],
-                              ),
-                              SizedBox(height: 50),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TabButtonDekstop(
-                                    icon: MaterialCommunityIcons
-                                        .book_open_outline,
-                                    label:
-                                        '${AppLocalizations.of(context).translate('ewarranti')}',
-                                    selectablePage: _selectablePage,
-                                    pageNumber: 0,
-                                    onTap: () {
-                                      _clickPageDekstop(0);
-                                    },
-                                  ),
-                                  TabButtonDekstop(
-                                    icon: Icons.history,
-                                    label:
-                                        '${AppLocalizations.of(context).translate('repairhistory')}',
-                                    selectablePage: _selectablePage,
-                                    pageNumber: 1,
-                                    onTap: () {
-                                      _clickPageDekstop(1);
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ],
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _onHover = !_onHover;
+                        });
+                      },
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 1000),
+                        curve: Curves.fastLinearToSlowEaseIn,
+                        height: constraints.maxHeight,
+                        width: _onHover == true ? 250 : 80,
+                        color: Theme.of(context).primaryColor,
+                        child: SingleChildScrollView(
+                          physics: NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Column(
+                                  children: [
+                                    SizedBox(height: 60),
+                                    userProfile(
+                                        _name, context, _isMobile, _isDarkMode),
+                                  ],
+                                ),
+                                SizedBox(height: 50),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TabButtonDekstop(
+                                      icon: MaterialCommunityIcons
+                                          .book_open_outline,
+                                      label:
+                                          '${AppLocalizations.of(context).translate('ewarranti')}',
+                                      selectablePage: _selectablePage,
+                                      pageNumber: 0,
+                                      onTap: () {
+                                        _clickPageDekstop(0);
+                                      },
+                                    ),
+                                    TabButtonDekstop(
+                                      icon: Icons.history,
+                                      label:
+                                          '${AppLocalizations.of(context).translate('repairhistory')}',
+                                      selectablePage: _selectablePage,
+                                      pageNumber: 1,
+                                      onTap: () {
+                                        _clickPageDekstop(1);
+                                      },
+                                    ),
+                                    TabButtonDekstop(
+                                      icon: Icons.person,
+                                      label: 'Profile',
+                                      selectablePage: _selectablePage,
+                                      pageNumber: 2,
+                                      onTap: () {
+                                        _clickPageDekstop(2);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -171,7 +190,24 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
                       children: [
                         eWarrantyPage(_uidText, _name, _isMobile),
                         historyRepairPage(
-                            _uidText, _name, _isDarkMode, _isMobile)
+                            _uidText, _name, _isDarkMode, _isMobile),
+                        Container(
+                          child: Center(
+                            child: InkWell(
+                              onTap: () async {
+                                await context
+                                    .read<AuthenticationServices>()
+                                    .linktoGoogle();
+
+                                Provider.of<UpdateUI>(context, listen: false)
+                                    .setUserPhoto(_user.photoURL);
+                              },
+                              child: Text(
+                                'Profile Page',
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -261,7 +297,7 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  VxNavigator.of(context).popToRoot();
                 },
                 tooltip:
                     '${AppLocalizations.of(context).translate('buttonclose')}',

@@ -1,17 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:intl/intl.dart';
 
 class AuthenticationServices extends ChangeNotifier {
   final FirebaseAuth _firebaseAuthWeb;
   String status = 'Sign in completed!';
   bool isError = false;
   AuthenticationServices(this._firebaseAuthWeb);
-
-  // Stream<User> get authStateChanges {
-
-  //   return _firebaseAuthWeb.authStateChanges();
-  // }
 
   getError(String e) {
     status = e;
@@ -33,6 +32,13 @@ class AuthenticationServices extends ChangeNotifier {
     final user = _firebaseAuthWeb.currentUser;
     final userName = user.displayName;
     return userName;
+  }
+
+  Future<String> getUserPhoto() async {
+    final user = _firebaseAuthWeb.currentUser;
+    final userPhoto = user.photoURL;
+
+    return userPhoto;
   }
 
   Future<String> getEmail() async {
@@ -81,5 +87,86 @@ class AuthenticationServices extends ChangeNotifier {
     } on FirebaseException catch (e) {
       return e.message;
     }
+  }
+
+  Future<void> linktoGoogle() async {
+    User _user = _firebaseAuthWeb.currentUser;
+    // Trigger the authentication flow
+    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    return await _user.linkWithCredential(credential).then((value) {
+      _user.updateProfile(
+          displayName: googleUser.displayName, photoURL: googleUser.photoUrl);
+    });
+  }
+
+  Future<void> signToGoogle() async {
+    try {
+      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      // Create a new credential
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      isError = false;
+      return await _firebaseAuthWeb.signInWithCredential(credential);
+    } on PlatformException catch (e) {
+      isError = true;
+      if (e.code == 'popup_closed_by_user') {
+        getError('Sign in failed!');
+      }
+      // getError(e.toString());
+    }
+  }
+
+  Future<void> createUserData() async {
+    User _user = _firebaseAuthWeb.currentUser;
+    String tarikh = '';
+    // String tarikh() {
+    //   var now = new DateTime.now();
+    //   var formatter = new DateFormat('dd-MM-yyyy');
+    //   return formatter.format(now);
+    // }
+
+    //fungsi search (LOOP Method)
+    List<String> splitList = _user.displayName.split(" ");
+    List<String> indexList = [];
+    for (int i = 0; i < splitList.length; i++) {
+      for (int y = 1; y < splitList[i].length + 1; y++)
+        indexList.add(splitList[i].substring(0, y).toLowerCase());
+    }
+    var now = DateTime.now();
+    var formatter = new DateFormat('dd-M-yyyy');
+    tarikh = formatter.format(now);
+    Map<String, dynamic> createUser = {
+      'Tarikh': tarikh,
+      'Nama': '${_user.displayName}',
+      'No Phone': '${_user.phoneNumber}',
+      'Email': '${_user.email}',
+      'Search Index': indexList,
+    };
+    await FirebaseFirestore.instance
+        .collection('customer')
+        .doc(_user.uid)
+        .set(createUser)
+        .then(
+            (value) => print('User has been succesfully created on database!'));
   }
 }

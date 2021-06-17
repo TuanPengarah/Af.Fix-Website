@@ -86,6 +86,9 @@ class _LandingPageState extends State<LandingPage> {
         await context.read<AuthenticationServices>().getEmail();
     Provider.of<UpdateUI>(context, listen: false)
         .setUserName(retrieve != null ? retrieve : retrieveEmail);
+    String userPhoto =
+        await context.read<AuthenticationServices>().getUserPhoto();
+
     if (retrieve == null && retrieveEmail == null) {
       Provider.of<UpdateUI>(context, listen: false).setAnonymous(true);
       Provider.of<UpdateUI>(context, listen: false).setUserName(
@@ -95,6 +98,7 @@ class _LandingPageState extends State<LandingPage> {
     }
 
     Provider.of<UpdateUI>(context, listen: false).setUID(uid);
+    Provider.of<UpdateUI>(context, listen: false).setUserPhoto(userPhoto);
   }
 
   _registerAnonymous(BuildContext context) async {
@@ -105,7 +109,10 @@ class _LandingPageState extends State<LandingPage> {
       if (_auth.currentUser != null) {
         _authServices(context);
       }
+      // String nullPhoto;
+      // Provider.of<UpdateUI>(context, listen: false).setUserPhoto(nullPhoto);
     });
+
     // await context.read<AuthenticationServices>().anonymousSignIn();
     // String uid = await context.read<AuthenticationServices>().getUID();
     // Provider.of<UpdateUI>(context, listen: false).setUserName('Anonymous');

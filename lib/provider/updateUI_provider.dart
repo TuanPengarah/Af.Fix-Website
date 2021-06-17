@@ -14,7 +14,13 @@ class UpdateUI extends ChangeNotifier {
   String uid;
   bool checkAnonymous = false;
   String userName = 'Af-Fix Smartphone Repair';
+  String userPhoto;
   bool isRepair = true;
+
+  setUserPhoto(String newPhoto) {
+    userPhoto = newPhoto;
+    notifyListeners();
+  }
 
   setRepair(bool repairType) {
     isRepair = repairType;
