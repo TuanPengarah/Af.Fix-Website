@@ -6,6 +6,7 @@ import 'package:affix_web/drawer/drawer.dart';
 import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
+import 'package:affix_web/screen/authscreen/ui/text_input.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,14 +17,6 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:string_validator/string_validator.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-extension Utility on BuildContext {
-  void nextEditableTextFocus() {
-    do {
-      FocusScope.of(this).nextFocus();
-    } while (FocusScope.of(this).focusedChild.context.widget is! EditableText);
-  }
-}
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -31,15 +24,10 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _emailInput = TextEditingController();
-
   final _passwordInput = TextEditingController();
-
   bool _emailMiss = false;
-
   bool _passwordMiss = false;
-
   DocumentSnapshot snapshot;
-
   bool _visibilityPassword;
 
   Future<dynamic> setUserName(String uid) async {
@@ -109,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                               SizedBox(height: 5),
                               _subtitle(context),
                               SizedBox(height: 30),
-                              _authTextInput(
+                              authTextInput(
                                 context: context,
                                 isDarkMode: _isDarkMode,
                                 controller: _emailInput,
@@ -120,9 +108,13 @@ class _LoginPageState extends State<LoginPage> {
                                 err: _emailMiss
                                     ? '${AppLocalizations.of(context).translate('noemail')}'
                                     : null,
+                                buttonController: _buttonController,
+                                onEnter: () {
+                                  context.nextEditableTextFocus();
+                                },
                               ),
                               SizedBox(height: 15),
-                              _authTextInput(
+                              authTextInput(
                                 context: context,
                                 isDarkMode: _isDarkMode,
                                 controller: _passwordInput,
@@ -146,7 +138,11 @@ class _LoginPageState extends State<LoginPage> {
                                       ? Icons.visibility_off
                                       : Icons.visibility),
                                 ),
-                                isTextFieldPassword: true,
+                                buttonController: _buttonController,
+                                onEnter: () {
+                                  FocusScope.of(context).unfocus();
+                                  _buttonController.start();
+                                },
                               ),
                               _buttonAuth(
                                   context: context,
@@ -200,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(height: 5),
                           _subtitle(context),
                           SizedBox(height: 30),
-                          _authTextInput(
+                          authTextInput(
                             context: context,
                             isDarkMode: _isDarkMode,
                             controller: _emailInput,
@@ -211,9 +207,13 @@ class _LoginPageState extends State<LoginPage> {
                             err: _emailMiss
                                 ? '${AppLocalizations.of(context).translate('noemail')}'
                                 : null,
+                            buttonController: _buttonController,
+                            onEnter: () {
+                              context.nextEditableTextFocus();
+                            },
                           ),
                           SizedBox(height: 15),
-                          _authTextInput(
+                          authTextInput(
                             context: context,
                             isDarkMode: _isDarkMode,
                             controller: _passwordInput,
@@ -236,7 +236,11 @@ class _LoginPageState extends State<LoginPage> {
                                   ? Icons.visibility_off
                                   : Icons.visibility),
                             ),
-                            isTextFieldPassword: true,
+                            buttonController: _buttonController,
+                            onEnter: () {
+                              FocusScope.of(context).unfocus();
+                              _buttonController.start();
+                            },
                           ),
                           _buttonAuth(
                               context: context,
@@ -466,88 +470,6 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(color: kColorWhite),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  SizedBox _authTextInput({
-    BuildContext context,
-    bool isDarkMode,
-    TextEditingController controller,
-    String title,
-    String subtitle,
-    bool isPassword = false,
-    Icon icon,
-    String err,
-    TextInputType type,
-    IconButton iconButton,
-    bool isTextFieldPassword = false,
-  }) {
-    return SizedBox(
-      width: 400,
-      child: TextField(
-        obscureText: isPassword,
-        controller: controller,
-        textAlign: TextAlign.center,
-        keyboardType: type ?? TextInputType.emailAddress,
-        style: TextStyle(fontWeight: FontWeight.bold),
-        onEditingComplete: () {
-          _inputComplete() {
-            FocusScope.of(context).unfocus();
-            _buttonController.start();
-          }
-
-          isPassword == false
-              ? context.nextEditableTextFocus()
-              : _inputComplete();
-        },
-        decoration: InputDecoration(
-          prefixIcon: Padding(
-              padding: EdgeInsetsDirectional.only(start: 12, end: 18),
-              child: isPassword == false && isTextFieldPassword == false
-                  ? Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: icon,
-                    )
-                  : iconButton),
-          hintText: subtitle,
-          errorText: err,
-          errorStyle: TextStyle(color: Colors.amber.shade800),
-          hintStyle: TextStyle(
-            color: Colors.grey,
-            fontSize: 13,
-          ),
-          filled: true,
-          alignLabelWithHint: true,
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          labelText: title,
-          labelStyle: TextStyle(
-            color: isDarkMode == false ? Colors.white : kColorGrey,
-            fontSize: 13,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Colors.grey, width: 2),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
-              color: Theme.of(context).primaryColor,
-              width: 2.0,
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
-              color: Colors.amber.shade800,
-              width: 2.5,
-            ),
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Colors.white),
-          ),
         ),
       ),
     );

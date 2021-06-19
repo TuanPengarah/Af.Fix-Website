@@ -28,6 +28,7 @@ class MyThemes {
     appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade900),
     scaffoldBackgroundColor: kColorDarkScaffold,
     primaryColor: Colors.teal,
+    toggleableActiveColor: Colors.teal,
     textSelectionTheme: TextSelectionThemeData(
       selectionColor: kColorRed,
       cursorColor: kColorRed,
@@ -74,11 +75,13 @@ class MyThemes {
       // color: kColorWhite,
       elevation: 5,
       brightness: Brightness.dark,
+
       backgroundColor: kColorWhite,
       foregroundColor: kColorGrey,
     ),
     scaffoldBackgroundColor: kColorWhite,
     primaryColor: Colors.red,
+    toggleableActiveColor: Colors.red,
     colorScheme: ColorScheme.light(),
     textSelectionTheme: TextSelectionThemeData(
       selectionColor: Colors.red[900],

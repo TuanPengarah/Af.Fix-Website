@@ -67,7 +67,7 @@ class OtherButtonSign extends StatelessWidget {
                   } else {
                     context
                         .read<AuthenticationServices>()
-                        .createUserData()
+                        .createUserData('')
                         .then((value) {
                       progressDialog.dismiss();
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -98,7 +98,12 @@ class OtherButtonSign extends StatelessWidget {
                 );
               }
             } else if (buttonItem == 1) {
-              showBottomSignUp(context);
+              showBottomSignUp(context).then((value) {
+                User _user = FirebaseAuth.instance.currentUser;
+                if (_user != null) {
+                  Navigator.of(context).pop();
+                }
+              });
               print('SubhanAllah');
             }
           }),

@@ -72,19 +72,40 @@ class AuthenticationServices extends ChangeNotifier {
         getError('Wrong Password!');
         isError = true;
         return 'wrong password';
+      } else {
+        isError = true;
+        getError(e.message);
+        return e.message;
       }
-      isError = true;
-      getError(e.message);
-      return e.message;
     }
   }
 
-  Future<String> signUp({String email, String password}) async {
+  Future<String> signUp(
+      {String email, String password, String name, String phone}) async {
     try {
-      await _firebaseAuthWeb.createUserWithEmailAndPassword(
-          email: email, password: password);
+      await _firebaseAuthWeb
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((credential) async {
+        await credential.user.updateProfile(displayName: name);
+        await createUserData(phone);
+      });
       return 'Signed up';
     } on FirebaseException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+        isError = true;
+        getError('Password is to weak');
+        return e.message;
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+        isError = true;
+        getError(e.message);
+        return e.message;
+      }
+
+      isError = true;
+      getError(e.message);
+      print(e.code);
       return e.message;
     }
   }
@@ -129,14 +150,15 @@ class AuthenticationServices extends ChangeNotifier {
       return await _firebaseAuthWeb.signInWithCredential(credential);
     } on PlatformException catch (e) {
       isError = true;
+      print(e.code);
+      getError(e.message);
       if (e.code == 'popup_closed_by_user') {
         getError('Sign in failed!');
       }
-      // getError(e.toString());
     }
   }
 
-  Future<void> createUserData() async {
+  Future<void> createUserData(String phone) async {
     User _user = _firebaseAuthWeb.currentUser;
     String tarikh = '';
     // String tarikh() {
@@ -158,7 +180,7 @@ class AuthenticationServices extends ChangeNotifier {
     Map<String, dynamic> createUser = {
       'Tarikh': tarikh,
       'Nama': '${_user.displayName}',
-      'No Phone': '${_user.phoneNumber}',
+      'No Phone': '$phone',
       'Email': '${_user.email}',
       'Search Index': indexList,
     };
