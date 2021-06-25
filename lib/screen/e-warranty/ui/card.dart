@@ -187,19 +187,23 @@ Material _normalCard(
                           : Colors.white,
                 ),
                 SizedBox(width: 9),
-                SelectableText(
-                  warrantiKe == true
-                      ? '${AppLocalizations.of(context).translate('validuntil')} $warrantyAkhir'
-                      : tengahRepair == true
-                          ? '${AppLocalizations.of(context).translate('beingrepair')}'
-                          : '${AppLocalizations.of(context).translate('expired')} $warrantyAkhir',
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: warrantiKe == true
-                        ? Colors.white60
-                        : isDark == true
-                            ? Colors.black54
-                            : Colors.white60,
+                Expanded(
+                  child: Text(
+                    warrantiKe == true
+                        ? '${AppLocalizations.of(context).translate('validuntil')} $warrantyAkhir'
+                        : tengahRepair == true
+                            ? '${AppLocalizations.of(context).translate('beingrepair')}'
+                            : '${AppLocalizations.of(context).translate('expired')} $warrantyAkhir',
+                    overflow: TextOverflow.clip,
+                    maxLines: 2,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: warrantiKe == true
+                          ? Colors.white60
+                          : isDark == true
+                              ? Colors.black54
+                              : Colors.white60,
+                    ),
                   ),
                 ),
               ],

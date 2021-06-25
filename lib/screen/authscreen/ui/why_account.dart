@@ -1,3 +1,4 @@
+import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -19,11 +20,14 @@ class WhyAccount extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SelectableText(
-            'Let\'s create your account!',
-            style: TextStyle(
-              fontSize: 50,
-              fontWeight: FontWeight.w900,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: SelectableText(
+              '${AppLocalizations.of(context).translate('titlecreateacc')}',
+              style: TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.w900,
+              ),
             ),
           ),
           SizedBox(height: 5),
@@ -31,12 +35,14 @@ class WhyAccount extends StatelessWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: 'Already have an account? ',
+                  text:
+                      '${AppLocalizations.of(context).translate('alreadyaccount')} ',
                   style: TextStyle(
                       color: _isDarkMode == true ? kColorGrey : Colors.white),
                 ),
                 TextSpan(
-                    text: 'Click here',
+                    text:
+                        '${AppLocalizations.of(context).translate('clickhere')}',
                     style: TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight.bold,
@@ -52,27 +58,27 @@ class WhyAccount extends StatelessWidget {
           advantage(
             context: context,
             icon: MaterialCommunityIcons.book_open_outline,
-            title: 'Get access to all your warranty status',
+            title: '${AppLocalizations.of(context).translate('advantage1')}',
           ),
           advantage(
             context: context,
             icon: Icons.browser_not_supported_sharp,
-            title: 'Track your repair status without entering MySID',
+            title: '${AppLocalizations.of(context).translate('advantage2')}',
           ),
           advantage(
             context: context,
             icon: Icons.notifications_active,
-            title: 'Get notified when your devices is ready to pickup',
+            title: '${AppLocalizations.of(context).translate('advantage3')}',
           ),
           advantage(
             context: context,
             icon: Icons.history,
-            title: 'Access to all your devices repair history',
+            title: '${AppLocalizations.of(context).translate('advantage4')}',
           ),
           advantage(
             context: context,
             icon: MaterialCommunityIcons.sale,
-            title: 'Get a discounted price on each repair',
+            title: '${AppLocalizations.of(context).translate('advantage5')}',
           ),
           SizedBox(height: 30),
         ],

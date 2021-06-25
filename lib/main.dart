@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
                       child: LoginPage(),
                       fullscreenDialog: true,
                     ),
-                MyRoutes.ewarranty: (_, __) => MaterialPage(
+                MyRoutes.ewarranty: (_, params) => MaterialPage(
                       child: EwarrantyWrapper(),
                       fullscreenDialog: true,
                     )

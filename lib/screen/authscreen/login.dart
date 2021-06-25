@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:affix_web/screen/authscreen/ui/bottom_signup.dart';
 import 'package:affix_web/screen/authscreen/ui/google_button.dart';
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
@@ -9,6 +10,7 @@ import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/authscreen/ui/text_input.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -144,30 +146,22 @@ class _LoginPageState extends State<LoginPage> {
                                   _buttonController.start();
                                 },
                               ),
+                              SizedBox(height: 30),
                               _buttonAuth(
                                   context: context,
                                   onTap: () {
                                     _loginAction(context);
                                   }),
+                              SizedBox(height: 15),
                               orDivivder(),
-                              SizedBox(height: 30),
-                              Row(
-                                children: [
-                                  OtherButtonSign(
-                                    title:
-                                        '${AppLocalizations.of(context).translate('googlesignbutton')}',
-                                    icon: MaterialCommunityIcons.google,
-                                    buttonItem: 0,
-                                  ),
-                                  SizedBox(width: 20),
-                                  OtherButtonSign(
-                                    title:
-                                        '${AppLocalizations.of(context).translate('emailsignbutton')}',
-                                    icon: MaterialCommunityIcons.email,
-                                    buttonItem: 1,
-                                  ),
-                                ],
+                              SizedBox(height: 15),
+                              OtherButtonSign(
+                                title:
+                                    '${AppLocalizations.of(context).translate('googlesignbutton')}',
+                                icon: MaterialCommunityIcons.google,
                               ),
+                              SizedBox(height: 20),
+                              newUser(context, _isDarkMode),
                             ],
                           ),
                         ],
@@ -242,26 +236,23 @@ class _LoginPageState extends State<LoginPage> {
                               _buttonController.start();
                             },
                           ),
+                          SizedBox(height: 30),
                           _buttonAuth(
                               context: context,
                               onTap: () {
                                 _loginAction(context);
                               }),
-                          orDivivder(),
                           SizedBox(height: 30),
+                          newUser(context, _isDarkMode),
+                          SizedBox(height: 30),
+                          orDivivder(),
+                          SizedBox(height: 10),
                           OtherButtonSign(
                             title:
                                 '${AppLocalizations.of(context).translate('googlesignbutton')}',
                             icon: MaterialCommunityIcons.google,
-                            buttonItem: 0,
                           ),
                           SizedBox(height: 10),
-                          OtherButtonSign(
-                            title:
-                                '${AppLocalizations.of(context).translate('emailsignbutton')}',
-                            icon: MaterialCommunityIcons.email,
-                            buttonItem: 1,
-                          ),
                         ],
                       ),
                     ),
@@ -306,6 +297,36 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  RichText newUser(BuildContext context, bool isDarkMode) {
+    return RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+              text: '${AppLocalizations.of(context).translate('newuser?')} ',
+              style: TextStyle(
+                  color: isDarkMode == true ? kColorGrey : Colors.white)),
+          TextSpan(
+              text:
+                  '${AppLocalizations.of(context).translate('emailsignbutton')}',
+              style: TextStyle(
+                color: Colors.blue,
+                fontWeight: FontWeight.bold,
+              ),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  showBottomSignUp(context).then((value) {
+                    User _user = FirebaseAuth.instance.currentUser;
+                    if (_user != null && !_user.isAnonymous) {
+                      Navigator.of(context).pop();
+                    }
+                  });
+                  print('SubhanAllah');
+                }),
         ],
       ),
     );
@@ -450,8 +471,7 @@ class _LoginPageState extends State<LoginPage> {
 
   SizedBox _buttonAuth({BuildContext context, Function onTap}) {
     return SizedBox(
-      width: 180,
-      height: 120,
+      width: 400,
       child: RoundedLoadingButton(
         successColor: Theme.of(context).primaryColor,
         valueColor: kColorWhite,

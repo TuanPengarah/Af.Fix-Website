@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/screen/authscreen/ui/text_input.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:ndialog/ndialog.dart';
@@ -42,21 +44,23 @@ class _RegisterFormState extends State<RegisterForm> {
         authTextInput(
           context: context,
           controller: _nameController,
-          title: 'Nama',
-          subtitle: 'Nama anda',
+          title: '${AppLocalizations.of(context).translate('name')}',
+          subtitle: '${AppLocalizations.of(context).translate('yourname')}',
           icon: Icon(Icons.person),
           type: TextInputType.name,
           onEnter: () {
             context.nextEditableTextFocus();
           },
           isDarkMode: _isDarkMode,
-          err: _errName ? 'Sila masukkan nama anda' : null,
+          err: _errName
+              ? '${AppLocalizations.of(context).translate('pleasename')}'
+              : null,
         ),
         SizedBox(height: 20),
         authTextInput(
           context: context,
           controller: _phoneController,
-          title: 'Nombor Telefon',
+          title: '${AppLocalizations.of(context).translate('phonenumber')}',
           subtitle: '012-34567890',
           icon: Icon(Icons.call),
           type: TextInputType.phone,
@@ -64,7 +68,9 @@ class _RegisterFormState extends State<RegisterForm> {
             context.nextEditableTextFocus();
           },
           isDarkMode: _isDarkMode,
-          err: _errPhone ? 'Sila masukkan nombor telefon anda' : null,
+          err: _errPhone
+              ? '${AppLocalizations.of(context).translate('pleasenumber')}'
+              : null,
         ),
         SizedBox(height: 20),
         authTextInput(
@@ -78,22 +84,28 @@ class _RegisterFormState extends State<RegisterForm> {
             context.nextEditableTextFocus();
           },
           isDarkMode: _isDarkMode,
-          err: _errEmail ? 'Sila masukkan email yang sah' : null,
+          err: _errEmail
+              ? '${AppLocalizations.of(context).translate('pleaseemail')}'
+              : null,
         ),
         SizedBox(height: 20),
         authTextInput(
           context: context,
           controller: _passwordController,
-          title: 'Kata Laluan',
-          subtitle: 'Memerlukan 6 aksara',
+          title: '${AppLocalizations.of(context).translate('password')}',
+          subtitle:
+              '${AppLocalizations.of(context).translate('pleasepassword')}',
           icon: Icon(Icons.password),
           type: TextInputType.visiblePassword,
           isPassword: !_showPassword,
           onEnter: () {
-            context.nextEditableTextFocus();
+            FocusScope.of(context).unfocus();
+            _buttonController.start();
           },
           isDarkMode: _isDarkMode,
-          err: _errPassword ? 'Panjang password mesti melebihi 6 aksara' : null,
+          err: _errPassword
+              ? '${AppLocalizations.of(context).translate('pleasepassword')}'
+              : null,
         ),
         SizedBox(height: 8),
         Row(
@@ -108,7 +120,7 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
             SizedBox(width: 5),
             Text(
-              'Tunjukkan Password',
+              '${AppLocalizations.of(context).translate('showpassword')}',
               style: TextStyle(fontSize: 13),
             ),
           ],
@@ -128,11 +140,50 @@ class _RegisterFormState extends State<RegisterForm> {
               children: [
                 Icon(MaterialCommunityIcons.email),
                 SizedBox(width: 15),
-                Text('Buat akaun baru'),
+                Text(
+                    '${AppLocalizations.of(context).translate('createaccount')}'),
               ],
             ),
           ),
         ),
+        SizedBox(height: 10),
+        Container(
+          width: 400,
+          child: RichText(
+            text: TextSpan(
+              style: TextStyle(color: Colors.grey),
+              children: [
+                TextSpan(
+                  text: '${AppLocalizations.of(context).translate('policy1')} ',
+                ),
+                TextSpan(
+                  text: '${AppLocalizations.of(context).translate('tos')}',
+                  recognizer: TapGestureRecognizer()..onTap = () {},
+                  style: TextStyle(
+                    color: Colors.blue,
+                  ),
+                ),
+                TextSpan(
+                  text:
+                      ', ${AppLocalizations.of(context).translate('policy2')} ',
+                ),
+                TextSpan(
+                    text:
+                        '${AppLocalizations.of(context).translate('useragreement')} ',
+                    recognizer: TapGestureRecognizer()..onTap = () {},
+                    style: TextStyle(color: Colors.blue)),
+                TextSpan(
+                    text:
+                        ', ${AppLocalizations.of(context).translate('and')} '),
+                TextSpan(
+                    text:
+                        '${AppLocalizations.of(context).translate('privacypolicy')}',
+                    recognizer: TapGestureRecognizer()..onTap = () {},
+                    style: TextStyle(color: Colors.blue))
+              ],
+            ),
+          ),
+        )
       ],
     );
   }
@@ -152,8 +203,10 @@ class _RegisterFormState extends State<RegisterForm> {
     DialogBackground(
       blur: 13,
       dialog: AlertDialog(
-        title: Text('Registration Completed'),
-        content: Text('Welcome to Af.Fix ${_nameController.text}'),
+        title:
+            Text('${AppLocalizations.of(context).translate('registerdone')}'),
+        content: Text(
+            '${AppLocalizations.of(context).translate('signinnew')} ${_nameController.text}'),
         actions: [
           TextButton(
             onPressed: () {
@@ -179,7 +232,7 @@ class _RegisterFormState extends State<RegisterForm> {
     DialogBackground(
       blur: 13,
       dialog: AlertDialog(
-        title: Text('Uh Oh, It\'s an Error!'),
+        title: Text('${AppLocalizations.of(context).translate('errorfound')}'),
         content: Text(
             'Error: ${Provider.of<AuthenticationServices>(context, listen: false).status}'),
         actions: [

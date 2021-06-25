@@ -13,11 +13,14 @@ import 'package:velocity_x/velocity_x.dart';
 class EwarrantyWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String _uidText = Provider.of<UpdateUI>(context).uid;
     bool _isAnony = Provider.of<UpdateUI>(context).checkAnonymous;
     if (_isAnony == true) {
       return NotLoginPage();
     } else if (_isAnony == false) {
-      return EwarrantyHome();
+      return EwarrantyHome(
+        uid: _uidText,
+      );
     }
     return NotLoginPage();
   }

@@ -1,13 +1,14 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/drawer/drawer.dart';
-import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/e-warranty/mobileView/ewarranty_page.dart';
 import 'package:affix_web/screen/e-warranty/mobileView/history_page.dart';
+import 'package:affix_web/screen/e-warranty/mobileView/profile_page.dart';
 import 'package:affix_web/screen/e-warranty/ui/avatar.dart';
 import 'package:affix_web/screen/e-warranty/ui/tab_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -29,6 +30,9 @@ extension CapExtension on String {
 }
 
 class EwarrantyHome extends StatefulWidget {
+  final String uid;
+
+  EwarrantyHome({this.uid});
   @override
   _EwarrantyHomeState createState() => _EwarrantyHomeState();
 }
@@ -40,6 +44,25 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
   bool _onHover = true;
   bool _isMobile = false;
   User _user = FirebaseAuth.instance.currentUser;
+  int _totalRepair = 0;
+  int _totalPrice = 0;
+
+  _getTotal(String uid) async {
+    await FirebaseFirestore.instance
+        .collection('customer')
+        .doc(uid)
+        .collection('repair history')
+        .where('Status', isEqualTo: 'Selesai')
+        .get()
+        .then((value) {
+      _totalRepair = value.docs.length;
+      double sum = 0.0;
+      var ds = value.docs;
+      for (int i = 0; i < ds.length; i++) sum += (ds[i]['Harga']).toDouble();
+      _totalPrice = sum.round();
+    });
+  }
+
   void _clickPage(int pageNum) {
     setState(() {
       _selectablePage = pageNum;
@@ -48,6 +71,8 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
           curve: Curves.fastLinearToSlowEaseIn);
     });
   }
+
+  ScrollController _tabView = ScrollController();
 
   void _clickPageDekstop(int pageNum) {
     setState(() {
@@ -58,6 +83,7 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
 
   @override
   void initState() {
+    _getTotal(widget.uid);
     if (_isMobile == false) {
       Future.delayed(Duration(milliseconds: 1500), () {
         setState(() {
@@ -191,22 +217,14 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
                         eWarrantyPage(_uidText, _name, _isMobile),
                         historyRepairPage(
                             _uidText, _name, _isDarkMode, _isMobile),
-                        Container(
-                          child: Center(
-                            child: InkWell(
-                              onTap: () async {
-                                await context
-                                    .read<AuthenticationServices>()
-                                    .linktoGoogle();
-
-                                Provider.of<UpdateUI>(context, listen: false)
-                                    .setUserPhoto(_user.photoURL);
-                              },
-                              child: Text(
-                                'Profile Page',
-                              ),
-                            ),
-                          ),
+                        profilePage(
+                          context: context,
+                          user: _user,
+                          isMobile: _isMobile,
+                          name: _name,
+                          uid: _uidText,
+                          totalRepair: _totalRepair,
+                          totalPrice: _totalPrice,
                         ),
                       ],
                     ),
@@ -229,6 +247,7 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
+                    controller: _tabView,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -251,6 +270,15 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
                             _clickPage(1);
                           },
                         ),
+                        TabButton(
+                          tabName: 'Profile',
+                          pageNumber: 2,
+                          icon: Icons.person,
+                          selectablePage: _selectablePage,
+                          onPressed: () {
+                            _clickPage(2);
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -260,14 +288,36 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
                       physics: BouncingScrollPhysics(),
                       onPageChanged: (int change) {
                         setState(() {
+                          if (change < 2) {
+                            _tabView.animToTop();
+                          } else {
+                            _tabView.animToBottom();
+                          }
                           _selectablePage = change;
                         });
                       },
                       controller: _pageController,
                       children: [
-                        eWarrantyPage(_uidText, _name, _isMobile),
+                        eWarrantyPage(
+                          _uidText,
+                          _name,
+                          _isMobile,
+                        ),
                         historyRepairPage(
-                            _uidText, _name, _isDarkMode, _isMobile)
+                          _uidText,
+                          _name,
+                          _isDarkMode,
+                          _isMobile,
+                        ),
+                        profilePage(
+                          context: context,
+                          user: _user,
+                          isMobile: _isMobile,
+                          name: _name,
+                          uid: _uidText,
+                          totalRepair: _totalRepair,
+                          totalPrice: _totalPrice,
+                        ),
                       ],
                     ),
                   ),
@@ -317,3 +367,12 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
     );
   }
 }
+
+// int _totalRepair = 0;
+// _totalRepair = snapshot.data.docs.length;
+// double sum = 0.0;
+// int convert;
+// var ds = snapshot.data.docs;
+// for (int i = 0; i < ds.length; i++)
+//   sum += (ds[i]['Harga']).toDouble();
+// convert = sum.round();

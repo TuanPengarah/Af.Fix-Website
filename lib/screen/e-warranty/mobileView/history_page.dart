@@ -2,7 +2,6 @@ import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/screen/e-warranty/ui/card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:string_validator/string_validator.dart';
 
 StreamBuilder<QuerySnapshot> historyRepairPage(
@@ -38,7 +37,7 @@ StreamBuilder<QuerySnapshot> historyRepairPage(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(
-                    MaterialCommunityIcons.timer_sand_empty,
+                    Icons.browser_not_supported,
                     color: Colors.grey,
                     size: 120,
                   ),
@@ -73,6 +72,7 @@ StreamBuilder<QuerySnapshot> historyRepairPage(
                 children: snapshot.data.docs.map((document) {
                   bool warranty = document['isWarranty'];
                   bool isRepair = equals('Belum Selesai', document['Status']);
+
                   return warrantyCard(
                       context: context,
                       phoneModel: document['Model'],

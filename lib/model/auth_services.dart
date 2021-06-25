@@ -124,11 +124,36 @@ class AuthenticationServices extends ChangeNotifier {
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-
-    return await _user.linkWithCredential(credential).then((value) {
-      _user.updateProfile(
-          displayName: googleUser.displayName, photoURL: googleUser.photoUrl);
-    });
+    try {
+      return await _user.linkWithCredential(credential).then((newUser) async {
+        await newUser.user.updateProfile(
+            displayName: googleUser.displayName, photoURL: googleUser.photoUrl);
+        try {
+          await newUser.user.updateEmail(googleUser.email);
+        } on FirebaseAuthException catch (e) {
+          if (e.code == 'invalid-email') {
+            isError = true;
+            print(e.code);
+            getError('This email is invalid try use other email address');
+          }
+          if (e.code == 'email-already-in-use') {
+            isError = true;
+            print(e.code);
+            getError(
+                'This email address has been used on another user, try use another email address');
+          }
+          if (e.code == 'requires-recent-login') {
+            isError = true;
+            print(e.code);
+            getError(
+                'For security reason, Please log out and log in again to prevent your account been hijacking');
+          }
+          isError = true;
+          print(e.code);
+          getError(e.message);
+        }
+      });
+    } on FirebaseAuthException catch (e) {}
   }
 
   Future<void> signToGoogle() async {
@@ -182,6 +207,7 @@ class AuthenticationServices extends ChangeNotifier {
       'Nama': '${_user.displayName}',
       'No Phone': '$phone',
       'Email': '${_user.email}',
+      'Points': 10,
       'Search Index': indexList,
     };
     await FirebaseFirestore.instance

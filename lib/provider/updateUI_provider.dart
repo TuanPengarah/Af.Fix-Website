@@ -16,6 +16,12 @@ class UpdateUI extends ChangeNotifier {
   String userName = 'Af-Fix Smartphone Repair';
   String userPhoto;
   bool isRepair = true;
+  int totalRepair = 0;
+
+  getTotalRepair(int newTotalRepair) {
+    totalRepair = newTotalRepair;
+    notifyListeners();
+  }
 
   setUserPhoto(String newPhoto) {
     userPhoto = newPhoto;
