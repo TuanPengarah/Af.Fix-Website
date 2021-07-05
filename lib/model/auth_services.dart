@@ -153,7 +153,67 @@ class AuthenticationServices extends ChangeNotifier {
           getError(e.message);
         }
       });
-    } on FirebaseAuthException catch (e) {}
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> reauthUser(String email, String password) async {
+    User user = _firebaseAuthWeb.currentUser;
+    AuthCredential credential =
+        EmailAuthProvider.credential(email: email, password: password);
+    try {
+      await user.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        isError = true;
+        print(e.code);
+        getError(
+            'This email is invalid. You must use your Assaff Account email address');
+      }
+      if (e.code == 'user-mismatch') {
+        isError = true;
+        print(e.code);
+        getError(
+            'User is mismatch. Please enter your valid proper user account');
+      }
+      if (e.code == 'wrong-password') {
+        isError = true;
+        print(e.code);
+        getError('Wrong Password! Please enter your correct password');
+      }
+      isError = true;
+      print(e.code);
+      getError(e.code);
+    }
+  }
+
+  Future<void> updateEmail(String newEmail) async {
+    User user = _firebaseAuthWeb.currentUser;
+    try {
+      await user.updateEmail(newEmail);
+      print('update email to : $newEmail');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        isError = true;
+        print(e.code);
+        getError('This email is invalid try use other email address');
+      }
+      if (e.code == 'email-already-in-use') {
+        isError = true;
+        print(e.code);
+        getError(
+            'This email address has been used on another user, try use another email address');
+      }
+      if (e.code == 'requires-recent-login') {
+        isError = true;
+        print(e.code);
+        getError(e.code);
+      }
+      isError = true;
+      print(e.code);
+      getError(e.code);
+    }
   }
 
   Future<void> signToGoogle() async {

@@ -148,5 +148,18 @@
     "tos" : "Syarat Perkhidmatan",
     "policy2" : "termasuk",
     "useragreement" : "Perjanjian Pengguna",
-    "privacypolicy" : "Dasar Privasi"
+    "privacypolicy" : "Dasar Privasi",
+    "repaireddevices" : "Peranti telah dibaiki",
+    "spentprice" : "Harga yang telah dibelanja",
+    "repairpoint" : "Assaff Repair Points",
+    "yourinformation" : "Maklumat Anda",
+    "infodescription" : "Maklumat di atas hanya digunakan untuk bertujuan pihak kami menghubungi berkenaan dengan peranti anda yang sedang dibaiki.",
+    "aboutinfo" : "Lihat bagaimana kami menguruskan maklumat dan data peribadi anda.",
+    "assaffaccount" : "Akaun Assaff",
+    "linkwithgoogle" : "Link akaun dengan Google" ,
+    "changepassword" : "Tukar kata laluan",
+    "changeemail" : "Tukar alamat email",
+    "email" : "Alamat Email",
+    "updatinguser" : "Mengemaskini data pengguna...",
+    "updatecomplete" : "Mengemaskini Selesai"
 }

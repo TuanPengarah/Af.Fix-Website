@@ -84,8 +84,8 @@ class MyThemes {
     toggleableActiveColor: Colors.red,
     colorScheme: ColorScheme.light(),
     textSelectionTheme: TextSelectionThemeData(
-      selectionColor: Colors.red[900],
-      cursorColor: Colors.red[900],
+      selectionColor: Colors.red[200],
+      cursorColor: Colors.red[200],
       selectionHandleColor: kColorRed,
     ),
     textTheme: TextTheme(

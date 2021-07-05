@@ -114,7 +114,7 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
       body: Stack(
         alignment: Alignment.topRight,
         children: [
-          LayoutBuilder(builder: (context, constraints) {
+          LayoutBuilder(builder: (BuildContext context, constraints) {
             if (constraints.maxWidth > 900) {
               _isMobile = false;
               _pageControllerDekstop =
@@ -310,14 +310,14 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
                           _isMobile,
                         ),
                         profilePage(
-                            context: context,
-                            user: _user,
-                            isMobile: _isMobile,
-                            name: _name,
-                            uid: _uidText,
-                            totalRepair: _totalRepair,
-                            totalPrice: _totalPrice,
-                            isDarkMode: _isDarkMode),
+                          context: context,
+                          user: _user,
+                          isMobile: _isMobile,
+                          name: _name,
+                          uid: _uidText,
+                          totalRepair: _totalRepair,
+                          totalPrice: _totalPrice,
+                        ),
                       ],
                     ),
                   ),

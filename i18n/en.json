@@ -148,5 +148,20 @@
     "tos" : "Terms of Services",
     "policy2" : "including the",
     "useragreement" : "User Agreement",
-    "privacypolicy" : "Privacy Policy"
+    "privacypolicy" : "Privacy Policy",
+    "repaireddevices" : "Your repaired devices",
+    "spentprice" : "Total you have spent",
+    "repairpoint" : "Assaff Repair Points",
+    "yourinformation" : "Your Information",
+    "infodescription" : "Your information is only used for contacting and notifying about your device being repaired.",
+    "aboutinfo" : "Learn how we managed your information and your personal data.",
+    "assaffaccount" : "Assaff Account",
+    "linkwithgoogle" : "Link Account with Google" ,
+    "changepassword" : "Change password",
+    "changeemail" : "Change email address",
+    "email" : "Email Address",
+    "updatinguser" : "Updating user data...",
+    "updatecomplete" : "Updating Completed"
+    
+
 }
