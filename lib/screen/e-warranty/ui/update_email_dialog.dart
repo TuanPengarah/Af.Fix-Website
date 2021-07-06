@@ -30,90 +30,93 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
             ),
           ),
         ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text.rich(
-              TextSpan(
-                  text:
-                      'Please insert your new email address and your password to continue, your current email address is ',
-                  children: [
-                    TextSpan(
-                      text: '$defaultEmail',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+        content: SingleChildScrollView(
+          reverse: true,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text.rich(
+                TextSpan(
+                    text:
+                        'Please insert your new email address and your password to continue, your current email address is ',
+                    children: [
+                      TextSpan(
+                        text: '$defaultEmail',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
+                    ]),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              TextField(
+                autofocus: true,
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.emailAddress,
+                controller: _inputEmail,
+                decoration: InputDecoration(
+                  errorText: _errEmail == true
+                      ? 'Please enter correct email address'
+                      : null,
+                  focusColor: Theme.of(context).primaryColor,
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).primaryColor,
                     ),
-                  ]),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 20),
-            TextField(
-              autofocus: true,
-              textAlign: TextAlign.center,
-              keyboardType: TextInputType.emailAddress,
-              controller: _inputEmail,
-              decoration: InputDecoration(
-                errorText: _errEmail == true
-                    ? 'Please enter correct email address'
-                    : null,
-                focusColor: Theme.of(context).primaryColor,
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Theme.of(context).primaryColor,
                   ),
-                ),
-                errorBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.amber[900],
+                  errorBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.amber[900],
+                    ),
                   ),
-                ),
-                hintText: 'New email address',
-                hintStyle: TextStyle(
-                  fontSize: 13,
-                  color: Colors.grey,
+                  hintText: 'New email address',
+                  hintStyle: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey,
+                  ),
                 ),
               ),
-            ),
-            TextField(
-              textAlign: TextAlign.center,
-              keyboardType: TextInputType.visiblePassword,
-              obscureText: _showPassword,
-              controller: _inputPass,
-              decoration: InputDecoration(
-                focusColor: Theme.of(context).primaryColor,
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Theme.of(context).primaryColor,
+              TextField(
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: _showPassword,
+                controller: _inputPass,
+                decoration: InputDecoration(
+                  focusColor: Theme.of(context).primaryColor,
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  hintText: 'Enter your password',
+                  hintStyle: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey,
                   ),
                 ),
-                hintText: 'Enter your password',
-                hintStyle: TextStyle(
-                  fontSize: 13,
-                  color: Colors.grey,
-                ),
               ),
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Checkbox(
-                  value: !_showPassword,
-                  onChanged: (newValue) {
-                    setState(() {
-                      _showPassword = !newValue;
-                    });
-                  },
-                ),
-                SizedBox(width: 10),
-                Text(
-                  '${AppLocalizations.of(context).translate('showpassword')}',
-                  style: TextStyle(fontSize: 13),
-                ),
-              ],
-            ),
-          ],
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  Checkbox(
+                    value: !_showPassword,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _showPassword = !newValue;
+                      });
+                    },
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    '${AppLocalizations.of(context).translate('showpassword')}',
+                    style: TextStyle(fontSize: 13),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         actions: [
           TextButton(

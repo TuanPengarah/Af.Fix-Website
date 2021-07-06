@@ -1,9 +1,12 @@
 import 'package:affix_web/config/app_localizations.dart';
+import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ndialog/ndialog.dart';
 import 'dart:html' as html;
+
+import 'package:provider/provider.dart';
 
 Future<void> updateUser({
   @required BuildContext context,
@@ -50,6 +53,7 @@ Future<void> updateUser({
   //     'requires-recent-login') {
   //   await reauthUserDialog();
   // }
+  Provider.of<UpdateUI>(context, listen: false).setUserName(inputName);
   await user.reload().then((value) {
     print('Updating completed');
     progressDialog.dismiss();

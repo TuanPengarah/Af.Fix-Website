@@ -15,6 +15,351 @@ import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:provider/provider.dart';
 
+bool _editable = false;
+
+class ProfilePage extends StatefulWidget {
+  final int totalRepair;
+  final int totalPrice;
+  final bool isMobile;
+  ProfilePage({
+    this.totalRepair,
+    this.totalPrice,
+    this.isMobile,
+  });
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  //Text Controller
+  final _inputName = TextEditingController();
+  final _inputEmail = TextEditingController();
+  final _inputPhone = TextEditingController();
+  String newName;
+  String newPhone;
+
+  bool _isGoogle = true;
+  String name;
+  User user = FirebaseAuth.instance.currentUser;
+  bool _reloading = true;
+
+  @override
+  Widget build(BuildContext context) {
+    String _photoUrl = Provider.of<UpdateUI>(context).userPhoto;
+    bool _isAnony = Provider.of<UpdateUI>(context).checkAnonymous;
+    bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
+    String _uid = Provider.of<UpdateUI>(context).uid;
+    bool isMobile = widget.isMobile;
+
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('customer')
+            .doc(_uid)
+            .snapshots(),
+        builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
+                      color: Theme.of(context).primaryColor),
+                  SizedBox(height: 15),
+                  Text('Loading...'),
+                ],
+              ),
+            );
+          }
+          var document = snapshot.data.data();
+          int _points = document['Points'];
+          name = document['Nama'];
+          _inputEmail.text = document['Email'];
+          if (_reloading == true) {
+            _inputName.text = document['Nama'];
+            _inputPhone.text = document['No Phone'];
+            _reloading = false;
+          }
+
+          if (FirebaseAuth.instance.currentUser != null) {
+            _isGoogle =
+                FirebaseAuth.instance.currentUser.providerData[0].providerId ==
+                    'google.com';
+          }
+          return SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 200,
+                      width: 200,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(30),
+                        child: _photoUrl == null && _isAnony == false
+                            ? AvatarLetter(
+                                fontSize: 30,
+                                text: '$name',
+                                textColor: Colors.white,
+                                textColorHex: null,
+                                backgroundColor: Theme.of(context).primaryColor,
+                                backgroundColorHex: null,
+                                letterType: LetterType.Circular,
+                              )
+                            : CircleAvatar(
+                                minRadius: 28,
+                                backgroundColor: isMobile == true
+                                    ? Theme.of(context).primaryColor
+                                    : Colors.white,
+                                backgroundImage: isMobile != null
+                                    ? NetworkImage(_photoUrl)
+                                    : null,
+                              ),
+                      ),
+                    ),
+                    SelectableText(
+                      '$name',
+                      style: TextStyle(
+                        fontSize: 35,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    SelectableText(
+                      '${_inputEmail.text}',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    SizedBox(height: 30),
+                    Wrap(
+                      runAlignment: WrapAlignment.center,
+                      alignment: WrapAlignment.center,
+                      children: [
+                        _cardDetails(
+                          '${AppLocalizations.of(context).translate('repaireddevices')}',
+                          widget.totalRepair <= 0
+                              ? '--'
+                              : '${widget.totalRepair}',
+                        ),
+                        _cardDetails(
+                          '${AppLocalizations.of(context).translate('spentprice')}',
+                          widget.totalPrice <= 0
+                              ? '--'
+                              : 'RM${widget.totalPrice}',
+                        ),
+                        _cardDetails(
+                          '${AppLocalizations.of(context).translate('repairpoint')}',
+                          _points <= 0 ? '--' : '$_points',
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 40),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: isMobile == true ? 30 : 90),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: isMobile == true
+                                    ? MediaQuery.of(context).size.width - 60
+                                    : 450,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '${AppLocalizations.of(context).translate('yourinformation')}',
+                                      style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                    // SizedBox(width: 15),
+                                    IconButton(
+                                      tooltip:
+                                          _editable == true ? 'Save' : 'Edit',
+                                      onPressed: () async {
+                                        setState(() {
+                                          _editable = !_editable;
+                                        });
+                                        if (_editable == false) {
+                                          // newName = _inputName.text;
+                                          // newPhone = _inputPhone.text;
+                                          // await reauthUserDialog(
+                                          //   context: context,
+                                          //   email: _inputEmail.text,
+                                          //   name: _inputName.text,
+                                          //   phone: _inputPhone.text,
+                                          // );
+                                          if (_inputName.text.isEmpty ||
+                                              _inputPhone.text.isEmpty) {
+                                            _inputName.text = newName;
+                                            _inputPhone.text = newPhone;
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text(
+                                                  'Gagal untuk mengemaskini data pengguna, Sila masukkann maklumat anda dengan betul'),
+                                              backgroundColor:
+                                                  Colors.amber[900],
+                                            ));
+                                          } else {
+                                            await updateUser(
+                                              context: context,
+                                              inputPhone: _inputPhone.text,
+                                              inputName: _inputName.text,
+                                            ).then((value) => user.reload());
+                                          }
+                                        } else {
+                                          newName = _inputName.text;
+                                          newPhone = _inputPhone.text;
+                                        }
+                                      },
+                                      icon: Icon(
+                                        _editable == false
+                                            ? Icons.edit
+                                            : Icons.save,
+                                        color: _isDarkMode == true
+                                            ? kColorGrey
+                                            : Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              textInputProfile(
+                                  controller: _inputName,
+                                  isMobile: isMobile,
+                                  context: context,
+                                  title:
+                                      '${AppLocalizations.of(context).translate('name')}',
+                                  icon: Icons.person,
+                                  lock: _editable,
+                                  isDarkMode: _isDarkMode),
+                              textInputProfile(
+                                  controller: _inputPhone,
+                                  isMobile: isMobile,
+                                  context: context,
+                                  title:
+                                      '${AppLocalizations.of(context).translate('phonenumber')}',
+                                  icon: Icons.phone,
+                                  lock: _editable,
+                                  isDarkMode: _isDarkMode),
+                              textInputProfile(
+                                  controller: _inputEmail,
+                                  isMobile: isMobile,
+                                  context: context,
+                                  title:
+                                      '${AppLocalizations.of(context).translate('email')}',
+                                  icon: Icons.mail,
+                                  lock: false,
+                                  isDarkMode: _isDarkMode),
+                              SizedBox(height: 10),
+                              Container(
+                                width: isMobile == true
+                                    ? MediaQuery.of(context).size.width - 60
+                                    : 450,
+                                child: Text.rich(
+                                  TextSpan(
+                                    text:
+                                        '${AppLocalizations.of(context).translate('infodescription')}',
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            ' ${AppLocalizations.of(context).translate('aboutinfo')}',
+                                        style: TextStyle(color: Colors.blue),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {},
+                                      ),
+                                    ],
+                                  ),
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 30),
+                              Text(
+                                '${AppLocalizations.of(context).translate('assaffaccount')}',
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                              SizedBox(height: 30),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Wrap(
+                      spacing: 20,
+                      runSpacing: 20,
+                      alignment: WrapAlignment.center,
+                      runAlignment: WrapAlignment.center,
+                      children: [
+                        _isGoogle == false
+                            ? SignInButton(
+                                _isDarkMode == true
+                                    ? Buttons.Google
+                                    : Buttons.GoogleDark,
+                                onPressed: () {
+                                  user.reload();
+                                },
+                                text:
+                                    '${AppLocalizations.of(context).translate('linkwithgoogle')}',
+                              )
+                            : Container(),
+                        _isGoogle == false
+                            ? buttonAccount(
+                                title:
+                                    '${AppLocalizations.of(context).translate('changeemail')}',
+                                icon: Icons.email,
+                                color: Colors.blueGrey[300],
+                                onPressed: () {
+                                  updatingEmail(
+                                      context: context,
+                                      defaultEmail: _inputEmail.text);
+                                })
+                            : Container(),
+                        _isGoogle == false
+                            ? buttonAccount(
+                                title:
+                                    '${AppLocalizations.of(context).translate('changepassword')}',
+                                icon: Icons.vpn_key_outlined,
+                                color: Colors.blueGrey[300],
+                              )
+                            : Container(),
+                        buttonAccount(
+                          title:
+                              '${AppLocalizations.of(context).translate('signout')}',
+                          icon: Icons.logout,
+                          color: Colors.red[300],
+                          onPressed: () {
+                            showLogoutDialog(context);
+                          },
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 30),
+                  ],
+                ),
+              ));
+        });
+  }
+}
+
 StreamBuilder<DocumentSnapshot> profilePage({
   BuildContext context,
   User user,
@@ -25,9 +370,9 @@ StreamBuilder<DocumentSnapshot> profilePage({
   int totalPrice,
 }) {
 //Text Controller
-  // final _inputName = TextEditingController();
-  // final _inputEmail = TextEditingController();
-  // final _inputPhone = TextEditingController();
+  final _inputName = TextEditingController();
+  final _inputEmail = TextEditingController();
+  final _inputPhone = TextEditingController();
 
   String newName;
   String newPhone;
@@ -36,7 +381,7 @@ StreamBuilder<DocumentSnapshot> profilePage({
   bool _isAnony = Provider.of<UpdateUI>(context).checkAnonymous;
   bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
   bool _isGoogle = true;
-  bool _editable = false;
+  _inputName.text = name;
   return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('customer')
@@ -61,13 +406,12 @@ StreamBuilder<DocumentSnapshot> profilePage({
         var document = snapshot.data.data();
         int _points = document['Points'];
 
-        final _inputName = TextEditingController(text: name);
-        final _inputEmail = TextEditingController(text: document['Email']);
-        final _inputPhone = TextEditingController(text: document['No Phone']);
+        // final _inputName = TextEditingController(text: name);
+        // final _inputEmail = TextEditingController(text: document['Email']);
+        // final _inputPhone = TextEditingController(text: document['No Phone']);
         // final String _defaultName = name;
         // final String _defaultEmail = document['Email'];
         // final String _defaultPhone = document['No Phone'];
-
         if (FirebaseAuth.instance.currentUser != null) {
           _isGoogle =
               FirebaseAuth.instance.currentUser.providerData[0].providerId ==

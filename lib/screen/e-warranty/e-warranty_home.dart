@@ -217,14 +217,10 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
                         eWarrantyPage(_uidText, _name, _isMobile),
                         historyRepairPage(
                             _uidText, _name, _isDarkMode, _isMobile),
-                        profilePage(
-                          context: context,
-                          user: _user,
-                          isMobile: _isMobile,
-                          name: _name,
-                          uid: _uidText,
+                        ProfilePage(
                           totalRepair: _totalRepair,
                           totalPrice: _totalPrice,
+                          isMobile: _isMobile,
                         ),
                       ],
                     ),
@@ -309,14 +305,10 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
                           _isDarkMode,
                           _isMobile,
                         ),
-                        profilePage(
-                          context: context,
-                          user: _user,
-                          isMobile: _isMobile,
-                          name: _name,
-                          uid: _uidText,
+                        ProfilePage(
                           totalRepair: _totalRepair,
                           totalPrice: _totalPrice,
+                          isMobile: _isMobile,
                         ),
                       ],
                     ),
