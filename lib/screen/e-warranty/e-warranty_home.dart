@@ -9,13 +9,11 @@ import 'package:affix_web/screen/e-warranty/mobileView/profile_page.dart';
 import 'package:affix_web/screen/e-warranty/ui/avatar.dart';
 import 'package:affix_web/screen/e-warranty/ui/tab_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 import 'dekstopView/ui/tab_button_dekstop.dart';
 
 extension CapExtension on String {
@@ -43,7 +41,6 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
   PageController _pageControllerDekstop;
   bool _onHover = true;
   bool _isMobile = false;
-  User _user = FirebaseAuth.instance.currentUser;
   int _totalRepair = 0;
   int _totalPrice = 0;
 

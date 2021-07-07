@@ -246,19 +246,6 @@ class AuthenticationServices extends ChangeNotifier {
   Future<void> createUserData(String phone) async {
     User _user = _firebaseAuthWeb.currentUser;
     String tarikh = '';
-    // String tarikh() {
-    //   var now = new DateTime.now();
-    //   var formatter = new DateFormat('dd-MM-yyyy');
-    //   return formatter.format(now);
-    // }
-
-    //fungsi search (LOOP Method)
-    List<String> splitList = _user.displayName.split(" ");
-    List<String> indexList = [];
-    for (int i = 0; i < splitList.length; i++) {
-      for (int y = 1; y < splitList[i].length + 1; y++)
-        indexList.add(splitList[i].substring(0, y).toLowerCase());
-    }
     var now = DateTime.now();
     var formatter = new DateFormat('dd-M-yyyy');
     tarikh = formatter.format(now);
@@ -268,7 +255,7 @@ class AuthenticationServices extends ChangeNotifier {
       'No Phone': '$phone',
       'Email': '${_user.email}',
       'Points': 10,
-      'Search Index': indexList,
+      'UID': _user.uid
     };
     await FirebaseFirestore.instance
         .collection('customer')

@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ndialog/ndialog.dart';
-import 'dart:html' as html;
 
 import 'package:provider/provider.dart';
 
@@ -58,12 +57,6 @@ Future<void> updateUser({
     print('Updating completed');
     progressDialog.dismiss();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      action: SnackBarAction(
-        label: 'Refresh',
-        onPressed: () {
-          html.window.location.reload();
-        },
-      ),
       content:
           Text('${AppLocalizations.of(context).translate('updatecomplete')}'),
     ));

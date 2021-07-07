@@ -514,3 +514,21 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
+class LoginWrapper extends StatefulWidget {
+  @override
+  _LoginWrapperState createState() => _LoginWrapperState();
+}
+
+class _LoginWrapperState extends State<LoginWrapper> {
+  @override
+  Widget build(BuildContext context) {
+    bool _isAnony = Provider.of<UpdateUI>(context).checkAnonymous;
+    if (_isAnony == true) {
+      LoginPage();
+    } else if (_isAnony == false) {
+      Navigator.of(context).pop();
+    }
+    return LoginPage();
+  }
+}

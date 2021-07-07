@@ -1,7 +1,5 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/model/auth_services.dart';
-import 'package:affix_web/model/update_user_info.dart';
-import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +11,7 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
   final _inputPass = TextEditingController();
   final _inputEmail = TextEditingController();
   bool _errEmail = false;
-
+  bool _errPassword = false;
   bool _showPassword = true;
   Provider.of<AuthenticationServices>(context, listen: false).isError = false;
   Provider.of<AuthenticationServices>(context, listen: false).getError('');
@@ -31,7 +29,6 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
           ),
         ),
         content: SingleChildScrollView(
-          reverse: true,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -56,6 +53,7 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.emailAddress,
                 controller: _inputEmail,
+                textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   errorText: _errEmail == true
                       ? 'Please enter correct email address'
@@ -83,6 +81,7 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: _showPassword,
                 controller: _inputPass,
+                textInputAction: TextInputAction.send,
                 decoration: InputDecoration(
                   focusColor: Theme.of(context).primaryColor,
                   focusedBorder: UnderlineInputBorder(
@@ -90,6 +89,14 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
+                  errorBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.amber[900],
+                    ),
+                  ),
+                  errorText: _errPassword == true
+                      ? 'Please enter your correct password'
+                      : null,
                   hintText: 'Enter your password',
                   hintStyle: TextStyle(
                     fontSize: 13,
@@ -115,44 +122,82 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                   ),
                 ],
               ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        'Cancel',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      if (!isEmail(_inputEmail.text) ||
+                          _inputEmail.text.isEmpty) {
+                        setState(() {
+                          _errEmail = true;
+                        });
+                      } else {
+                        _submitting(context, _inputEmail.text, _inputPass.text)
+                            .then(
+                          (value) {
+                            bool isError = Provider.of<AuthenticationServices>(
+                                    context,
+                                    listen: false)
+                                .isError;
+                            String status = Provider.of<AuthenticationServices>(
+                                    context,
+                                    listen: false)
+                                .status;
+                            if (isError == true) {
+                              if (status == 'wrong-password') {
+                                setState(() {
+                                  _errPassword = true;
+                                });
+
+                                Provider.of<AuthenticationServices>(context,
+                                        listen: false)
+                                    .isError = false;
+                                Provider.of<AuthenticationServices>(context,
+                                        listen: false)
+                                    .getError('');
+                              }
+                              Provider.of<AuthenticationServices>(context,
+                                      listen: false)
+                                  .isError = false;
+                              Provider.of<AuthenticationServices>(context,
+                                      listen: false)
+                                  .getError('');
+                            } else {
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        );
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 15),
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                'Cancel',
-                style: TextStyle(fontSize: 15),
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              if (!isEmail(_inputEmail.text) || _inputEmail.text.isEmpty) {
-                setState(() {
-                  _errEmail = true;
-                });
-              } else {
-                _submitting(context, _inputEmail.text, _inputPass.text).then(
-                  (value) => Navigator.of(context).pop(),
-                );
-              }
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                'Submit',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor, fontSize: 15),
-              ),
-            ),
-          ),
-        ],
       );
     }),
   ).show(context);
@@ -185,14 +230,22 @@ Future<void> _submitting(
       .read<AuthenticationServices>()
       .reauthUser(user.email, password)
       .then((value) async {
-    print('reauth completed');
+    // print('reauth completed');
+    bool isError =
+        Provider.of<AuthenticationServices>(context, listen: false).isError;
+    if (isError == true) {
+      progressDialog.dismiss();
+    } else {
+      await user.updateEmail(email);
+      await FirebaseFirestore.instance
+          .collection('customer')
+          .doc(user.uid)
+          .update({
+        'Email': email,
+      });
+      print('Successfully Update Email');
+      await user.reload();
+      progressDialog.dismiss();
+    }
   });
-
-  await user.updateEmail(email);
-  await FirebaseFirestore.instance.collection('customer').doc(user.uid).update({
-    'Email': email,
-  });
-  print('Successfully Update Email');
-  await user.reload();
-  progressDialog.dismiss();
 }
