@@ -1,4 +1,6 @@
 import 'package:affix_web/config/app_localizations.dart';
+import 'package:affix_web/config/check_version.dart';
+import 'package:affix_web/main.dart';
 import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/mobile_home.dart';
@@ -12,10 +14,12 @@ import 'package:affix_web/screen/homescreen/page/footer.dart';
 import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:affix_web/screen/homescreen/page/pwa.dart';
 import 'package:affix_web/navbar/navbar_landingPage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -31,16 +35,6 @@ FirebaseAuth _auth = FirebaseAuth.instance;
 class _LandingPageState extends State<LandingPage> {
   _scrollListener() {
     scrollPosition = scrollController.position.pixels;
-    // print(scrollPosition);
-    // if (dahRunningMobile == true) {
-    //   if (scrollPosition < 200) {
-    //     Provider.of<UpdateUI>(context, listen: false)
-    //         .changeColorDarkWhite(kColorGrey);
-    //     dahRunningMobile = false;
-    //     Provider.of<UpdateUI>(context, listen: false)
-    //         .changeLogoColorRedWhite(kColorRed);
-    //   }
-    // }
     if (dahRunningDesktop == false) {
       if (scrollPosition > 60 && scrollPosition < 190) {
         Provider.of<UpdateUI>(context, listen: false).animationStartSmall(
@@ -49,16 +43,6 @@ class _LandingPageState extends State<LandingPage> {
         dahRunningDesktop = true;
       }
     }
-    // if (dahRunningMobile == false) {
-    //   if (scrollPosition > 200) {
-    //     Provider.of<UpdateUI>(context, listen: false)
-    //         .changeColorDarkWhite(kColorWhite);
-    //     Provider.of<UpdateUI>(context, listen: false)
-    //         .changeLogoColorRedWhite(kColorWhite);
-
-    //     dahRunningMobile = true;
-    //   }
-    // }
     if (scrollController.offset >= scrollController.position.maxScrollExtent &&
         !scrollController.position.outOfRange) {
 //do logic untuk bawah sekali
@@ -103,28 +87,21 @@ class _LandingPageState extends State<LandingPage> {
 
   _registerAnonymous(BuildContext context) async {
     print('initialize anonymouse');
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // await checkVersion(context);
       Provider.of<UpdateUI>(context, listen: false).setAnonymous(true);
       Provider.of<UpdateUI>(context, listen: false).setUID('N/A');
+
       if (_auth.currentUser != null) {
         _authServices(context);
       }
-      // String nullPhoto;
-      // Provider.of<UpdateUI>(context, listen: false).setUserPhoto(nullPhoto);
     });
-
-    // await context.read<AuthenticationServices>().anonymousSignIn();
-    // String uid = await context.read<AuthenticationServices>().getUID();
-    // Provider.of<UpdateUI>(context, listen: false).setUserName('Anonymous');
   }
 
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   _authServices(context);
-    // });
-
     scrollController = ScrollController();
     scrollController.addListener(_scrollListener);
   }
@@ -147,6 +124,7 @@ class _LandingPageState extends State<LandingPage> {
           } else {
             _registerAnonymous(context);
           }
+
           return LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               if (constraints.maxWidth > 1200) {
@@ -163,10 +141,35 @@ class _LandingPageState extends State<LandingPage> {
   }
 }
 
-class DekstopHomeView extends StatelessWidget {
+class DekstopHomeView extends StatefulWidget {
+  @override
+  _DekstopHomeViewState createState() => _DekstopHomeViewState();
+}
+
+class _DekstopHomeViewState extends State<DekstopHomeView> {
+  GlobalKey _globalScaffoldKey = GlobalKey<ScaffoldMessengerState>();
+  @override
+  void initState() {
+    CheckVersion(context: _globalScaffoldKey.currentState)
+        .checkVersion()
+        .then((v) {
+      if (v == true) {
+        navigatorKey.currentState.showSnackBar(SnackBar(
+          content: Text('New version available'),
+          action: SnackBarAction(
+            label: 'Update',
+            onPressed: () {},
+          ),
+        ));
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _globalScaffoldKey,
       body: PrimaryScrollController(
         controller: scrollController,
         child: Container(

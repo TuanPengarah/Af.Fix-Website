@@ -8,6 +8,7 @@ import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/authscreen/ui/text_input.dart';
+import 'package:affix_web/screen/e-warranty/e-warranty_wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
@@ -527,7 +528,7 @@ class _LoginWrapperState extends State<LoginWrapper> {
     if (_isAnony == true) {
       LoginPage();
     } else if (_isAnony == false) {
-      Navigator.of(context).pop();
+      EwarrantyWrapper();
     }
     return LoginPage();
   }

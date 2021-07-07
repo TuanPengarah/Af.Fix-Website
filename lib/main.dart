@@ -33,6 +33,8 @@ Future<void> main() async {
   ));
 }
 
+final navigatorKey = GlobalKey<ScaffoldMessengerState>();
+
 class MyApp extends StatelessWidget {
   final AppLanguage appLanguage;
   final bool getTheme;
@@ -53,6 +55,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<AppLanguage>(
         builder: (context, model, child) {
           return MaterialApp.router(
+            scaffoldMessengerKey: navigatorKey,
             themeMode: Provider.of<ThemeProvider>(context).themeMode,
             debugShowCheckedModeBanner: false,
             title:

@@ -62,7 +62,6 @@ dependencies:
   shimmer: ^2.0.0
   flutter_signin_button: ^2.0.0
   modal_progress_hud_alt: ^1.0.0
-
   
   #Splash Screen
   flutter_native_splash: ^1.1.8+4
