@@ -14,12 +14,11 @@ import 'package:affix_web/screen/homescreen/page/footer.dart';
 import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:affix_web/screen/homescreen/page/pwa.dart';
 import 'package:affix_web/navbar/navbar_landingPage.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_html/html.dart' as html;
 
 class LandingPage extends StatefulWidget {
   @override
@@ -89,7 +88,6 @@ class _LandingPageState extends State<LandingPage> {
     print('initialize anonymouse');
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // await checkVersion(context);
       Provider.of<UpdateUI>(context, listen: false).setAnonymous(true);
       Provider.of<UpdateUI>(context, listen: false).setUID('N/A');
 
@@ -104,6 +102,19 @@ class _LandingPageState extends State<LandingPage> {
     super.initState();
     scrollController = ScrollController();
     scrollController.addListener(_scrollListener);
+    CheckVersion().checkVersion().then((v) {
+      if (v == true) {
+        navigatorKey.currentState.showSnackBar(SnackBar(
+          content: Text('New version available'),
+          action: SnackBarAction(
+            label: 'Update',
+            onPressed: () {
+              html.window.location.reload();
+            },
+          ),
+        ));
+      }
+    });
   }
 
   @override
@@ -141,35 +152,10 @@ class _LandingPageState extends State<LandingPage> {
   }
 }
 
-class DekstopHomeView extends StatefulWidget {
-  @override
-  _DekstopHomeViewState createState() => _DekstopHomeViewState();
-}
-
-class _DekstopHomeViewState extends State<DekstopHomeView> {
-  GlobalKey _globalScaffoldKey = GlobalKey<ScaffoldMessengerState>();
-  @override
-  void initState() {
-    CheckVersion(context: _globalScaffoldKey.currentState)
-        .checkVersion()
-        .then((v) {
-      if (v == true) {
-        navigatorKey.currentState.showSnackBar(SnackBar(
-          content: Text('New version available'),
-          action: SnackBarAction(
-            label: 'Update',
-            onPressed: () {},
-          ),
-        ));
-      }
-    });
-    super.initState();
-  }
-
+class DekstopHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _globalScaffoldKey,
       body: PrimaryScrollController(
         controller: scrollController,
         child: Container(

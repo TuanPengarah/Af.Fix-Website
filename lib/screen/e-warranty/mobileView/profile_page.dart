@@ -4,6 +4,7 @@ import 'package:affix_web/model/sweetLogoutDialog.dart';
 import 'package:affix_web/model/update_user_info.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
+import 'package:affix_web/screen/e-warranty/ui/change_password.dart';
 import 'package:affix_web/screen/e-warranty/ui/update_email_dialog.dart';
 import 'package:affix_web/screen/e-warranty/ui/text_input_profile.dart';
 import 'package:avatar_letter/avatar_letter.dart';
@@ -193,14 +194,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                           _editable = !_editable;
                                         });
                                         if (_editable == false) {
-                                          // newName = _inputName.text;
-                                          // newPhone = _inputPhone.text;
-                                          // await reauthUserDialog(
-                                          //   context: context,
-                                          //   email: _inputEmail.text,
-                                          //   name: _inputName.text,
-                                          //   phone: _inputPhone.text,
-                                          // );
                                           if (_inputName.text.isEmpty ||
                                               _inputPhone.text.isEmpty) {
                                             _inputName.text = newName;
@@ -339,7 +332,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                     '${AppLocalizations.of(context).translate('changepassword')}',
                                 icon: Icons.vpn_key_outlined,
                                 color: Colors.blueGrey[300],
-                              )
+                                onPressed: () {
+                                  changePassword(context: context);
+                                })
                             : Container(),
                         buttonAccount(
                           title:

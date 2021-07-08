@@ -1,8 +1,6 @@
 import 'package:affix_web/config/app_localizations.dart';
-import 'package:affix_web/config/check_version.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/config/routes.dart';
-import 'package:affix_web/main.dart';
 import 'package:affix_web/model/sweetLogoutDialog.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
@@ -23,29 +21,7 @@ import 'package:affix_web/provider/themeUI_provider.dart';
 import '../../menu/menu_change_theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class MobileHomeView extends StatefulWidget {
-  @override
-  _MobileHomeViewState createState() => _MobileHomeViewState();
-}
-
-class _MobileHomeViewState extends State<MobileHomeView> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  void initState() {
-    CheckVersion().checkVersion().then((v) {
-      print(v);
-      if (v == true) {
-        navigatorKey.currentState.showSnackBar(SnackBar(
-          content: Text('New version available'),
-          action: SnackBarAction(
-            label: 'Update',
-            onPressed: () {},
-          ),
-        ));
-      }
-    });
-    super.initState();
-  }
-
+class MobileHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String _userName = Provider.of<UpdateUI>(context).userName;
@@ -54,7 +30,6 @@ class _MobileHomeViewState extends State<MobileHomeView> {
     String _userPhoto = Provider.of<UpdateUI>(context).userPhoto;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      key: _scaffoldKey,
       endDrawer: Drawer(
         child: ListView(
           children: [

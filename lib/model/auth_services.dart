@@ -158,7 +158,8 @@ class AuthenticationServices extends ChangeNotifier {
     }
   }
 
-  Future<void> reauthUser(String email, String password) async {
+  Future<String> reauthUser(String email, String password) async {
+    String status;
     User user = _firebaseAuthWeb.currentUser;
     AuthCredential credential =
         EmailAuthProvider.credential(email: email, password: password);
@@ -166,26 +167,31 @@ class AuthenticationServices extends ChangeNotifier {
       await user.reauthenticateWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
+        status = e.code;
         isError = true;
         print(e.code);
         getError(
             'This email is invalid. You must use your Assaff Account email address');
       }
       if (e.code == 'user-mismatch') {
+        status = e.code;
         isError = true;
         print(e.code);
         getError(
             'User is mismatch. Please enter your valid proper user account');
       }
       if (e.code == 'wrong-password') {
+        status = e.code;
         isError = true;
         print(e.code);
         getError('Wrong Password! Please enter your correct password');
       }
       isError = true;
+      status = e.code;
       print(e.code);
       getError(e.code);
     }
+    return status;
   }
 
   Future<void> updateEmail(String newEmail) async {
@@ -214,6 +220,20 @@ class AuthenticationServices extends ChangeNotifier {
       print(e.code);
       getError(e.code);
     }
+  }
+
+  Future<String> updatePassword(String newPassword) async {
+    User user = _firebaseAuthWeb.currentUser;
+    String status;
+    try {
+      await user.updatePassword(newPassword);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        status = e.code;
+        print(e.code);
+      }
+    }
+    return status;
   }
 
   Future<void> signToGoogle() async {

@@ -1,18 +1,16 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/main.dart';
 import 'package:affix_web/model/auth_services.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:provider/provider.dart';
-import 'package:string_validator/string_validator.dart';
 
-Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
-  final _inputPass = TextEditingController();
-  final _inputEmail = TextEditingController();
-  bool _errEmail = false;
-  bool _errPassword = false;
+Future<void> changePassword({BuildContext context}) async {
+  final _inputOldPass = TextEditingController();
+  final _inputNewPass = TextEditingController();
+  bool _errOldPassword = false;
+  bool _errNewPassword = false;
   bool _showPassword = true;
   Provider.of<AuthenticationServices>(context, listen: false).isError = false;
   Provider.of<AuthenticationServices>(context, listen: false).getError('');
@@ -23,7 +21,7 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
       return AlertDialog(
         title: Center(
           child: Text(
-            'Change email address',
+            'Change Password',
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -34,30 +32,18 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text.rich(
-                TextSpan(
-                    text:
-                        'Please insert your new email address and your password to continue, your current email address is ',
-                    children: [
-                      TextSpan(
-                        text: '$defaultEmail',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ]),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 20),
               TextField(
                 autofocus: true,
-                textAlign: TextAlign.center,
                 keyboardType: TextInputType.emailAddress,
-                controller: _inputEmail,
+                controller: _inputOldPass,
+                obscureText: _showPassword,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                  errorText: _errEmail == true
-                      ? 'Please enter correct email address'
+                  contentPadding: EdgeInsets.only(top: 10),
+                  labelText: 'Please enter your old Password',
+                  alignLabelWithHint: true,
+                  errorText: _errOldPassword == true
+                      ? 'Please enter correct old password'
                       : null,
                   focusColor: Theme.of(context).primaryColor,
                   focusedBorder: UnderlineInputBorder(
@@ -70,7 +56,7 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                       color: Colors.amber[900],
                     ),
                   ),
-                  hintText: 'New email address',
+                  hintText: 'Default password: 123456',
                   hintStyle: TextStyle(
                     fontSize: 13,
                     color: Colors.grey,
@@ -78,12 +64,14 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                 ),
               ),
               TextField(
-                textAlign: TextAlign.center,
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: _showPassword,
-                controller: _inputPass,
+                controller: _inputNewPass,
                 textInputAction: TextInputAction.send,
                 decoration: InputDecoration(
+                  contentPadding: EdgeInsets.only(top: 10),
+                  labelText: 'Enter your new password',
+                  alignLabelWithHint: true,
                   focusColor: Theme.of(context).primaryColor,
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
@@ -95,10 +83,10 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                       color: Colors.amber[900],
                     ),
                   ),
-                  errorText: _errPassword == true
-                      ? 'Please enter your correct password'
+                  errorText: _errNewPassword == true
+                      ? 'Your password must include at least 6 characters'
                       : null,
-                  hintText: 'Enter your password',
+                  hintText: 'Your password must include 6 characters',
                   hintStyle: TextStyle(
                     fontSize: 13,
                     color: Colors.grey,
@@ -140,47 +128,67 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
-                      if (!isEmail(_inputEmail.text) ||
-                          _inputEmail.text.isEmpty) {
+                    onPressed: () async {
+                      setState(() {
+                        _errNewPassword = false;
+                        _errOldPassword = false;
+                      });
+
+                      if (_inputNewPass.text.isEmpty) {
                         setState(() {
-                          _errEmail = true;
+                          _errOldPassword = true;
                         });
                       } else {
-                        _submitting(context, _inputEmail.text, _inputPass.text)
+                        await _submitting(
+                                context, _inputOldPass.text, _inputNewPass.text)
                             .then(
                           (value) {
-                            bool isError = Provider.of<AuthenticationServices>(
-                                    context,
-                                    listen: false)
-                                .isError;
-                            String status = Provider.of<AuthenticationServices>(
-                                    context,
-                                    listen: false)
-                                .status;
-                            if (isError == true) {
-                              if (status == 'wrong-password') {
-                                setState(() {
-                                  _errPassword = true;
-                                });
-
-                                Provider.of<AuthenticationServices>(context,
-                                        listen: false)
-                                    .isError = false;
-                                Provider.of<AuthenticationServices>(context,
-                                        listen: false)
-                                    .getError('');
-                              }
+                            if (value == 'wrong-password') {
+                              setState(() {
+                                _errOldPassword = true;
+                              });
                               Provider.of<AuthenticationServices>(context,
                                       listen: false)
                                   .isError = false;
                               Provider.of<AuthenticationServices>(context,
                                       listen: false)
                                   .getError('');
-                            } else {
+                            } else if (value == 'weak-password') {
+                              setState(() {
+                                _errNewPassword = true;
+                              });
+                              Provider.of<AuthenticationServices>(context,
+                                      listen: false)
+                                  .isError = false;
+                              Provider.of<AuthenticationServices>(context,
+                                      listen: false)
+                                  .getError('');
+                            } else if (value == null || value == '') {
+                              Provider.of<AuthenticationServices>(context,
+                                      listen: false)
+                                  .isError = false;
+                              Provider.of<AuthenticationServices>(context,
+                                      listen: false)
+                                  .getError('');
+                              print('Successfully Changing Password');
                               navigatorKey.currentState.showSnackBar(SnackBar(
                                   content: Text(
-                                      'Congratulation, you have successfully change your email address!')));
+                                      'Congratulation, you have successfully change your password account!')));
+                              Navigator.of(context).pop();
+                            } else {
+                              Provider.of<AuthenticationServices>(context,
+                                      listen: false)
+                                  .isError = false;
+                              Provider.of<AuthenticationServices>(context,
+                                      listen: false)
+                                  .getError('');
+                              print('Error $value');
+                              navigatorKey.currentState.showSnackBar(SnackBar(
+                                content: Text(
+                                    'Aw Snap, An error occured please try again later!',
+                                    style: TextStyle(color: Colors.white)),
+                                backgroundColor: Colors.amber[900],
+                              ));
                               Navigator.of(context).pop();
                             }
                           },
@@ -207,8 +215,9 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
   ).show(context);
 }
 
-Future<void> _submitting(
-    BuildContext context, String email, String password) async {
+Future<String> _submitting(
+    BuildContext context, String oldPassword, String newPassword) async {
+  String status;
   CustomProgressDialog progressDialog = CustomProgressDialog(context, blur: 15);
   progressDialog.setLoadingWidget(
     Column(
@@ -232,24 +241,24 @@ Future<void> _submitting(
   User user = FirebaseAuth.instance.currentUser;
   await context
       .read<AuthenticationServices>()
-      .reauthUser(user.email, password)
+      .reauthUser(user.email, oldPassword)
       .then((value) async {
-    // print('reauth completed');
+    status = value;
     bool isError =
         Provider.of<AuthenticationServices>(context, listen: false).isError;
     if (isError == true) {
       progressDialog.dismiss();
     } else {
-      await user.updateEmail(email);
-      await FirebaseFirestore.instance
-          .collection('customer')
-          .doc(user.uid)
-          .update({
-        'Email': email,
+      await context
+          .read<AuthenticationServices>()
+          .updatePassword(newPassword)
+          .then((value) {
+        return status = value;
       });
-      print('Successfully Update Email');
+
       await user.reload();
       progressDialog.dismiss();
     }
   });
+  return status;
 }
