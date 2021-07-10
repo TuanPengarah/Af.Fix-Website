@@ -1,6 +1,7 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/main.dart';
 import 'package:affix_web/model/auth_services.dart';
+import 'package:affix_web/snackbar/sucess_snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ndialog/ndialog.dart';
@@ -21,7 +22,7 @@ Future<void> changePassword({BuildContext context}) async {
       return AlertDialog(
         title: Center(
           child: Text(
-            'Change Password',
+            '${AppLocalizations.of(context).translate('titlechangepassword')}',
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -40,10 +41,11 @@ Future<void> changePassword({BuildContext context}) async {
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(top: 10),
-                  labelText: 'Please enter your old Password',
+                  labelText:
+                      '${AppLocalizations.of(context).translate('oldpassword')}',
                   alignLabelWithHint: true,
                   errorText: _errOldPassword == true
-                      ? 'Please enter correct old password'
+                      ? '${AppLocalizations.of(context).translate('wrongpassword')}'
                       : null,
                   focusColor: Theme.of(context).primaryColor,
                   focusedBorder: UnderlineInputBorder(
@@ -56,7 +58,8 @@ Future<void> changePassword({BuildContext context}) async {
                       color: Colors.amber[900],
                     ),
                   ),
-                  hintText: 'Default password: 123456',
+                  hintText:
+                      '${AppLocalizations.of(context).translate('defaultpassword')}123456',
                   hintStyle: TextStyle(
                     fontSize: 13,
                     color: Colors.grey,
@@ -70,7 +73,8 @@ Future<void> changePassword({BuildContext context}) async {
                 textInputAction: TextInputAction.send,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(top: 10),
-                  labelText: 'Enter your new password',
+                  labelText:
+                      '${AppLocalizations.of(context).translate('newpassword')}',
                   alignLabelWithHint: true,
                   focusColor: Theme.of(context).primaryColor,
                   focusedBorder: UnderlineInputBorder(
@@ -84,9 +88,10 @@ Future<void> changePassword({BuildContext context}) async {
                     ),
                   ),
                   errorText: _errNewPassword == true
-                      ? 'Your password must include at least 6 characters'
+                      ? '${AppLocalizations.of(context).translate('pleasepassword')}'
                       : null,
-                  hintText: 'Your password must include 6 characters',
+                  hintText:
+                      '${AppLocalizations.of(context).translate('pleasepassword')}',
                   hintStyle: TextStyle(
                     fontSize: 13,
                     color: Colors.grey,
@@ -122,7 +127,7 @@ Future<void> changePassword({BuildContext context}) async {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        'Cancel',
+                        '${AppLocalizations.of(context).translate('cancel')}',
                         style: TextStyle(fontSize: 15),
                       ),
                     ),
@@ -171,9 +176,8 @@ Future<void> changePassword({BuildContext context}) async {
                                       listen: false)
                                   .getError('');
                               print('Successfully Changing Password');
-                              navigatorKey.currentState.showSnackBar(SnackBar(
-                                  content: Text(
-                                      'Congratulation, you have successfully change your password account!')));
+                              showSuccessSnackBar(
+                                  '${AppLocalizations.of(context).translate('ok-change-password')}');
                               Navigator.of(context).pop();
                             } else {
                               Provider.of<AuthenticationServices>(context,
@@ -185,7 +189,7 @@ Future<void> changePassword({BuildContext context}) async {
                               print('Error $value');
                               navigatorKey.currentState.showSnackBar(SnackBar(
                                 content: Text(
-                                    'Aw Snap, An error occured please try again later!',
+                                    '${AppLocalizations.of(context).translate('submit')}',
                                     style: TextStyle(color: Colors.white)),
                                 backgroundColor: Colors.amber[900],
                               ));
@@ -198,7 +202,7 @@ Future<void> changePassword({BuildContext context}) async {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        'Submit',
+                        '${AppLocalizations.of(context).translate('submit')}',
                         style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 15),

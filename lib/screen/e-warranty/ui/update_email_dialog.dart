@@ -1,6 +1,6 @@
 import 'package:affix_web/config/app_localizations.dart';
-import 'package:affix_web/main.dart';
 import 'package:affix_web/model/auth_services.dart';
+import 'package:affix_web/snackbar/sucess_snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
       return AlertDialog(
         title: Center(
           child: Text(
-            'Change email address',
+            '${AppLocalizations.of(context).translate('titlechangeemail')}',
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -37,7 +37,7 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
               Text.rich(
                 TextSpan(
                     text:
-                        'Please insert your new email address and your password to continue, your current email address is ',
+                        '${AppLocalizations.of(context).translate('subtitlechangeemail')}',
                     children: [
                       TextSpan(
                         text: '$defaultEmail',
@@ -57,7 +57,7 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   errorText: _errEmail == true
-                      ? 'Please enter correct email address'
+                      ? '${AppLocalizations.of(context).translate('noemail')}'
                       : null,
                   focusColor: Theme.of(context).primaryColor,
                   focusedBorder: UnderlineInputBorder(
@@ -70,7 +70,8 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                       color: Colors.amber[900],
                     ),
                   ),
-                  hintText: 'New email address',
+                  hintText:
+                      '${AppLocalizations.of(context).translate('newemail')}',
                   hintStyle: TextStyle(
                     fontSize: 13,
                     color: Colors.grey,
@@ -96,9 +97,10 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                     ),
                   ),
                   errorText: _errPassword == true
-                      ? 'Please enter your correct password'
+                      ? '${AppLocalizations.of(context).translate('wrongpassword')}'
                       : null,
-                  hintText: 'Enter your password',
+                  hintText:
+                      '${AppLocalizations.of(context).translate('password')}',
                   hintStyle: TextStyle(
                     fontSize: 13,
                     color: Colors.grey,
@@ -134,7 +136,7 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        'Cancel',
+                        '${AppLocalizations.of(context).translate('cancel')}',
                         style: TextStyle(fontSize: 15),
                       ),
                     ),
@@ -178,9 +180,8 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                                       listen: false)
                                   .getError('');
                             } else {
-                              navigatorKey.currentState.showSnackBar(SnackBar(
-                                  content: Text(
-                                      'Congratulation, you have successfully change your email address!')));
+                              showSuccessSnackBar(
+                                  '${AppLocalizations.of(context).translate('ok-change-email')}');
                               Navigator.of(context).pop();
                             }
                           },
@@ -190,7 +191,7 @@ Future<void> updatingEmail({BuildContext context, String defaultEmail}) async {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        'Submit',
+                        '${AppLocalizations.of(context).translate('submit')}',
                         style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 15),

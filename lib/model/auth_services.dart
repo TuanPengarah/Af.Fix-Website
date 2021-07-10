@@ -36,8 +36,17 @@ class AuthenticationServices extends ChangeNotifier {
 
   Future<String> getUserPhoto() async {
     final user = _firebaseAuthWeb.currentUser;
-    final userPhoto = user.photoURL;
-
+    String userPhoto;
+    await FirebaseFirestore.instance
+        .collection('customer')
+        .doc(user.uid)
+        .get()
+        .then((f) async {
+      userPhoto = await f.data()['photoURL'];
+      if (userPhoto == '') {
+        userPhoto = null;
+      }
+    });
     return userPhoto;
   }
 
@@ -110,7 +119,8 @@ class AuthenticationServices extends ChangeNotifier {
     }
   }
 
-  Future<void> linktoGoogle() async {
+  Future<String> linktoGoogle() async {
+    String result;
     User _user = _firebaseAuthWeb.currentUser;
     // Trigger the authentication flow
     final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
@@ -125,37 +135,72 @@ class AuthenticationServices extends ChangeNotifier {
       idToken: googleAuth.idToken,
     );
     try {
-      return await _user.linkWithCredential(credential).then((newUser) async {
+      await _user.linkWithCredential(credential).then((newUser) async {
         await newUser.user.updateProfile(
             displayName: googleUser.displayName, photoURL: googleUser.photoUrl);
         try {
-          await newUser.user.updateEmail(googleUser.email);
+          await newUser.user.updateEmail(googleUser.email).then((value) async {
+            FirebaseFirestore.instance
+                .collection('customer')
+                .doc(newUser.user.uid)
+                .update({
+              'Nama': googleUser.displayName,
+              'Email': googleUser.email,
+              'photoURL': googleUser.photoUrl
+            });
+            newUser.user
+                .reload()
+                .then((value) => print('Sucessfully link to Google'));
+          });
         } on FirebaseAuthException catch (e) {
           if (e.code == 'invalid-email') {
-            isError = true;
             print(e.code);
-            getError('This email is invalid try use other email address');
+            result = e.code;
+            isError = true;
           }
           if (e.code == 'email-already-in-use') {
-            isError = true;
             print(e.code);
-            getError(
-                'This email address has been used on another user, try use another email address');
+            result = e.code;
+            isError = true;
           }
           if (e.code == 'requires-recent-login') {
+            result = e.code;
             isError = true;
-            print(e.code);
-            getError(
-                'For security reason, Please log out and log in again to prevent your account been hijacking');
           }
-          isError = true;
+          result = e.code;
           print(e.code);
-          getError(e.message);
+          isError = true;
         }
       });
     } on FirebaseAuthException catch (e) {
-      print(e);
+      if (e.code == 'provider-already-linked') {
+        print(e.code);
+        result = e.code;
+        isError = true;
+      }
+      if (e.code == 'invalid-credential') {
+        print(e.code);
+        result = e.code;
+        isError = true;
+      }
+
+      if (e.code == 'credential-already-in-use') {
+        result = e.code;
+        print(e.code);
+        isError = true;
+      }
+      if (e.code == 'email-already-in-use') {
+        result = e.code;
+        print(e.code);
+        isError = true;
+      }
+      if (e.code == 'invalid=email') {
+        result = e.code;
+        print(e.code);
+        isError = true;
+      }
     }
+    return result;
   }
 
   Future<String> reauthUser(String email, String password) async {
@@ -275,7 +320,8 @@ class AuthenticationServices extends ChangeNotifier {
       'No Phone': '$phone',
       'Email': '${_user.email}',
       'Points': 10,
-      'UID': _user.uid
+      'UID': _user.uid,
+      'photoURL': '',
     };
     await FirebaseFirestore.instance
         .collection('customer')

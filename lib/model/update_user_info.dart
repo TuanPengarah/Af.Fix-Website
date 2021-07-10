@@ -1,5 +1,6 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
+import 'package:affix_web/snackbar/sucess_snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -56,9 +57,7 @@ Future<void> updateUser({
   await user.reload().then((value) {
     print('Updating completed');
     progressDialog.dismiss();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content:
-          Text('${AppLocalizations.of(context).translate('updatecomplete')}'),
-    ));
+    showSuccessSnackBar(
+        '${AppLocalizations.of(context).translate('updatecomplete')}');
   });
 }

@@ -13,11 +13,11 @@ class CheckVersion {
           .then((e) async {
         double onFirestore = e.data()['version'];
         double version = (prefs.getDouble('webVersion') ?? 0);
-        await prefs.setDouble('webVersion', onFirestore);
         if (version != onFirestore) {
           print('New Version Available');
           isUpdate = true;
         } else {
+          await prefs.setDouble('webVersion', onFirestore);
           isUpdate = false;
         }
       });
