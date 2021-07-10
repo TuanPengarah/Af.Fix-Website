@@ -18,6 +18,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_html/html.dart' as html;
 
 class LandingPage extends StatefulWidget {
@@ -30,6 +31,7 @@ double scrollPosition = 0;
 bool atasSekali = true;
 bool dahRunningDesktop = false;
 FirebaseAuth _auth = FirebaseAuth.instance;
+double setVersion;
 
 class _LandingPageState extends State<LandingPage> {
   _scrollListener() {
@@ -108,7 +110,10 @@ class _LandingPageState extends State<LandingPage> {
           content: Text('New version available'),
           action: SnackBarAction(
             label: 'Update',
-            onPressed: () {
+            onPressed: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              await prefs.setDouble('webVersion', setVersion);
+
               html.window.location.reload();
             },
           ),

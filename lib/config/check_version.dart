@@ -1,3 +1,4 @@
+import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,12 +13,14 @@ class CheckVersion {
           .get()
           .then((e) async {
         double onFirestore = e.data()['version'];
+
         double version = (prefs.getDouble('webVersion') ?? 0);
+
         if (version != onFirestore) {
           print('New Version Available');
+          setVersion = e.data()['version'];
           isUpdate = true;
         } else {
-          await prefs.setDouble('webVersion', onFirestore);
           isUpdate = false;
         }
       });
