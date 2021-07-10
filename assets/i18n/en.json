@@ -103,6 +103,10 @@
     "noemail" : "Please enter your valid email address",
     "nopassword" : "Please enter your password",
     "password" : "Password",
+    "newemail" : "New email address",
+    "defaultpassword" : "Default password: ",
+    "oldpassword" : "Please enter your old password",
+    "newpassword" : "Enter your new password",
     "signoutconfirmtitle" : "Are you sure want to sign out?",
     "signoutconfirmsubtitle" : "Once signed out, you can sign in back at any point to manage your repaired devices and your e-warranty status.",
     "cancel" : "Cancel",
@@ -161,7 +165,24 @@
     "changeemail" : "Change email address",
     "email" : "Email Address",
     "updatinguser" : "Updating user data...",
-    "updatecomplete" : "Updating Completed"
+    "updatecomplete" : "Updating Completed",
+    "titlelinkgoogle" : "Link Account To Google",
+    "subtitlelinkgoogle" : "For security reason please enter your current password to link with Google Account",
+    "titlechangepassword" : "Change Password",
+    "titlechangeemail" : "Change Email Address",
+    "subtitlechangeemail" : "Please insert your new email address and your password to continue, your current email address is ", 
+    "submit" : "Submit",
+    "err-email-already-exist" : "This email are already exist, please use another email address!",
+    "err-invalid-email" : "This email adrress are invalid, try using another email address",
+    "err-provider-already-linked" : "You have already linked your account with Google",
+    "err-invalid-credential" : "Invalid credential has been detected! Please try again later",
+    "err-credential-already-in-use" : "Your Google Account are already exist on our server, please use another Google Account!",
+    "err-occured" : "Aw Snap, An error occured please try again later!",
+    "err-update-information" : "Failed to update user information, Please enter your correct information",
+    "ok-link-google" : "Congratulation, Your accound has been linked with Google Account",
+    "ok-change-password" : "Congratulation, you have successfully change your password account!",
+    "ok-change-email" : "Congratulation, you have successfully change your email address!"
+
     
 
 }
