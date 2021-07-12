@@ -8,13 +8,13 @@ import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/authscreen/ui/text_input.dart';
-import 'package:affix_web/screen/e-warranty/e-warranty_wrapper.dart';
+import 'package:affix_web/snackbar/error_snackbar.dart';
+import 'package:affix_web/snackbar/sucess_snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:string_validator/string_validator.dart';
@@ -32,19 +32,6 @@ class _LoginPageState extends State<LoginPage> {
   bool _passwordMiss = false;
   DocumentSnapshot snapshot;
   bool _visibilityPassword;
-
-  Future<dynamic> setUserName(String uid) async {
-    try {
-      final setUser = await FirebaseFirestore.instance
-          .collection('customer')
-          .doc(uid)
-          .get();
-      print('setting username...');
-      snapshot = setUser;
-    } catch (e) {
-      print('cannot set username');
-    }
-  }
 
   @override
   void initState() {
@@ -117,40 +104,56 @@ class _LoginPageState extends State<LoginPage> {
                                 },
                               ),
                               SizedBox(height: 15),
-                              authTextInput(
-                                context: context,
-                                isDarkMode: _isDarkMode,
-                                controller: _passwordInput,
-                                type: TextInputType.visiblePassword,
-                                title:
-                                    '${AppLocalizations.of(context).translate('password')}',
-                                subtitle: '123456',
-                                isPassword: !_visibilityPassword,
-                                icon: Icon(Icons.password),
-                                err: _passwordMiss
-                                    ? '${AppLocalizations.of(context).translate('nopassword')}'
-                                    : null,
-                                iconButton: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _visibilityPassword =
-                                          !_visibilityPassword;
-                                    });
-                                  },
-                                  icon: Icon(_visibilityPassword == false
-                                      ? Icons.visibility_off
-                                      : Icons.visibility),
-                                ),
-                                buttonController: _buttonController,
-                                onEnter: () {
-                                  FocusScope.of(context).unfocus();
-                                  _buttonController.start();
-                                },
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  authTextInput(
+                                    context: context,
+                                    isDarkMode: _isDarkMode,
+                                    controller: _passwordInput,
+                                    type: TextInputType.visiblePassword,
+                                    title:
+                                        '${AppLocalizations.of(context).translate('password')}',
+                                    subtitle: '123456',
+                                    isPassword: !_visibilityPassword,
+                                    icon: Icon(Icons.password),
+                                    err: _passwordMiss
+                                        ? '${AppLocalizations.of(context).translate('nopassword')}'
+                                        : null,
+                                    buttonController: _buttonController,
+                                    onEnter: () {
+                                      FocusScope.of(context).unfocus();
+                                      _buttonController.start();
+                                    },
+                                  ),
+                                  SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        value: _visibilityPassword,
+                                        onChanged: (newValue) {
+                                          setState(() {
+                                            _visibilityPassword = newValue;
+                                          });
+                                        },
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        '${AppLocalizations.of(context).translate('showpassword')}',
+                                        style: TextStyle(fontSize: 13),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                               SizedBox(height: 30),
                               _buttonAuth(
                                   context: context,
                                   onTap: () {
+                                    setState(() {
+                                      _emailMiss = false;
+                                      _passwordMiss = false;
+                                    });
                                     _loginAction(context);
                                   }),
                               SizedBox(height: 15),
@@ -159,7 +162,6 @@ class _LoginPageState extends State<LoginPage> {
                               OtherButtonSign(
                                 title:
                                     '${AppLocalizations.of(context).translate('googlesignbutton')}',
-                                icon: MaterialCommunityIcons.google,
                               ),
                               SizedBox(height: 20),
                               newUser(context, _isDarkMode),
@@ -208,52 +210,69 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           ),
                           SizedBox(height: 15),
-                          authTextInput(
-                            context: context,
-                            isDarkMode: _isDarkMode,
-                            controller: _passwordInput,
-                            type: TextInputType.visiblePassword,
-                            title:
-                                '${AppLocalizations.of(context).translate('password')}',
-                            subtitle: '123456',
-                            isPassword: !_visibilityPassword,
-                            icon: Icon(Icons.password),
-                            err: _passwordMiss
-                                ? '${AppLocalizations.of(context).translate('nopassword')}'
-                                : null,
-                            iconButton: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _visibilityPassword = !_visibilityPassword;
-                                });
-                              },
-                              icon: Icon(_visibilityPassword == false
-                                  ? Icons.visibility_off
-                                  : Icons.visibility),
-                            ),
-                            buttonController: _buttonController,
-                            onEnter: () {
-                              FocusScope.of(context).unfocus();
-                              _buttonController.start();
-                            },
+                          Column(
+                            children: [
+                              authTextInput(
+                                context: context,
+                                isDarkMode: _isDarkMode,
+                                controller: _passwordInput,
+                                type: TextInputType.visiblePassword,
+                                title:
+                                    '${AppLocalizations.of(context).translate('password')}',
+                                subtitle: '123456',
+                                isPassword: !_visibilityPassword,
+                                icon: Icon(Icons.password),
+                                err: _passwordMiss
+                                    ? '${AppLocalizations.of(context).translate('nopassword')}'
+                                    : null,
+                                buttonController: _buttonController,
+                                onEnter: () {
+                                  FocusScope.of(context).unfocus();
+                                  _buttonController.start();
+                                },
+                              ),
+                              SizedBox(height: 10),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 28.0),
+                                child: Row(
+                                  children: [
+                                    Checkbox(
+                                      value: _visibilityPassword,
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          _visibilityPassword = newValue;
+                                        });
+                                      },
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      '${AppLocalizations.of(context).translate('showpassword')}',
+                                      style: TextStyle(fontSize: 13),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                           SizedBox(height: 30),
                           _buttonAuth(
                               context: context,
                               onTap: () {
+                                setState(() {
+                                  _emailMiss = false;
+                                  _passwordMiss = false;
+                                });
                                 _loginAction(context);
                               }),
-                          SizedBox(height: 30),
-                          newUser(context, _isDarkMode),
                           SizedBox(height: 30),
                           orDivivder(),
                           SizedBox(height: 10),
                           OtherButtonSign(
                             title:
                                 '${AppLocalizations.of(context).translate('googlesignbutton')}',
-                            icon: MaterialCommunityIcons.google,
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 30),
+                          newUser(context, _isDarkMode),
                         ],
                       ),
                     ),
@@ -409,62 +428,38 @@ class _LoginPageState extends State<LoginPage> {
       try {
         //sign in new user
 
-        await context.read<AuthenticationServices>().signIn(
-            email: _emailInput.text.trim(),
-            password: _passwordInput.text.trim());
-
-        if (Provider.of<AuthenticationServices>(context, listen: false)
-                .isError ==
-            false) {
-          final retrieve =
-              await context.read<AuthenticationServices>().getUserName();
-          Provider.of<UpdateUI>(context, listen: false).setUserName(retrieve);
-          _buttonCompleted();
-          Provider.of<UpdateUI>(context, listen: false).setAnonymous(false);
-          //show status
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                  '${Provider.of<AuthenticationServices>(context, listen: false).status}'),
-            ),
-          );
-        } else {
-          _buttonError();
-          //show status
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Colors.amber[900],
-              content: Text(
-                  '${Provider.of<AuthenticationServices>(context, listen: false).status}'),
-            ),
-          );
-        }
+        await context
+            .read<AuthenticationServices>()
+            .signIn(
+                email: _emailInput.text.trim(),
+                password: _passwordInput.text.trim())
+            .then((e) async {
+          if (e == 'user-not-found') {
+            _buttonError();
+            showErrorSnackBar('User xde wat akaun baru lah der');
+          } else if (e == 'wrong-password') {
+            _buttonError();
+            showErrorSnackBar('Password salah bae');
+          } else if (e != null) {
+            _buttonError();
+            showErrorSnackBar('Kesalahan telah berlaku');
+          } else {
+            final retrieve =
+                await context.read<AuthenticationServices>().getUserName();
+            Provider.of<UpdateUI>(context, listen: false).setUserName(retrieve);
+            Provider.of<UpdateUI>(context, listen: false).setAnonymous(false);
+            _buttonCompleted();
+            showSuccessSnackBar('Log Masuk Berjaya!');
+          }
+        });
         //setting uid
         FirebaseAuth.instance.authStateChanges().listen((User user) async {
           if (user != null) {
             Provider.of<UpdateUI>(context, listen: false).setUID(user.uid);
-            if (user.displayName == null && !user.isAnonymous) {
-              await setUserName(user.uid);
-              try {
-                user.updateProfile(
-                    displayName: snapshot.data()['Nama'].toString());
-              } catch (e) {
-                final retrieve =
-                    await context.read<AuthenticationServices>().getEmail();
-                Provider.of<UpdateUI>(context, listen: false)
-                    .setUserName(retrieve);
-                print('cannot set username: $e');
-              }
-            }
           }
         });
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-                '${Provider.of<AuthenticationServices>(context, listen: false).status}'),
-          ),
-        );
+        showErrorSnackBar(e);
         print(e);
       }
     }
@@ -513,23 +508,5 @@ class _LoginPageState extends State<LoginPage> {
         fontWeight: FontWeight.w800,
       ),
     );
-  }
-}
-
-class LoginWrapper extends StatefulWidget {
-  @override
-  _LoginWrapperState createState() => _LoginWrapperState();
-}
-
-class _LoginWrapperState extends State<LoginWrapper> {
-  @override
-  Widget build(BuildContext context) {
-    bool _isAnony = Provider.of<UpdateUI>(context).checkAnonymous;
-    if (_isAnony == true) {
-      LoginPage();
-    } else if (_isAnony == false) {
-      EwarrantyWrapper();
-    }
-    return LoginPage();
   }
 }

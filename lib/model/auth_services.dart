@@ -66,50 +66,43 @@ class AuthenticationServices extends ChangeNotifier {
   }
 
   Future<String> signIn({String email, String password}) async {
+    String result;
     try {
       await _firebaseAuthWeb.signInWithEmailAndPassword(
           email: email, password: password);
-      isError = false;
-      getError('Sign in completed!');
-      return 'Signed in';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        getError('User not found! Please check your email address');
-        isError = true;
-        return 'no user';
+        result = e.code;
       } else if (e.code == 'wrong-password') {
-        getError('Wrong Password!');
-        isError = true;
-        return 'wrong password';
+        result = e.code;
       } else {
-        isError = true;
-        getError(e.message);
-        return e.message;
+        result = e.code;
       }
     }
+    return result;
   }
 
   Future<String> signUp(
       {String email, String password, String name, String phone}) async {
+    String result;
     try {
       await _firebaseAuthWeb
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((credential) async {
         await credential.user.updateProfile(displayName: name);
-        await createUserData(phone);
+        await createUserData(phone, '');
       });
-      return 'Signed up';
     } on FirebaseException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
         isError = true;
         getError('Password is to weak');
-        return e.message;
+        result = e.code;
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
         isError = true;
         getError(e.message);
-        return e.message;
+        result = e.code;
       }
 
       isError = true;
@@ -117,6 +110,7 @@ class AuthenticationServices extends ChangeNotifier {
       print(e.code);
       return e.message;
     }
+    return result;
   }
 
   Future<String> linktoGoogle() async {
@@ -281,7 +275,8 @@ class AuthenticationServices extends ChangeNotifier {
     return status;
   }
 
-  Future<void> signToGoogle() async {
+  Future<String> signToGoogle() async {
+    String result;
     try {
       final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
 
@@ -296,19 +291,36 @@ class AuthenticationServices extends ChangeNotifier {
         idToken: googleAuth.idToken,
       );
 
-      isError = false;
-      return await _firebaseAuthWeb.signInWithCredential(credential);
+      await _firebaseAuthWeb
+          .signInWithCredential(credential)
+          .then((user) async {
+        print('checking user data...');
+        FirebaseFirestore.instance
+            .collection('customer')
+            .doc(user.user.uid)
+            .get()
+            .then((doc) async {
+          if (doc.exists) {
+            result = 'login';
+            print('user data exist');
+          } else {
+            print('creating new database');
+            result = 'newuser';
+            await createUserData('', user.user.photoURL);
+          }
+        });
+      });
     } on PlatformException catch (e) {
-      isError = true;
-      print(e.code);
-      getError(e.message);
       if (e.code == 'popup_closed_by_user') {
-        getError('Sign in failed!');
+        result = e.code;
       }
+      print(e.code);
+      result = e.code;
     }
+    return result;
   }
 
-  Future<void> createUserData(String phone) async {
+  Future<void> createUserData(String phone, String photo) async {
     User _user = _firebaseAuthWeb.currentUser;
     String tarikh = '';
     var now = DateTime.now();
@@ -321,7 +333,7 @@ class AuthenticationServices extends ChangeNotifier {
       'Email': '${_user.email}',
       'Points': 10,
       'UID': _user.uid,
-      'photoURL': '',
+      'photoURL': photo,
     };
     await FirebaseFirestore.instance
         .collection('customer')

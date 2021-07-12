@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
                   );
                 },
                 MyRoutes.login: (_, __) => MaterialPage(
-                      child: LoginWrapper(),
+                      child: LoginPage(),
                       fullscreenDialog: true,
                     ),
                 MyRoutes.ewarranty: (_, params) => MaterialPage(

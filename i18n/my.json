@@ -115,7 +115,7 @@
     "visithelpcenter" : "Lawati pusat bantuan kami",
     "signincomplete" : "Log Masuk Selesai!",
     "signinnew" :"Selamat datang ke Af.Fix", 
-    "googlesignbutton": "Log masuk dengan Google",
+    "googlesignbutton": "Sambung dengan Google",
     "emailsignbutton": "Buat akaun secara percuma",
     "or" : "Atau",
     "repairhistory" : "Sejarah Baiki",
@@ -180,7 +180,7 @@
     "err-occured" : "Oh tidak, Kesalahan telah berlaku sila cuba sebentar lagi!",
     "err-update-information" : "Gagal untuk mengemaskini data pengguna, Sila masukkann maklumat anda dengan betul",
     "ok-link-google" : "Tahniah, Akaun anda telah di sambung dengan Google",
-    "ok-change-password" : "Tahnianh, anda telah berjaya menukar kata laluan!",
+    "ok-change-password" : "Tahniah, anda telah berjaya menukar kata laluan!",
     "ok-change-email" : "Tahniah, anda telah berjaya menukar alamat email!"
 
 }

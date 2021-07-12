@@ -25,7 +25,7 @@ class WhyAccount extends StatelessWidget {
             child: SelectableText(
               '${AppLocalizations.of(context).translate('titlecreateacc')}',
               style: TextStyle(
-                fontSize: 50,
+                fontSize: isMobile == true ? 40 : 50,
                 fontWeight: FontWeight.w900,
               ),
             ),

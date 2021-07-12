@@ -143,7 +143,7 @@ class NotLoginPage extends StatelessWidget {
             textAlign: TextAlign.center,
             maxLines: 5,
             style: TextStyle(
-              fontSize: fntSubSize ?? 20,
+              fontSize: fntSubSize ?? 16,
               fontWeight: FontWeight.w400,
             ),
           ),

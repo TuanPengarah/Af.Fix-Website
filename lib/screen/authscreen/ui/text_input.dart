@@ -20,7 +20,6 @@ SizedBox authTextInput({
   @required Icon icon,
   String err,
   @required TextInputType type,
-  IconButton iconButton,
   RoundedLoadingButtonController buttonController,
   Function onEnter,
 }) {
