@@ -89,7 +89,7 @@ class AuthenticationServices extends ChangeNotifier {
       await _firebaseAuthWeb
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((credential) async {
-        await credential.user.updateProfile(displayName: name);
+        await credential.user.updateDisplayName(name);
         await createUserData(phone, '');
       });
     } on FirebaseException catch (e) {
@@ -130,8 +130,10 @@ class AuthenticationServices extends ChangeNotifier {
     );
     try {
       await _user.linkWithCredential(credential).then((newUser) async {
-        await newUser.user.updateProfile(
-            displayName: googleUser.displayName, photoURL: googleUser.photoUrl);
+        await newUser.user.updateDisplayName(
+          googleUser.displayName,
+        );
+        await newUser.user.updatePhotoURL(googleUser.photoUrl);
         try {
           await newUser.user.updateEmail(googleUser.email).then((value) async {
             FirebaseFirestore.instance
@@ -291,33 +293,57 @@ class AuthenticationServices extends ChangeNotifier {
         idToken: googleAuth.idToken,
       );
 
-      await _firebaseAuthWeb
-          .signInWithCredential(credential)
-          .then((user) async {
-        print('checking user data...');
-        FirebaseFirestore.instance
+      await _firebaseAuthWeb.signInWithCredential(credential);
+      print('checking user data...');
+      User user = FirebaseAuth.instance.currentUser;
+      try {
+        final snapshot = await FirebaseFirestore.instance
             .collection('customer')
-            .doc(user.user.uid)
-            .get()
-            .then((doc) async {
-          if (doc.exists) {
-            result = 'login';
-            print('user data exist');
-          } else {
-            print('creating new database');
-            result = 'newuser';
-            await createUserData('', user.user.photoURL);
-          }
-        });
-      });
+            .doc(user.uid)
+            .get();
+        if (snapshot == null || !snapshot.exists) {
+          String tarikh = '';
+          var now = DateTime.now();
+          var formatter = new DateFormat('dd-M-yyyy');
+          tarikh = formatter.format(now);
+          print('creating new database');
+          await FirebaseFirestore.instance
+              .collection('customer')
+              .doc(user.uid)
+              .set({
+            'Tarikh': tarikh,
+            'Nama': '${user.displayName}',
+            'No Phone': '',
+            'Email': '${user.email}',
+            'Points': 10,
+            'UID': user.uid,
+            'photoURL': user.photoURL,
+          });
+          print('User has been succesfully created on database!');
+          await _firebaseAuthWeb.signInWithCredential(credential);
+          result = 'newuser';
+        } else {
+          result = 'login';
+          print('user data exist');
+
+          // await createUserData('', user.user.photoURL);
+        }
+      } catch (e) {
+        print(e);
+      }
+
+      await Future.delayed(Duration(seconds: 3));
+      print(result);
+      return result;
     } on PlatformException catch (e) {
       if (e.code == 'popup_closed_by_user') {
         result = e.code;
+        return result;
       }
       print(e.code);
       result = e.code;
+      return result;
     }
-    return result;
   }
 
   Future<void> createUserData(String phone, String photo) async {

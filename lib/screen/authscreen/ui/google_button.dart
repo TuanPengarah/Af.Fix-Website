@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:intl/intl.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -40,22 +41,21 @@ class OtherButtonSign extends StatelessWidget {
           if (e == 'popup_closed_by_user') {
             showErrorSnackBar('Sign in failed lor!');
             progressDialog.dismiss();
-          } else if (user != null) {
+          } else if (e == 'newuser') {
             progressDialog.dismiss();
             showSuccessSnackBar(
                 '${AppLocalizations.of(context).translate('signinnew')} ${user.displayName}');
             Future.delayed(Duration(seconds: 2), () {
               VxNavigator.of(context).pop();
             });
+          } else if (e == 'login') {
+            progressDialog.dismiss();
+            showSuccessSnackBar(
+                '${AppLocalizations.of(context).translate('signincomplete')}');
+            Future.delayed(Duration(seconds: 2), () {
+              VxNavigator.of(context).pop();
+            });
           }
-          // } else if (user != null && e == 'login') {
-          //   progressDialog.dismiss();
-          //   showSuccessSnackBar(
-          //       '${AppLocalizations.of(context).translate('signincomplete')}');
-          //   Future.delayed(Duration(seconds: 2), () {
-          //     VxNavigator.of(context).pop();
-          //   });
-          // }
         });
       },
     );

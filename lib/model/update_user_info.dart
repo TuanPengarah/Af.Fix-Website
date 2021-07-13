@@ -46,7 +46,7 @@ Future<void> updateUser({
   });
 
   //Update User Auth Name
-  await user.updateProfile(displayName: inputName);
+  await user.updateDisplayName(inputName);
   //Update Email
   // await context.read<AuthenticationServices>().updateEmail(inputEmail);
   // if (Provider.of<AuthenticationServices>(context, listen: false).status ==
