@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:affix_web/config/app_localizations.dart';
+import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/screen/authscreen/ui/text_input.dart';
@@ -10,6 +11,7 @@ import 'package:ndialog/ndialog.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:string_validator/string_validator.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class RegisterForm extends StatefulWidget {
   final bool isMobile;
@@ -158,7 +160,10 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
                 TextSpan(
                   text: '${AppLocalizations.of(context).translate('tos')}',
-                  recognizer: TapGestureRecognizer()..onTap = () {},
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      _tos();
+                    },
                   style: TextStyle(
                     color: Colors.blue,
                   ),
@@ -170,7 +175,10 @@ class _RegisterFormState extends State<RegisterForm> {
                 TextSpan(
                     text:
                         '${AppLocalizations.of(context).translate('useragreement')} ',
-                    recognizer: TapGestureRecognizer()..onTap = () {},
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        _tos();
+                      },
                     style: TextStyle(color: Colors.blue)),
                 TextSpan(
                     text:
@@ -178,7 +186,10 @@ class _RegisterFormState extends State<RegisterForm> {
                 TextSpan(
                     text:
                         '${AppLocalizations.of(context).translate('privacypolicy')}',
-                    recognizer: TapGestureRecognizer()..onTap = () {},
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        _tos();
+                      },
                     style: TextStyle(color: Colors.blue))
               ],
             ),
@@ -186,6 +197,10 @@ class _RegisterFormState extends State<RegisterForm> {
         )
       ],
     );
+  }
+
+  void _tos() {
+    VxNavigator.of(context).push(Uri.parse(MyRoutes.terms));
   }
 
   _buttonError() {

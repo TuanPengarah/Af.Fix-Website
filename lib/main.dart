@@ -8,6 +8,7 @@ import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/MyStatusID/MyStatusID_wrapper.dart';
 import 'package:affix_web/screen/MyStatusID/repair_report.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
+import 'package:affix_web/screen/terms/services_of_use.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +97,11 @@ class MyApp extends StatelessWidget {
                 MyRoutes.ewarranty: (_, params) => MaterialPage(
                       child: EwarrantyWrapper(),
                       fullscreenDialog: true,
-                    )
+                    ),
+                MyRoutes.terms: (_, __) => MaterialPage(
+                      child: TermsOfServices(),
+                      fullscreenDialog: true,
+                    ),
               },
             ),
             locale: model.appLocal,

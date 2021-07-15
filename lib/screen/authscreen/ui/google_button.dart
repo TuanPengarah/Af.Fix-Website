@@ -39,7 +39,8 @@ class OtherButtonSign extends StatelessWidget {
             .then((e) async {
           User user = FirebaseAuth.instance.currentUser;
           if (e == 'popup_closed_by_user') {
-            showErrorSnackBar('Sign in failed lor!');
+            showErrorSnackBar(
+                '${AppLocalizations.of(context).translate('googleloginfailed')}');
             progressDialog.dismiss();
           } else if (e == 'newuser') {
             progressDialog.dismiss();
@@ -51,7 +52,7 @@ class OtherButtonSign extends StatelessWidget {
           } else if (e == 'login') {
             progressDialog.dismiss();
             showSuccessSnackBar(
-                '${AppLocalizations.of(context).translate('signincomplete')}');
+                '${AppLocalizations.of(context).translate('signincomplete')} ${user.displayName}');
             Future.delayed(Duration(seconds: 2), () {
               VxNavigator.of(context).pop();
             });

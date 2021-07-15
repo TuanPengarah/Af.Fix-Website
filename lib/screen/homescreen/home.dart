@@ -107,9 +107,10 @@ class _LandingPageState extends State<LandingPage> {
     CheckVersion().checkVersion().then((v) {
       if (v == true) {
         navigatorKey.currentState.showSnackBar(SnackBar(
-          content: Text('New version available'),
+          content:
+              Text('${AppLocalizations.of(context).translate('newversion')}'),
           action: SnackBarAction(
-            label: 'Update',
+            label: '${AppLocalizations.of(context).translate('updatebutton')}',
             onPressed: () async {
               SharedPreferences prefs = await SharedPreferences.getInstance();
               await prefs.setDouble('webVersion', setVersion);

@@ -232,8 +232,8 @@ class _LoginPageState extends State<LoginPage> {
                                 },
                               ),
                               SizedBox(height: 10),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 28.0),
+                              SizedBox(
+                                width: 400,
                                 child: Row(
                                   children: [
                                     Checkbox(
@@ -436,20 +436,25 @@ class _LoginPageState extends State<LoginPage> {
             .then((e) async {
           if (e == 'user-not-found') {
             _buttonError();
-            showErrorSnackBar('User xde wat akaun baru lah der');
+            showErrorSnackBar(
+                '${AppLocalizations.of(context).translate('usernotfound')}');
           } else if (e == 'wrong-password') {
             _buttonError();
-            showErrorSnackBar('Password salah bae');
+            showErrorSnackBar(
+                '${AppLocalizations.of(context).translate('wrongpassword')}');
           } else if (e != null) {
             _buttonError();
-            showErrorSnackBar('Kesalahan telah berlaku');
+            showErrorSnackBar(
+                '${AppLocalizations.of(context).translate('errorfound')}');
           } else {
+            User user = FirebaseAuth.instance.currentUser;
             final retrieve =
                 await context.read<AuthenticationServices>().getUserName();
             Provider.of<UpdateUI>(context, listen: false).setUserName(retrieve);
             Provider.of<UpdateUI>(context, listen: false).setAnonymous(false);
             _buttonCompleted();
-            showSuccessSnackBar('Log Masuk Berjaya!');
+            showSuccessSnackBar(
+                '${AppLocalizations.of(context).translate('signincomplete')} ${user.displayName}');
           }
         });
         //setting uid

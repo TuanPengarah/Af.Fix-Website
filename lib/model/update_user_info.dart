@@ -34,12 +34,11 @@ Future<void> updateUser({
   );
   progressDialog.show();
   print('Updating user data..');
-  print(inputName);
-  print(inputPhone);
   User user = FirebaseAuth.instance.currentUser;
   var firestoreCollection =
       FirebaseFirestore.instance.collection('customer').doc(user.uid);
-  //Update Name dan Phone Number di  Firestore
+
+  //Update Name dan Phone Number di Firestore
   await firestoreCollection.update({
     'Nama': inputName,
     'No Phone': inputPhone,
@@ -47,12 +46,6 @@ Future<void> updateUser({
 
   //Update User Auth Name
   await user.updateDisplayName(inputName);
-  //Update Email
-  // await context.read<AuthenticationServices>().updateEmail(inputEmail);
-  // if (Provider.of<AuthenticationServices>(context, listen: false).status ==
-  //     'requires-recent-login') {
-  //   await reauthUserDialog();
-  // }
   Provider.of<UpdateUI>(context, listen: false).setUserName(inputName);
   await user.reload().then((value) {
     print('Updating completed');

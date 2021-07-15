@@ -3,4 +3,5 @@ class MyRoutes {
   static String mySIDDetails = '/mysid/timeline';
   static String login = '/login';
   static String ewarranty = '/e-warranty';
+  static String terms = '/terms';
 }
