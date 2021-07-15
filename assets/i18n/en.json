@@ -23,7 +23,7 @@
     "emptyfield" : "This field cannot be empty",
     "tooltipsocial" : "Our Social Media",
     "usernotsign" : "User not sign in",
-    "login" : "Click here to login",
+    "login" : "Click here to sign in",
     "darktheme" : "Dark Theme",
     "tooltipletrepair" : "Let's repair with us",
     "tooltipabout" : "About and advantage services with us",
@@ -97,8 +97,8 @@
     "tooltipsignout" : "Sign out to your account",
     "signintitle" : "Let's sign you in first!",
     "signinsubtitle" : "Don't worry, just enter your email address and password to continue!",
-    "signincompleted" : "Sign in completed!",
-    "usernotfound" : "User not found for that email. Please enter correct email address!",
+    "signincompleted" : "Welcome back",
+    "usernotfound" : "User not found for that email. Please enter correct registered email address!",
     "wrongpassword" : "Wrong password. Enter your correct password!",
     "noemail" : "Please enter your valid email address",
     "nopassword" : "Please enter your password",
@@ -114,7 +114,7 @@
     "signinfirstsub" : "Sign in to your Af.Fix Account to check your E-Warranty status and all your repaired devices!",
     "visithelpcenter" : "Visit our help center",
     "signincomplete" : "Congratulations, you are logging in!",
-    "signinnew" :"Welcome to Af.Fix", 
+    "signinnew" :"Welcome to Assaff", 
     "googlesignbutton": "Continue with Google",
     "emailsignbutton": "Create an account for free",
     "or" : "Or",
@@ -148,6 +148,7 @@
     "createaccount" : "Create new account!",
     "registerdone" : "Registration Completed",
     "errorfound" : "Uh Oh, It's an Error!",
+    "googleloginfailed" : "Sign in failed!",
     "policy1" : "By creating an account, you understand and agree to our",
     "tos" : "Terms of Services",
     "policy2" : "including the",
@@ -181,8 +182,9 @@
     "err-update-information" : "Failed to update user information, Please enter your correct information",
     "ok-link-google" : "Congratulation, Your accound has been linked with Google Account",
     "ok-change-password" : "Congratulation, you have successfully change your password account!",
-    "ok-change-email" : "Congratulation, you have successfully change your email address!"
-
+    "ok-change-email" : "Congratulation, you have successfully change your email address!",
+    "newversion" : "New version available! Update now",
+    "updatebutton" : "Update"
     
 
 }
