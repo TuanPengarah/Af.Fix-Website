@@ -25,7 +25,9 @@ class ThemeProvider extends ChangeNotifier {
 
 class MyThemes {
   static final darkTheme = ThemeData(
+    primarySwatch: Colors.teal,
     appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade900),
+    brightness: Brightness.dark,
     scaffoldBackgroundColor: kColorDarkScaffold,
     primaryColor: Colors.teal,
     toggleableActiveColor: Colors.teal,
@@ -71,6 +73,7 @@ class MyThemes {
   );
 
   static final lightTheme = ThemeData(
+    primarySwatch: Colors.red,
     appBarTheme: AppBarTheme(
       // color: kColorWhite,
       elevation: 5,
@@ -79,6 +82,7 @@ class MyThemes {
       backgroundColor: kColorWhite,
       foregroundColor: kColorGrey,
     ),
+    brightness: Brightness.light,
     scaffoldBackgroundColor: kColorWhite,
     primaryColor: Colors.red,
     toggleableActiveColor: Colors.red,

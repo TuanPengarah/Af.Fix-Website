@@ -174,17 +174,6 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
                 TextSpan(
                     text:
-                        '${AppLocalizations.of(context).translate('useragreement')} ',
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        _tos();
-                      },
-                    style: TextStyle(color: Colors.blue)),
-                TextSpan(
-                    text:
-                        ', ${AppLocalizations.of(context).translate('and')} '),
-                TextSpan(
-                    text:
                         '${AppLocalizations.of(context).translate('privacypolicy')}',
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
