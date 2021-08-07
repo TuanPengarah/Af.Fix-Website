@@ -1,10 +1,12 @@
 import 'package:affix_web/config/app_localizations.dart';
+import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/drawer/drawer.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class TermsOfServices extends StatelessWidget {
   @override
@@ -19,9 +21,6 @@ class TermsOfServices extends StatelessWidget {
           },
           icon: Icon(
             Icons.close,
-            color: _isDarkMode == false
-                ? Colors.white
-                : Provider.of<UpdateUI>(context).changeColor,
           ),
         ),
         title: Text('${AppLocalizations.of(context).translate('termstitle')}'),
@@ -31,9 +30,6 @@ class TermsOfServices extends StatelessWidget {
               tooltip: 'Menu',
               icon: Icon(
                 Icons.menu,
-                color: _isDarkMode == false
-                    ? Colors.white
-                    : Provider.of<UpdateUI>(context).changeColor,
               ),
               onPressed: () async {
                 Scaffold.of(context).openEndDrawer();
@@ -176,7 +172,11 @@ class TermsOfServices extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.blue,
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = () {},
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              VxNavigator.of(context)
+                                  .push(Uri.parse(MyRoutes.privacy));
+                            },
                         ),
                       ],
                     ),

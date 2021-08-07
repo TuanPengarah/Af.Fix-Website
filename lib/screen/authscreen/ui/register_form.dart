@@ -177,7 +177,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         '${AppLocalizations.of(context).translate('privacypolicy')}',
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        _tos();
+                        _pp();
                       },
                     style: TextStyle(color: Colors.blue))
               ],
@@ -190,6 +190,10 @@ class _RegisterFormState extends State<RegisterForm> {
 
   void _tos() {
     VxNavigator.of(context).push(Uri.parse(MyRoutes.terms));
+  }
+
+  void _pp() {
+    VxNavigator.of(context).push(Uri.parse(MyRoutes.privacy));
   }
 
   _buttonError() {
