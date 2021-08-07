@@ -77,7 +77,7 @@ const RESOURCES = {
 "manifest.json": "c1c05b36b4b98d3ee00298846bcdb93f",
 "version.json": "42dbcea7fb445741e49bc6c0904a3948",
 "favicon.ico": "562c0adcb9842c2f3925a6c0b36911a3",
-"main.dart.js": "ab53d91f4f523b57e7d20cb906de69a5",
+"main.dart.js": "1fca2f09a1149e0edcc1410a8e583ad2",
 "splash/img/light-3x.png": "89d523b0afc9902e934495b23a8b2030",
 "splash/img/light-1x.png": "b00ce8a3c0377f303bc3702c9fdd75da",
 "splash/img/dark-2x.png": "d3e62b8d36c8ff50d72394ce8de2fd3d",
@@ -85,8 +85,8 @@ const RESOURCES = {
 "splash/img/light-2x.png": "f96770bf7b45c106baa7803d34f1372a",
 "splash/img/dark-3x.png": "b265afa5e82e3d5796c1e518d8a76d61",
 "splash/style.css": "85b9bc5808a6c2e98251c14244b99ae7",
-"index.html": "ca64c8c12cea65377cea89bdf58506d8",
-"/": "ca64c8c12cea65377cea89bdf58506d8"
+"index.html": "da612eacb04d752bbbc547240b4d0a26",
+"/": "da612eacb04d752bbbc547240b4d0a26"
 };
 
 // The application shell files that are downloaded before a service worker can
