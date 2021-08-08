@@ -1,3 +1,4 @@
+import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/drawer/drawer.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
@@ -19,7 +20,8 @@ class PrivacyPolicy extends StatelessWidget {
             Icons.close,
           ),
         ),
-        title: Text('Privacy Policy'),
+        title:
+            Text('${AppLocalizations.of(context).translate('privacypolicy')}'),
         actions: [
           Builder(
             builder: (BuildContext context) => IconButton(
@@ -39,7 +41,7 @@ class PrivacyPolicy extends StatelessWidget {
         width: double.infinity,
         child: Scrollbar(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: ScrollConfiguration(
               behavior:
                   ScrollConfiguration.of(context).copyWith(scrollbars: false),
@@ -48,11 +50,11 @@ class PrivacyPolicy extends StatelessWidget {
                 children: [
                   SizedBox(height: 20),
                   SelectableText(
-                    'At Af.Fix Smartphone Repair, accessible from af-fix.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Af.Fix Smartphone Repair and how we use it. If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us. This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in Af.Fix Smartphone Repair. This policy is not applicable to any information collected offline or via channels other than this website.',
+                    '${AppLocalizations.of(context).translate('privacydesc2')}',
                   ),
                   SizedBox(height: 20),
                   SelectableText(
-                    'Consent',
+                    '${AppLocalizations.of(context).translate('consenttitle')}',
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 25,
@@ -61,11 +63,11 @@ class PrivacyPolicy extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   SelectableText(
-                    'By using our website, you hereby consent to our Privacy Policy and agree to its terms.',
+                    '${AppLocalizations.of(context).translate('consentdesc')}',
                   ),
                   SizedBox(height: 20),
                   SelectableText(
-                    'Information we collect',
+                    '${AppLocalizations.of(context).translate('infocollecttitle')}',
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 25,
@@ -74,11 +76,11 @@ class PrivacyPolicy extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   SelectableText(
-                    'The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information. If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide. When you register for an Account, we may ask for your contact information, including items such as name, company name, address, email address, and telephone number.',
+                    '${AppLocalizations.of(context).translate('infocollectdesc')}',
                   ),
                   SizedBox(height: 20),
                   SelectableText(
-                    'How we use your information',
+                    '${AppLocalizations.of(context).translate('howwetitle')}',
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 25,
@@ -87,27 +89,155 @@ class PrivacyPolicy extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   SelectableText(
-                      'We use the information we collect in various ways, including to:'),
+                      '${AppLocalizations.of(context).translate('howwedesc1')}'),
                   SizedBox(height: 10),
                   SelectableText(
-                      '• Provide, operate, and maintain our website'),
+                      '${AppLocalizations.of(context).translate('howwedesc2')}'),
                   SizedBox(height: 10),
                   SelectableText(
-                      '• Improve, personalize, and expand our website'),
+                      '${AppLocalizations.of(context).translate('howwedesc3')}'),
                   SizedBox(height: 10),
                   SelectableText(
-                      '• Understand and analyze how you use our website'),
+                      '${AppLocalizations.of(context).translate('howwedesc4')}'),
                   SizedBox(height: 10),
                   SelectableText(
-                      '• Develop new products, services, features, and functionality'),
+                      '${AppLocalizations.of(context).translate('howwedesc5')}'),
                   SizedBox(height: 10),
                   SelectableText(
-                      '• Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the website, and for marketing and promotional purposes'),
+                      '${AppLocalizations.of(context).translate('howwedesc6')}'),
                   SizedBox(height: 10),
-                  SelectableText('• Send you emails'),
+                  SelectableText(
+                      '${AppLocalizations.of(context).translate('howwedesc7')}'),
                   SizedBox(height: 10),
-                  SelectableText('• Find and prevent fraud'),
+                  SelectableText(
+                      '${AppLocalizations.of(context).translate('howwedesc8')}'),
                   SizedBox(height: 20),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('logtitle')}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 25,
+                      letterSpacing: 1.1,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('logdesc')}',
+                  ),
+                  SizedBox(height: 20),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('adpartnertitle')}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 25,
+                      letterSpacing: 1.1,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('adpartnerdesc')}',
+                  ),
+                  SizedBox(height: 20),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('thirdtitle')}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 25,
+                      letterSpacing: 1.1,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('thirddesc')}',
+                  ),
+                  SizedBox(height: 20),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('ccpatitle')}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 25,
+                      letterSpacing: 1.1,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SelectableText(
+                      '${AppLocalizations.of(context).translate('ccpadesc1')}'),
+                  SizedBox(height: 10),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('ccpadesc2')}',
+                  ),
+                  SizedBox(height: 10),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('ccpadesc3')}',
+                  ),
+                  SizedBox(height: 10),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('ccpadesc4')}',
+                  ),
+                  SizedBox(height: 10),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('ccpadesc5')}',
+                  ),
+                  SizedBox(height: 20),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('gdprtitle')}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 25,
+                      letterSpacing: 1.1,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('gpdrdesc1')}',
+                  ),
+                  SizedBox(height: 10),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('gpdrdesc2')}',
+                  ),
+                  SizedBox(height: 10),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('gpdrdesc3')}',
+                  ),
+                  SizedBox(height: 10),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('gpdrdesc4')}',
+                  ),
+                  SizedBox(height: 10),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('gpdrdesc5')}',
+                  ),
+                  SizedBox(height: 10),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('gpdrdesc6')}',
+                  ),
+                  SizedBox(height: 10),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('gpdrdesc7')}',
+                  ),
+                  SizedBox(height: 10),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('gpdrdesc8')}',
+                  ),
+                  SizedBox(height: 10),
+                  SizedBox(height: 20),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('childrentitle')}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 25,
+                      letterSpacing: 1.1,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('childrendesc1')}',
+                  ),
+                  SizedBox(height: 10),
+                  SelectableText(
+                    '${AppLocalizations.of(context).translate('childrendesc2')}',
+                  ),
+                  SizedBox(height: 50),
                 ],
               ),
             ),
