@@ -44,8 +44,8 @@ const RESOURCES = {
 "assets/packages/slimy_card/assets/flare/topSlime.flr": "9f381ee39c22b624c805f536b39171a6",
 "assets/packages/slimy_card/assets/flare/bottomSlime.flr": "3a26ed39d3a9a9956105e9e6e4d5ad43",
 "assets/NOTICES": "6c99d03f4395152e08a29ed3e0cc57b8",
-"assets/i18n/my.json": "4ba4b3175bd95c0350279c88c28518c7",
-"assets/i18n/en.json": "c57e992ae0858a7012296973141dcbf8",
+"assets/i18n/my.json": "dd099f3132d48cd713bf0bf2e91c837a",
+"assets/i18n/en.json": "53e39dd3a5cef5e964d32784d136c1f8",
 "icons/android-icon-96x96.png": "b6c9f53a97d937615dd87a95e9dd1ecd",
 "icons/ms-icon-144x144.png": "f93c75b93d0275bfe2ac2c4809c437a3",
 "icons/apple-icon-180x180.png": "e3fd4f8547f6846a93996545f0c03332",
@@ -77,7 +77,7 @@ const RESOURCES = {
 "manifest.json": "c1c05b36b4b98d3ee00298846bcdb93f",
 "version.json": "42dbcea7fb445741e49bc6c0904a3948",
 "favicon.ico": "562c0adcb9842c2f3925a6c0b36911a3",
-"main.dart.js": "d15a28df6272652b9a9afec2f065968f",
+"main.dart.js": "dfe2ff9d137c050dc5cfd1daaed004a0",
 "splash/img/light-3x.png": "89d523b0afc9902e934495b23a8b2030",
 "splash/img/light-1x.png": "b00ce8a3c0377f303bc3702c9fdd75da",
 "splash/img/dark-2x.png": "d3e62b8d36c8ff50d72394ce8de2fd3d",
@@ -85,8 +85,8 @@ const RESOURCES = {
 "splash/img/light-2x.png": "f96770bf7b45c106baa7803d34f1372a",
 "splash/img/dark-3x.png": "b265afa5e82e3d5796c1e518d8a76d61",
 "splash/style.css": "85b9bc5808a6c2e98251c14244b99ae7",
-"index.html": "6e9781bfbdd04dd28f88fe4f885dafb6",
-"/": "6e9781bfbdd04dd28f88fe4f885dafb6"
+"index.html": "43ef2ad1d2d7f7209acebf1ef171e7b8",
+"/": "43ef2ad1d2d7f7209acebf1ef171e7b8"
 };
 
 // The application shell files that are downloaded before a service worker can
