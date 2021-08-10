@@ -269,7 +269,7 @@ class MobileHomeView extends StatelessWidget {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: '.FIX',
+                          text: '-FIX',
                           style: TextStyle(
                             color:
                                 _isDarkMode == false ? kColorWhite : kColorGrey,

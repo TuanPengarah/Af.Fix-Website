@@ -171,7 +171,6 @@ class DekstopHomeView extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      // Navbar(),
                       FirstLanding(),
                       About(),
                       CallUs(),

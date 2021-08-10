@@ -177,7 +177,9 @@ class NotLoginPage extends StatelessWidget {
               ),
               SizedBox(width: 30),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  VxNavigator.of(context).pop();
+                },
                 child: Text(
                   '${AppLocalizations.of(context).translate('visithelpcenter')}',
                   style: TextStyle(

@@ -52,7 +52,7 @@ class PWA extends StatelessWidget {
                     '${AppLocalizations.of(context).translate('ewaranttysubtitle')}',
                     '${AppLocalizations.of(context).translate('ewarrantygobutton')}',
                     context, () {
-                  context.vxNav.push(Uri.parse(MyRoutes.myStatusID));
+                  context.vxNav.push(Uri.parse(MyRoutes.ewarranty));
                 }),
               ],
             ),
@@ -67,6 +67,7 @@ class PWA extends StatelessWidget {
       BuildContext context, Function onTap) {
     return Container(
       width: 600,
+      height: 250,
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(30),
@@ -74,6 +75,7 @@ class PWA extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SelectableText(
               title,
@@ -84,7 +86,7 @@ class PWA extends StatelessWidget {
                 fontSize: 30,
               ),
             ),
-            SizedBox(height: 20),
+            // SizedBox(height: 20),
             SelectableText(
               subtitle,
               textAlign: TextAlign.center,
@@ -94,7 +96,7 @@ class PWA extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
-            SizedBox(height: 100),
+            // SizedBox(height: 100),
             ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(kColorWhite),
