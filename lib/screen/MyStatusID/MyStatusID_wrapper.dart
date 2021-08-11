@@ -1,24 +1,17 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/drawer/drawer.dart';
-import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/MyStatusID/MyStatusID_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class MyStatusIDScaffold extends StatefulWidget {
+class MyStatusIDScaffold extends StatelessWidget {
   final String mysidData;
 
   MyStatusIDScaffold({this.mysidData});
-  @override
-  _MyStatusIDScaffoldState createState() => _MyStatusIDScaffoldState();
-}
-
-class _MyStatusIDScaffoldState extends State<MyStatusIDScaffold> {
   @override
   Widget build(BuildContext context) {
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
@@ -37,7 +30,7 @@ class _MyStatusIDScaffoldState extends State<MyStatusIDScaffold> {
         alignment: AlignmentDirectional.topEnd,
         children: [
           MyRepairIDContainer(
-            mySIDText: widget.mysidData,
+            mySIDText: mysidData,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

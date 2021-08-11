@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
-import 'package:affix_web/model/firestore_add.dart';
+import 'package:affix_web/model/email_api.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
+import 'package:affix_web/snackbar/error_snackbar.dart';
+import 'package:affix_web/snackbar/sucess_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -36,32 +38,28 @@ class _RepairFormState extends State<RepairForm> {
   void _submitted() async {
     Timer(Duration(seconds: 2), () async {
       if (_formKey.currentState.validate()) {
-        try {
-          await AddAppointment(
-            context: context,
-            email: _email.text,
-            model: _model.text,
-            name: _name.text,
-            noPhone: _phoneNumber.text,
-            problem: _kerosakkan.text,
-          ).addToFirestore();
-          _email.clear();
-          _kerosakkan.clear();
-          _model.clear();
-          _name.clear();
-          _phoneNumber.clear();
-          _buttonController.success();
-          Timer(Duration(seconds: 2), () {
-            _buttonController.reset();
-          });
-        } catch (e) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(e.toString())));
-          _buttonController.error();
-          Timer(Duration(seconds: 2), () {
-            _buttonController.reset();
-          });
-        }
+        await EmailApi(
+          _name.text,
+          _phoneNumber.text,
+          _email.text,
+          _model.text,
+          _kerosakkan.text,
+        ).sendEmail().then((s) {
+          if (s == 'OK') {
+            _buttonController.success();
+            showSuccessSnackBar(
+                '${AppLocalizations.of(context).translate('appoinmentsuccess')}');
+            Timer(Duration(seconds: 2), () {
+              _buttonController.reset();
+            });
+          } else {
+            showErrorSnackBar('Error: $s');
+            _buttonController.error();
+            Timer(Duration(seconds: 2), () {
+              _buttonController.reset();
+            });
+          }
+        });
       } else {
         _buttonController.error();
         Timer(Duration(seconds: 2), () {
