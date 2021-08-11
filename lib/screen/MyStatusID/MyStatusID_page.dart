@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
+import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
+import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/MyStatusID/MyStatusID_modal_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +27,13 @@ class _MyRepairIDContainerState extends State<MyRepairIDContainer> {
   final _inputSearch = TextEditingController();
 
   _checkDatabase(BuildContext context) async {
+    bool _isAnony =
+        Provider.of<UpdateUI>(context, listen: false).checkAnonymous;
     final _inputText = _inputSearch.text;
+    if (_isAnony == true && FirebaseAuth.instance.currentUser == null) {
+      print('become assasins');
+      await context.read<AuthenticationServices>().anonymousSignIn();
+    }
     if (_inputText.isEmpty) {
       _buttonController.error();
       ScaffoldMessenger.of(context).showSnackBar(
@@ -198,38 +207,35 @@ class _MyRepairIDContainerState extends State<MyRepairIDContainer> {
                       ),
                     ),
                   ),
-                  Hero(
-                    tag: _inputSearch.text,
-                    child: SizedBox(
-                      width: 180,
-                      height: 120,
-                      child: RoundedLoadingButton(
-                        successColor: Colors.white,
-                        valueColor: Theme.of(context).primaryColor,
-                        errorColor: Colors.white,
-                        controller: _buttonController,
-                        onPressed: () {
-                          FocusScope.of(context).unfocus();
-                          _checkDatabase(context);
-                        },
-                        color: kColorWhite,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              MaterialCommunityIcons.notebook,
+                  SizedBox(
+                    width: 180,
+                    height: 120,
+                    child: RoundedLoadingButton(
+                      successColor: Colors.white,
+                      valueColor: Theme.of(context).primaryColor,
+                      errorColor: Colors.white,
+                      controller: _buttonController,
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
+                        _checkDatabase(context);
+                      },
+                      color: kColorWhite,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            MaterialCommunityIcons.notebook,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          SizedBox(width: 15),
+                          Text(
+                            '${AppLocalizations.of(context).translate('trackbutton')}',
+                            style: TextStyle(
                               color: Theme.of(context).primaryColor,
                             ),
-                            SizedBox(width: 15),
-                            Text(
-                              '${AppLocalizations.of(context).translate('trackbutton')}',
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

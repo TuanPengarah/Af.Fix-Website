@@ -19,28 +19,6 @@ class MyStatusIDScaffold extends StatefulWidget {
 }
 
 class _MyStatusIDScaffoldState extends State<MyStatusIDScaffold> {
-  _checkAnonymous(BuildContext context) async {
-    bool _isAnony =
-        Provider.of<UpdateUI>(context, listen: false).checkAnonymous;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_isAnony == true && FirebaseAuth.instance.currentUser == null) {
-        print('become assasins');
-        WidgetsBinding.instance.addPostFrameCallback((_) async {
-          await context.read<AuthenticationServices>().anonymousSignIn();
-        });
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _checkAnonymous(context);
-    });
-
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
