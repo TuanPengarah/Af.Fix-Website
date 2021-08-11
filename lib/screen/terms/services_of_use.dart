@@ -8,7 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class TermsOfServices extends StatelessWidget {
+class TermsOfServices extends StatefulWidget {
+  @override
+  _TermsOfServicesState createState() => _TermsOfServicesState();
+}
+
+class _TermsOfServicesState extends State<TermsOfServices> {
+  bool _isMobile;
   @override
   Widget build(BuildContext context) {
     String _uidText = Provider.of<UpdateUI>(context).uid;
@@ -39,168 +45,177 @@ class TermsOfServices extends StatelessWidget {
         ],
       ),
       endDrawer: EndDrawer(uidText: _uidText, isDarkMode: _isDarkMode),
-      body: Container(
-        width: double.infinity,
-        child: Scrollbar(
+      body: LayoutBuilder(builder: (context, constraints) {
+        if (constraints.maxWidth >= 1200) {
+          _isMobile = false;
+        } else {
+          _isMobile = true;
+        }
+        return SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: ScrollConfiguration(
-              behavior:
-                  ScrollConfiguration.of(context).copyWith(scrollbars: false),
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                children: [
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('termsdesc')}',
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('licensetitle')}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 25,
-                      letterSpacing: 1.1,
+            padding: EdgeInsets.symmetric(
+              horizontal: _isMobile == true ? 18.0 : 350.0,
+              vertical: _isMobile == true ? 15 : 18,
+            ),
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('termsdesc')}',
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('licensedesc')}',
-                  ),
-                  SizedBox(height: 8),
-                  SelectableText(
-                      '${AppLocalizations.of(context).translate('licensedesc1')}'),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('licensedesc2')}',
-                  ),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('licensedesc3')}',
-                  ),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('licensedesc4')}',
-                  ),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('licensedesc5')}',
-                  ),
-                  SizedBox(height: 8),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('licensedesc6')}',
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('disclaimertitle')}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 25,
-                      letterSpacing: 1.1,
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('licensetitle')}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 25,
+                        letterSpacing: 1.1,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('disclaimerdesc')}',
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('limitationtitle')}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 25,
-                      letterSpacing: 1.1,
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('licensedesc')}',
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('limitationdesc')}',
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('revisiontitle')}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 25,
-                      letterSpacing: 1.1,
+                    SizedBox(height: 8),
+                    SelectableText(
+                        '${AppLocalizations.of(context).translate('licensedesc1')}'),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('licensedesc2')}',
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('revisiondesc')}',
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('linkstitle')}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 25,
-                      letterSpacing: 1.1,
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('licensedesc3')}',
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('linksdesc')}',
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('sitetermstitle')}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 25,
-                      letterSpacing: 1.1,
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('licensedesc4')}',
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('sitetermsdesc')}',
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('privacytitle')}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 25,
-                      letterSpacing: 1.1,
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('licensedesc5')}',
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText.rich(
-                    TextSpan(
-                      text:
-                          '${AppLocalizations.of(context).translate('privacydesc')} ',
-                      children: [
-                        TextSpan(
-                          text:
-                              '${AppLocalizations.of(context).translate('privacypolicy')}',
-                          style: TextStyle(
-                            color: Colors.blue,
+                    SizedBox(height: 8),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('licensedesc6')}',
+                    ),
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('disclaimertitle')}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 25,
+                        letterSpacing: 1.1,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('disclaimerdesc')}',
+                    ),
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('limitationtitle')}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 25,
+                        letterSpacing: 1.1,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('limitationdesc')}',
+                    ),
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('revisiontitle')}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 25,
+                        letterSpacing: 1.1,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('revisiondesc')}',
+                    ),
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('linkstitle')}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 25,
+                        letterSpacing: 1.1,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('linksdesc')}',
+                    ),
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('sitetermstitle')}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 25,
+                        letterSpacing: 1.1,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('sitetermsdesc')}',
+                    ),
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('privacytitle')}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 25,
+                        letterSpacing: 1.1,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    SelectableText.rich(
+                      TextSpan(
+                        text:
+                            '${AppLocalizations.of(context).translate('privacydesc')} ',
+                        children: [
+                          TextSpan(
+                            text:
+                                '${AppLocalizations.of(context).translate('privacypolicy')}',
+                            style: TextStyle(
+                              color: Colors.blue,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                VxNavigator.of(context)
+                                    .push(Uri.parse(MyRoutes.privacy));
+                              },
                           ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              VxNavigator.of(context)
-                                  .push(Uri.parse(MyRoutes.privacy));
-                            },
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('lawtitle')}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 25,
-                      letterSpacing: 1.1,
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('lawtitle')}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 25,
+                        letterSpacing: 1.1,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  SelectableText(
-                    '${AppLocalizations.of(context).translate('lawdesc')}',
-                  ),
-                  SizedBox(height: 50),
-                ],
+                    SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('lawdesc')}',
+                    ),
+                    SizedBox(height: 50),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

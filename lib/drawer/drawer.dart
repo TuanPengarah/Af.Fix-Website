@@ -27,7 +27,6 @@ class EndDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     String _userName = Provider.of<UpdateUI>(context).userName;
     bool _isAnony = Provider.of<UpdateUI>(context).checkAnonymous;
-    bool _isMobile = Provider.of<UpdateUI>(context).isMobile;
     String _userPhoto = Provider.of<UpdateUI>(context).userPhoto;
     return Drawer(
       child: ListView(
@@ -74,10 +73,6 @@ class EndDrawer extends StatelessWidget {
               ],
             ),
             decoration: BoxDecoration(
-              // image: _userPhoto != ''
-              //     ? DecorationImage(
-              //         image: NetworkImage(_userPhoto), fit: BoxFit.cover)
-              //     : null,
               color: Theme.of(context).primaryColor,
             ),
           ),

@@ -79,7 +79,7 @@ class MyThemes {
     ),
     brightness: Brightness.light,
     scaffoldBackgroundColor: kColorWhite,
-    primaryColor: Colors.red,
+    // primaryColor: Colors.red,
     toggleableActiveColor: Colors.red,
     colorScheme: ColorScheme.light(),
     textSelectionTheme: TextSelectionThemeData(
