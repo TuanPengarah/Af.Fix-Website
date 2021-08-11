@@ -10,6 +10,8 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:universal_html/html.dart' as html;
 
+import '../home.dart';
+
 class FirstLanding extends StatelessWidget {
   const FirstLanding({
     Key key,
@@ -147,9 +149,12 @@ class _MobileFirstPageViewState extends State<MobileFirstPageView> {
                   width: 280,
                   child: Center(
                     child: TextButton.icon(
-                      onPressed: () {
-                        print(Provider.of<UpdateUI>(context, listen: false)
-                            .checkAnonymous);
+                      onPressed: () async {
+                        final scroll = appsKey.currentContext;
+                        await Scrollable.ensureVisible(
+                          scroll,
+                          duration: Duration(seconds: 1),
+                        );
                       },
                       icon: Icon(
                         Icons.file_download,
@@ -290,7 +295,21 @@ class _DekstopFirstPageViewState extends State<DekstopFirstPageView> {
                       width: 20,
                     ),
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () async {
+                        atasSekali = false;
+                        Provider.of<UpdateUI>(context, listen: false)
+                            .animationStartSmall(
+                                wAnimDesk: 140,
+                                hAnimDesk: 90,
+                                wAnimMob: 120,
+                                hAnimMob: 80);
+                        final scroll = appsKey.currentContext;
+                        await Scrollable.ensureVisible(
+                          scroll,
+                          duration: Duration(seconds: 1),
+                          alignment: 0.8,
+                        );
+                      },
                       icon: Icon(
                         Icons.file_download,
                       ),

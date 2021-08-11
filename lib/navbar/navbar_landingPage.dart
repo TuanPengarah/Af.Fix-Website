@@ -77,7 +77,7 @@ class _DekstopNavState extends State<DekstopNav> {
                           width: 20,
                         ),
                         TextButton(
-                          onPressed: () {
+                          onPressed: () async {
                             atasSekali = false;
                             Provider.of<UpdateUI>(context, listen: false)
                                 .animationStartSmall(
@@ -85,10 +85,11 @@ class _DekstopNavState extends State<DekstopNav> {
                                     hAnimDesk: 90,
                                     wAnimMob: 120,
                                     hAnimMob: 80);
-
-                            scrollController.animateTo(1200,
-                                duration: Duration(milliseconds: 800),
-                                curve: Curves.decelerate);
+                            final scroll = aboutKey.currentContext;
+                            await Scrollable.ensureVisible(
+                              scroll,
+                              duration: Duration(seconds: 1),
+                            );
                           },
                           child: Text(
                             AppLocalizations.of(context).translate('about'),
@@ -99,7 +100,7 @@ class _DekstopNavState extends State<DekstopNav> {
                           width: 20,
                         ),
                         TextButton(
-                          onPressed: () {
+                          onPressed: () async {
                             atasSekali = false;
                             Provider.of<UpdateUI>(context, listen: false)
                                 .animationStartSmall(
@@ -107,10 +108,11 @@ class _DekstopNavState extends State<DekstopNav> {
                                     hAnimDesk: 90,
                                     wAnimMob: 120,
                                     hAnimMob: 80);
-
-                            scrollController.animateTo(2700,
-                                duration: Duration(milliseconds: 800),
-                                curve: Curves.decelerate);
+                            final scroll = ourServicesKey.currentContext;
+                            await Scrollable.ensureVisible(
+                              scroll,
+                              duration: Duration(seconds: 1),
+                            );
                           },
                           child: Text(
                             AppLocalizations.of(context)

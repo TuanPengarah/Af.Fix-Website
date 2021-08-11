@@ -32,6 +32,9 @@ bool atasSekali = true;
 bool dahRunningDesktop = false;
 FirebaseAuth _auth = FirebaseAuth.instance;
 double setVersion;
+final ourServicesKey = GlobalKey();
+final aboutKey = GlobalKey();
+final appsKey = GlobalKey();
 
 class _LandingPageState extends State<LandingPage> {
   _scrollListener() {
@@ -172,10 +175,19 @@ class DekstopHomeView extends StatelessWidget {
                   child: Column(
                     children: [
                       FirstLanding(),
-                      About(),
+                      Container(
+                        key: aboutKey,
+                        child: About(),
+                      ),
                       CallUs(),
-                      OurServices(),
-                      Apps(),
+                      Container(
+                        key: ourServicesKey,
+                        child: OurServices(),
+                      ),
+                      Container(
+                        key: appsKey,
+                        child: Apps(),
+                      ),
                       CustomerTestimonial(),
                       FollowSocialMedia(),
                       PWA(),

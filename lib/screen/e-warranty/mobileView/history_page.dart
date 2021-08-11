@@ -68,7 +68,7 @@ StreamBuilder<QuerySnapshot> historyRepairPage(
                 ),
               ),
               SizedBox(height: 10),
-              Column(
+              ListView(
                 children: snapshot.data.docs.map((document) {
                   bool warranty = document['isWarranty'];
                   bool isRepair = equals('Belum Selesai', document['Status']);

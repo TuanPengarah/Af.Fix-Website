@@ -143,7 +143,7 @@ class EndDrawer extends StatelessWidget {
                 '${AppLocalizations.of(context).translate('tooltipabout')}',
             child: ListTile(
               title: Text(AppLocalizations.of(context).translate('about')),
-              onTap: () {
+              onTap: () async {
                 SystemChrome.setApplicationSwitcherDescription(
                     ApplicationSwitcherDescription(
                   label:
@@ -152,9 +152,11 @@ class EndDrawer extends StatelessWidget {
                 ));
                 Navigator.of(context).pop();
                 context.vxNav.popToRoot();
-                scrollController.animateTo(_isMobile == true ? 1677 : 1200,
-                    duration: Duration(milliseconds: 800),
-                    curve: Curves.decelerate);
+                final scroll = aboutKey.currentContext;
+                await Scrollable.ensureVisible(
+                  scroll,
+                  duration: Duration(seconds: 1),
+                );
               },
             ),
           ),
@@ -165,7 +167,7 @@ class EndDrawer extends StatelessWidget {
               title: Text(
                 AppLocalizations.of(context).translate('ourservice'),
               ),
-              onTap: () {
+              onTap: () async {
                 SystemChrome.setApplicationSwitcherDescription(
                     ApplicationSwitcherDescription(
                   label:
@@ -174,9 +176,11 @@ class EndDrawer extends StatelessWidget {
                 ));
                 Navigator.of(context).pop();
                 context.vxNav.popToRoot();
-                scrollController.animateTo(_isMobile == true ? 5500 : 2700,
-                    duration: Duration(milliseconds: 800),
-                    curve: Curves.decelerate);
+                final scroll = ourServicesKey.currentContext;
+                await Scrollable.ensureVisible(
+                  scroll,
+                  duration: Duration(seconds: 1),
+                );
               },
             ),
           ),

@@ -133,12 +133,13 @@ class MobileHomeView extends StatelessWidget {
                   '${AppLocalizations.of(context).translate('tooltipabout')}',
               child: ListTile(
                 title: Text(AppLocalizations.of(context).translate('about')),
-                onTap: () {
+                onTap: () async {
                   Navigator.of(context).pop();
-                  if (scrollController.hasClients)
-                    scrollController.animateTo(1677,
-                        duration: Duration(milliseconds: 800),
-                        curve: Curves.decelerate);
+                  final scroll = aboutKey.currentContext;
+                  await Scrollable.ensureVisible(
+                    scroll,
+                    duration: Duration(seconds: 1),
+                  );
                 },
               ),
             ),
@@ -149,12 +150,13 @@ class MobileHomeView extends StatelessWidget {
                 title: Text(
                   AppLocalizations.of(context).translate('ourservice'),
                 ),
-                onTap: () {
+                onTap: () async {
                   Navigator.of(context).pop();
-                  if (scrollController.hasClients)
-                    scrollController.animateTo(5500,
-                        duration: Duration(milliseconds: 800),
-                        curve: Curves.decelerate);
+                  final scroll = ourServicesKey.currentContext;
+                  await Scrollable.ensureVisible(
+                    scroll,
+                    duration: Duration(seconds: 1),
+                  );
                 },
               ),
             ),
@@ -315,10 +317,19 @@ class MobileHomeView extends StatelessWidget {
                           Column(
                             children: [
                               FirstLanding(),
-                              About(),
+                              Container(
+                                key: aboutKey,
+                                child: About(),
+                              ),
                               CallUs(),
-                              OurServices(),
-                              Apps(),
+                              Container(
+                                key: ourServicesKey,
+                                child: OurServices(),
+                              ),
+                              Container(
+                                key: appsKey,
+                                child: Apps(),
+                              ),
                               CustomerTestimonial(),
                               FollowSocialMedia(),
                               PWA(),
