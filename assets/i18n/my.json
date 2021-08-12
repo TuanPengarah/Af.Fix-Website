@@ -110,8 +110,9 @@
     "signoutconfirmtitle" : "Adakah anda pasti untuk log keluar?",
     "signoutconfirmsubtitle" : "Selepas log keluar, anda boleh log masuk semula untuk menguruskan peranti anda yang dibaiki dan menguruskan status E-Waranti anda.",
     "cancel" : "Batal",
+    "continue" : "Teruskan",
     "signinfirst" : "Whoops! Anda mesti log masuk terlebih dahulu!",
-    "signinfirstsub" : "Log masuk ke akaun Af-Fix untuk memeriksa status E-Warranty anda dan juga memeriksa kesemuaan peranti anda yang telah dibaiki!",
+    "signinfirstsub" : "Log masuk ke akaun Af-Fix untuk memeriksa status E-Waranti anda dan juga memeriksa kesemuaan peranti anda yang telah dibaiki!",
     "visithelpcenter" : "Kembali ke laman sebelumnya",
     "signincomplete" : "Assalamualaikum dan selamat kembali",
     "signinnew" :"Selamat datang ke Assaff", 
@@ -246,5 +247,10 @@
     "gpdrdesc8" : "Sekiranya anda membuat permintaan, kami memerlukan sekurang-kurangnya satu bulan untuk menunaikanya. Sekiranya anda ingin menggunakan mana-mana hak ini, sila hubungi kami.",
     "childrentitle" : "Maklumat Mengenai Kanak-kanak",
     "childrendesc1" : "Selain bahagian yang menjadi keutamaan kami adalah menambahkan perlindungan untuk kanak-kanak semasa menggunakan internet. Kami mendorong ibu bapa dan penjaga untuk memerhatikan, mengambil berat, dan / atau memantau serta membimbing aktiviti dalam talian mereka.",
-    "childrendesc2" : "Kami berkemungkinan tidak secara sengaja mengumpulkan Maklumat Pengenalan Diri (Personal Identifiable Information) dari kanak-kanak di bawah usia 13 tahun. Sekiranya anda berpendapat bahawa anak anda memberikan maklumat seperti ini di Aplikasi Web kami, kami sangat menggalakkan anda untuk menghubungi kami dengan segera dan kami akan melakukan yang terbaik usaha untuk segera membuang maklumat tersebut dari rekod kami."
+    "childrendesc2" : "Kami berkemungkinan tidak secara sengaja mengumpulkan Maklumat Pengenalan Diri (Personal Identifiable Information) dari kanak-kanak di bawah usia 13 tahun. Sekiranya anda berpendapat bahawa anak anda memberikan maklumat seperti ini di Aplikasi Web kami, kami sangat menggalakkan anda untuk menghubungi kami dengan segera dan kami akan melakukan yang terbaik usaha untuk segera membuang maklumat tersebut dari rekod kami.",
+    "dialogglobalsubtitle" : "Aplikasi Web ini akan dimulakan semula, adakah anda ingin meneruskan? ",
+    "dialogchangemy" : "Tukar ke Bahasa Melayu",
+    "dialogchangeen" : "Tukar bahasa ke English",
+    "dialogdarkon" : "Aktifkan Tema Gelap",
+    "dialogdarkoff" : "Tukar ke Tema Asal"
 }
