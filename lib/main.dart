@@ -8,6 +8,7 @@ import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/MyStatusID/MyStatusID_wrapper.dart';
 import 'package:affix_web/screen/MyStatusID/repair_report.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
+import 'package:affix_web/screen/socmed/contact_us.dart';
 import 'package:affix_web/screen/terms/privacy_Policy.dart';
 import 'package:affix_web/screen/terms/services_of_use.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -105,6 +106,10 @@ class MyApp extends StatelessWidget {
                     ),
                 MyRoutes.privacy: (_, __) => MaterialPage(
                       child: PrivacyPolicy(),
+                      fullscreenDialog: true,
+                    ),
+                MyRoutes.socmed: (_, __) => MaterialPage(
+                      child: ContactUs(),
                       fullscreenDialog: true,
                     ),
               },

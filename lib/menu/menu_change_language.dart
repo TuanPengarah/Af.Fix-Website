@@ -1,4 +1,6 @@
+import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/change_lang.dart';
+import 'package:affix_web/menu/dialog_change%20language.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,8 +18,16 @@ Future<void> showLanguage(BuildContext context) async {
     ],
   );
   if (selected == 0) {
-    appLanguage.changeLanguage(Locale("my"));
+    showGlobalDialog(context, () {
+      Navigator.of(context).pop();
+      appLanguage.changeLanguage(Locale("my"));
+    }, '${AppLocalizations.of(context).translate('dialogchangemy')}',
+        '${AppLocalizations.of(context).translate('dialogglobalsubtitle')}');
   } else if (selected == 1) {
-    appLanguage.changeLanguage(Locale("en"));
+    showGlobalDialog(context, () {
+      Navigator.of(context).pop();
+      appLanguage.changeLanguage(Locale("en"));
+    }, '${AppLocalizations.of(context).translate('dialogchangeen')}',
+        '${AppLocalizations.of(context).translate('dialogglobalsubtitle')}');
   }
 }

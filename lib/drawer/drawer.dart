@@ -28,6 +28,7 @@ class EndDrawer extends StatelessWidget {
     String _userName = Provider.of<UpdateUI>(context).userName;
     bool _isAnony = Provider.of<UpdateUI>(context).checkAnonymous;
     String _userPhoto = Provider.of<UpdateUI>(context).userPhoto;
+
     return Drawer(
       child: ListView(
         children: [

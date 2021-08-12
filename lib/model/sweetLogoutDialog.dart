@@ -10,6 +10,9 @@ Future<void> showLogoutDialog(BuildContext context) async {
     dismissable: true,
     blur: 6,
     dialog: AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
       title: Text(
           '${AppLocalizations.of(context).translate('signoutconfirmtitle')}'),
       content: Text(

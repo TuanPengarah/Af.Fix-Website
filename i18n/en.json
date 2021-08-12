@@ -110,6 +110,7 @@
     "signoutconfirmtitle" : "Are you sure want to sign out?",
     "signoutconfirmsubtitle" : "Once signed out, you can sign in back at any point to manage your repaired devices and your e-warranty status.",
     "cancel" : "Cancel",
+    "continue" : "Continue",
     "signinfirst" : "Oh No! You must sign in first!",
     "signinfirstsub" : "Sign in to your Af-Fix Account to check your E-Warranty status and all your repaired devices!",
     "visithelpcenter" : "Return to the previous page",
@@ -246,6 +247,10 @@
     "gpdrdesc8" : "If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.",
     "childrentitle" : "Children's Information",
     "childrendesc1" : "Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.",
-    "childrendesc2" : "Af-Fix Smartphone Repair does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our Web Apps, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records."
-
+    "childrendesc2" : "Af-Fix Smartphone Repair does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our Web Apps, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.",
+    "dialogglobalsubtitle" : "This Web Apps will restart if you perform this action, do you want to continue?",
+    "dialogchangemy" : "Change languange to Bahasa Melayu",
+    "dialogchangeen" : "Change languange to English",
+    "dialogdarkon" : "Turn on Dark Theme",
+    "dialogdarkoff" : "Turn off Dark Theme"
 }

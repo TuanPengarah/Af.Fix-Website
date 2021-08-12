@@ -52,130 +52,135 @@ class _MobileFirstPageViewState extends State<MobileFirstPageView> {
   Widget build(BuildContext context) {
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
 
-    return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: FittedBox(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                SelectableText(
-                  AppLocalizations.of(context).translate('broken'),
-                  textAlign: TextAlign.center,
-                  style: kTextSubtitleDark,
-                ),
-                Container(
-                  width: 200,
-                  child: Divider(
-                    thickness: 1,
-                    color: _isDarkMode == false ? kColorWhite : kColorGrey,
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Container(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: FittedBox(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 20,
                   ),
-                ),
-                Center(
-                  child: Container(
-                    child: Center(
-                      child: AutoSizeText.rich(
-                        TextSpan(
-                          text:
-                              '${AppLocalizations.of(context).translate('service')} ',
-                          style: TextStyle(
-                            letterSpacing: 1.1,
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
+                  SelectableText(
+                    AppLocalizations.of(context).translate('broken'),
+                    textAlign: TextAlign.center,
+                    style: kTextSubtitleDark,
+                  ),
+                  Container(
+                    width: 200,
+                    child: Divider(
+                      thickness: 1,
+                      color: _isDarkMode == false ? kColorWhite : kColorGrey,
+                    ),
+                  ),
+                  Center(
+                    child: Container(
+                      child: Center(
+                        child: AutoSizeText.rich(
+                          TextSpan(
+                            text:
+                                '${AppLocalizations.of(context).translate('service')} ',
+                            style: TextStyle(
+                              letterSpacing: 1.1,
+                              fontSize: 35,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text:
+                                    '${AppLocalizations.of(context).translate('easy')}',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w900, fontSize: 40),
+                              ),
+                              TextSpan(
+                                text:
+                                    ' ${AppLocalizations.of(context).translate('and')} ',
+                              ),
+                              TextSpan(
+                                text:
+                                    '${AppLocalizations.of(context).translate('trust')}',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w900, fontSize: 40),
+                              ),
+                            ],
                           ),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text:
-                                  '${AppLocalizations.of(context).translate('easy')}',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w900, fontSize: 40),
-                            ),
-                            TextSpan(
-                              text:
-                                  ' ${AppLocalizations.of(context).translate('and')} ',
-                            ),
-                            TextSpan(
-                              text:
-                                  '${AppLocalizations.of(context).translate('trust')}',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w900, fontSize: 40),
-                            ),
-                          ],
-                        ),
-                        textAlign: TextAlign.center,
-                        minFontSize: 10,
-                        maxFontSize: 30,
-                        // overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton.icon(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Theme.of(context).primaryColor),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                  ),
-                  icon: Icon(
-                    MaterialCommunityIcons.whatsapp,
-                  ),
-                  label: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Text(
-                      '${AppLocalizations.of(context).translate('whatsapp')}',
-                      style: kTextSubtitle,
-                    ),
-                  ),
-                  onPressed: () {
-                    html.window.open(kWhatsAppLink, 'WhatsApp');
-                  },
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  width: 280,
-                  child: Center(
-                    child: TextButton.icon(
-                      onPressed: () async {
-                        final scroll = appsKey.currentContext;
-                        await Scrollable.ensureVisible(
-                          scroll,
-                          duration: Duration(seconds: 1),
-                        );
-                      },
-                      icon: Icon(
-                        Icons.file_download,
-                      ),
-                      label: Center(
-                        child: Text(
-                          '${AppLocalizations.of(context).translate('download')}',
                           textAlign: TextAlign.center,
+                          minFontSize: 10,
+                          maxFontSize: 30,
+                          // overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                RepairFormMobile(),
-                SizedBox(
-                  height: 50,
-                ),
-              ],
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton.icon(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context).primaryColor),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                    ),
+                    icon: Icon(
+                      MaterialCommunityIcons.whatsapp,
+                    ),
+                    label: Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Text(
+                        '${AppLocalizations.of(context).translate('whatsapp')}',
+                        style: kTextSubtitle,
+                      ),
+                    ),
+                    onPressed: () {
+                      html.window.open(kWhatsAppLink, 'WhatsApp');
+                    },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: 280,
+                    child: Center(
+                      child: TextButton.icon(
+                        onPressed: () async {
+                          final scroll = appsKey.currentContext;
+                          await Scrollable.ensureVisible(
+                            scroll,
+                            duration: Duration(seconds: 1),
+                          );
+                        },
+                        icon: Icon(
+                          Icons.file_download,
+                        ),
+                        label: Center(
+                          child: Text(
+                            '${AppLocalizations.of(context).translate('download')}',
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  RepairFormMobile(),
+                  SizedBox(
+                    height: 50,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -203,131 +208,136 @@ class _DekstopFirstPageViewState extends State<DekstopFirstPageView> {
   Widget build(BuildContext context) {
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
     return FittedBox(
-      child: Container(
-        height: MediaQuery.of(context).size.height + 250,
-        width: MediaQuery.of(context).size.width,
-        decoration:
-            BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SelectableText(
-                  AppLocalizations.of(context).translate('broken'),
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  width: 200,
-                  child: Divider(
-                    thickness: 3,
-                    color: _isDarkMode == false ? kColorWhite : kColorGrey,
-                  ),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width / 2.4,
-                  child: SelectableText.rich(
-                    TextSpan(
-                      text:
-                          '${AppLocalizations.of(context).translate('service')} ',
-                      style: TextStyle(
-                        fontSize: 60,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text:
-                              '${AppLocalizations.of(context).translate('easy')}',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              color: Theme.of(context).primaryColor),
-                        ),
-                        TextSpan(
-                            text:
-                                ' ${AppLocalizations.of(context).translate('and')} '),
-                        TextSpan(
-                          text:
-                              '${AppLocalizations.of(context).translate('trust')}',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              color: Theme.of(context).primaryColor),
-                        ),
-                      ],
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Container(
+          height: MediaQuery.of(context).size.height + 250,
+          width: MediaQuery.of(context).size.width,
+          decoration:
+              BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SelectableText(
+                    AppLocalizations.of(context).translate('broken'),
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  children: [
-                    ElevatedButton.icon(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Theme.of(context).primaryColor),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: 200,
+                    child: Divider(
+                      thickness: 3,
+                      color: _isDarkMode == false ? kColorWhite : kColorGrey,
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 2.4,
+                    child: SelectableText.rich(
+                      TextSpan(
+                        text:
+                            '${AppLocalizations.of(context).translate('service')} ',
+                        style: TextStyle(
+                          fontSize: 60,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text:
+                                '${AppLocalizations.of(context).translate('easy')}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          TextSpan(
+                              text:
+                                  ' ${AppLocalizations.of(context).translate('and')} '),
+                          TextSpan(
+                            text:
+                                '${AppLocalizations.of(context).translate('trust')}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                color: Theme.of(context).primaryColor),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    children: [
+                      ElevatedButton.icon(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Theme.of(context).primaryColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
                           ),
                         ),
+                        icon: Icon(MaterialCommunityIcons.whatsapp),
+                        label: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Text(
+                            '${AppLocalizations.of(context).translate('whatsapp')}',
+                            style: kTextSubtitle,
+                          ),
+                        ),
+                        onPressed: () {
+                          html.window.open(kWhatsAppLink, 'WhatsApp');
+                        },
                       ),
-                      icon: Icon(MaterialCommunityIcons.whatsapp),
-                      label: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Text(
-                          '${AppLocalizations.of(context).translate('whatsapp')}',
-                          style: kTextSubtitle,
+                      SizedBox(
+                        width: 20,
+                      ),
+                      TextButton.icon(
+                        onPressed: () async {
+                          atasSekali = false;
+                          Provider.of<UpdateUI>(context, listen: false)
+                              .animationStartSmall(
+                                  wAnimDesk: 140,
+                                  hAnimDesk: 90,
+                                  wAnimMob: 120,
+                                  hAnimMob: 80);
+                          final scroll = appsKey.currentContext;
+                          await Scrollable.ensureVisible(
+                            scroll,
+                            duration: Duration(seconds: 1),
+                            alignment: 0.8,
+                          );
+                        },
+                        icon: Icon(
+                          Icons.file_download,
+                        ),
+                        label: Text(
+                          '${AppLocalizations.of(context).translate('download')}',
+                          style: kTextSubtitleDark,
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                      onPressed: () {
-                        html.window.open(kWhatsAppLink, 'WhatsApp');
-                      },
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    TextButton.icon(
-                      onPressed: () async {
-                        atasSekali = false;
-                        Provider.of<UpdateUI>(context, listen: false)
-                            .animationStartSmall(
-                                wAnimDesk: 140,
-                                hAnimDesk: 90,
-                                wAnimMob: 120,
-                                hAnimMob: 80);
-                        final scroll = appsKey.currentContext;
-                        await Scrollable.ensureVisible(
-                          scroll,
-                          duration: Duration(seconds: 1),
-                          alignment: 0.8,
-                        );
-                      },
-                      icon: Icon(
-                        Icons.file_download,
-                      ),
-                      label: Text(
-                        '${AppLocalizations.of(context).translate('download')}',
-                        style: kTextSubtitleDark,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 40,
-            ),
-            RepairForm()
-          ],
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 40,
+              ),
+              RepairForm()
+            ],
+          ),
         ),
       ),
     );

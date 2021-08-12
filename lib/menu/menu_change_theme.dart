@@ -1,4 +1,5 @@
 import 'package:affix_web/config/app_localizations.dart';
+import 'package:affix_web/menu/dialog_change%20language.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +24,18 @@ Future<void> showDarkTheme(BuildContext context) async {
   if (selected == 0) {
     _isDarkMode == false
         ? print('dark theme dah on le')
-        : Provider.of<ThemeProvider>(context, listen: false).toggleTheme(true);
+        : showGlobalDialog(context, () {
+            Provider.of<ThemeProvider>(context, listen: false)
+                .toggleTheme(true);
+          }, '${AppLocalizations.of(context).translate('dialogdarkon')}',
+            '${AppLocalizations.of(context).translate('dialogglobalsubtitle')}');
   } else if (selected == 1) {
     _isDarkMode == false
-        ? Provider.of<ThemeProvider>(context, listen: false).toggleTheme(false)
+        ? showGlobalDialog(context, () {
+            Provider.of<ThemeProvider>(context, listen: false)
+                .toggleTheme(false);
+          }, '${AppLocalizations.of(context).translate('dialogdarkoff')}',
+            '${AppLocalizations.of(context).translate('dialogglobalsubtitle')}')
         : print('dark theme dah off le');
   }
 }

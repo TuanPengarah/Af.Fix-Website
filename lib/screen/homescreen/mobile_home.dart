@@ -122,6 +122,7 @@ class MobileHomeView extends StatelessWidget {
                     Text(AppLocalizations.of(context).translate('letsrepair')),
                 onTap: () {
                   Navigator.of(context).pop();
+                  FocusScope.of(context).unfocus();
                   scrollController.animateTo(0,
                       duration: Duration(milliseconds: 800),
                       curve: Curves.decelerate);
@@ -135,6 +136,7 @@ class MobileHomeView extends StatelessWidget {
                 title: Text(AppLocalizations.of(context).translate('about')),
                 onTap: () async {
                   Navigator.of(context).pop();
+                  FocusScope.of(context).unfocus();
                   final scroll = aboutKey.currentContext;
                   await Scrollable.ensureVisible(
                     scroll,
@@ -152,6 +154,7 @@ class MobileHomeView extends StatelessWidget {
                 ),
                 onTap: () async {
                   Navigator.of(context).pop();
+                  FocusScope.of(context).unfocus();
                   final scroll = ourServicesKey.currentContext;
                   await Scrollable.ensureVisible(
                     scroll,
@@ -169,6 +172,7 @@ class MobileHomeView extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
+                  FocusScope.of(context).unfocus();
                   context.vxNav.push(Uri.parse(MyRoutes.ewarranty));
                 },
               ),
@@ -186,6 +190,7 @@ class MobileHomeView extends StatelessWidget {
                   });
 
                   Navigator.of(context).pop();
+                  FocusScope.of(context).unfocus();
                 },
               ),
             ),
@@ -355,7 +360,8 @@ class MobileHomeView extends StatelessWidget {
                     ? Colors.white
                     : Provider.of<UpdateUI>(context).changeColor,
               ),
-              onPressed: () async {
+              onPressed: () {
+                FocusScope.of(context).unfocus();
                 Scaffold.of(context).openEndDrawer();
               },
             ),

@@ -5,4 +5,5 @@ class MyRoutes {
   static String ewarranty = '/e-warranty';
   static String terms = '/terms';
   static String privacy = '/privacy';
+  static String socmed = '/contact-us';
 }

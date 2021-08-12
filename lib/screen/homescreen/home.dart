@@ -107,7 +107,7 @@ class _LandingPageState extends State<LandingPage> {
     super.initState();
     scrollController = ScrollController();
     scrollController.addListener(_scrollListener);
-    CheckVersion().checkVersion().then((v) {
+    CheckVersion().checkVersion(context).then((v) {
       if (v == true) {
         navigatorKey.currentState.showSnackBar(SnackBar(
           content:
