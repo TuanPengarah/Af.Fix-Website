@@ -220,6 +220,7 @@ class EndDrawer extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.of(context).pop();
+                VxNavigator.of(context).push(Uri.parse(MyRoutes.socmed));
               },
             ),
           ),

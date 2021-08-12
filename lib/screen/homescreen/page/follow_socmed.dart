@@ -1,10 +1,12 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
+import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:universal_html/html.dart' as html;
+import 'package:velocity_x/velocity_x.dart';
 
 class FollowSocialMedia extends StatelessWidget {
   const FollowSocialMedia({
@@ -94,7 +96,9 @@ class FollowSocialMedia extends StatelessWidget {
                   message:
                       '${AppLocalizations.of(context).translate('buttonsocmed')}',
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      VxNavigator.of(context).push(Uri.parse(MyRoutes.socmed));
+                    },
                     child: CircleAvatar(
                       minRadius: 25,
                       backgroundColor: Colors.grey.withOpacity(0.2),

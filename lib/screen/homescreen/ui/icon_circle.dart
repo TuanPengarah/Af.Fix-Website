@@ -1,7 +1,9 @@
 import 'package:affix_web/config/constant.dart';
+import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/menu/menu_settings_dekstop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class IconCircle extends StatelessWidget {
   const IconCircle({
@@ -15,7 +17,9 @@ class IconCircle extends StatelessWidget {
         Tooltip(
           message: 'Our Social Media',
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              VxNavigator.of(context).push(Uri.parse(MyRoutes.socmed));
+            },
             child: CircleAvatar(
               backgroundColor: Theme.of(context).primaryColor,
               child: Icon(
