@@ -116,12 +116,12 @@ class _MyRepairIDContainerState extends State<MyRepairIDContainer> {
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          color: Theme.of(context).primaryColor,
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        color: Theme.of(context).primaryColor,
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
