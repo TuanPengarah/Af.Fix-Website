@@ -123,7 +123,7 @@ class EndDrawer extends StatelessWidget {
                 SystemChrome.setApplicationSwitcherDescription(
                     ApplicationSwitcherDescription(
                   label:
-                      'Af.Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
+                      'Af-Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
                   primaryColor: Theme.of(context).primaryColor.value,
                 ));
                 Navigator.of(context).pop();
@@ -143,7 +143,7 @@ class EndDrawer extends StatelessWidget {
                 SystemChrome.setApplicationSwitcherDescription(
                     ApplicationSwitcherDescription(
                   label:
-                      'Af.Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
+                      'Af-Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
                   primaryColor: Theme.of(context).primaryColor.value,
                 ));
                 Navigator.of(context).pop();
@@ -167,7 +167,7 @@ class EndDrawer extends StatelessWidget {
                 SystemChrome.setApplicationSwitcherDescription(
                     ApplicationSwitcherDescription(
                   label:
-                      'Af.Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
+                      'Af-Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
                   primaryColor: Theme.of(context).primaryColor.value,
                 ));
                 Navigator.of(context).pop();
@@ -203,7 +203,7 @@ class EndDrawer extends StatelessWidget {
               onTap: () {
                 SystemChrome.setApplicationSwitcherDescription(
                     ApplicationSwitcherDescription(
-                  label: 'MyStatus ID - Af.Fix Smartphone Repair',
+                  label: 'MyStatus ID - Af-Fix Smartphone Repair',
                   primaryColor: Theme.of(context).primaryColor.value,
                 ));
                 Navigator.of(context).pop();

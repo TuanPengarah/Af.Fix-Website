@@ -62,7 +62,7 @@ class _RepairReportState extends State<RepairReport> {
     SystemChrome.setApplicationSwitcherDescription(
         ApplicationSwitcherDescription(
       label:
-          '${AppLocalizations.of(context).translate('buttonrepairlog')} - Af.Fix Smartphone Repair',
+          '${AppLocalizations.of(context).translate('buttonrepairlog')} - Af-Fix Smartphone Repair',
       primaryColor: Theme.of(context).primaryColor.value,
     ));
     return Scaffold(

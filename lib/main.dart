@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
             themeMode: Provider.of<ThemeProvider>(context).themeMode,
             debugShowCheckedModeBanner: false,
             title:
-                'Af.Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
+                'Af-Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
             theme: MyThemes.lightTheme,
             darkTheme: MyThemes.darkTheme,
             routeInformationParser: VxInformationParser(),

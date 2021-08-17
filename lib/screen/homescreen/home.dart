@@ -130,7 +130,7 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     SystemChrome.setApplicationSwitcherDescription(
         ApplicationSwitcherDescription(
-      label: 'Af.Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
+      label: 'Af-Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
       primaryColor: Theme.of(context).primaryColor.value,
     ));
 

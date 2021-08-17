@@ -207,7 +207,7 @@ class _RegisterFormState extends State<RegisterForm> {
     _buttonController.success();
     // showDialogStatus(
     //     title: 'Registration Completed',
-    //     content: 'Welcome to Af.Fix ${_nameController.text}');
+    //     content: 'Welcome to Af-Fix ${_nameController.text}');
     DialogBackground(
       blur: 13,
       dialog: AlertDialog(

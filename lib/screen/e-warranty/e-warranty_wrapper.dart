@@ -100,7 +100,7 @@ class NotLoginPage extends StatelessWidget {
                     SystemChrome.setApplicationSwitcherDescription(
                         ApplicationSwitcherDescription(
                       label:
-                          'Af.Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
+                          'Af-Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
                       primaryColor: Theme.of(context).primaryColor.value,
                     ));
                     Navigator.of(context).pop();
