@@ -1,6 +1,6 @@
 {
-    "name": "Af.Fix Smartphone Repair",
-    "short_name": "Af.Fix Smartphone Repair",
+    "name": "Af-Fix Smartphone Repair",
+    "short_name": "Af-Fix Smartphone Repair",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#E33E3E",

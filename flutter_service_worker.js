@@ -44,8 +44,8 @@ const RESOURCES = {
 "assets/packages/slimy_card/assets/flare/topSlime.flr": "9f381ee39c22b624c805f536b39171a6",
 "assets/packages/slimy_card/assets/flare/bottomSlime.flr": "3a26ed39d3a9a9956105e9e6e4d5ad43",
 "assets/NOTICES": "6c99d03f4395152e08a29ed3e0cc57b8",
-"assets/i18n/my.json": "eed039dbd8736a47241b316dca7835e1",
-"assets/i18n/en.json": "1415988d87b963926def5826ad412af3",
+"assets/i18n/my.json": "06220f45556dd5ef4deb1ddb6058e92a",
+"assets/i18n/en.json": "7f7cde0a1f4ed3f1733b12056cc6677a",
 "icons/android-icon-96x96.png": "b6c9f53a97d937615dd87a95e9dd1ecd",
 "icons/ms-icon-144x144.png": "f93c75b93d0275bfe2ac2c4809c437a3",
 "icons/apple-icon-180x180.png": "e3fd4f8547f6846a93996545f0c03332",
@@ -58,7 +58,7 @@ const RESOURCES = {
 "icons/ms-icon-70x70.png": "df41d4b05b83d189a063f4d2edbaee03",
 "icons/apple-icon-152x152.png": "bf5f0c61c9272d58631a63d745a5a366",
 "icons/apple-icon-precomposed.png": "ef22c5b0f7c0ed2bf196e747da6d4945",
-"icons/manifest.json": "a69cb23b49c992be60b7bdc2f1ec6813",
+"icons/manifest.json": "4a627cbd5944024f83d69c9c6322613a",
 "icons/apple-icon-72x72.png": "be28995a4d0f339c9cf9dde2e3ab3baa",
 "icons/android-icon-192x192.png": "99b0d91f59efddbb32f07db40e78c8d8",
 "icons/favicon.ico": "562c0adcb9842c2f3925a6c0b36911a3",
@@ -74,10 +74,10 @@ const RESOURCES = {
 "icons/android-icon-144x144.png": "f93c75b93d0275bfe2ac2c4809c437a3",
 "icons/ms-icon-310x310.png": "be2df71d23c42f75e6f10b9b5feef202",
 "favicon.png": "58af0e0bcc7c0cf3b56c6316b6c84569",
-"manifest.json": "c1c05b36b4b98d3ee00298846bcdb93f",
+"manifest.json": "c7af34f78277ebe9925c500a61b7c664",
 "version.json": "42dbcea7fb445741e49bc6c0904a3948",
 "favicon.ico": "562c0adcb9842c2f3925a6c0b36911a3",
-"main.dart.js": "aa981e6f45765f3634264a1ca3a3f422",
+"main.dart.js": "fe70f802d98d3ef2b00f03239519e9fb",
 "splash/img/light-3x.png": "8d74c963ed5a0b59e3284fc3b819ea6d",
 "splash/img/light-1x.png": "783b94bddfc87a95d18813e41304d6f9",
 "splash/img/dark-2x.png": "0011c6ce2b668b566cdfb3ca4a98cf06",
@@ -85,8 +85,8 @@ const RESOURCES = {
 "splash/img/light-2x.png": "d1a48de6c8dc787848ab1e445e82b3f5",
 "splash/img/dark-3x.png": "c91c1659257a841ece48fa70896f8c0e",
 "splash/style.css": "85b9bc5808a6c2e98251c14244b99ae7",
-"index.html": "d177307d5589c991b47b9b433b38fcba",
-"/": "d177307d5589c991b47b9b433b38fcba"
+"index.html": "046907cfe2f5df043032fbadb1873612",
+"/": "046907cfe2f5df043032fbadb1873612"
 };
 
 // The application shell files that are downloaded before a service worker can

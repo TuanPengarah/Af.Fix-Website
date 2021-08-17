@@ -252,5 +252,9 @@
     "dialogchangemy" : "Change languange to Bahasa Melayu",
     "dialogchangeen" : "Change languange to English",
     "dialogdarkon" : "Turn on Dark Theme",
-    "dialogdarkoff" : "Turn off Dark Theme"
+    "dialogdarkoff" : "Turn off Dark Theme",
+    "contactustitle" : "Get touch with us!",
+    "calltitle" : "Phone Number",
+    "messagetitle": "Message",
+    "webappstitle": "Web Apps"
 }

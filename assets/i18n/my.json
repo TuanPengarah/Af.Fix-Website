@@ -252,5 +252,9 @@
     "dialogchangemy" : "Tukar ke Bahasa Melayu",
     "dialogchangeen" : "Tukar bahasa ke English",
     "dialogdarkon" : "Aktifkan Tema Gelap",
-    "dialogdarkoff" : "Tukar ke Tema Asal"
+    "dialogdarkoff" : "Tukar ke Tema Asal",
+    "contactustitle" : "Jom Hubungi Kami!",
+    "calltitle" : "Nombor Telefon",
+    "messagetitle": "Mesej",
+    "webappstitle": "Aplikasi Web"
 }
