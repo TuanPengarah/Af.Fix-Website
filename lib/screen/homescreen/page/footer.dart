@@ -121,7 +121,7 @@ class Footer extends StatelessWidget {
               '${AppLocalizations.of(context).translate('copyright')}',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey, fontSize: 12),
-            )
+            ),
           ],
         ),
       ),
