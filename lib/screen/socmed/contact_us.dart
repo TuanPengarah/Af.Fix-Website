@@ -3,7 +3,6 @@ import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/drawer/drawer.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
-import 'package:affix_web/screen/homescreen/page/footer.dart';
 import 'package:affix_web/snackbar/error_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -68,14 +67,15 @@ class ContactUs extends StatelessWidget {
                     child: Column(
                       children: [
                         SizedBox(
-                          width: 190,
-                          height: 180,
+                          width: 150,
+                          height: 150,
                           child: Image.asset(
                             _isDarkMode == false
-                                ? 'assets/images/logo_only_white.png'
-                                : 'assets/images/logo_only_black.png',
+                                ? 'assets/images/splash_light.png'
+                                : 'assets/images/splash_dark.png',
                           ),
                         ),
+                        SizedBox(height: 20),
                         SelectableText(
                           '${AppLocalizations.of(context).translate('contactustitle')}',
                           textAlign: TextAlign.center,

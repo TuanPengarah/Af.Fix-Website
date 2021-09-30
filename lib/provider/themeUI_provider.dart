@@ -1,5 +1,6 @@
 import 'package:affix_web/config/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
@@ -73,20 +74,19 @@ class MyThemes {
   );
 
   static final lightTheme = ThemeData(
-    primarySwatch: Colors.red,
+    primarySwatch: Colors.blue,
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.red,
-      brightness: Brightness.light,
+      backgroundColor: Colors.blue,
+      systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
     brightness: Brightness.light,
     scaffoldBackgroundColor: kColorWhite,
-    // primaryColor: Colors.red,
-    toggleableActiveColor: Colors.red,
+    toggleableActiveColor:Colors.blue,
     colorScheme: ColorScheme.light(),
     textSelectionTheme: TextSelectionThemeData(
-      selectionColor: Colors.red[200],
-      cursorColor: Colors.red[200],
-      selectionHandleColor: kColorRed,
+      selectionColor: Colors.blue[200],
+      cursorColor: Colors.blue[200],
+      selectionHandleColor: Colors.blue,
     ),
     textTheme: TextTheme(
       headline1: TextStyle(color: kColorWhite),
@@ -95,7 +95,7 @@ class MyThemes {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.all<Color>(kColorWhite),
-        backgroundColor: MaterialStateProperty.all<Color>(kColorRed),
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -118,7 +118,7 @@ class MyThemes {
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      focusColor: Colors.red,
+      focusColor: Colors.blue,
       hoverColor: Colors.grey.withOpacity(0.1),
     ),
   );

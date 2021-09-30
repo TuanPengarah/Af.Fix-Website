@@ -1,6 +1,4 @@
 import 'package:affix_web/config/app_localizations.dart';
-import 'package:affix_web/config/check_version.dart';
-import 'package:affix_web/main.dart';
 import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/mobile_home.dart';
@@ -18,8 +16,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_html/html.dart' as html;
 
 class LandingPage extends StatefulWidget {
   @override
@@ -42,7 +38,7 @@ class _LandingPageState extends State<LandingPage> {
     if (dahRunningDesktop == false) {
       if (scrollPosition > 60 && scrollPosition < 190) {
         Provider.of<UpdateUI>(context, listen: false).animationStartSmall(
-            wAnimDesk: 140, hAnimDesk: 90, wAnimMob: 120, hAnimMob: 80);
+            wAnimDesk: 80, hAnimDesk: 80, wAnimMob: 120, hAnimMob: 80,);
         atasSekali = false;
         dahRunningDesktop = true;
       }
@@ -57,7 +53,7 @@ class _LandingPageState extends State<LandingPage> {
         !scrollController.position.outOfRange) {
 //do logic untuk atas sekali
       Provider.of<UpdateUI>(context, listen: false).animationStartBig(
-          wAnimDesk: 240, hAnimDesk: 150, wAnimMob: 150, hAnimMob: 100);
+          wAnimDesk: 130, hAnimDesk: 130, wAnimMob: 150, hAnimMob: 100);
       // Provider.of<UpdateUI>(context, listen: false)
       //     .changeColorDarkWhite(kColorGrey);
       atasSekali = true;
@@ -107,23 +103,23 @@ class _LandingPageState extends State<LandingPage> {
     super.initState();
     scrollController = ScrollController();
     scrollController.addListener(_scrollListener);
-    CheckVersion().checkVersion(context).then((v) {
-      if (v == true) {
-        navigatorKey.currentState.showSnackBar(SnackBar(
-          content:
-              Text('${AppLocalizations.of(context).translate('newversion')}'),
-          action: SnackBarAction(
-            label: '${AppLocalizations.of(context).translate('updatebutton')}',
-            onPressed: () async {
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              await prefs.setDouble('webVersion', setVersion);
-
-              html.window.location.reload();
-            },
-          ),
-        ));
-      }
-    });
+    // CheckVersion().checkVersion(context).then((v) {
+    //   if (v == true) {
+    //     navigatorKey.currentState.showSnackBar(SnackBar(
+    //       content:
+    //           Text('${AppLocalizations.of(context).translate('newversion')}'),
+    //       action: SnackBarAction(
+    //         label: '${AppLocalizations.of(context).translate('updatebutton')}',
+    //         onPressed: () async {
+    //           SharedPreferences prefs = await SharedPreferences.getInstance();
+    //           await prefs.setDouble('webVersion', setVersion);
+    //
+    //           html.window.location.reload();
+    //         },
+    //       ),
+    //     ));
+    //   }
+    // });
   }
 
   @override

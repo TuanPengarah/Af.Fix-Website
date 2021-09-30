@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class UpdateUI extends ChangeNotifier {
-  double widthAnimDeks = 240;
-  double heightAnimDeks = 150;
-  double widthAnimMob = 150;
+  double widthAnimDeks = 130;
+  double heightAnimDeks = 130;
+  double widthAnimMob = 100;
   double heightAnimMob = 100;
   bool isMobile = true;
   Color changeColor = kColorGrey;

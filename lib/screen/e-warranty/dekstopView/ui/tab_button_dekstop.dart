@@ -31,7 +31,7 @@ class TabButtonDekstop extends StatelessWidget {
           width: 250,
           color: pageNumber == selectablePage
               ? _isDarkMode == true
-                  ? Colors.red[900]
+                  ? Colors.blue[700]
                   : Colors.teal[900]
               : Colors.transparent,
           padding: const EdgeInsets.symmetric(vertical: 20.0),

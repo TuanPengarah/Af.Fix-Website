@@ -40,7 +40,7 @@ class EndDrawer extends StatelessWidget {
                 CircleAvatar(
                   minRadius: 30,
                   backgroundColor:
-                      _isDarkMode == true ? Colors.red[900] : Colors.teal[900],
+                      _isDarkMode == true ? Colors.blue[700] : Colors.teal[900],
                   child: _userPhoto != null && _isAnony == false
                       ? ClipOval(
                           child: Image.network(

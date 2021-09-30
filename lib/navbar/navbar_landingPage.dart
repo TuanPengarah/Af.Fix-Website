@@ -81,8 +81,8 @@ class _DekstopNavState extends State<DekstopNav> {
                             atasSekali = false;
                             Provider.of<UpdateUI>(context, listen: false)
                                 .animationStartSmall(
-                                    wAnimDesk: 140,
-                                    hAnimDesk: 90,
+                                    wAnimDesk: 80,
+                                    hAnimDesk: 80,
                                     wAnimMob: 120,
                                     hAnimMob: 80);
                             final scroll = aboutKey.currentContext;
@@ -104,10 +104,10 @@ class _DekstopNavState extends State<DekstopNav> {
                             atasSekali = false;
                             Provider.of<UpdateUI>(context, listen: false)
                                 .animationStartSmall(
-                                    wAnimDesk: 140,
-                                    hAnimDesk: 90,
-                                    wAnimMob: 120,
-                                    hAnimMob: 80);
+                                wAnimDesk: 80,
+                                hAnimDesk: 80,
+                                wAnimMob: 120,
+                                hAnimMob: 80);
                             final scroll = ourServicesKey.currentContext;
                             await Scrollable.ensureVisible(
                               scroll,
@@ -137,10 +137,10 @@ class _DekstopNavState extends State<DekstopNav> {
                           onPressed: () {
                             Provider.of<UpdateUI>(context, listen: false)
                                 .animationStartSmall(
-                                    wAnimDesk: 140,
-                                    hAnimDesk: 90,
-                                    wAnimMob: 120,
-                                    hAnimMob: 80);
+                                wAnimDesk: 80,
+                                hAnimDesk: 80,
+                                wAnimMob: 120,
+                                hAnimMob: 80);
 
                             scrollController.animateTo(60,
                                 duration: Duration(milliseconds: 800),
@@ -175,10 +175,10 @@ class _DekstopNavState extends State<DekstopNav> {
                             context.vxNav.push(Uri.parse(MyRoutes.myStatusID));
                             Provider.of<UpdateUI>(context, listen: false)
                                 .animationStartSmall(
-                                    wAnimDesk: 140,
-                                    hAnimDesk: 90,
-                                    wAnimMob: 120,
-                                    hAnimMob: 80);
+                                wAnimDesk: 80,
+                                hAnimDesk: 80,
+                                wAnimMob: 120,
+                                hAnimMob: 80);
                           },
                           child: Text(
                             AppLocalizations.of(context).translate('myrid'),
@@ -203,8 +203,8 @@ class _DekstopNavState extends State<DekstopNav> {
             curve: Curves.decelerate,
             child: Image.asset(
               _isDarkMode == false
-                  ? 'assets/images/logo_only_white.png'
-                  : 'assets/images/logo_only_black.png',
+                  ? 'assets/images/splash_light.png'
+                  : 'assets/images/splash_dark.png',
               fit: BoxFit.fill,
             ),
           ),

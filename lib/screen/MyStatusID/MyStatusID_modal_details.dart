@@ -175,6 +175,7 @@ showDetails(BuildContext context, String docid) {
                                 child: FAProgressBar(
                                   currentValue: _progress.toInt(),
                                   displayText: '%',
+                                  progressColor: Colors.blue.shade300,
                                   border: Border.all(
                                     color: Colors.grey.shade300,
                                   ),
@@ -213,7 +214,7 @@ showDetails(BuildContext context, String docid) {
                                         ),
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
-                                          Color(0xFFFA7268),
+                                        Colors.blue.shade300,
                                         ),
                                       ),
                                       child: Padding(
@@ -250,7 +251,7 @@ showDetails(BuildContext context, String docid) {
                                   '${AppLocalizations.of(context).translate('buttonclose')}',
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: Color(0xFFFA7268),
+                                    color:  Colors.blue.shade300,
                                   ),
                                 ),
                               ),

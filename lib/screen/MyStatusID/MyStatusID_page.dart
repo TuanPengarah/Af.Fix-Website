@@ -117,6 +117,7 @@ class _MyRepairIDContainerState extends State<MyRepairIDContainer> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Container(
+        alignment: Alignment.center,
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         color: Theme.of(context).primaryColor,
@@ -190,7 +191,7 @@ class _MyRepairIDContainerState extends State<MyRepairIDContainer> {
                           borderSide: BorderSide(
                               color: _isDarkMode == false
                                   ? Colors.teal.shade700
-                                  : Colors.red.shade800,
+                                  : Colors.blue.shade800,
                               width: 2),
                         ),
                         focusedBorder: OutlineInputBorder(

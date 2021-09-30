@@ -41,7 +41,7 @@ class MobileHomeView extends StatelessWidget {
                   CircleAvatar(
                     minRadius: 30,
                     backgroundColor: _isDarkMode == true
-                        ? Colors.red[900]
+                        ? Colors.blue.shade700
                         : Colors.teal[900],
                     child: _userPhoto != null
                         ? ClipOval(
@@ -273,7 +273,7 @@ class MobileHomeView extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'MotionControl',
                         fontSize: 60,
-                        color: kColorRed,
+                        color: Colors.blue,
                       ),
                       children: <TextSpan>[
                         TextSpan(
@@ -299,13 +299,13 @@ class MobileHomeView extends StatelessWidget {
                           height: 20,
                         ),
                         Container(
-                          height: 250,
+                          height: 170,
                           alignment: Alignment.topCenter,
-                          width: 250,
+                          width: 170,
                           child: Image.asset(
                             _isDarkMode == false
-                                ? 'assets/images/logo_only_white.png'
-                                : 'assets/images/logo_only_black.png',
+                                ? 'assets/images/splash_light.png'
+                                : 'assets/images/splash_dark.png',
                           ),
                         ),
                       ],
