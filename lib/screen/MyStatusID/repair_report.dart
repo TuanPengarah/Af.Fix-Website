@@ -8,6 +8,7 @@ import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:provider/provider.dart';
 import 'package:string_validator/string_validator.dart';
@@ -229,6 +230,8 @@ class _RepairReportState extends State<RepairReport> {
                             physics: BouncingScrollPhysics(),
                             itemBuilder: (BuildContext context, int i) {
                               var document = snapshot.data.docs[i];
+                              DateTime dt =
+                                  (document['timeStamp'] as Timestamp).toDate();
                               bool _isError = document['isError'];
                               _isDone =
                                   matches('Selesai', document['Repair Log']);
@@ -307,7 +310,10 @@ class _RepairReportState extends State<RepairReport> {
                                                 ),
                                                 SizedBox(height: 10),
                                                 SelectableText(
-                                                  document['Waktu'],
+                                                  DateFormat(
+                                                          'dd-MM-yyyy | hh:mm a')
+                                                      .format(dt)
+                                                      .toString(),
                                                   style: TextStyle(
                                                       fontSize: 12,
                                                       color: Colors.white),
