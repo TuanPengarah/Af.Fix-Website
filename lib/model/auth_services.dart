@@ -318,6 +318,7 @@ class AuthenticationServices extends ChangeNotifier {
             'Points': 10,
             'UID': user.uid,
             'photoURL': user.photoURL,
+            'timeStamp': FieldValue.serverTimestamp(),
           });
           print('User has been succesfully created on database!');
           await _firebaseAuthWeb.signInWithCredential(credential);
@@ -360,6 +361,7 @@ class AuthenticationServices extends ChangeNotifier {
       'Points': 10,
       'UID': _user.uid,
       'photoURL': photo,
+      'timeStamp': FieldValue.serverTimestamp(),
     };
     await FirebaseFirestore.instance
         .collection('customer')
