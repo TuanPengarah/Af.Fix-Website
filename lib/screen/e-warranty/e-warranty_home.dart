@@ -10,7 +10,6 @@ import 'package:affix_web/screen/e-warranty/ui/avatar.dart';
 import 'package:affix_web/screen/e-warranty/ui/tab_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
