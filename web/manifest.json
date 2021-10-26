@@ -1,10 +1,10 @@
 {
     "name": "Af-Fix Smartphone Repair",
     "short_name": "Af-Fix Smartphone Repair",
-    "start_url": "https://af-fix-database.web.app/",
+    "start_url": "https://af-fix.com/",
     "display": "standalone",
-    "background_color": "#E33E3E",
-    "theme_color": "#E33E3E",
+    "background_color": "#2196F3",
+    "theme_color": "#2196F3",
     "description": "Jom baiki smartphone anda.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
