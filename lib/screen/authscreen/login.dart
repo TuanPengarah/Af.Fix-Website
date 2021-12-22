@@ -99,6 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                                 title: 'Email',
                                 subtitle: 'contoh@email.com',
                                 icon: Icon(Icons.email),
+                                onEnter: () => _passwordFocus.requestFocus(),
                                 err: _emailMiss
                                     ? '${AppLocalizations.of(context).translate('noemail')}'
                                     : null,
@@ -209,7 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                                 : null,
                             buttonController: _buttonController,
                             onEnter: () {
-                              context.nextEditableTextFocus();
+                              _passwordFocus.requestFocus();
                             },
                           ),
                           SizedBox(height: 15),
