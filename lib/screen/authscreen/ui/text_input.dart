@@ -16,6 +16,7 @@ SizedBox authTextInput({
   @required TextEditingController controller,
   @required String title,
   @required String subtitle,
+  @required FocusNode focus,
   bool isPassword,
   @required Icon icon,
   String err,

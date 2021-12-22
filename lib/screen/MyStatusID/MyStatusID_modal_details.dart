@@ -98,7 +98,8 @@ showDetails(BuildContext context, String docid) {
                             matches(_model, 'IPHONE XS') ||
                             matches(_model, 'IPHONE XR') ||
                             matches(_model, 'IPHONE 11') ||
-                            matches(_model, 'IPHONE 12')) {
+                            matches(_model, 'IPHONE 12') ||
+                            matches(_model, 'IPHONE 13')) {
                           _isNewiPhone = true;
                           _isOldiPhone = false;
                         } else {
@@ -214,7 +215,7 @@ showDetails(BuildContext context, String docid) {
                                         ),
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
-                                        Colors.blue.shade300,
+                                          Colors.blue.shade300,
                                         ),
                                       ),
                                       child: Padding(
@@ -251,7 +252,7 @@ showDetails(BuildContext context, String docid) {
                                   '${AppLocalizations.of(context).translate('buttonclose')}',
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color:  Colors.blue.shade300,
+                                    color: Colors.blue.shade300,
                                   ),
                                 ),
                               ),

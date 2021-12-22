@@ -1,5 +1,6 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 class About extends StatelessWidget {
@@ -91,7 +92,7 @@ class About extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
-              child: Image.network(url),
+              child: ExtendedImage.network(url),
             ),
             SizedBox(height: 15),
             SelectableText(

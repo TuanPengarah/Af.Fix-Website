@@ -31,6 +31,11 @@ class _RegisterFormState extends State<RegisterForm> {
   bool _errEmail = false;
   bool _errPassword = false;
   bool _showPassword = false;
+  final _nameFocus = FocusNode();
+  final _phoneFocus = FocusNode();
+  final _emailFocus = FocusNode();
+  final _passwordFocus = FocusNode();
+
   RoundedLoadingButtonController _buttonController =
       RoundedLoadingButtonController();
   @override
@@ -44,6 +49,7 @@ class _RegisterFormState extends State<RegisterForm> {
       children: [
         SizedBox(height: 30),
         authTextInput(
+          focus: _nameFocus,
           context: context,
           controller: _nameController,
           title: '${AppLocalizations.of(context).translate('name')}',
@@ -61,6 +67,7 @@ class _RegisterFormState extends State<RegisterForm> {
         SizedBox(height: 20),
         authTextInput(
           context: context,
+          focus: _phoneFocus,
           controller: _phoneController,
           title: '${AppLocalizations.of(context).translate('phonenumber')}',
           subtitle: '012-34567890',
@@ -77,6 +84,7 @@ class _RegisterFormState extends State<RegisterForm> {
         SizedBox(height: 20),
         authTextInput(
           context: context,
+          focus: _emailFocus,
           controller: _emailController,
           title: 'Email',
           subtitle: 'abdullah@contoh.com',
@@ -93,6 +101,7 @@ class _RegisterFormState extends State<RegisterForm> {
         SizedBox(height: 20),
         authTextInput(
           context: context,
+          focus: _passwordFocus,
           controller: _passwordController,
           title: '${AppLocalizations.of(context).translate('password')}',
           subtitle:
@@ -152,6 +161,7 @@ class _RegisterFormState extends State<RegisterForm> {
         Container(
           width: 400,
           child: RichText(
+            textAlign: TextAlign.center,
             text: TextSpan(
               style: TextStyle(color: Colors.grey),
               children: [

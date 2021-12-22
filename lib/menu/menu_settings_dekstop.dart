@@ -4,6 +4,7 @@ import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/model/sweetLogoutDialog.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:affix_web/config/change_lang.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +26,9 @@ Future<void> showSettingMenu(BuildContext context) async {
             children: [
               CircleAvatar(
                 backgroundColor: kColorWhiteDark,
-                backgroundImage: _photo != null ? NetworkImage(_photo) : null,
+                backgroundImage: _photo != null
+                    ? ExtendedNetworkImageProvider(_photo)
+                    : null,
               ),
               SizedBox(
                 width: 10,

@@ -11,6 +11,7 @@ import 'package:affix_web/screen/authscreen/ui/text_input.dart';
 import 'package:affix_web/snackbar/error_snackbar.dart';
 import 'package:affix_web/snackbar/sucess_snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _emailInput = TextEditingController();
   final _passwordInput = TextEditingController();
+  final _emailFocus = new FocusNode();
+  final _passwordFocus = new FocusNode();
   bool _emailMiss = false;
   bool _passwordMiss = false;
   DocumentSnapshot snapshot;
@@ -76,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image(
-                            image: NetworkImage(kImageAuth),
+                            image: ExtendedNetworkImageProvider(kImageAuth),
                             height: 400,
                           ),
                           Column(
@@ -88,6 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                               _subtitle(context),
                               SizedBox(height: 30),
                               authTextInput(
+                                focus: _emailFocus,
                                 context: context,
                                 isDarkMode: _isDarkMode,
                                 controller: _emailInput,
@@ -99,9 +103,6 @@ class _LoginPageState extends State<LoginPage> {
                                     ? '${AppLocalizations.of(context).translate('noemail')}'
                                     : null,
                                 buttonController: _buttonController,
-                                onEnter: () {
-                                  context.nextEditableTextFocus();
-                                },
                               ),
                               SizedBox(height: 15),
                               Column(
@@ -109,6 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                                 children: [
                                   authTextInput(
                                     context: context,
+                                    focus: _passwordFocus,
                                     isDarkMode: _isDarkMode,
                                     controller: _passwordInput,
                                     type: TextInputType.visiblePassword,
@@ -195,6 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(height: 30),
                           authTextInput(
                             context: context,
+                            focus: _emailFocus,
                             isDarkMode: _isDarkMode,
                             controller: _emailInput,
                             type: TextInputType.emailAddress,
@@ -214,6 +217,7 @@ class _LoginPageState extends State<LoginPage> {
                             children: [
                               authTextInput(
                                 context: context,
+                                focus: _passwordFocus,
                                 isDarkMode: _isDarkMode,
                                 controller: _passwordInput,
                                 type: TextInputType.visiblePassword,

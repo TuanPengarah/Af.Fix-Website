@@ -15,6 +15,7 @@ import 'package:affix_web/screen/homescreen/page/footer.dart';
 import 'package:affix_web/screen/homescreen/page/our_services.dart';
 import 'package:affix_web/screen/homescreen/page/pwa.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
@@ -45,7 +46,7 @@ class MobileHomeView extends StatelessWidget {
                         : Colors.teal[900],
                     child: _userPhoto != null
                         ? ClipOval(
-                            child: Image.network(
+                            child: ExtendedImage.network(
                               _userPhoto,
                               height: 63,
                               fit: BoxFit.cover,
@@ -203,7 +204,7 @@ class MobileHomeView extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                   VxNavigator.of(context).push(Uri.parse(MyRoutes.socmed));
+                  VxNavigator.of(context).push(Uri.parse(MyRoutes.socmed));
                 },
               ),
             ),

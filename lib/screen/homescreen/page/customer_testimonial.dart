@@ -1,6 +1,7 @@
 import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -110,7 +111,7 @@ class CustomerTestimonial extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CircleAvatar(
-                    backgroundImage: NetworkImage(url),
+                    backgroundImage: ExtendedNetworkImageProvider(url),
                     maxRadius: 40,
                     backgroundColor: kColorWhiteDark,
                   ),

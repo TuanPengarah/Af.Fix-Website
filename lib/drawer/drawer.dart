@@ -7,6 +7,7 @@ import 'package:affix_web/model/sweetLogoutDialog.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/homescreen/home.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +44,7 @@ class EndDrawer extends StatelessWidget {
                       _isDarkMode == true ? Colors.blue[700] : Colors.teal[900],
                   child: _userPhoto != null && _isAnony == false
                       ? ClipOval(
-                          child: Image.network(
+                          child: ExtendedImage.network(
                             _userPhoto != null && _isAnony == false
                                 ? _userPhoto
                                 : kImageCustomerFaridzul,

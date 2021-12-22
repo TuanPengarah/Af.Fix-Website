@@ -5,6 +5,7 @@ import 'package:affix_web/drawer/drawer.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:affix_web/screen/e-warranty/e-warranty_home.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -198,7 +199,7 @@ class NotLoginPage extends StatelessWidget {
   Expanded imageSignFirst({imgSize}) {
     return Expanded(
       child: Image(
-        image: NetworkImage(kImageSignFirst),
+        image: ExtendedNetworkImageProvider(kImageSignFirst),
         height: imgSize ?? 450,
       ),
     );
