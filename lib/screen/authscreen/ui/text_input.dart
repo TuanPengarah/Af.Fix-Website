@@ -2,14 +2,6 @@ import 'package:affix_web/config/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-extension Utility on BuildContext {
-  void nextEditableTextFocus() {
-    do {
-      FocusScope.of(this).nextFocus();
-    } while (FocusScope.of(this).focusedChild.context.widget is! EditableText);
-  }
-}
-
 SizedBox authTextInput({
   @required BuildContext context,
   @required bool isDarkMode,
@@ -29,6 +21,7 @@ SizedBox authTextInput({
     child: TextField(
       obscureText: isPassword ?? false,
       controller: controller,
+      textInputAction: TextInputAction.next,
       textAlign: TextAlign.center,
       keyboardType: type ?? TextInputType.emailAddress,
       style: TextStyle(fontWeight: FontWeight.bold),

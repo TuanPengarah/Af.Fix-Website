@@ -57,7 +57,7 @@ class _RegisterFormState extends State<RegisterForm> {
           icon: Icon(Icons.person),
           type: TextInputType.name,
           onEnter: () {
-            context.nextEditableTextFocus();
+            _phoneFocus.requestFocus();
           },
           isDarkMode: _isDarkMode,
           err: _errName
@@ -74,7 +74,7 @@ class _RegisterFormState extends State<RegisterForm> {
           icon: Icon(Icons.call),
           type: TextInputType.phone,
           onEnter: () {
-            context.nextEditableTextFocus();
+            _emailFocus.requestFocus();
           },
           isDarkMode: _isDarkMode,
           err: _errPhone
@@ -91,7 +91,7 @@ class _RegisterFormState extends State<RegisterForm> {
           icon: Icon(MaterialCommunityIcons.email),
           type: TextInputType.emailAddress,
           onEnter: () {
-            context.nextEditableTextFocus();
+            _passwordFocus.requestFocus();
           },
           isDarkMode: _isDarkMode,
           err: _errEmail
