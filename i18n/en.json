@@ -71,7 +71,8 @@
     "qhowlong" : "How long does it take to repair?",
     "ahowlong" : "Depending on the type of damage, if the minor damage takes 30 minutes to 1 day, If the damage involves the motherboard it may take 3 - 14 days",
     "fmission" : "Offers Android and iPhone device repair services. Our mission is to provide quality and services in all aspect in the smartphone repair industry",
-    "copyright" : "Copyright © 2021 Assaff Enterprise | All right reserved",
+    "copyright" : "Copyright ©",
+    "copyright1" : "Assaff Enterprise | All right reserved",
     "trackyourrepair"  : "Track My Repair",
     "tyrsubtitle" : "Please enter your MyStatus ID (MySID) number to find out your latest device's repair status directly!",
     "tyrhint" : "Enter MySID number",
@@ -256,5 +257,7 @@
     "contactustitle" : "Get touch with us!",
     "calltitle" : "Phone Number",
     "messagetitle": "Message",
-    "webappstitle": "Web Apps"
+    "webappstitle": "Web Apps",
+    "clickhereprivacy" : "Click here for view our terms, condition and privacy",
+    "termapply" : "Terms and conditions apply"
 }

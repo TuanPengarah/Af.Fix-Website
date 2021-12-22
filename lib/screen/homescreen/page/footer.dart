@@ -15,6 +15,8 @@ class Footer extends StatelessWidget {
     }
   }
 
+  final String _date = DateTime.now().year.toString();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -118,7 +120,7 @@ class Footer extends StatelessWidget {
             ),
             SizedBox(height: 10),
             SelectableText(
-              '${AppLocalizations.of(context).translate('copyright')}',
+              '${AppLocalizations.of(context).translate('copyright')} $_date ${AppLocalizations.of(context).translate('copyright1')}',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey, fontSize: 12),
             ),

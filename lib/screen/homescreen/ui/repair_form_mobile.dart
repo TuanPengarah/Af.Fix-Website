@@ -8,6 +8,9 @@ import 'package:affix_web/snackbar/sucess_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+import '../../../config/routes.dart';
 
 class RepairFormMobile extends StatefulWidget {
   @override
@@ -291,7 +294,24 @@ class _RepairFormMobileState extends State<RepairFormMobile> {
                       ),
                     ),
                   ],
-                )
+                ),
+                const SizedBox(height: 20),
+                InkWell(
+                  onTap: () {
+                    context.vxNav.push(Uri.parse(MyRoutes.terms));
+                  },
+                  child: Center(
+                    child: Text(
+                      '${AppLocalizations.of(context).translate('clickhereprivacy')}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

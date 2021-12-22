@@ -64,6 +64,14 @@ class About extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 50),
+              Text(
+                '*${AppLocalizations.of(context).translate('termapply')}',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 10),
             ],
           ),
         ),
