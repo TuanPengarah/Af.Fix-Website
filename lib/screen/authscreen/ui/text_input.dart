@@ -21,6 +21,7 @@ SizedBox authTextInput({
     child: TextField(
       obscureText: isPassword ?? false,
       controller: controller,
+      focusNode: focus,
       textInputAction: TextInputAction.next,
       textAlign: TextAlign.center,
       keyboardType: type ?? TextInputType.emailAddress,
