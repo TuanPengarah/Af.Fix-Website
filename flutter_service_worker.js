@@ -54,8 +54,8 @@ const RESOURCES = {
 "assets/assets/images/logo_web_dark.jpg": "dc20063d21ddf06ba118495542a2b16d",
 "assets/assets/images/logo_only_black.png": "00cf4fd5a291a69311a921b6909dbc2c",
 "assets/assets/fonts/MotionControlNeueLite.otf": "9ec0a2b1444d60c12f92b77032f25509",
-"assets/i18n/my.json": "3304cd9ca414737f9ceee99e6b0371fc",
-"assets/i18n/en.json": "eeef1b0660bb28880a4ae11f34dfb496",
+"assets/i18n/my.json": "6f97f64a7f096a0e02320df6f4f723a7",
+"assets/i18n/en.json": "832044aac010d3349db8dbdfdabece76",
 "assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
 "assets/packages/flutter_vector_icons/fonts/Foundation.ttf": "e20945d7c929279ef7a6f1db184a4470",
 "assets/packages/flutter_vector_icons/fonts/MaterialIcons.ttf": "8ef52a15e44481b41e7db3c7eaf9bb83",
@@ -88,8 +88,8 @@ const RESOURCES = {
 "assets/packages/flutter_signin_button/assets/logos/2.0x/google_dark.png": "937022ea241c167c8ce463d2ef7ed105",
 "assets/packages/flutter_signin_button/assets/logos/2.0x/google_light.png": "8f10eb93525f0c0259c5e97271796b3c",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
-"index.html": "fcf2cb57a4e235a86fc60bac911c6cf8",
-"/": "fcf2cb57a4e235a86fc60bac911c6cf8",
+"index.html": "913370a4d3b400115f7135f9c4b3db30",
+"/": "913370a4d3b400115f7135f9c4b3db30",
 "favicon.png": "2c1df7703bdc1760fd5d8f22b9ffc74b"
 };
 
