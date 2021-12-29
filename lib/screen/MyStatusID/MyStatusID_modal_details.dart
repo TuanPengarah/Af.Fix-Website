@@ -3,6 +3,7 @@ import 'package:affix_web/config/constant.dart';
 import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
@@ -119,11 +120,12 @@ showDetails(BuildContext context, String docid) async {
                             child: Column(
                               children: [
                                 Image(
-                                  image: NetworkImage((_isOldiPhone == true)
-                                      ? kImageiPhoneOldWhite
-                                      : (_isNewiPhone == true)
-                                          ? kImageiPhoneNew
-                                          : kImageAndroid),
+                                  image: ExtendedNetworkImageProvider(
+                                      (_isOldiPhone == true)
+                                          ? kImageiPhoneOldWhite
+                                          : (_isNewiPhone == true)
+                                              ? kImageiPhoneNew
+                                              : kImageAndroid),
                                   height: 180,
                                 ),
                                 SizedBox(height: 15),
