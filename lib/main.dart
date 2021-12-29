@@ -1,4 +1,5 @@
 import 'package:affix_web/config/app_localizations.dart';
+import 'package:affix_web/config/mouse_drag.dart';
 import 'package:affix_web/config/routes.dart';
 import 'package:affix_web/model/auth_services.dart';
 import 'package:affix_web/screen/authscreen/login.dart';
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<AppLanguage>(
         builder: (context, model, child) {
           return MaterialApp.router(
+            scrollBehavior: MyCustomScrollBehavior(),
             scaffoldMessengerKey: navigatorKey,
             themeMode: Provider.of<ThemeProvider>(context).themeMode,
             debugShowCheckedModeBanner: false,

@@ -64,11 +64,41 @@ class _TermsOfServicesState extends State<TermsOfServices> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     SelectableText(
                       '${AppLocalizations.of(context).translate('termsdesc')}',
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
+                    SelectableText(
+                      '${AppLocalizations.of(context).translate('repairtermstitle')}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 25,
+                        letterSpacing: 1.1,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    SelectableText(
+                        '${AppLocalizations.of(context).translate('repairterms1')}'),
+                    const SizedBox(height: 5),
+                    SelectableText(
+                        '${AppLocalizations.of(context).translate('repairterms2')}'),
+                    const SizedBox(height: 5),
+                    SelectableText(
+                        '${AppLocalizations.of(context).translate('repairterms3')}'),
+                    const SizedBox(height: 5),
+                    SelectableText(
+                        '${AppLocalizations.of(context).translate('repairterms4')}'),
+                    const SizedBox(height: 5),
+                    SelectableText(
+                        '${AppLocalizations.of(context).translate('repairterms5')}'),
+                    const SizedBox(height: 5),
+                    SelectableText(
+                        '${AppLocalizations.of(context).translate('repairterms6')}'),
+                    const SizedBox(height: 5),
+                    SelectableText(
+                        '${AppLocalizations.of(context).translate('repairterms7')}'),
+                    const SizedBox(height: 20),
                     SelectableText(
                       '${AppLocalizations.of(context).translate('licensetitle')}',
                       style: TextStyle(
@@ -209,6 +239,15 @@ class _TermsOfServicesState extends State<TermsOfServices> {
                       '${AppLocalizations.of(context).translate('lawdesc')}',
                     ),
                     SizedBox(height: 50),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      child: SelectableText(
+                        '${AppLocalizations.of(context).translate('updateon')}: 28-12-2021',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),

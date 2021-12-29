@@ -255,6 +255,15 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                         '${AppLocalizations.of(context).translate('childrendesc2')}',
                       ),
                       SizedBox(height: 50),
+                      Container(
+                        alignment: Alignment.centerRight,
+                        child: SelectableText(
+                          '${AppLocalizations.of(context).translate('updateon')}: 28-12-2021',
+                          textAlign: TextAlign.end,
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                      SizedBox(height: 20),
                     ],
                   ),
                 ),
