@@ -57,13 +57,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  bottom_sheet:
-    dependency: "direct main"
-    description:
-      name: bottom_sheet
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.5"
   characters:
     dependency: transitive
     description:
@@ -600,6 +593,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sliding_sheet:
+    dependency: "direct main"
+    description:
+      name: sliding_sheet
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.2"
   slimy_card:
     dependency: "direct main"
     description:

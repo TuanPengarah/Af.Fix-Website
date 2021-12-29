@@ -56,13 +56,13 @@ dependencies:
   timeline_list: ^0.0.5
   clay_containers: ^0.3.2
   dismissible_page: ^0.5.5
-  bottom_sheet: ^1.0.1
   ndialog: ^4.1.0
   liquid_pull_to_refresh: ^3.0.0
   avatar_letter: ^1.0.1
   shimmer: ^2.0.0
   flutter_signin_button: ^2.0.0
   modal_progress_hud_alt: ^1.0.0
+  sliding_sheet: ^0.5.2
   
   #Splash Screen
   flutter_native_splash: ^1.1.8+4
