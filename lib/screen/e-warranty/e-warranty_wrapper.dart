@@ -32,6 +32,12 @@ class NotLoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     String _uidText = Provider.of<UpdateUI>(context).uid;
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
+    SystemChrome.setApplicationSwitcherDescription(
+        ApplicationSwitcherDescription(
+      label: 'Warranty - Af-Fix Smartphone Repair',
+      primaryColor: Theme.of(context).primaryColor.value,
+    ));
+
     return Scaffold(
       endDrawer: EndDrawer(uidText: _uidText, isDarkMode: _isDarkMode),
       body: Stack(

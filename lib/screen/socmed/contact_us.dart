@@ -14,6 +14,7 @@ class ContactUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
+    String _year = DateTime.now().year.toString();
     String _uidText = Provider.of<UpdateUI>(context).uid;
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -189,7 +190,7 @@ class ContactUs extends StatelessWidget {
               ),
               SizedBox(height: 50),
               SelectableText(
-                '${AppLocalizations.of(context).translate('copyright')}',
+                '${AppLocalizations.of(context).translate('copyright')} $_year | ${AppLocalizations.of(context).translate('copyright1')}',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.grey, fontSize: 12),
               ),

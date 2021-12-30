@@ -91,9 +91,12 @@ class _DekstopNavState extends State<DekstopNav> {
                               duration: Duration(seconds: 1),
                             );
                           },
-                          child: Text(
-                            AppLocalizations.of(context).translate('about'),
-                            style: kTextSubtitleDark,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              AppLocalizations.of(context).translate('about'),
+                              style: kTextSubtitleDark,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -104,20 +107,23 @@ class _DekstopNavState extends State<DekstopNav> {
                             atasSekali = false;
                             Provider.of<UpdateUI>(context, listen: false)
                                 .animationStartSmall(
-                                wAnimDesk: 80,
-                                hAnimDesk: 80,
-                                wAnimMob: 120,
-                                hAnimMob: 80);
+                                    wAnimDesk: 80,
+                                    hAnimDesk: 80,
+                                    wAnimMob: 120,
+                                    hAnimMob: 80);
                             final scroll = ourServicesKey.currentContext;
                             await Scrollable.ensureVisible(
                               scroll,
                               duration: Duration(seconds: 1),
                             );
                           },
-                          child: Text(
-                            AppLocalizations.of(context)
-                                .translate('ourservice'),
-                            style: kTextSubtitleDark,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              AppLocalizations.of(context)
+                                  .translate('ourservice'),
+                              style: kTextSubtitleDark,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -137,10 +143,10 @@ class _DekstopNavState extends State<DekstopNav> {
                           onPressed: () {
                             Provider.of<UpdateUI>(context, listen: false)
                                 .animationStartSmall(
-                                wAnimDesk: 80,
-                                hAnimDesk: 80,
-                                wAnimMob: 120,
-                                hAnimMob: 80);
+                                    wAnimDesk: 80,
+                                    hAnimDesk: 80,
+                                    wAnimMob: 120,
+                                    hAnimMob: 80);
 
                             scrollController.animateTo(60,
                                 duration: Duration(milliseconds: 800),
@@ -162,9 +168,13 @@ class _DekstopNavState extends State<DekstopNav> {
                           onPressed: () {
                             context.vxNav.push(Uri(path: MyRoutes.ewarranty));
                           },
-                          child: Text(
-                            AppLocalizations.of(context).translate('ewarranti'),
-                            style: kTextSubtitleDark,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              AppLocalizations.of(context)
+                                  .translate('ewarranti'),
+                              style: kTextSubtitleDark,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -175,14 +185,17 @@ class _DekstopNavState extends State<DekstopNav> {
                             context.vxNav.push(Uri.parse(MyRoutes.myStatusID));
                             Provider.of<UpdateUI>(context, listen: false)
                                 .animationStartSmall(
-                                wAnimDesk: 80,
-                                hAnimDesk: 80,
-                                wAnimMob: 120,
-                                hAnimMob: 80);
+                                    wAnimDesk: 80,
+                                    hAnimDesk: 80,
+                                    wAnimMob: 120,
+                                    hAnimMob: 80);
                           },
-                          child: Text(
-                            AppLocalizations.of(context).translate('myrid'),
-                            style: kTextSubtitleDark,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              AppLocalizations.of(context).translate('myrid'),
+                              style: kTextSubtitleDark,
+                            ),
                           ),
                         ),
                       ],

@@ -10,6 +10,7 @@ import 'package:affix_web/screen/e-warranty/ui/avatar.dart';
 import 'package:affix_web/screen/e-warranty/ui/tab_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -105,6 +106,11 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
     String _userName = Provider.of<UpdateUI>(context).userName.toLowerCase();
     final _name = _userName.capitalizeFirstofEach;
+    SystemChrome.setApplicationSwitcherDescription(
+        ApplicationSwitcherDescription(
+      label: 'Warranty - Af-Fix Smartphone Repair',
+      primaryColor: Theme.of(context).primaryColor.value,
+    ));
     return Scaffold(
       endDrawer: EndDrawer(uidText: _uidText, isDarkMode: _isDarkMode),
       body: Stack(
@@ -335,6 +341,12 @@ class _EwarrantyHomeState extends State<EwarrantyHome> {
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
                 onPressed: () {
+                  SystemChrome.setApplicationSwitcherDescription(
+                      ApplicationSwitcherDescription(
+                    label:
+                        'Af-Fix Smartphone Repair - Baiki Smartphone anda dengan mudah',
+                    primaryColor: Theme.of(context).primaryColor.value,
+                  ));
                   VxNavigator.of(context).popToRoot();
                 },
                 tooltip:
