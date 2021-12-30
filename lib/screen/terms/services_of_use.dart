@@ -219,7 +219,7 @@ class _TermsOfServicesState extends State<TermsOfServices> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 VxNavigator.of(context)
-                                    .push(Uri.parse(MyRoutes.privacy));
+                                    .replace(Uri.parse(MyRoutes.privacy));
                               },
                           ),
                         ],

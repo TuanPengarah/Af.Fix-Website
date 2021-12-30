@@ -298,7 +298,7 @@ class _RepairFormMobileState extends State<RepairFormMobile> {
                 const SizedBox(height: 20),
                 InkWell(
                   onTap: () {
-                    context.vxNav.push(Uri.parse(MyRoutes.terms));
+                    context.vxNav.push(Uri.parse(MyRoutes.privacy));
                   },
                   child: Center(
                     child: Text(

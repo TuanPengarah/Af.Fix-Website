@@ -2,8 +2,12 @@ import 'package:affix_web/config/app_localizations.dart';
 import 'package:affix_web/drawer/drawer.dart';
 import 'package:affix_web/provider/themeUI_provider.dart';
 import 'package:affix_web/provider/updateUI_provider.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+import '../../config/routes.dart';
 
 class PrivacyPolicy extends StatefulWidget {
   @override
@@ -253,6 +257,36 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       SizedBox(height: 10),
                       SelectableText(
                         '${AppLocalizations.of(context).translate('childrendesc2')}',
+                      ),
+                      SizedBox(height: 20),
+                      SelectableText(
+                        '${AppLocalizations.of(context).translate('termstitle')}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 25,
+                          letterSpacing: 1.1,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      SelectableText.rich(
+                        TextSpan(
+                          text:
+                              '${AppLocalizations.of(context).translate('privacydesc')} ',
+                          children: [
+                            TextSpan(
+                              text:
+                                  '${AppLocalizations.of(context).translate('termstitle')}',
+                              style: TextStyle(
+                                color: Colors.blue,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  VxNavigator.of(context)
+                                      .replace(Uri.parse(MyRoutes.terms));
+                                },
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(height: 50),
                       Container(
