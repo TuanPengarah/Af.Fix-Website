@@ -20,7 +20,7 @@ class OtherButtonSign extends StatelessWidget {
   Widget build(BuildContext context) {
     bool _isDarkMode = Provider.of<ThemeProvider>(context).isDark;
     return SignInButton(
-      _isDarkMode == false ? Buttons.Google : Buttons.GoogleDark,
+      _isDarkMode == false ? Buttons.GoogleDark : Buttons.Google,
       text: title,
       onPressed: () async {
         CustomProgressDialog progressDialog =
