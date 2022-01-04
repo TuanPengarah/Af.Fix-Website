@@ -88,8 +88,8 @@ const RESOURCES = {
 "assets/packages/flutter_signin_button/assets/logos/2.0x/google_dark.png": "937022ea241c167c8ce463d2ef7ed105",
 "assets/packages/flutter_signin_button/assets/logos/2.0x/google_light.png": "8f10eb93525f0c0259c5e97271796b3c",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
-"index.html": "c7e89e99900edf447039fb5b3027c4a2",
-"/": "c7e89e99900edf447039fb5b3027c4a2",
+"index.html": "27c87d2fbcc89b51c60028241ea6f3fe",
+"/": "27c87d2fbcc89b51c60028241ea6f3fe",
 "favicon.png": "6f0407f52a49534b40ed66178204881a"
 };
 
