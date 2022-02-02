@@ -12,6 +12,9 @@ const kNoKedai = '01111426421';
 const kEmailKedai = 'services.af.fix@gmail.com';
 
 //link
+const kMapsSearch =
+    'https://www.google.com/maps/place/Af-Fix+Smartphone+Repair/@2.9845823,101.7712061,15.75z/data=!4m5!3m4!1s0x31cdcb9a2a094935:0x78a77f3c4c5a08c9!8m2!3d2.9882962!4d101.7674559';
+const kYoutubeLink = 'https://www.youtube.com/channel/UCP38YF9hOyXCt5rU3l5ipAA';
 const kWhatsAppLink = 'https://wa.link/ah5ifs';
 const kFacebookLink = 'https://www.facebook.com/assaff.fix';
 const kInstagramLink = 'https://www.instagram.com/assaff.fix/';

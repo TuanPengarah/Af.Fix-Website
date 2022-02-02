@@ -30,6 +30,7 @@ dependencies:
   firebase: ^9.0.1
   firebase_core: ^1.0.3
   cloud_firestore: "^1.0.5"
+  firebase_database: any
   firebase_auth: ^1.1.4
   google_sign_in: ^5.0.4
 

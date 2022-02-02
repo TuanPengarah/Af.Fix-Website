@@ -18,7 +18,8 @@ class IconCircle extends StatelessWidget {
           message: 'Our Social Media',
           child: InkWell(
             onTap: () {
-              VxNavigator.of(context).push(Uri.parse(MyRoutes.socmed));
+              VxNavigator.of(context)
+                  .push(Uri.parse('${MyRoutes.socmed}?tech=akidfikriazhar'));
             },
             child: CircleAvatar(
               backgroundColor: Theme.of(context).primaryColor,

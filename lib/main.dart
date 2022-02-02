@@ -110,10 +110,12 @@ class MyApp extends StatelessWidget {
                       child: PrivacyPolicy(),
                       fullscreenDialog: true,
                     ),
-                MyRoutes.socmed: (_, __) => MaterialPage(
-                      child: ContactUs(),
-                      fullscreenDialog: true,
-                    ),
+                MyRoutes.socmed: (uri, __) {
+                  final tech = uri.queryParameters['tech'];
+                  return MaterialPage(
+                    child: ContactUs(tech),
+                  );
+                },
               },
             ),
             locale: model.appLocal,
