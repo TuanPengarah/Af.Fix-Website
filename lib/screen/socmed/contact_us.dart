@@ -365,7 +365,7 @@ class _ContactUsState extends State<ContactUs> {
                             child: InfoWidget(
                               title: 'WhatsApp',
                               subtitle: '+60 11 1179 6421',
-                              icon: MaterialCommunityIcons.instagram,
+                              icon: MaterialCommunityIcons.whatsapp,
                             ),
                           ),
                           InkWell(

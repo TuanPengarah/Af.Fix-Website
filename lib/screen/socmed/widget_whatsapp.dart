@@ -28,7 +28,7 @@ class WhatsappNow extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 1.2,
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.circular(100),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
