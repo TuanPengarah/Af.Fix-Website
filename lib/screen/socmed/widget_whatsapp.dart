@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:universal_html/html.dart' as html;
+import '../../config/app_localizations.dart';
 import '../../config/constant.dart';
 
 class WhatsappNow extends StatelessWidget {
@@ -37,7 +38,7 @@ class WhatsappNow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Ingin bercakap dengan technician kami dan ingin mengetahui harga spareparts untuk peranti anda? WhatsApp kami sekarang!',
+                  '${AppLocalizations.of(context).translate('whatsappdesc')}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,

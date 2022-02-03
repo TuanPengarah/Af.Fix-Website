@@ -102,7 +102,8 @@ class _ContactUsState extends State<ContactUs> {
                                 const EdgeInsets.symmetric(horizontal: 50.0),
                             child: Text.rich(
                               TextSpan(
-                                text: 'Hi!, saya ',
+                                text:
+                                    '${AppLocalizations.of(context).translate('greetinghi')} ',
                                 style: TextStyle(
                                   fontSize: 25,
                                   color: Colors.white,
@@ -116,7 +117,7 @@ class _ContactUsState extends State<ContactUs> {
                                   ),
                                   TextSpan(
                                       text:
-                                          '. Phone rosak? jangan risau saya boleh bantu!'),
+                                          '. ${AppLocalizations.of(context).translate('greeting1')}'),
                                 ],
                               ),
                               textAlign: TextAlign.center,
@@ -208,19 +209,22 @@ class _ContactUsState extends State<ContactUs> {
                                   children: [
                                     InfoWidget(
                                       icon: Icons.badge,
-                                      title: 'Jawatan',
+                                      title:
+                                          '${AppLocalizations.of(context).translate('position')}',
                                       subtitle: '$_jawatan',
                                     ),
                                     InfoWidget(
                                       icon: Icons.room,
-                                      title: 'Cawangan',
+                                      title:
+                                          '${AppLocalizations.of(context).translate('branch')}',
                                       subtitle: '$_cawangan',
                                     ),
                                     InfoWidget(
                                       icon: Icons.construction,
-                                      title: 'Jumlah Peranti Dibaiki',
+                                      title:
+                                          '${AppLocalizations.of(context).translate('totalrepair')}',
                                       subtitle:
-                                          '$_jumlahRepair Peranti telah dibaiki',
+                                          '$_jumlahRepair ${AppLocalizations.of(context).translate('totalrepaired')}',
                                     ),
                                   ],
                                 ),
@@ -244,7 +248,7 @@ class _ContactUsState extends State<ContactUs> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 15.0),
                             child: Text(
-                              'Kami Sentiasa Bersama Anda!',
+                              '${AppLocalizations.of(context).translate('gettouch')}',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.white,
@@ -258,7 +262,7 @@ class _ContactUsState extends State<ContactUs> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 15.0),
                             child: Text(
-                              'Klik di mana-mana platform untuk menghubungi kami!',
+                              '${AppLocalizations.of(context).translate('gettouchsub')}',
                               textAlign: TextAlign.center,
                               style: TextStyle(color: Colors.white),
                             ),
@@ -288,7 +292,8 @@ class _ContactUsState extends State<ContactUs> {
                               }
                             },
                             child: InfoWidget(
-                              title: 'Hubungi',
+                              title:
+                                  '${AppLocalizations.of(context).translate('calltitle')}',
                               subtitle: '+60 11 1179 6421',
                               icon: Icons.call,
                             ),
@@ -304,7 +309,8 @@ class _ContactUsState extends State<ContactUs> {
                               }
                             },
                             child: InfoWidget(
-                              title: 'Mesej',
+                              title:
+                                  '${AppLocalizations.of(context).translate('messagetitle')}',
                               subtitle: '+60 11 1179 6421',
                               icon: Icons.message,
                             ),
@@ -330,7 +336,8 @@ class _ContactUsState extends State<ContactUs> {
                               Navigator.of(context).pop();
                             },
                             child: InfoWidget(
-                              title: 'Aplikasi Web',
+                              title:
+                                  '${AppLocalizations.of(context).translate('webappstitle')}',
                               subtitle: 'af-fix.com',
                               icon: Icons.web,
                             ),
@@ -385,7 +392,8 @@ class _ContactUsState extends State<ContactUs> {
                               html.window.open(kMapsSearch, 'Google Maps');
                             },
                             child: InfoWidget(
-                              title: 'Lokasi',
+                              title:
+                                  '${AppLocalizations.of(context).translate('location')}',
                               subtitle: 'Lihat semua cawangan kami',
                               icon: MaterialCommunityIcons.map,
                             ),
