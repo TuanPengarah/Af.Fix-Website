@@ -394,7 +394,8 @@ class _ContactUsState extends State<ContactUs> {
                             child: InfoWidget(
                               title:
                                   '${AppLocalizations.of(context).translate('location')}',
-                              subtitle: 'Lihat semua cawangan kami',
+                              subtitle:
+                                  '${AppLocalizations.of(context).translate('locationdesc')}',
                               icon: MaterialCommunityIcons.map,
                             ),
                           ),
