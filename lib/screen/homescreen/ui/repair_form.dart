@@ -12,13 +12,13 @@ import 'package:velocity_x/velocity_x.dart';
 
 import '../../../config/routes.dart';
 
-extension Utility on BuildContext {
-  void nextEditableTextFocus() {
-    do {
-      FocusScope.of(this).nextFocus();
-    } while (FocusScope.of(this).focusedChild.context.widget is! EditableText);
-  }
-}
+// extension Utility on BuildContext {
+//   void nextEditableTextFocus() {
+//     do {
+//       FocusScope.of(this).nextFocus();
+//     } while (FocusScope.of(this).focusedChild.context.widget is! EditableText);
+//   }
+// }
 
 class RepairForm extends StatefulWidget {
   @override
@@ -30,6 +30,12 @@ class _RepairFormState extends State<RepairForm> {
 
   final RoundedLoadingButtonController _buttonController =
       RoundedLoadingButtonController();
+
+  final _namaFocus = FocusNode();
+  final _phoneNumberFocus = FocusNode();
+  final _emailFocus = FocusNode();
+  final _modelFocus = FocusNode();
+  final _kerosakkanFocus = FocusNode();
 
   final _name = TextEditingController();
   final _phoneNumber = TextEditingController();
@@ -121,6 +127,7 @@ class _RepairFormState extends State<RepairForm> {
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
                     controller: _name,
+                    focusNode: _namaFocus,
                     style: TextStyle(
                       color: Colors.white,
                     ),
@@ -132,7 +139,7 @@ class _RepairFormState extends State<RepairForm> {
                       }
                       return null;
                     },
-                    onEditingComplete: () => context.nextEditableTextFocus(),
+                    onEditingComplete: () => _phoneNumberFocus.requestFocus(),
                     decoration: InputDecoration(
                       focusColor: Colors.red,
                       border: OutlineInputBorder(
@@ -153,8 +160,9 @@ class _RepairFormState extends State<RepairForm> {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
+                    focusNode: _phoneNumberFocus,
                     controller: _phoneNumber,
-                    onEditingComplete: () => context.nextEditableTextFocus(),
+                    onEditingComplete: () => _emailFocus.requestFocus(),
                     style: TextStyle(
                       color: Colors.white,
                     ),
@@ -184,8 +192,9 @@ class _RepairFormState extends State<RepairForm> {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
+                    focusNode: _emailFocus,
                     controller: _email,
-                    onEditingComplete: () => context.nextEditableTextFocus(),
+                    onEditingComplete: () => _modelFocus.requestFocus(),
                     style: TextStyle(
                       color: Colors.white,
                     ),
@@ -214,8 +223,9 @@ class _RepairFormState extends State<RepairForm> {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
+                    focusNode: _modelFocus,
                     controller: _model,
-                    onEditingComplete: () => context.nextEditableTextFocus(),
+                    onEditingComplete: () => _kerosakkanFocus.requestFocus(),
                     keyboardType: TextInputType.name,
                     style: TextStyle(
                       color: Colors.white,
@@ -245,6 +255,7 @@ class _RepairFormState extends State<RepairForm> {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
+                    focusNode: _kerosakkanFocus,
                     // maxLines: 3,
                     controller: _kerosakkan,
                     keyboardType: TextInputType.name,
