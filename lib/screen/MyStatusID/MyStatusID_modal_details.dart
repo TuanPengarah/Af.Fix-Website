@@ -184,7 +184,7 @@ showDetails(BuildContext context, String docid) async {
                                 Container(
                                   width: 500,
                                   child: FAProgressBar(
-                                    currentValue: _progress.toInt(),
+                                    currentValue: _progress.toDouble(),
                                     displayText: '%',
                                     progressColor: Colors.blue.shade300,
                                     border: Border.all(

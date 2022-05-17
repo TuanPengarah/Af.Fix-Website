@@ -14,8 +14,8 @@ class CallUs extends StatelessWidget {
   Widget build(BuildContext context) {
     _launchCaller() async {
       final url = "tel: $kNoKedai";
-      if (await canLaunch(url)) {
-        await launch(url);
+      if (await canLaunchUrl(Uri.parse(url))) {
+        await launchUrl(Uri.parse(url));
       } else {
         throw 'Could not launch $url';
       }

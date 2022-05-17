@@ -285,8 +285,8 @@ class _ContactUsState extends State<ContactUs> {
                             onTap: () async {
                               final url = "tel: $kNoKedai";
                               await Future.delayed(Duration(milliseconds: 180));
-                              if (await canLaunch(url)) {
-                                await launch(url);
+                              if (await canLaunchUrl(Uri.parse(url))) {
+                                await launchUrl(Uri.parse(url));
                               } else {
                                 showErrorSnackBar('Could not launch $url');
                               }
@@ -302,8 +302,8 @@ class _ContactUsState extends State<ContactUs> {
                             onTap: () async {
                               final url = "sms: $kNoKedai";
                               await Future.delayed(Duration(milliseconds: 180));
-                              if (await canLaunch(url)) {
-                                await launch(url);
+                              if (await canLaunchUrl(Uri.parse(url))) {
+                                await launchUrl(Uri.parse(url));
                               } else {
                                 showErrorSnackBar('Could not launch $url');
                               }
@@ -319,8 +319,8 @@ class _ContactUsState extends State<ContactUs> {
                             onTap: () async {
                               final url = "mailto: $kEmailKedai";
                               await Future.delayed(Duration(milliseconds: 180));
-                              if (await canLaunch(url)) {
-                                await launch(url);
+                              if (await canLaunchUrl(Uri.parse(url))) {
+                                await launchUrl(Uri.parse(url));
                               } else {
                                 showErrorSnackBar('Could not launch $url');
                               }

@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             );
           }
-          var document = snapshot.data.data();
+          var document = snapshot.data;
           int _points = document['Points'];
           name = document['Nama'];
           _inputEmail.text = document['Email'];
