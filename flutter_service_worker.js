@@ -11,7 +11,7 @@ const RESOURCES = {
 "splash/img/dark-1x.png": "c4eefd6d583681a1b97345bc9013fb4e",
 "splash/img/dark-2x.png": "30de973e212cc25460a50377c5dfadd2",
 "splash/img/light-1x.png": "72f828e63d515cb0653e4e22074c543e",
-"main.dart.js": "f7c5eee54deeeae621c89658fb81ba20",
+"main.dart.js": "6315a6110cfa041b5d18460e90b48773",
 "cors.json": "434eb804728f2a72969effd13fc48333",
 "icons/favicon-16x16.png": "6f0407f52a49534b40ed66178204881a",
 "icons/apple-icon-76x76.png": "4de225904f79f9a2dd3242d8b3481677",
@@ -90,8 +90,8 @@ const RESOURCES = {
 "assets/assets/images/logo_only_black.png": "00cf4fd5a291a69311a921b6909dbc2c",
 "assets/assets/images/splash_dark.png": "35800d06d721a3de39381f258cba1b6f",
 "flutter.js": "0816e65a103ba8ba51b174eeeeb2cb67",
-"index.html": "8da1ba60bc691909b99d68949989e1f6",
-"/": "8da1ba60bc691909b99d68949989e1f6",
+"index.html": "204138f094aac0597652042f6cc185f3",
+"/": "204138f094aac0597652042f6cc185f3",
 "manifest.json": "03fe42ff67201fb7a1db1c384c3a2f15"
 };
 
