@@ -23,7 +23,6 @@ class LandingPage extends StatefulWidget {
 }
 
 ScrollController scrollController = ScrollController();
-double scrollPosition = 0;
 bool atasSekali = true;
 bool dahRunningDesktop = false;
 FirebaseAuth _auth = FirebaseAuth.instance;
@@ -34,11 +33,15 @@ final appsKey = GlobalKey();
 
 class _LandingPageState extends State<LandingPage> {
   _scrollListener() {
-    scrollPosition = scrollController.position.pixels;
     if (dahRunningDesktop == false) {
-      if (scrollPosition > 60 && scrollPosition < 190) {
+      if (scrollController.offset > 60 &&
+          !scrollController.position.outOfRange) {
         Provider.of<UpdateUI>(context, listen: false).animationStartSmall(
-            wAnimDesk: 80, hAnimDesk: 80, wAnimMob: 120, hAnimMob: 80,);
+          wAnimDesk: 80,
+          hAnimDesk: 80,
+          wAnimMob: 120,
+          hAnimMob: 80,
+        );
         atasSekali = false;
         dahRunningDesktop = true;
       }
@@ -49,20 +52,18 @@ class _LandingPageState extends State<LandingPage> {
       atasSekali = false;
       dahRunningDesktop = false;
     }
-    if (scrollController.offset <= scrollController.position.minScrollExtent &&
+    if (scrollController.offset <= 30 &&
         !scrollController.position.outOfRange) {
 //do logic untuk atas sekali
       Provider.of<UpdateUI>(context, listen: false).animationStartBig(
           wAnimDesk: 130, hAnimDesk: 130, wAnimMob: 150, hAnimMob: 100);
-      // Provider.of<UpdateUI>(context, listen: false)
-      //     .changeColorDarkWhite(kColorGrey);
       atasSekali = true;
       dahRunningDesktop = false;
     }
   }
 
   _authServices(BuildContext context) async {
-    print('already login');
+    debugPrint('already login');
     String uid = await context.read<AuthenticationServices>().getUID();
     String retrieve =
         await context.read<AuthenticationServices>().getUserName();
@@ -86,7 +87,7 @@ class _LandingPageState extends State<LandingPage> {
   }
 
   _registerAnonymous(BuildContext context) async {
-    print('initialize anonymouse');
+    debugPrint('initialize anonymouse');
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       Provider.of<UpdateUI>(context, listen: false).setAnonymous(true);
@@ -103,23 +104,6 @@ class _LandingPageState extends State<LandingPage> {
     super.initState();
     scrollController = ScrollController();
     scrollController.addListener(_scrollListener);
-    // CheckVersion().checkVersion(context).then((v) {
-    //   if (v == true) {
-    //     navigatorKey.currentState.showSnackBar(SnackBar(
-    //       content:
-    //           Text('${AppLocalizations.of(context).translate('newversion')}'),
-    //       action: SnackBarAction(
-    //         label: '${AppLocalizations.of(context).translate('updatebutton')}',
-    //         onPressed: () async {
-    //           SharedPreferences prefs = await SharedPreferences.getInstance();
-    //           await prefs.setDouble('webVersion', setVersion);
-    //
-    //           html.window.location.reload();
-    //         },
-    //       ),
-    //     ));
-    //   }
-    // });
   }
 
   @override
@@ -170,7 +154,7 @@ class DekstopHomeView extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      FirstLanding(),
+                      const FirstLanding(),
                       Container(
                         key: aboutKey,
                         child: About(),
@@ -184,10 +168,9 @@ class DekstopHomeView extends StatelessWidget {
                         key: appsKey,
                         child: Apps(),
                       ),
-                      CustomerTestimonial(),
-                      FollowSocialMedia(),
-                      PWA(),
-                      // FAQ(),
+                      const CustomerTestimonial(),
+                      const FollowSocialMedia(),
+                      const PWA(),
                       Footer(),
                     ],
                   ),

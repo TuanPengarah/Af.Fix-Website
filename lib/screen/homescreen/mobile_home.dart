@@ -323,12 +323,12 @@ class MobileHomeView extends StatelessWidget {
                         children: [
                           Column(
                             children: [
-                              FirstLanding(),
+                              const FirstLanding(),
                               Container(
                                 key: aboutKey,
                                 child: About(),
                               ),
-                              CallUs(),
+                              const CallUs(),
                               Container(
                                 key: ourServicesKey,
                                 child: OurServices(),
@@ -337,10 +337,9 @@ class MobileHomeView extends StatelessWidget {
                                 key: appsKey,
                                 child: Apps(),
                               ),
-                              CustomerTestimonial(),
-                              FollowSocialMedia(),
-                              PWA(),
-                              // FAQ(),
+                              const CustomerTestimonial(),
+                              const FollowSocialMedia(),
+                              const PWA(),
                               Footer(),
                             ],
                           ),
